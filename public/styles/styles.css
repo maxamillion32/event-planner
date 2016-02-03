@@ -37,3 +37,24 @@ body {
 	padding-right: 30%;
 
 }
+
+.top-container {
+
+	font-size: 2em;
+    background-color: #F5F5F5;
+    min-width: 100%;
+    max-width: 100%;
+    text-align: left;
+    padding: 1em;
+    margin-bottom: 2em;
+    border-bottom: 1px solid #E0E0E0;
+    min-height: 5em;
+
+}
+
+.top-container button {
+
+	top: 5.8em;
+    left: 85%;
+
+}
