@@ -1,0 +1,23 @@
+{
+  "name": "event-planner",
+  "description": "An event planner app for the udacity course",
+  "main": "index.html",
+  "authors": [
+    "Dustin Gulley"
+  ],
+  "license": "BSD-3-Clause",
+  "moduleType": [
+    "globals"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "animate.css": "daneden/animate.css#^3.5.1"
+  }
+}

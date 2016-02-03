@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="">
+	
+	<head>
+		
+		<!-- Material Design Lite Stylin -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://code.getmdl.io/1.1.0/material.indigo-pink.min.css">
+
+		<!-- Animate.css -->
+		<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+
+		<!--Local Styles -->
+		<link rel="stylesheet" href="public/styles/styles.css">
+
+		<title>Dustin's Swanky Event Planner</title>
+
+	</head>
+
+	<body>
+
+		<!-- Sign In-->
+		<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
+
+			<div class="mdl-card__title">
+
+				<h2 class="mdl-card__title-text">Sign In</h2>
+
+			</div>
+			
+			<div class="mdl-card__supporting-text">
+
+				<form action="javascript:APP.signIn()" class="authForm" autocomplete="on">
+
+					<div class="authContent">
+
+						<p>
+
+							<label for="signinEmail">
+								
+								<span>Email</span>
+
+								<input id="signinEmail" type="email" name="email" required>
+
+							</label>
+
+						</p>
+
+						<p>
+
+							<label for="signinPassword">
+								
+								<span>Password</span>
+
+								<input id="signinPassword" type="password" name="current-password" required>
+
+							</label>
+
+						</p>
+
+						<p>
+							
+							Don't have an account?  <a onclick="APP.showSignUp()" href="#">Sign Up</a>
+
+						</p>
+
+					</div>
+
+					<p>
+
+						<input type="submit" value="Submit">
+
+					</p>
+
+				</form>
+
+			</div>
+
+		</div>
+
+		<div id="signUpContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp" hidden="true">
+
+			<div class="mdl-card__title">
+
+				<h2 class="mdl-card__title-text">Sign Up</h2>
+
+			</div>
+
+			<div class="mdl-card__supporting-text">
+
+				<form action="javascript:APP.signUp()" class="authForm" autocomplete="on">
+
+					<div class="authContent">
+
+						<p>
+
+							<label for="signupName">
+								
+								<span>Name</span>
+
+								<input id="signupName" type="text" name="name" required>
+
+							</label>
+
+						</p>
+
+						<p>
+
+							<label for="signupEmail">
+								
+								<span>Email</span>
+
+								<input id="signupEmail" type="email" name="email" required>
+
+							</label>
+
+						</p>
+
+						<p>
+
+							<label for="signupPassword">
+								
+								<span>Password</span>
+
+								<input id="signupPassword" type="password" name="new-password" required>
+
+							</label>
+
+						</p>
+
+						<p>
+
+							<label for="signupPassword2">
+								
+								<span>Retype Password</span>
+
+								<input id="signupPassword2" type="password" name="new-password" required>
+
+							</label>
+
+						</p>
+
+					</div>
+
+					<p>
+
+						<input type="submit" value="Submit">
+
+					</p>
+
+				</form>
+
+			</div>	
+
+		</div>
+		
+		<!-- Event Planner -->
+		<div id="eventPlannerContainer" hidden="true">
+
+			Event Planner
+
+		</div>
+		
+		<!-- Material Design Lite -->
+		<script defer src="https://code.getmdl.io/1.1.0/material.min.js"></script>
+
+		<!-- Firebase -->
+		<script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+
+		<!-- App Logic -->
+		<script src="public/js/app.js"></script>
+
+	</body>
+
+</html>
