@@ -1,6 +1,7 @@
 body {
 
 	background-color: #EFEFEE;
+	font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
 }
 
@@ -52,9 +53,15 @@ body {
 
 }
 
-.top-container button {
+.tag-wrapper {
 
-	top: 5.8em;
-    left: 85%;
+	margin-top: 1em;
+	margin-bottom: 2em;
+
+}
+
+.tag-style {
+
+	font-size: 0.55em;
 
 }

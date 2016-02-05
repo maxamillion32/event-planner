@@ -12,6 +12,15 @@
 
 		<!--Local Styles -->
 		<link rel="stylesheet" href="public/styles/styles.css">
+		
+		<!-- VTIL styles -->
+		<link rel="stylesheet" href="bower_components/vanilla-tag-input-list/dist/styles/styles.css">
+		
+		<!-- Font awesome -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		
+		<!-- Roboto -->
+		<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 
 		<title>Dustin's Swanky Event Planner</title>
 
@@ -19,7 +28,7 @@
 
 	<body>
 
-		<!-- Sign In-->
+		<!-- Sign In -->
 		<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
 
 			<div class="mdl-card__title">
@@ -36,11 +45,11 @@
 
 						<p>
 
-							<label for="signinEmail">
+							<label for="signinEmail" title="Email">
 								
 								<span>Email</span>
 
-								<input id="signinEmail" type="email" name="email" required>
+								<input id="signinEmail" type="email" name="email" placeholder="email@awesome.com" title="Email" required>
 
 							</label>
 
@@ -48,11 +57,11 @@
 
 						<p>
 
-							<label for="signinPassword">
+							<label for="signinPassword" title="Password">
 								
 								<span>Password</span>
 
-								<input id="signinPassword" type="password" name="current-password" required>
+								<input id="signinPassword" type="password" name="current-password" title="Password" required>
 
 							</label>
 
@@ -60,7 +69,14 @@
 
 						<p>
 							
-							Don't have an account?  <a onclick="APP.showSignUp()" href="#">Sign Up</a>
+							Don't have an account?  <a onclick="APP.showSignUp()" href="#"
+							title="Sign Up">Sign Up</a>
+
+						</p>
+
+						<p>
+							
+							Forgot your password?  <a onclick="APP.resetPassword()" href="#" title="Reset Password">Reset Password</a>
 
 						</p>
 
@@ -68,7 +84,7 @@
 
 					<p>
 
-						<input type="submit" value="Submit">
+						<input type="submit" value="Sign In" title="Sign In">
 
 					</p>
 
@@ -77,7 +93,8 @@
 			</div>
 
 		</div>
-
+		
+		<!-- Sign up -->
 		<div id="signUpContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp" hidden="true">
 
 			<div class="mdl-card__title">
@@ -94,11 +111,11 @@
 
 						<p>
 
-							<label for="signupName">
+							<label for="signupName" title="Name">
 								
 								<span>Name</span>
 
-								<input id="signupName" type="text" name="name" required>
+								<input id="signupName" type="text" name="name" placeholder="First and Last Name" title="Name" required>
 
 							</label>
 
@@ -106,11 +123,11 @@
 
 						<p>
 
-							<label for="signupEmail">
+							<label for="signupEmail" title="Email">
 								
 								<span>Email</span>
 
-								<input id="signupEmail" type="email" name="email" required>
+								<input id="signupEmail" type="email" name="email" placeholder="waycoolemail@awesome.com" title="Email" required>
 
 							</label>
 
@@ -118,11 +135,11 @@
 
 						<p>
 
-							<label for="signupPassword">
+							<label for="signupPassword" title="Password">
 								
 								<span>Password</span>
 
-								<input id="signupPassword" type="password" name="new-password" required>
+								<input id="signupPassword" type="password" name="new-password" title="Password" required>
 
 							</label>
 
@@ -130,13 +147,19 @@
 
 						<p>
 
-							<label for="signupPassword2">
+							<label for="signupPassword2" title="Password Repeat">
 								
 								<span>Retype Password</span>
 
-								<input id="signupPassword2" type="password" name="new-password" required>
+								<input id="signupPassword2" type="password" name="new-password" title="Password Repeat" required>
 
 							</label>
+
+						</p>
+
+						<p>
+							
+							Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
 
 						</p>
 
@@ -144,7 +167,7 @@
 
 					<p>
 
-						<input type="submit" value="Submit">
+						<input type="submit" value="Sign Up" title="Sign Up">
 
 					</p>
 
@@ -154,27 +177,185 @@
 
 		</div>
 		
+		<!-- Reset Password -->
+		<div id="resetPasswordContainer" hidden="true">
+
+		</div>
+		
 		<!-- Event Planner -->
 		<div id="eventPlannerContainer" hidden="true">
 
 			<div class="top-container animated slideInDown">
 
-				<button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored">
-					<i class="material-icons">add</i>
-				</button>
+				<form action="javascript:APP.submitForm()" autocomplete="on">
+					
+					<!-- Name of the event -->
+					<p>
+
+						<label for="event-name" title="Event Name">
+								
+							<span>Event Title</span>
+
+							<input id="eventName" type="text" name="event-name" 
+							title="Event Name" required>
+
+						</label>
+
+					</p>
+					
+					<!-- Event Type -->
+					<p>
+
+						<label for="event-type" title="Event Type">
+								
+							<span>What kind of event is it?</span>
+
+							<input id="eventType" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" 
+							title="Event Type" required>
+
+						</label>
+
+					</p>
+					
+					<!-- Host of the event -->
+					<p>
+
+						<label for="event-host" title="Event Host">
+								
+							<span>Who's hosting it?</span>
+
+							<input id="eventHost" type="text" name="event-host" placeholder="First and Last Name or Organization Name" 
+							title="Event Host" required>
+
+						</label>
+
+					</p>
+					
+					<!-- Begin Date -->
+					<p>
+
+						<label for="start-date" title="Start Date">
+							
+							<span>When will it begin?</span>
+
+							<input id="startDate" type="datetime-local" name="start-date" 
+							title="Start Date"required>
+
+						</label>
+
+					</p>
+					
+					<!-- End Date -->
+					<p>
+
+						<label for="end-date" title="End Date">
+							
+							<span>When will it end?</span>
+
+							<input id="endDate" type="datetime-local" name="end-date" 
+							title="End Date" required>
+
+						</label>
+
+					</p>
+					
+					<!-- People attending -->
+					<p>
+      
+						<label for="vtil-input">
+
+							Who's going?
+
+							<input id="vtil-input" type="text" title="Who's going?" placeholder="Who will be attending?"></input>
+
+						</label>
+
+						<button id="add-button" type='button' onclick="VTILAPP.vtil.addTag()">Add</button>
+
+					</p>
+
+					<p class="tag-wrapper">
+
+						<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
+
+
+						</div>  
+
+					</p>
+					
+					<!-- Location autocomplete field -->
+					<p>
+
+						<label for="location-input">
+
+							Where will you have the event?
+
+							<input id="location-input" placeholder="Enter your address"
+             					onFocus="APP.geolocate()" type="text"></input>
+
+						</label>
+
+					</p>
+
+
+					<!-- Event location -->
+					<p>
+
+						<table id="address">
+					      <tr>
+					        <td class="label">Street address</td>
+					        <td class="slimField"><input class="field" id="street_number"
+					              disabled="true"></input></td>
+					        <td class="wideField" colspan="2"><input class="field" id="route"
+					              disabled="true"></input></td>
+					      </tr>
+					      <tr>
+					        <td class="label">City</td>
+					        <td class="wideField" colspan="3"><input class="field" id="locality"
+					              disabled="true"></input></td>
+					      </tr>
+					      <tr>
+					        <td class="label">State</td>
+					        <td class="slimField"><input class="field"
+					              id="administrative_area_level_1" disabled="true"></input></td>
+					        <td class="label">Zip code</td>
+					        <td class="wideField"><input class="field" id="postal_code"
+					              disabled="true"></input></td>
+					      </tr>
+					      <tr>
+					        <td class="label">Country</td>
+					        <td class="wideField" colspan="3"><input class="field"
+					              id="country" disabled="true"></input></td>
+					      </tr>
+					    </table>
+
+					</p>
+
+
+
+
+					<input type="submit" value="Submit" title="Submit Event">
+
+				</form>
 
 			</div>
 
 		</div>
 		
 		<!-- Material Design Lite -->
-		<script defer src="https://code.getmdl.io/1.1.0/material.min.js"></script>
+		<script async src="https://code.getmdl.io/1.1.0/material.min.js"></script>
+		
+		<!-- VTIL src -->
+		<script async src="bower_components/vanilla-tag-input-list/dist/scripts/app.js"></script>
 
 		<!-- Firebase -->
 		<script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
 
 		<!-- App Logic -->
 		<script src="public/js/app.js"></script>
+
+		<!-- google places -->
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBazGsBMgeOxWxTx6oZlTM3TaAiLGsrUZY&signed_in=true&libraries=places&callback=APP.initAutocomplete"></script>
 
 	</body>
 
