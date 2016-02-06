@@ -211,7 +211,16 @@
 							<span>What kind of event is it?</span>
 
 							<input id="eventType" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" 
-							title="Event Type" required>
+							title="Event Type" list="guest-list" required>
+							<datalist id="guest-list">
+							  <option value="Birthday">
+							  <option value="Conference">
+							  <option value="Wedding">
+							  <option value="Anniversary">
+							  <option value="Holiday">
+							  <option value="Graduation">
+							  <option value="Funeral">
+							</datalist>
 
 						</label>
 
@@ -290,7 +299,7 @@
 
 							Where will you have the event?
 
-							<input id="location-input" placeholder="Enter your address"
+							<input id="location-input" placeholder="Enter the address of the event"
              					onFocus="APP.geolocate()" type="text"></input>
 
 						</label>
@@ -365,10 +374,8 @@
 
 						<!-- Message -->
 						<label for="message">
-							
-							Message for the guests
 
-							<textarea id="message" name="textarea" rows="10" cols="50">Put a message here!</textarea>
+							<textarea id="message" name="textarea" rows="10" cols="50">Leave a message for your guests!</textarea>
 
 						</label>
 
@@ -380,14 +387,19 @@
 				</form>
 
 			</div>
+			
+			<!-- Events -->
+			<p id="event-container">
+
+			</p>
 
 		</div>
 		
 		<!-- Material Design Lite -->
-		<script async src="https://code.getmdl.io/1.1.0/material.min.js"></script>
+		<script src="https://code.getmdl.io/1.1.0/material.min.js"></script>
 		
 		<!-- VTIL src -->
-		<script async src="bower_components/vanilla-tag-input-list/dist/scripts/app.js"></script>
+		<script src="bower_components/vanilla-tag-input-list/dist/scripts/app.js"></script>
 
 		<!-- Firebase -->
 		<script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>

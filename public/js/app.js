@@ -41,6 +41,9 @@
 	var messageEl =					document.getElementById('message');
 	var addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
 
+	//event display
+	var eventContainerEl =			document.getElementById('event-container');
+
 	var events = [];	//The users events
 	var userRef;		//Tag input list
 	var eventRef;		//Events
@@ -101,7 +104,21 @@
 
 			APP.showEventPlanner();
 
-			console.log("User " + authData.uid + " is logged in with " + authData.provider);
+			/**
+			 * Get the data
+			 * @param  {Object} snapshot value of the event
+			 */
+			eventRef.on("value", function(snapshot) {
+
+			  events = snapshot.val();
+
+			  _redrawEvents();
+			  
+			}, function(err) {
+
+				console.log('Error: ', err);
+
+			});
 
 		}
 
@@ -135,6 +152,7 @@
 	APP.signOut = function() {
 
 		ref.unauth();
+		eventRef.off();
 		userRef = undefined;
 		eventRef = undefined;
 		signInEmailEl = 			'';
@@ -144,6 +162,7 @@
 		signupPasswordEl = 			'';
 		signupPassword2El = 		'';
 		_clearElements();
+		_clearEl(eventContainerEl);
 
 	};
 
@@ -191,6 +210,78 @@
 
 	});
 
+	/**
+	* Clear all child elements
+	*
+	**/ 
+	function _clearEl(el) {
+
+		while (el.firstChild) {
+
+			el.removeChild(el.firstChild);
+
+		}
+
+	}
+
+	/**
+	 * Draw the events to te screen
+	 * 
+	 */
+	function _redrawEvents() {
+
+		_clearEl(eventContainerEl);
+
+		events.forEach(function(event) {
+
+			//Create the card
+			var cardDiv = document.createElement('div');
+			cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp"
+
+			//Card Title
+			var cardTitleDiv = document.createElement('div');
+			cardTitleDiv.className = "mdl-card__title";
+			var headerDiv = document.createElement('h2');
+			headerDiv.className = "mdl-card__title-text";
+			headerDiv.appendChild(document.createTextNode(event.title));
+			cardTitleDiv.appendChild(headerDiv);
+			cardDiv.appendChild(cardTitleDiv);
+
+			//Card Body
+			var cardContentDiv = document.createElement('div');
+			cardContentDiv.className = "mdl-card__supporting-text";
+			var p = document.createElement('p');
+			p.innerHTML = "<b>" + event.host + '</b> is hosting a ' + '<b>' + 
+			event.type + '</b> at ';
+			cardContentDiv.appendChild(p);
+
+			p = document.createElement('p');
+			p.innerHTML = event.address + '<br />' + event.city + ', ' + 
+			event.state + ' ' + event.zip + '<br />' + event.country;
+			cardContentDiv.appendChild(p);
+
+			p = document.createElement('p');
+			p.appendChild(document.createTextNode("on"));
+			cardContentDiv.appendChild(p);
+
+			p = document.createElement('p');
+			var begin = new Date(event.begin);
+			var end = new Date(event.end);
+			p.innerHTML = '<b>' + begin.toLocaleString() + '</b>' + ' to ' + 
+			'<b>' + end.toLocaleString() + '</b>';
+			cardContentDiv.appendChild(p);
+
+			p = document.createElement('p');
+			p.innerHTML = 'and <b>' + event.host + '</b> wishes to let you know that<br/>' + event.message;
+			cardContentDiv.appendChild(p);
+
+			cardDiv.appendChild(cardContentDiv);
+			eventContainerEl.appendChild(cardDiv);
+
+		});
+
+	}
+ 
 	/**
 	 * Clear guests
 	 * 
@@ -351,7 +442,7 @@
 
 		var d = new Date();
 
-		eventRef.set({
+		events.push({
 
 			'id': 		d.toISOString(),
 			'title': 	eventNameEl.value,
@@ -368,6 +459,8 @@
 			'message': 	messageEl.value
 
 		});
+
+		eventRef.set(events);
 
 		_clearElements();
 
