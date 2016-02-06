@@ -31,9 +31,19 @@
 	var endDateEl =					document.getElementById('endDate');
 	var contentEl = 				document.getElementById('vtil-content');
 	var inputEl = 					document.getElementById('vtil-input');
-	var locationInputEl	=			document.getElementById('location-input');			
+	var locationInputEl	=			document.getElementById('location-input');
+	var streetNumberEl =			document.getElementById('street_number');
+	var routeEl =					document.getElementById('route');
+	var cityEl =					document.getElementById('city');
+	var stateEl =					document.getElementById('state');
+	var postalCodeEl =				document.getElementById('postal-code');
+	var countryEl =					document.getElementById('country');
+	var messageEl =					document.getElementById('message');
+	var addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
 
+	var events = [];	//The users events
 	var userRef;		//Tag input list
+	var eventRef;		//Events
 	var placeSearch;	//Location search
 	var autocomplete;	//Location search
 
@@ -87,6 +97,7 @@
 		} else {
 
 			userRef = ref.child('users/' + authData.uid);
+			eventRef = userRef.child('events/');
 
 			APP.showEventPlanner();
 
@@ -125,12 +136,14 @@
 
 		ref.unauth();
 		userRef = undefined;
+		eventRef = undefined;
 		signInEmailEl = 			'';
 		signInPasswordEl = 			'';
 		signupNameEl = 				'';
 		signupEmailEl = 			'';
 		signupPasswordEl = 			'';
 		signupPassword2El = 		'';
+		_clearElements();
 
 	};
 
@@ -179,6 +192,56 @@
 	});
 
 	/**
+	 * Clear guests
+	 * 
+	 */
+	function _clearGuests() {
+
+		var tags = VTILAPP.vtil.tags.slice(0);
+
+		tags.forEach(function(tag) {
+
+			VTILAPP.vtil.removeTag(tag.id);
+
+		});
+
+	}
+
+	/**
+	 * Clear the address elements
+	 * @param  {Boolean} pred disable the field or not?
+	 * 
+	 */
+	function _clearAddress(pred) {
+
+		addressList.forEach(function(addressEl) {
+
+		  	addressEl.value = '';
+		  	addressEl.disabled = pred;
+
+		  });
+
+	}
+
+	/**
+	 * Clear the form elements
+	 * 
+	 */
+	function _clearElements() {
+
+		eventNameEl =				document.getElementById('eventName');
+		eventTypeEl =				document.getElementById('eventType');
+		eventHostEl =				document.getElementById('eventHost');
+		startDateEl =				document.getElementById('startDate');
+		endDateEl =					document.getElementById('endDate');
+		locationInputEl	=			document.getElementById('location-input');
+
+		_clearAddress(true);
+		_clearGuests();
+
+	}
+
+	/**
 	 * Fills in the address when the location is retrieved
 	 * 
 	 */
@@ -186,22 +249,50 @@
 	  // Get the place details from the autocomplete object.
 	  var place = autocomplete.getPlace();
 
-	  /**
-	  for (var component in componentForm) {
-	    document.getElementById(component).value = '';
-	    document.getElementById(component).disabled = false;
-	  }
+	  _clearAddress(false);
 
 	  // Get each component of the address from the place details
 	  // and fill the corresponding field on the form.
 	  for (var i = 0; i < place.address_components.length; i++) {
+
 	    var addressType = place.address_components[i].types[0];
-	    if (componentForm[addressType]) {
-	      var val = place.address_components[i][componentForm[addressType]];
-	      document.getElementById(addressType).value = val;
+
+	    switch(addressType) {
+
+	    	//Address1
+	    	case 'street_number':
+	    		streetNumberEl.value = place.address_components[i].short_name;
+	    		break;
+
+	    	//Address2
+	    	case 'route':
+	    		routeEl.value = place.address_components[i].short_name;
+	    		break;
+
+	    	//City
+	    	case 'locality':
+	    		cityEl.value = place.address_components[i].short_name;
+	    		break;
+
+	    	//State
+	    	case 'administrative_area_level_1':
+	    		stateEl.value = place.address_components[i].short_name;
+	    		break;
+
+	    	//Zip
+	    	case 'postal_code':
+	    		postalCodeEl.value = place.address_components[i].short_name;
+	    		break;
+
+	    	//Country
+	    	case 'country':
+	    		countryEl.value = place.address_components[i].short_name;
+	    		break;
+
 	    }
+
 	  }
-	  **/
+
 	}
 
 	/**
@@ -258,7 +349,35 @@
 	 */
 	APP.submitForm = function() {
 
+		var d = new Date();
+
+		eventRef.set({
+
+			'id': 		d.toISOString(),
+			'title': 	eventNameEl.value,
+			'type': 	eventTypeEl.value,
+			'host': 	eventHostEl.value,
+			'begin': 	startDateEl.value,
+			'end': 		endDateEl.value,
+			'guests': 	VTILAPP.vtil.tags,
+			'address': 	streetNumberEl.value + ' ' + routeEl.value,
+			'city': 	cityEl.value,
+			'state': 	stateEl.value,
+			'zip': 		postalCodeEl.value,
+			'country': 	countryEl.value,
+			'message': 	messageEl.value
+
+		});
+
+		_clearElements();
+
 	};
+
+	/**
+	 * Sign out on exit
+	 * 
+	 */
+	window.onbeforeunload = APP.signOut;
 
 	/******************************************************************
 	Display functionality
