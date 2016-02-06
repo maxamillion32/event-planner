@@ -244,6 +244,10 @@
 			var headerDiv = document.createElement('h2');
 			headerDiv.className = "mdl-card__title-text";
 			headerDiv.appendChild(document.createTextNode(event.title));
+			var trashSpan = document.createElement('span');
+			trashSpan.innerHTML = '&nbsp;<i class="fa fa-trash-o"></i>';
+			trashSpan.setAttribute('onclick', 'APP.removeEvent("' + event.id + '")');
+			headerDiv.appendChild(trashSpan);
 			cardTitleDiv.appendChild(headerDiv);
 			cardDiv.appendChild(cardTitleDiv);
 
@@ -431,6 +435,35 @@
 	    });
 
 	  }
+
+	};
+
+	/**
+	 * Remove an event from events
+	 * @param  {[type]} id [description]
+	 * @return {[type]}    [description]
+	 */
+	APP.removeEvent = function(id) {
+
+		var index = -1;
+
+		for(var i = 0; i < events.length; ++i) {
+
+			if(id === events[i].id) {
+
+				index = i;
+				break;
+
+			}
+
+		}
+
+		if(index !== -1) {
+
+			events = events.splice(index, 1);
+			eventRef.set(events);
+
+		}
 
 	};
 
