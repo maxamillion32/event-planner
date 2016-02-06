@@ -244,10 +244,15 @@
 			var headerDiv = document.createElement('h2');
 			headerDiv.className = "mdl-card__title-text";
 			headerDiv.appendChild(document.createTextNode(event.title));
-			var trashSpan = document.createElement('span');
-			trashSpan.innerHTML = '&nbsp;<i class="fa fa-trash-o"></i>';
-			trashSpan.setAttribute('onclick', 'APP.removeEvent("' + event.id + '")');
-			headerDiv.appendChild(trashSpan);
+
+			var del = document.createElement('a');
+			del.setAttribute('href', "#");
+			del.setAttribute('title', "Delete");
+			del.className = "card-trash";
+			del.setAttribute('onclick', 'APP.removeEvent("' + event.id + '")');
+			del.innerHTML = '<i class="fa fa-trash-o"></i>';
+
+			headerDiv.appendChild(del);
 			cardTitleDiv.appendChild(headerDiv);
 			cardDiv.appendChild(cardTitleDiv);
 
@@ -518,6 +523,7 @@
 		signInContainerEl.hidden = true;
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = false;
+		resetPasswordContainerEl.hidden = true;
 
 	};
 
@@ -530,6 +536,7 @@
 		signInContainerEl.hidden = false;
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = true;
+		resetPasswordContainerEl.hidden = true
 
 	};
 
@@ -542,6 +549,20 @@
 		signInContainerEl.hidden = true;
 		eventPlannerContainerEl.hidden = false;
 		signUpContainerEl.hidden = true;
+		resetPasswordContainerEl.hidden = true;
+
+	};
+
+	/**
+	 * Show the reset password screen
+	 * 
+	 */
+	APP.showResetPassword= function() {
+
+		signInContainerEl.hidden = true;
+		eventPlannerContainerEl.hidden = true;
+		signUpContainerEl.hidden = true;
+		resetPasswordContainerEl.hidden = false;
 
 	};
 

@@ -67,19 +67,6 @@
 
 						</p>
 
-						<p>
-							
-							Don't have an account?  <a onclick="APP.showSignUp()" href="#"
-							title="Sign Up">Sign Up</a>
-
-						</p>
-
-						<p>
-							
-							Forgot your password?  <a onclick="APP.resetPassword()" href="#" title="Reset Password">Reset Password</a>
-
-						</p>
-
 					</div>
 
 					<p>
@@ -89,6 +76,17 @@
 					</p>
 
 				</form>
+
+				<p>
+							
+					Don't have an account?  <a onclick="APP.showSignUp()" href="#"
+					title="Sign Up">Sign Up</a>
+
+					<br />
+					
+					Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+				</p>
 
 			</div>
 
@@ -157,12 +155,6 @@
 
 						</p>
 
-						<p>
-							
-							Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
-
-						</p>
-
 					</div>
 
 					<p>
@@ -173,12 +165,69 @@
 
 				</form>
 
+				<p>
+							
+					Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+					<br />
+
+					Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+				</p>
+
 			</div>	
 
 		</div>
 		
 		<!-- Reset Password -->
-		<div id="resetPasswordContainer" hidden="true">
+		<div id="resetPasswordContainer" hidden="true" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
+
+			<div class="mdl-card__title">
+
+				<h2 class="mdl-card__title-text">Reset Password</h2>
+
+			</div>
+			
+			<div class="mdl-card__supporting-text">
+
+				<form action="javascript:APP.resetPassword()" class="authForm" autocomplete="on">
+
+					<div class="authContent">
+
+						<p>
+
+							<label for="resetPasswordEmail" title="Email">
+								
+								<span>Email</span>
+
+								<input id="resetPasswordEmail" type="email" name="email" placeholder="email@awesome.com" title="Email" required>
+
+							</label>
+
+						</p>
+
+					</div>
+
+					<p>
+
+						<input type="submit" value="Reset Password" title="Reset Password">
+
+					</p>
+
+				</form>
+
+				<p>
+
+					Don't have an account?  <a onclick="APP.showSignUp()" href="#"
+					title="Sign Up">Sign Up</a>
+
+					<br />
+
+					Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+				</p>
+
+			</div>
 
 		</div>
 		
@@ -229,11 +278,11 @@
 					<!-- Host of the event -->
 					<p>
 
-						<label for="event-host" title="Event Host">
+						<label for="eventHost" title="Event Host">
 								
 							<span>Who's hosting it?</span>
 
-							<input id="eventHost" type="text" name="event-host" placeholder="First and Last Name or Organization Name" 
+							<input id="eventHost" type="text" name="name" placeholder="First and Last Name or Organization Name" 
 							title="Event Host" required>
 
 						</label>
@@ -243,7 +292,7 @@
 					<!-- Begin Date -->
 					<p>
 
-						<label for="start-date" title="Start Date">
+						<label for="startDate" title="Start Date">
 							
 							<span>When will it begin?</span>
 
@@ -257,7 +306,7 @@
 					<!-- End Date -->
 					<p>
 
-						<label for="end-date" title="End Date">
+						<label for="endDate" title="End Date">
 							
 							<span>When will it end?</span>
 
