@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "animate.css": "daneden/animate.css#^3.5.1",
-    "vanilla-tag-input-list": "vision89/vanilla-javascript-tag-input#^0.0.3"
+    "vanilla-tag-input-list": "vision89/vanilla-javascript-tag-input#^0.0.3",
+    "form-validator": "vision89/form-validator#^0.0.2"
   }
 }

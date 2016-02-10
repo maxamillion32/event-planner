@@ -8,8 +8,8 @@
 	var ref = new Firebase("https://swanky-event-planner.firebaseIO.com");
 
 	//signing in
-	var signInEmailEl = 			document.getElementById('signinEmail');
-	var signInPasswordEl = 			document.getElementById('signinPassword');
+	var signInEmailEl = 			document.getElementById('signin-email');
+	var signInPasswordEl = 			document.getElementById('signin-password');
 	var signInContainerEl = 		document.getElementById('signInContainer');
 
 	//signing up
@@ -19,6 +19,10 @@
 	var signupEmailEl = 			document.getElementById('signupEmail');
 	var signupPasswordEl = 			document.getElementById('signupPassword');
 	var signupPassword2El = 		document.getElementById('signupPassword2');
+	var signupEmployerEl =			document.getElementById('signupEmployer');
+	var signupTitleEl =				document.getElementById('signupTitle');
+	var signupBirthday =			document.getElementById('signup-birthday');
+	var submitPasswordButton =		document.getElementById('submit-password-button');
 
 	//Reset Password
 	var resetPasswordContainerEl =	document.getElementById('resetPasswordContainer');
@@ -44,11 +48,36 @@
 	//event display
 	var eventContainerEl =			document.getElementById('event-container');
 
-	var events = [];	//The users events
-	var userRef;		//Tag input list
-	var eventRef;		//Events
-	var placeSearch;	//Location search
-	var autocomplete;	//Location search
+	var events = [];		//The users events
+	var userRef;			//Tag input list
+	var eventRef;			//Events
+	var extraRef;			//Extra user data
+	var placeSearch;		//Location search
+	var autocomplete;		//Location search
+	var storeExtra = false;	//Store extra user info
+
+	//Validation
+	var validator = 			new FV.Validator();
+	var passwordField = 		new FV.Field("Password1", signupPasswordEl);
+	var password2Field = 		new FV.Field("Password2", signupPassword2El, signupPasswordEl);
+
+	passwordField.constraints = [
+		new FV.Constraint(FV.Validator.MINLENGTH, 
+			"* Password must be at least 8 characters long.\n",
+			8),
+		new FV.Constraint(FV.Validator.CONTAINSUPPER,
+			"* Password must contain at least one upper case letter.\n"),
+		new FV.Constraint(FV.Validator.CONTAINSLOWER,
+			"* Password must contain at least one lower case letter.\n"),
+		new FV.Constraint(FV.Validator.CONTAINSSPECIAL,
+			"* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n")
+	];
+
+	password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD,
+			"* Must match your password.\n")];
+
+	validator.fields = [passwordField, password2Field];
+
 
 	/******************************************************************
 	Sign up functionality
@@ -71,11 +100,59 @@
 
 		  } else {
 
+		  	storeExtra = true;
+
 		    APP.signIn(signupEmailEl.value, signupPasswordEl.value);
 
 		  }
 		  
 		});
+
+	};
+
+	/**
+	 * Validating input before submitting the password
+	 * 
+	 */
+	submitPasswordButton.onclick = function() {
+
+		var errors = 			validator.checkForErrors();
+		var passwordErrors = 	"";
+		var password2Errors = 	"";
+
+		errors.forEach(function(error) {
+
+			switch(error.name) {
+
+				case "Password1":
+
+					passwordErrors += error.error;
+					break;
+
+				case "Password2":
+
+					password2Errors += error.error;
+					break;
+
+			}
+
+		});
+
+		if(passwordErrors !== '') {
+
+			passwordErrors = "Please correct the following errors:\n" + passwordErrors;
+
+		}
+
+		if(password2Errors !== '') {
+
+			password2Errors = "Please correct the following errors:\n" + password2Errors;
+
+		}
+
+		//These will only display one at a time
+		signupPasswordEl.setCustomValidity(passwordErrors);
+		signupPassword2El.setCustomValidity(password2Errors);
 
 	};
 
@@ -101,6 +178,25 @@
 
 			userRef = ref.child('users/' + authData.uid);
 			eventRef = userRef.child('events/');
+			extraRef = userRef.child('extra/');
+
+			//If just signing up store the extra user data
+			if(storeExtra === true) {
+
+				storeExtra = false;
+
+				extraRef.set({
+
+					name: signupNameEl.value,
+					employer: signupEmployerEl.value,
+					title: signupTitleEl.value,
+					birthday: signupBirthday.value
+
+				});
+
+				//signupNameEl signupEmployerEl signupTitleEl signupBirthday
+
+			}
 
 			APP.showEventPlanner();
 
@@ -153,8 +249,10 @@
 
 		ref.unauth();
 		eventRef.off();
+		extraRef.off();
 		userRef = undefined;
 		eventRef = undefined;
+		extraRef = undefined;
 		signInEmailEl = 			'';
 		signInPasswordEl = 			'';
 		signupNameEl = 				'';

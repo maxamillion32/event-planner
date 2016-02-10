@@ -49,7 +49,7 @@
 								
 								<span>Email</span>
 
-								<input id="signinEmail" type="email" name="email" placeholder="email@awesome.com" title="Email" required>
+								<input id="signin-email" type="email" name="email" placeholder="email@awesome.com" title="Email" required>
 
 							</label>
 
@@ -61,7 +61,7 @@
 								
 								<span>Password</span>
 
-								<input id="signinPassword" type="password" name="current-password" title="Password" required>
+								<input id="signin-password" type="password" name="current-password" title="Password" required>
 
 							</label>
 
@@ -133,6 +133,46 @@
 
 						<p>
 
+							<label for="signupEmployer" title="Employer">
+								
+								<span>Employer</span>
+
+								<input id="signupEmployer" type="text" title="Employer"
+								placeholder="Awesome place I work" name="organization">
+
+							</label>
+
+						</p>
+						
+						<p>	
+
+							<label for="signupTitle" title="Title">
+								
+								<span>Job Title</span>
+
+								<input id="signupTitle" type="text" title="Title"
+								placeholder="Senior Decision Deferrer" 
+								name="organization-title">
+
+							</label>
+
+						</p>
+
+						<p>	
+
+							<label for="signup-birthday" title="Birthday">
+								
+								<span>When's your birthday?</span>
+
+								<input id="signup-birthday" type="date" title="Birthday"
+								name="bday">
+
+							</label>
+
+						</p>
+
+						<p>
+
 							<label for="signupPassword" title="Password">
 								
 								<span>Password</span>
@@ -159,7 +199,7 @@
 
 					<p>
 
-						<input type="submit" value="Sign Up" title="Sign Up">
+						<input id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
 
 					</p>
 
@@ -452,6 +492,9 @@
 
 		<!-- Firebase -->
 		<script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+
+		<!-- Form Validator -->
+		<script src="bower_components/form-validator/dist/all.js"></script>
 
 		<!-- App Logic -->
 		<script src="public/js/app.js"></script>
