@@ -1,0 +1,38 @@
+body {
+  background-image: url("../assets/confectionary.png");
+  background-repeat: repeat;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  body .vert-cent {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15%; }
+  body .card-width.mdl-card {
+    width: 40%; }
+    body .card-width.mdl-card .card-width > .mdl-card__title {
+      height: 7em;
+      color: white;
+      font-weight: bold;
+      background: repeating-linear-gradient(45deg, #F50057, #F50057 10px, #FF4081 10px, #FF4081 20px); }
+    body .card-width.mdl-card .authForm {
+      text-align: center; }
+    body .card-width.mdl-card .authContent {
+      text-align: right;
+      padding-right: 30%; }
+    body .card-width.mdl-card p.links {
+      font-size: .8em; }
+  body .top-container {
+    font-size: 2em;
+    background-color: #F5F5F5;
+    min-width: 100%;
+    max-width: 100%;
+    text-align: left;
+    padding: 1em;
+    margin-bottom: 2em;
+    border-bottom: 1px solid #E0E0E0;
+    min-height: 5em; }
+  body .tag-wrapper {
+    margin-top: 1em;
+    margin-bottom: 2em; }
+    body .tag-wrapper .tag-style {
+      font-size: 0.55em; }
