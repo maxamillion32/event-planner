@@ -11,11 +11,8 @@ body {
     width: 40%; }
     body .card-width.mdl-card .authForm {
       text-align: center; }
-    body .card-width.mdl-card .authContent {
-      text-align: right;
-      padding-right: 30%; }
     body .card-width.mdl-card p.links {
-      font-size: .8em; }
+      font-size: .9em; }
   body .card-width > .mdl-card__title {
     height: 7em;
     color: white;

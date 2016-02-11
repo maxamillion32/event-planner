@@ -17,12 +17,12 @@
 	//signing up
 	var signUpContainerEl = document.getElementById('signUpContainer');
 	var eventPlannerContainerEl = document.getElementById('eventPlannerContainer');
-	var signupNameEl = document.getElementById('signupName');
-	var signupEmailEl = document.getElementById('signupEmail');
+	var signupNameEl = document.getElementById('signup-name');
+	var signupEmailEl = document.getElementById('signup-email');
 	var signupPasswordEl = document.getElementById('signupPassword');
 	var signupPassword2El = document.getElementById('signupPassword2');
-	var signupEmployerEl = document.getElementById('signupEmployer');
-	var signupTitleEl = document.getElementById('signupTitle');
+	var signupEmployerEl = document.getElementById('signup-employer');
+	var signupTitleEl = document.getElementById('signup-title');
 	var signupBirthday = document.getElementById('signup-birthday');
 	var submitPasswordButton = document.getElementById('submit-password-button');
 

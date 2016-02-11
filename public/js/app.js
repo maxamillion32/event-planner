@@ -15,12 +15,12 @@
 	//signing up
 	let signUpContainerEl = 		document.getElementById('signUpContainer');
 	let eventPlannerContainerEl = 	document.getElementById('eventPlannerContainer');
-	let signupNameEl = 				document.getElementById('signupName');
-	let signupEmailEl = 			document.getElementById('signupEmail');
+	let signupNameEl = 				document.getElementById('signup-name');
+	let signupEmailEl = 			document.getElementById('signup-email');
 	let signupPasswordEl = 			document.getElementById('signupPassword');
 	let signupPassword2El = 		document.getElementById('signupPassword2');
-	let signupEmployerEl =			document.getElementById('signupEmployer');
-	let signupTitleEl =				document.getElementById('signupTitle');
+	let signupEmployerEl =			document.getElementById('signup-employer');
+	let signupTitleEl =				document.getElementById('signup-title');
 	let signupBirthday =			document.getElementById('signup-birthday');
 	let submitPasswordButton =		document.getElementById('submit-password-button');
 

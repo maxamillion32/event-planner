@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="https://code.getmdl.io/1.1.0/material.indigo-pink.min.css">
 
 		<!-- Animate.css -->
-		<link rel="stylesheet" href="./animate.css/animate.min.css">
+		<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
 
 		<!--Local Styles -->
 		<link rel="stylesheet" href="css/styles.css">
@@ -41,49 +41,51 @@
 
 				<form action="javascript:APP.signIn()" class="authForm" autocomplete="on">
 
-					<div class="authContent">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>
+						<label class="mdl-textfield__label" for="signin-email" title="Email">
+							
+							<span>Email</span>
 
-							<label for="signinEmail" title="Email">
-								
-								<span>Email</span>
+						</label>
 
-								<input id="signin-email" type="email" name="email" placeholder="email@awesome.com" title="Email" required>
+						<input class="mdl-textfield__input" id="signin-email" type="email" name="email" title="Email" required>
 
-							</label>
+					</div>
 
-						</p>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>
+						<label class="mdl-textfield__label" for="signin-password" title="Password">
+							
+							<span>Password</span>
 
-							<label for="signinPassword" title="Password">
-								
-								<span>Password</span>
+						</label>
 
-								<input id="signin-password" type="password" name="current-password" title="Password" required>
-
-							</label>
-
-						</p>
+						<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" required>
 
 					</div>
 
 					<p>
 
-						<input type="submit" value="Sign In" title="Sign In">
+						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sign In" title="Sign In">
 
 					</p>
 
 				</form>
 
 				<p class="links">
-							
-					Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
-
-					<br>
 					
-					Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+					<div>
+
+						Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
+
+					</div>
+
+					<div>
+
+						Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+					</div>
 
 				</p>
 
@@ -104,109 +106,111 @@
 
 				<form action="javascript:APP.signUp()" class="authForm" autocomplete="on">
 
-					<div class="authContent">
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>
+						<label class="mdl-textfield__label" for="signup-name" title="Name">
+							
+							<span>Name</span>
 
-							<label for="signupName" title="Name">
-								
-								<span>Name</span>
+						</label>
 
-								<input id="signupName" type="text" name="name" placeholder="First and Last Name" title="Name" required>
+						<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
 
-							</label>
+					</div>
 
-						</p>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>
+						<label class="mdl-textfield__label" for="signup-email" title="Email">
+							
+							<span>Email</span>
 
-							<label for="signupEmail" title="Email">
-								
-								<span>Email</span>
+						</label>
 
-								<input id="signupEmail" type="email" name="email" placeholder="waycoolemail@awesome.com" title="Email" required>
+						<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" required>
 
-							</label>
+					</div>
 
-						</p>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>
+						<label class="mdl-textfield__label" for="signup-employer" title="Employer">
+							
+							<span>Employer</span>
 
-							<label for="signupEmployer" title="Employer">
-								
-								<span>Employer</span>
+						</label>
 
-								<input id="signupEmployer" type="text" title="Employer" placeholder="Awesome place I work" name="organization">
+						<input class="mdl-textfield__input" id="signup-employer" type="text" title="Employer" name="organization">
 
-							</label>
+					</div>
+					
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						</p>
-						
-						<p>	
+						<label class="mdl-textfield__label" for="signup-title" title="Title">
+							
+							<span>Job Title</span>
 
-							<label for="signupTitle" title="Title">
-								
-								<span>Job Title</span>
+						</label>
 
-								<input id="signupTitle" type="text" title="Title" placeholder="Senior Decision Deferrer" name="organization-title">
+						<input class="mdl-textfield__input" id="signup-title" type="text" title="Title" name="organization-title">
 
-							</label>
+					</div>
 
-						</p>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>	
+						<label class="mdl-textfield__label" for="signup-birthday" title="Birthday">
+							
+							<span>When's your birthday?</span>
 
-							<label for="signup-birthday" title="Birthday">
-								
-								<span>When's your birthday?</span>
+						</label>
 
-								<input id="signup-birthday" type="date" title="Birthday" name="bday">
+						<input class="mdl-textfield__input" id="signup-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
 
-							</label>
+					</div>
 
-						</p>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>
+						<label class="mdl-textfield__label" for="signup-password" title="Password">
+							
+							<span>Password</span>
 
-							<label for="signupPassword" title="Password">
-								
-								<span>Password</span>
+						</label>
 
-								<input id="signupPassword" type="password" name="new-password" title="Password" required>
+						<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" required>
 
-							</label>
+					</div>
 
-						</p>
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-						<p>
+						<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
+							
+							<span>Retype Password</span>
 
-							<label for="signupPassword2" title="Password Repeat">
-								
-								<span>Retype Password</span>
+						</label>
 
-								<input id="signupPassword2" type="password" name="new-password" title="Password Repeat" required>
-
-							</label>
-
-						</p>
+						<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" required>
 
 					</div>
 
 					<p>
 
-						<input id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
+						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
 
 					</p>
 
 				</form>
 
-				<p>
-							
-					Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+				<p class="links">
 
-					<br>
+					<div>
 
-					Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+						Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+					</div>
+
+					<div>
+
+						Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+					</div>
 
 				</p>
 
@@ -245,19 +249,25 @@
 
 					<p>
 
-						<input type="submit" value="Reset Password" title="Reset Password">
+						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Reset Password" title="Reset Password">
 
 					</p>
 
 				</form>
 
-				<p>
+				<p class="links">
 
-					Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
+					<div>
 
-					<br>
+						Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
 
-					Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+					</div>
+
+					<div>
+
+						Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+					</div>
 
 				</p>
 
