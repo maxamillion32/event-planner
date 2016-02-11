@@ -5,61 +5,61 @@
 	window.VTILAPP = Object.create(null);
 
 	// Register the callback to be fired every time auth state changes
-	var ref = new Firebase("https://swanky-event-planner.firebaseIO.com");
+	let ref = new Firebase("https://swanky-event-planner.firebaseIO.com");
 
 	//signing in
-	var signInEmailEl = 			document.getElementById('signin-email');
-	var signInPasswordEl = 			document.getElementById('signin-password');
-	var signInContainerEl = 		document.getElementById('signInContainer');
+	let signInEmailEl = 			document.getElementById('signin-email');
+	let signInPasswordEl = 			document.getElementById('signin-password');
+	let signInContainerEl = 		document.getElementById('signInContainer');
 
 	//signing up
-	var signUpContainerEl = 		document.getElementById('signUpContainer');
-	var eventPlannerContainerEl = 	document.getElementById('eventPlannerContainer');
-	var signupNameEl = 				document.getElementById('signupName');
-	var signupEmailEl = 			document.getElementById('signupEmail');
-	var signupPasswordEl = 			document.getElementById('signupPassword');
-	var signupPassword2El = 		document.getElementById('signupPassword2');
-	var signupEmployerEl =			document.getElementById('signupEmployer');
-	var signupTitleEl =				document.getElementById('signupTitle');
-	var signupBirthday =			document.getElementById('signup-birthday');
-	var submitPasswordButton =		document.getElementById('submit-password-button');
+	let signUpContainerEl = 		document.getElementById('signUpContainer');
+	let eventPlannerContainerEl = 	document.getElementById('eventPlannerContainer');
+	let signupNameEl = 				document.getElementById('signupName');
+	let signupEmailEl = 			document.getElementById('signupEmail');
+	let signupPasswordEl = 			document.getElementById('signupPassword');
+	let signupPassword2El = 		document.getElementById('signupPassword2');
+	let signupEmployerEl =			document.getElementById('signupEmployer');
+	let signupTitleEl =				document.getElementById('signupTitle');
+	let signupBirthday =			document.getElementById('signup-birthday');
+	let submitPasswordButton =		document.getElementById('submit-password-button');
 
 	//Reset Password
-	var resetPasswordContainerEl =	document.getElementById('resetPasswordContainer');
+	let resetPasswordContainerEl =	document.getElementById('resetPasswordContainer');
 
 	//event creation
-	var eventNameEl =				document.getElementById('eventName');
-	var eventTypeEl =				document.getElementById('eventType');
-	var eventHostEl =				document.getElementById('eventHost');
-	var startDateEl =				document.getElementById('startDate');
-	var endDateEl =					document.getElementById('endDate');
-	var contentEl = 				document.getElementById('vtil-content');
-	var inputEl = 					document.getElementById('vtil-input');
-	var locationInputEl	=			document.getElementById('location-input');
-	var streetNumberEl =			document.getElementById('street_number');
-	var routeEl =					document.getElementById('route');
-	var cityEl =					document.getElementById('city');
-	var stateEl =					document.getElementById('state');
-	var postalCodeEl =				document.getElementById('postal-code');
-	var countryEl =					document.getElementById('country');
-	var messageEl =					document.getElementById('message');
-	var addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
+	let eventNameEl =				document.getElementById('eventName');
+	let eventTypeEl =				document.getElementById('eventType');
+	let eventHostEl =				document.getElementById('eventHost');
+	let startDateEl =				document.getElementById('startDate');
+	let endDateEl =					document.getElementById('endDate');
+	let contentEl = 				document.getElementById('vtil-content');
+	let inputEl = 					document.getElementById('vtil-input');
+	let locationInputEl	=			document.getElementById('location-input');
+	let streetNumberEl =			document.getElementById('street_number');
+	let routeEl =					document.getElementById('route');
+	let cityEl =					document.getElementById('city');
+	let stateEl =					document.getElementById('state');
+	let postalCodeEl =				document.getElementById('postal-code');
+	let countryEl =					document.getElementById('country');
+	let messageEl =					document.getElementById('message');
+	let addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
 
 	//event display
-	var eventContainerEl =			document.getElementById('event-container');
+	let eventContainerEl =			document.getElementById('event-container');
 
-	var events = [];		//The users events
-	var userRef;			//Tag input list
-	var eventRef;			//Events
-	var extraRef;			//Extra user data
-	var placeSearch;		//Location search
-	var autocomplete;		//Location search
-	var storeExtra = false;	//Store extra user info
+	let events = [];		//The users events
+	let userRef;			//Tag input list
+	let eventRef;			//Events
+	let extraRef;			//Extra user data
+	let placeSearch;		//Location search
+	let autocomplete;		//Location search
+	let storeExtra = false;	//Store extra user info
 
 	//Validation
-	var validator = 			new FV.Validator();
-	var passwordField = 		new FV.Field("Password1", signupPasswordEl);
-	var password2Field = 		new FV.Field("Password2", signupPassword2El, signupPasswordEl);
+	let validator = 			new FV.Validator();
+	let passwordField = 		new FV.Field("Password1", signupPasswordEl);
+	let password2Field = 		new FV.Field("Password2", signupPassword2El, signupPasswordEl);
 
 	passwordField.constraints = [
 		new FV.Constraint(FV.Validator.MINLENGTH, 
@@ -116,11 +116,11 @@
 	 */
 	submitPasswordButton.onclick = function() {
 
-		var errors = 			validator.checkForErrors();
-		var passwordErrors = 	"";
-		var password2Errors = 	"";
+		let errors = 			validator.checkForErrors();
+		let passwordErrors = 	"";
+		let password2Errors = 	"";
 
-		errors.forEach(function(error) {
+		errors.forEach(error => {
 
 			switch(error.name) {
 
@@ -451,40 +451,40 @@
 
 	  // Get each component of the address from the place details
 	  // and fill the corresponding field on the form.
-	  for (var i = 0; i < place.address_components.length; i++) {
+	  for (var component of place.address_components) {
 
-	    var addressType = place.address_components[i].types[0];
+	    var addressType = component.types[0];
 
 	    switch(addressType) {
 
 	    	//Address1
 	    	case 'street_number':
-	    		streetNumberEl.value = place.address_components[i].short_name;
+	    		streetNumberEl.value = component.short_name;
 	    		break;
 
 	    	//Address2
 	    	case 'route':
-	    		routeEl.value = place.address_components[i].short_name;
+	    		routeEl.value = component.short_name;
 	    		break;
 
 	    	//City
 	    	case 'locality':
-	    		cityEl.value = place.address_components[i].short_name;
+	    		cityEl.value = component.short_name;
 	    		break;
 
 	    	//State
 	    	case 'administrative_area_level_1':
-	    		stateEl.value = place.address_components[i].short_name;
+	    		stateEl.value = component.short_name;
 	    		break;
 
 	    	//Zip
 	    	case 'postal_code':
-	    		postalCodeEl.value = place.address_components[i].short_name;
+	    		postalCodeEl.value = component.short_name;
 	    		break;
 
 	    	//Country
 	    	case 'country':
-	    		countryEl.value = place.address_components[i].short_name;
+	    		countryEl.value = component.short_name;
 	    		break;
 
 	    }
@@ -519,14 +519,14 @@
 
 	    navigator.geolocation.getCurrentPosition(function(position) {
 
-	      var geolocation = {
+	      let geolocation = {
 
 	        lat: position.coords.latitude,
 	        lng: position.coords.longitude
 
 	      };
 
-	      var circle = new google.maps.Circle({
+	      let circle = new google.maps.Circle({
 
 	        center: geolocation,
 	        radius: position.coords.accuracy
@@ -548,9 +548,9 @@
 	 */
 	APP.removeEvent = function(id) {
 
-		var index = -1;
+		let index = -1;
 
-		for(var i = 0; i < events.length; ++i) {
+		for(let i = 0; i < events.length; ++i) {
 
 			if(id === events[i].id) {
 

@@ -79,10 +79,9 @@
 
 				<p class="links">
 							
-					Don't have an account?  <a onclick="APP.showSignUp()" href="#"
-					title="Sign Up">Sign Up</a>
+					Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
 
-					<br />
+					<br>
 					
 					Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
 
@@ -137,8 +136,7 @@
 								
 								<span>Employer</span>
 
-								<input id="signupEmployer" type="text" title="Employer"
-								placeholder="Awesome place I work" name="organization">
+								<input id="signupEmployer" type="text" title="Employer" placeholder="Awesome place I work" name="organization">
 
 							</label>
 
@@ -150,9 +148,7 @@
 								
 								<span>Job Title</span>
 
-								<input id="signupTitle" type="text" title="Title"
-								placeholder="Senior Decision Deferrer" 
-								name="organization-title">
+								<input id="signupTitle" type="text" title="Title" placeholder="Senior Decision Deferrer" name="organization-title">
 
 							</label>
 
@@ -164,8 +160,7 @@
 								
 								<span>When's your birthday?</span>
 
-								<input id="signup-birthday" type="date" title="Birthday"
-								name="bday">
+								<input id="signup-birthday" type="date" title="Birthday" name="bday">
 
 							</label>
 
@@ -209,7 +204,7 @@
 							
 					Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
 
-					<br />
+					<br>
 
 					Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
 
@@ -258,10 +253,9 @@
 
 				<p>
 
-					Don't have an account?  <a onclick="APP.showSignUp()" href="#"
-					title="Sign Up">Sign Up</a>
+					Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
 
-					<br />
+					<br>
 
 					Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
 
@@ -285,8 +279,7 @@
 								
 							<span>Event Title</span>
 
-							<input id="eventName" type="text" name="event-name" 
-							title="Event Name" required>
+							<input id="eventName" type="text" name="event-name" title="Event Name" required>
 
 						</label>
 
@@ -299,8 +292,7 @@
 								
 							<span>What kind of event is it?</span>
 
-							<input id="eventType" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" 
-							title="Event Type" list="guest-list" required>
+							<input id="eventType" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" title="Event Type" list="guest-list" required>
 							<datalist id="guest-list">
 							  <option value="Birthday">
 							  <option value="Conference">
@@ -309,7 +301,7 @@
 							  <option value="Holiday">
 							  <option value="Graduation">
 							  <option value="Funeral">
-							</datalist>
+							</option></option></option></option></option></option></option></datalist>
 
 						</label>
 
@@ -322,8 +314,7 @@
 								
 							<span>Who's hosting it?</span>
 
-							<input id="eventHost" type="text" name="name" placeholder="First and Last Name or Organization Name" 
-							title="Event Host" required>
+							<input id="eventHost" type="text" name="name" placeholder="First and Last Name or Organization Name" title="Event Host" required>
 
 						</label>
 
@@ -336,8 +327,7 @@
 							
 							<span>When will it begin?</span>
 
-							<input id="startDate" type="datetime-local" name="start-date" 
-							title="Start Date"required>
+							<input id="startDate" type="datetime-local" name="start-date" title="Start Date" required>
 
 						</label>
 
@@ -350,8 +340,7 @@
 							
 							<span>When will it end?</span>
 
-							<input id="endDate" type="datetime-local" name="end-date" 
-							title="End Date" required>
+							<input id="endDate" type="datetime-local" name="end-date" title="End Date" required>
 
 						</label>
 
@@ -364,11 +353,11 @@
 
 							Who's going?
 
-							<input id="vtil-input" type="text" title="Who's going?" placeholder="Who will be attending?"></input>
+							<input id="vtil-input" type="text" title="Who's going?" placeholder="Who will be attending?">
 
 						</label>
 
-						<button id="add-button" type='button' onclick="VTILAPP.vtil.addTag()">Add</button>
+						<button id="add-button" type="button" onclick="VTILAPP.vtil.addTag()">Add</button>
 
 					</p>
 
@@ -388,8 +377,7 @@
 
 							Where will you have the event?
 
-							<input id="location-input" placeholder="Enter the address of the event"
-             					onFocus="APP.geolocate()" type="text"></input>
+							<input id="location-input" placeholder="Enter the address of the event" onfocus="APP.geolocate()" type="text">
 
 						</label>
 
@@ -403,37 +391,33 @@
 
 							Street Address
 
-							<input type="text" id="street_number"
-					              disabled="true"></input>
+							<input type="text" id="street_number" disabled="true">
 							
 						</label>
 						
 						<label for="route">
 
-							<input type="text" id="route"
-					              disabled="true">
+							<input type="text" id="route" disabled="true">
 
 						</label>
 
-						<br />
+						<br>
 
 						<label for="city">
 
 							City
 
-							<input type="text" id="city"
-					              disabled="true"></input>
+							<input type="text" id="city" disabled="true">
 
 						</label>
 
-						<br />
+						<br>
 
 						<label for="state">
 							
 							State
 
-							<input type="text"
-					              id="state" disabled="true">
+							<input type="text" id="state" disabled="true">
 
 						</label>
 
@@ -441,19 +425,17 @@
 							
 							Zip Code
 
-							<input type="text" id="postal-code"
-					              disabled="true">
+							<input type="text" id="postal-code" disabled="true">
 
 						</label>
 
-						<br />
+						<br>
 
 						<label for="country">
 
 							Country
 
-							<input type="text"
-					              id="country" disabled="true">
+							<input type="text" id="country" disabled="true">
 
 						</label>	
 

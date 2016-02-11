@@ -22,21 +22,6 @@ body {
   
 	  width: 40%;
 
-	  .card-width > .mdl-card__title {
-
-			height: 7em;
-			color: white;
-			font-weight: bold;
-			background: repeating-linear-gradient(
-			  45deg,
-			  $primary-color,
-			  $primary-color 10px,
-			  $secondary-color 10px,
-			  $secondary-color 20px
-			);
-
-		}
-
 		.authForm {
 
 			text-align: center;
@@ -55,6 +40,21 @@ body {
 			font-size: .8em;
 
 		}
+
+	}
+
+	.card-width > .mdl-card__title {
+
+		height: 7em;
+		color: white;
+		font-weight: bold;
+		background: repeating-linear-gradient(
+		  45deg,
+		  $primary-color,
+		  $primary-color 10px,
+		  $secondary-color 10px,
+		  $secondary-color 20px
+		);
 
 	}
 

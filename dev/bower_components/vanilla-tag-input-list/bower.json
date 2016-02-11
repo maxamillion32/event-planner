@@ -1,0 +1,26 @@
+{
+  "name": "vanilla-tag-input-list",
+  "homepage": "https://github.com/vision89/vanilla-javascript-tag-input",
+  "authors": [
+    "Dustin Gulley <dlgulley411@gmail.com>"
+  ],
+  "description": "Little library for creating a tag input list to help with a udacity project I'm working on",
+  "main": "dist/scripts/app.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "tag",
+    "input",
+    "list",
+    "tags"
+  ],
+  "license": "BSD",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

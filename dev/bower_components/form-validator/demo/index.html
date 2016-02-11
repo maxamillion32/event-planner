@@ -1,0 +1,83 @@
+<html>
+
+	<head>
+
+	</head>
+
+	<body>
+
+		Form validation helper
+
+		<form action="javascript:APP.submitted()">
+
+			<p>
+
+				<label for="required-input">
+					
+					Password
+
+					<input id="password-input" type="text" placeholder="Password" title="Password" maxlength="100" autofocus required> 
+
+				</label>
+				<br />
+				Constrains:
+				<br/>
+				* At least 3 characters long
+				<br />
+				* No more than 8 characters long
+				<br />
+				* Contain at least one upper case character
+				<br />
+				* Contain at least one lower case character
+				<br />
+				* Contain at least one special character (!, @, #, $, %, ^, &, *)
+				
+
+			</p>
+
+			<p>
+
+				<label for="repeat-password">
+					
+					Repeat Password
+
+					<input id="repeat-password" type="text" placeholder="Repeat Password" title="Repeat Password" maxlength="100" required> 
+
+				</label>
+				<br />
+				Constrains:
+				<br/>
+				* Must match your password
+				
+			</p>
+
+			<p>
+
+				<label for="regex-input">
+					
+					Regex Test
+
+					<input id="regex-input" type="text" placeholder="Stuff" title="Regex Test" maxlength="100" required> 
+
+				</label>
+				<br />
+				Constrains:
+				<br/>
+				* Contain the word 'Test'.
+				
+
+			</p>
+
+			<!-- Submit Button -->
+			<input type="submit" value="Submit" title="Submit" id="submit-button">
+
+		</form>
+		
+		<script src="../dev/all.js"></script>
+
+		<!-- Darth Validator -->
+		<script src="app.js"></script>
+
+	</body>
+
+</html>

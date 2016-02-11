@@ -9,11 +9,6 @@ body {
     margin-top: 15%; }
   body .card-width.mdl-card {
     width: 40%; }
-    body .card-width.mdl-card .card-width > .mdl-card__title {
-      height: 7em;
-      color: white;
-      font-weight: bold;
-      background: repeating-linear-gradient(45deg, #F50057, #F50057 10px, #FF4081 10px, #FF4081 20px); }
     body .card-width.mdl-card .authForm {
       text-align: center; }
     body .card-width.mdl-card .authContent {
@@ -21,6 +16,11 @@ body {
       padding-right: 30%; }
     body .card-width.mdl-card p.links {
       font-size: .8em; }
+  body .card-width > .mdl-card__title {
+    height: 7em;
+    color: white;
+    font-weight: bold;
+    background: repeating-linear-gradient(45deg, #F50057, #F50057 10px, #FF4081 10px, #FF4081 20px); }
   body .top-container {
     font-size: 2em;
     background-color: #F5F5F5;
