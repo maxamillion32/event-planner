@@ -25,9 +25,12 @@
 	var signupTitleEl = document.getElementById('signup-title');
 	var signupBirthday = document.getElementById('signup-birthday');
 	var submitPasswordButton = document.getElementById('submit-password-button');
+	var signupAdditionalInfoEl = document.getElementById('signup-additional-info');
+	var signupSwitchEl = document.getElementById('switch-1');
 
 	//Reset Password
-	var resetPasswordContainerEl = document.getElementById('resetPasswordContainer');
+	var resetPasswordContainerEl = document.getElementById('reset-password-container');
+	var resetPasswordEmail = document.getElementById('reset-password-email');
 
 	//event creation
 	var eventNameEl = document.getElementById('eventName');
@@ -135,6 +138,15 @@
 		//These will only display one at a time
 		signupPasswordEl.setCustomValidity(passwordErrors);
 		signupPassword2El.setCustomValidity(password2Errors);
+	};
+
+	/**
+  * Show/hide additional info
+  * 
+  */
+	APP.showAdditionalInfo = function () {
+
+		signupAdditionalInfoEl.hidden = !signupSwitchEl.checked;
 	};
 
 	/******************************************************************

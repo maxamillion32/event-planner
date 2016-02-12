@@ -28,466 +28,501 @@
 
 	<body>
 
-		<!-- Sign In -->
-		<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
+		<div class="demo-layout-transparent mdl-layout">
 
-			<div class="mdl-card__title">
+		  <header class="mdl-layout__header mdl-layout__header--transparent">
 
-				<h2 class="mdl-card__title-text">Sign In</h2>
+		    <div class="mdl-layout__header-row">
+		      <!-- Title -->
+		      <span class="mdl-layout-title">Event Planner!</span>
+		      <!-- Add spacer, to align navigation to the right -->
+		      <div class="mdl-layout-spacer"></div>
+		      <!-- Navigation -->
+		      <nav class="mdl-navigation">
+		        <a class="mdl-navigation__link" href="#">Add Event</a>
+		        <a class="mdl-navigation__link" href="#">Show Events</a>
+		      </nav>
+		    </div>
+		  </header>
+		  <main class="mdl-layout__content">
 
-			</div>
-			
-			<div class="mdl-card__supporting-text">
+			<!-- Sign In -->
+			<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
 
-				<form action="javascript:APP.signIn()" class="authForm" autocomplete="on">
+				<div class="mdl-card__title">
 
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<h2 class="mdl-card__title-text">Sign In</h2>
 
-						<label class="mdl-textfield__label" for="signin-email" title="Email">
-							
-							<span>Email</span>
+				</div>
+				
+				<div class="mdl-card__supporting-text">
 
-						</label>
+					<form action="javascript:APP.signIn()" class="authForm" autocomplete="on">
 
-						<input class="mdl-textfield__input" id="signin-email" type="email" name="email" title="Email" required>
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signin-password" title="Password">
-							
-							<span>Password</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" required>
-
-					</div>
-
-					<p>
-
-						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sign In" title="Sign In">
-
-					</p>
-
-				</form>
-
-				<p class="links">
-					
-					<div>
-
-						Don't have an account?  <a onclick="APP.showSignUp()" href="#"
-						title="Sign Up">Sign Up</a>
-
-					</div>
-
-					<div>
-
-						Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
-
-					</div>
-
-				</p>
-
-			</div>
-
-		</div>
-		
-		<!-- Sign up -->
-		<div id="signUpContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp" hidden="true">
-
-			<div class="mdl-card__title">
-
-				<h2 class="mdl-card__title-text">Sign Up</h2>
-
-			</div>
-
-			<div class="mdl-card__supporting-text">
-
-				<form action="javascript:APP.signUp()" class="authForm" autocomplete="on">
-
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signup-name" title="Name">
-							
-							<span>Name</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
-
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signup-email" title="Email">
-							
-							<span>Email</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" required>
-
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signup-employer" title="Employer">
-							
-							<span>Employer</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signup-employer" type="text" title="Employer" name="organization">
-
-					</div>
-					
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signup-title" title="Title">
-							
-							<span>Job Title</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signup-title" type="text" title="Title" name="organization-title">
-
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signup-birthday" title="Birthday">
-							
-							<span>When's your birthday?</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signup-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
-
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signup-password" title="Password">
-							
-							<span>Password</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" required>
-
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-						<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
-							
-							<span>Retype Password</span>
-
-						</label>
-
-						<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" required>
-
-					</div>
-
-					<p>
-
-						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
-
-					</p>
-
-				</form>
-
-				<p class="links">
-
-					<div>
-
-						Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
-
-					</div>
-
-					<div>
-
-						Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
-
-					</div>
-
-				</p>
-
-			</div>	
-
-		</div>
-		
-		<!-- Reset Password -->
-		<div id="resetPasswordContainer" hidden="true" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
-
-			<div class="mdl-card__title">
-
-				<h2 class="mdl-card__title-text">Reset Password</h2>
-
-			</div>
-			
-			<div class="mdl-card__supporting-text">
-
-				<form action="javascript:APP.resetPassword()" class="authForm" autocomplete="on">
-
-					<div class="authContent">
-
-						<p>
-
-							<label for="resetPasswordEmail" title="Email">
+							<label class="mdl-textfield__label" for="signin-email" title="Email">
 								
 								<span>Email</span>
 
-								<input id="resetPasswordEmail" type="email" name="email" placeholder="email@awesome.com" title="Email" required>
+							</label>
+
+							<input class="mdl-textfield__input" id="signin-email" type="email" name="email" title="Email" required>
+
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signin-password" title="Password">
+								
+								<span>Password</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" required>
+
+						</div>
+
+						<p>
+
+							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sign In" title="Sign In">
+
+						</p>
+
+					</form>
+
+					<p>
+						
+						<div class="link">
+
+							Don't have an account?  <a onclick="APP.showSignUp()" href="#"
+							title="Sign Up">Sign Up</a>
+
+						</div>
+
+						<div class="link">
+
+							Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+						</div>
+
+					</p>
+
+				</div>
+
+			</div>
+			
+			<!-- Sign up -->
+			<div id="signUpContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp" hidden="true">
+
+				<div class="mdl-card__title">
+
+					<h2 class="mdl-card__title-text">Sign Up</h2>
+
+				</div>
+
+				<div class="mdl-card__supporting-text">
+
+					<form action="javascript:APP.signUp()" class="authForm" autocomplete="on">
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signup-name" title="Name">
+								
+								<span>Name</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
+
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signup-email" title="Email">
+								
+								<span>Email</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" required>
+
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signup-password" title="Password">
+								
+								<span>Password</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" required>
+
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
+								
+								<span>Retype Password</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" required>
+
+						</div>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+
+								<input type="checkbox" id="switch-1" class="mdl-switch__input"
+								onclick="APP.showAdditionalInfo()">
+								<span class="mdl-switch__label">Care to tell us more about yourself?</span>
+
+							</label>
+
+						</div>
+						
+						<!-- Additional signup info -->
+						<div id="signup-additional-info" hidden="true">
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="signup-employer" title="Employer">
+									
+									<span>Employer</span>
+
+								</label>
+
+								<input class="mdl-textfield__input" id="signup-employer" type="text" title="Employer" name="organization">
+
+							</div>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="signup-title" title="Title">
+									
+									<span>Job Title</span>
+
+								</label>
+
+								<input class="mdl-textfield__input" id="signup-title" type="text" title="Title" name="organization-title">
+
+							</div>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="signup-birthday" title="Birthday">
+									
+									<span>When's your birthday?</span>
+
+								</label>
+
+								<input class="mdl-textfield__input" id="signup-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+							</div>
+
+						</div>
+
+						<p>
+
+							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
+
+						</p>
+
+					</form>
+
+					<p>
+
+						<div class="link">
+
+							Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+						</div>
+
+						<div class="link">
+
+							Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+						</div>
+
+					</p>
+
+				</div>	
+
+			</div>
+			
+			<!-- Reset Password -->
+			<div id="reset-password-container" hidden="true" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
+
+				<div class="mdl-card__title">
+
+					<h2 class="mdl-card__title-text">Reset Password</h2>
+
+				</div>
+				
+				<div class="mdl-card__supporting-text">
+
+					<form action="javascript:APP.resetPassword()" class="authForm" autocomplete="on">
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label"
+							for="reset-password-email" title="Email">
+								
+								<span>Email</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="reset-password-email" type="email" name="email" title="Email" required>
+
+						</div>
+
+						<p>
+
+							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Reset Password" title="Reset Password">
+
+						</p>
+
+					</form>
+
+					<p>
+
+						<div class="link">
+
+							Don't have an account?  <a onclick="APP.showSignUp()" href="#"
+							title="Sign Up">Sign Up</a>
+
+						</div>
+
+						<div class="link">
+
+							Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+						</div>
+
+					</p>
+
+				</div>
+
+			</div>
+			
+			<!-- Event Planner -->
+			<div id="eventPlannerContainer" hidden="true">
+
+				<div class="top-container animated slideInDown">
+
+					<form action="javascript:APP.submitForm()" autocomplete="on">
+						
+						<!-- Name of the event -->
+						<p>
+
+							<label for="event-name" title="Event Name">
+									
+								<span>Event Title</span>
+
+								<input id="eventName" type="text" name="event-name" 
+								title="Event Name" required>
+
+							</label>
+
+						</p>
+						
+						<!-- Event Type -->
+						<p>
+
+							<label for="event-type" title="Event Type">
+									
+								<span>What kind of event is it?</span>
+
+								<input id="eventType" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" 
+								title="Event Type" list="guest-list" required>
+								<datalist id="guest-list">
+								  <option value="Birthday">
+								  <option value="Conference">
+								  <option value="Wedding">
+								  <option value="Anniversary">
+								  <option value="Holiday">
+								  <option value="Graduation">
+								  <option value="Funeral">
+								</datalist>
+
+							</label>
+
+						</p>
+						
+						<!-- Host of the event -->
+						<p>
+
+							<label for="eventHost" title="Event Host">
+									
+								<span>Who's hosting it?</span>
+
+								<input id="eventHost" type="text" name="name" placeholder="First and Last Name or Organization Name" 
+								title="Event Host" required>
+
+							</label>
+
+						</p>
+						
+						<!-- Begin Date -->
+						<p>
+
+							<label for="startDate" title="Start Date">
+								
+								<span>When will it begin?</span>
+
+								<input id="startDate" type="datetime-local" name="start-date" 
+								title="Start Date"required>
+
+							</label>
+
+						</p>
+						
+						<!-- End Date -->
+						<p>
+
+							<label for="endDate" title="End Date">
+								
+								<span>When will it end?</span>
+
+								<input id="endDate" type="datetime-local" name="end-date" 
+								title="End Date" required>
+
+							</label>
+
+						</p>
+						
+						<!-- People attending -->
+						<p>
+	      
+							<label for="vtil-input">
+
+								Who's going?
+
+								<input id="vtil-input" type="text" title="Who's going?" placeholder="Who will be attending?"></input>
+
+							</label>
+
+							<button id="add-button" type='button' onclick="VTILAPP.vtil.addTag()">Add</button>
+
+						</p>
+
+						<p class="tag-wrapper">
+
+							<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
+
+
+							</div>  
+
+						</p>
+						
+						<!-- Location autocomplete field -->
+						<p>
+
+							<label for="location-input">
+
+								Where will you have the event?
+
+								<input id="location-input" placeholder="Enter the address of the event"
+	             					onFocus="APP.geolocate()" type="text"></input>
 
 							</label>
 
 						</p>
 
-					</div>
 
-					<p>
+						<!-- Event location -->
+						<p>
 
-						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Reset Password" title="Reset Password">
+							<label for="street_number">
 
-					</p>
+								Street Address
 
-				</form>
+								<input type="text" id="street_number"
+						              disabled="true"></input>
+								
+							</label>
+							
+							<label for="route">
 
-				<p class="links">
+								<input type="text" id="route"
+						              disabled="true">
 
-					<div>
+							</label>
 
-						Don't have an account?  <a onclick="APP.showSignUp()" href="#"
-						title="Sign Up">Sign Up</a>
+							<br />
 
-					</div>
+							<label for="city">
 
-					<div>
+								City
 
-						Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+								<input type="text" id="city"
+						              disabled="true"></input>
 
-					</div>
+							</label>
+
+							<br />
+
+							<label for="state">
+								
+								State
+
+								<input type="text"
+						              id="state" disabled="true">
+
+							</label>
+
+							<label for="postal-code">
+								
+								Zip Code
+
+								<input type="text" id="postal-code"
+						              disabled="true">
+
+							</label>
+
+							<br />
+
+							<label for="country">
+
+								Country
+
+								<input type="text"
+						              id="country" disabled="true">
+
+							</label>	
+
+						</p>
+
+						<p>
+
+							<!-- Message -->
+							<label for="message">
+
+								<textarea id="message" name="textarea" rows="10" cols="50">Leave a message for your guests!</textarea>
+
+							</label>
+
+						</p>
+
+						<!-- Submit Button -->
+						<input type="submit" value="Submit" title="Submit Event">
+
+					</form>
+
+				</div>
+				
+				<!-- Events -->
+				<p id="event-container">
 
 				</p>
 
 			</div>
 
-		</div>
-		
-		<!-- Event Planner -->
-		<div id="eventPlannerContainer" hidden="true">
-
-			<div class="top-container animated slideInDown">
-
-				<form action="javascript:APP.submitForm()" autocomplete="on">
-					
-					<!-- Name of the event -->
-					<p>
-
-						<label for="event-name" title="Event Name">
-								
-							<span>Event Title</span>
-
-							<input id="eventName" type="text" name="event-name" 
-							title="Event Name" required>
-
-						</label>
-
-					</p>
-					
-					<!-- Event Type -->
-					<p>
-
-						<label for="event-type" title="Event Type">
-								
-							<span>What kind of event is it?</span>
-
-							<input id="eventType" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" 
-							title="Event Type" list="guest-list" required>
-							<datalist id="guest-list">
-							  <option value="Birthday">
-							  <option value="Conference">
-							  <option value="Wedding">
-							  <option value="Anniversary">
-							  <option value="Holiday">
-							  <option value="Graduation">
-							  <option value="Funeral">
-							</datalist>
-
-						</label>
-
-					</p>
-					
-					<!-- Host of the event -->
-					<p>
-
-						<label for="eventHost" title="Event Host">
-								
-							<span>Who's hosting it?</span>
-
-							<input id="eventHost" type="text" name="name" placeholder="First and Last Name or Organization Name" 
-							title="Event Host" required>
-
-						</label>
-
-					</p>
-					
-					<!-- Begin Date -->
-					<p>
-
-						<label for="startDate" title="Start Date">
-							
-							<span>When will it begin?</span>
-
-							<input id="startDate" type="datetime-local" name="start-date" 
-							title="Start Date"required>
-
-						</label>
-
-					</p>
-					
-					<!-- End Date -->
-					<p>
-
-						<label for="endDate" title="End Date">
-							
-							<span>When will it end?</span>
-
-							<input id="endDate" type="datetime-local" name="end-date" 
-							title="End Date" required>
-
-						</label>
-
-					</p>
-					
-					<!-- People attending -->
-					<p>
-      
-						<label for="vtil-input">
-
-							Who's going?
-
-							<input id="vtil-input" type="text" title="Who's going?" placeholder="Who will be attending?"></input>
-
-						</label>
-
-						<button id="add-button" type='button' onclick="VTILAPP.vtil.addTag()">Add</button>
-
-					</p>
-
-					<p class="tag-wrapper">
-
-						<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
-
-
-						</div>  
-
-					</p>
-					
-					<!-- Location autocomplete field -->
-					<p>
-
-						<label for="location-input">
-
-							Where will you have the event?
-
-							<input id="location-input" placeholder="Enter the address of the event"
-             					onFocus="APP.geolocate()" type="text"></input>
-
-						</label>
-
-					</p>
-
-
-					<!-- Event location -->
-					<p>
-
-						<label for="street_number">
-
-							Street Address
-
-							<input type="text" id="street_number"
-					              disabled="true"></input>
-							
-						</label>
-						
-						<label for="route">
-
-							<input type="text" id="route"
-					              disabled="true">
-
-						</label>
-
-						<br />
-
-						<label for="city">
-
-							City
-
-							<input type="text" id="city"
-					              disabled="true"></input>
-
-						</label>
-
-						<br />
-
-						<label for="state">
-							
-							State
-
-							<input type="text"
-					              id="state" disabled="true">
-
-						</label>
-
-						<label for="postal-code">
-							
-							Zip Code
-
-							<input type="text" id="postal-code"
-					              disabled="true">
-
-						</label>
-
-						<br />
-
-						<label for="country">
-
-							Country
-
-							<input type="text"
-					              id="country" disabled="true">
-
-						</label>	
-
-					</p>
-
-					<p>
-
-						<!-- Message -->
-						<label for="message">
-
-							<textarea id="message" name="textarea" rows="10" cols="50">Leave a message for your guests!</textarea>
-
-						</label>
-
-					</p>
-
-					<!-- Submit Button -->
-					<input type="submit" value="Submit" title="Submit Event">
-
-				</form>
-
-			</div>
-			
-			<!-- Events -->
-			<p id="event-container">
-
-			</p>
-
+		  </main>
 		</div>
 		
 		<!-- Material Design Lite -->
