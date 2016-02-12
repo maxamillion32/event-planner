@@ -14,7 +14,7 @@
 
 	//signing up
 	let signUpContainerEl = 		document.getElementById('signUpContainer');
-	let eventPlannerContainerEl = 	document.getElementById('eventPlannerContainer');
+	let eventPlannerContainerEl = 	document.getElementById('event-planner-container');
 	let signupNameEl = 				document.getElementById('signup-name');
 	let signupEmailEl = 			document.getElementById('signup-email');
 	let signupPasswordEl = 			document.getElementById('signupPassword');
@@ -31,15 +31,15 @@
 	let resetPasswordEmail =		document.getElementById('reset-password-email');
 
 	//event creation
-	let eventNameEl =				document.getElementById('eventName');
-	let eventTypeEl =				document.getElementById('eventType');
-	let eventHostEl =				document.getElementById('eventHost');
-	let startDateEl =				document.getElementById('startDate');
-	let endDateEl =					document.getElementById('endDate');
+	let eventNameEl =				document.getElementById('event-name');
+	let eventTypeEl =				document.getElementById('event-type');
+	let eventHostEl =				document.getElementById('event-host');
+	let startDateEl =				document.getElementById('start-date');
+	let endDateEl =					document.getElementById('end-date');
 	let contentEl = 				document.getElementById('vtil-content');
 	let inputEl = 					document.getElementById('vtil-input');
 	let locationInputEl	=			document.getElementById('location-input');
-	let streetNumberEl =			document.getElementById('street_number');
+	let streetNumberEl =			document.getElementById('street-number');
 	let routeEl =					document.getElementById('route');
 	let cityEl =					document.getElementById('city');
 	let stateEl =					document.getElementById('state');

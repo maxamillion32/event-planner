@@ -16,7 +16,7 @@
 
 	//signing up
 	var signUpContainerEl = document.getElementById('signUpContainer');
-	var eventPlannerContainerEl = document.getElementById('eventPlannerContainer');
+	var eventPlannerContainerEl = document.getElementById('event-planner-container');
 	var signupNameEl = document.getElementById('signup-name');
 	var signupEmailEl = document.getElementById('signup-email');
 	var signupPasswordEl = document.getElementById('signupPassword');
@@ -33,15 +33,15 @@
 	var resetPasswordEmail = document.getElementById('reset-password-email');
 
 	//event creation
-	var eventNameEl = document.getElementById('eventName');
-	var eventTypeEl = document.getElementById('eventType');
-	var eventHostEl = document.getElementById('eventHost');
-	var startDateEl = document.getElementById('startDate');
-	var endDateEl = document.getElementById('endDate');
+	var eventNameEl = document.getElementById('event-name');
+	var eventTypeEl = document.getElementById('event-type');
+	var eventHostEl = document.getElementById('event-host');
+	var startDateEl = document.getElementById('start-date');
+	var endDateEl = document.getElementById('end-date');
 	var contentEl = document.getElementById('vtil-content');
 	var inputEl = document.getElementById('vtil-input');
 	var locationInputEl = document.getElementById('location-input');
-	var streetNumberEl = document.getElementById('street_number');
+	var streetNumberEl = document.getElementById('street-number');
 	var routeEl = document.getElementById('route');
 	var cityEl = document.getElementById('city');
 	var stateEl = document.getElementById('state');

@@ -310,35 +310,44 @@
 			</div>
 			
 			<!-- Event Planner -->
-			<div id="eventPlannerContainer" hidden="true">
+			<div id="event-planner-container" hidden="true">
 
-				<div class="top-container animated slideInDown">
+				<div class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
 
-					<form action="javascript:APP.submitForm()" autocomplete="on">
+					<div class="mdl-card__title">
+
+						<h2 class="mdl-card__title-text">Plan That Event!</h2>
+
+					</div>
+
+					<div class="mdl-card__supporting-text">
+
+						<form action="javascript:APP.submitForm()" autocomplete="on">
 						
-						<!-- Name of the event -->
-						<p>
+							<!-- Name of the event -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-							<label for="event-name" title="Event Name">
-									
-								<span>Event Title</span>
+								<label class="mdl-textfield__label" for="event-name" title="Event Name">
+										
+									<span>Event Title</span>
 
-								<input id="eventName" type="text" name="event-name" 
-								title="Event Name" required>
+								</label>
 
-							</label>
+								<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" 
+									title="Event Name" required>
 
-						</p>
-						
-						<!-- Event Type -->
-						<p>
+							</div>
+							
+							<!-- Event Type -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-							<label for="event-type" title="Event Type">
-									
-								<span>What kind of event is it?</span>
+								<label class="mdl-textfield__label" for="event-type" title="Event Type">
+										
+									<span>What kind of event is it?</span>
 
-								<input id="eventType" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" 
-								title="Event Type" list="guest-list" required>
+								</label>
+
+								<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" title="Event Type" list="guest-list" required>
 								<datalist id="guest-list">
 								  <option value="Birthday">
 								  <option value="Conference">
@@ -349,169 +358,164 @@
 								  <option value="Funeral">
 								</datalist>
 
-							</label>
-
-						</p>
-						
-						<!-- Host of the event -->
-						<p>
-
-							<label for="eventHost" title="Event Host">
-									
-								<span>Who's hosting it?</span>
-
-								<input id="eventHost" type="text" name="name" placeholder="First and Last Name or Organization Name" 
-								title="Event Host" required>
-
-							</label>
-
-						</p>
-						
-						<!-- Begin Date -->
-						<p>
-
-							<label for="startDate" title="Start Date">
-								
-								<span>When will it begin?</span>
-
-								<input id="startDate" type="datetime-local" name="start-date" 
-								title="Start Date"required>
-
-							</label>
-
-						</p>
-						
-						<!-- End Date -->
-						<p>
-
-							<label for="endDate" title="End Date">
-								
-								<span>When will it end?</span>
-
-								<input id="endDate" type="datetime-local" name="end-date" 
-								title="End Date" required>
-
-							</label>
-
-						</p>
-						
-						<!-- People attending -->
-						<p>
-	      
-							<label for="vtil-input">
-
-								Who's going?
-
-								<input id="vtil-input" type="text" title="Who's going?" placeholder="Who will be attending?"></input>
-
-							</label>
-
-							<button id="add-button" type='button' onclick="VTILAPP.vtil.addTag()">Add</button>
-
-						</p>
-
-						<p class="tag-wrapper">
-
-							<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
-
-
-							</div>  
-
-						</p>
-						
-						<!-- Location autocomplete field -->
-						<p>
-
-							<label for="location-input">
-
-								Where will you have the event?
-
-								<input id="location-input" placeholder="Enter the address of the event"
-	             					onFocus="APP.geolocate()" type="text"></input>
-
-							</label>
-
-						</p>
-
-
-						<!-- Event location -->
-						<p>
-
-							<label for="street_number">
-
-								Street Address
-
-								<input type="text" id="street_number"
-						              disabled="true"></input>
-								
-							</label>
+							</div>
 							
-							<label for="route">
+							<!-- Host of the event -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-								<input type="text" id="route"
-						              disabled="true">
+								<label class="mdl-textfield__label" for="event-host" title="Event Host">
+										
+									<span>Who's hosting it?</span>
 
-							</label>
+								</label>
 
-							<br />
+								<input id="event-host" class="mdl-textfield__input" type="text" name="name" placeholder="First and Last Name or Organization Name" title="Event Host" required>
 
-							<label for="city">
+							</div>
+							
+							<!-- Begin Date -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-								City
+								<label class="mdl-textfield__label" for="start-date" title="Start Date">
+									
+									<span>When will it begin?</span>
 
-								<input type="text" id="city"
-						              disabled="true"></input>
+								</label>
 
-							</label>
+								<input id="start-date" class="mdl-textfield__input" type="datetime-local" name="start-date" title="Start Date"required>
 
-							<br />
+							</div>
+							
+							<!-- End Date -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-							<label for="state">
+								<label class="mdl-textfield__label" for="end-date" title="End Date">
+									
+									<span>When will it end?</span>
+
+								</label>
+
+								<input id="end-date" class="mdl-textfield__input" type="datetime-local" name="end-date" title="End Date" required>
+
+							</div>
+							
+							<!-- People attending -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+		      
+								<label class="mdl-textfield__label" for="vtil-input">
+
+									Who's going?
+
+								</label>
+
+								<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" placeholder="Who will be attending?"></input>
+
+								<button id="add-button" type='button' onclick="VTILAPP.vtil.addTag()">Add</button>
+
+							</div>
+
+							<p class="tag-wrapper">
+
+								<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
+
+
+								</div>  
+
+							</p>
+							
+							<!-- Location autocomplete field -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="location-input">
+
+									Where will you have the event?
+
+								</label>
+
+								<input id="location-input" class="mdl-textfield__input" placeholder="Enter the address of the event"
+		             					onFocus="APP.geolocate()" type="text"></input>
+
+							</div>
+
+
+							<!-- Event location -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="street-number">
+
+									Street Address
+									
+								</label>
+
+								<input type="text" id="street-number" class="mdl-textfield__input" disabled="true"></input>
 								
-								State
+								<label class="mdl-textfield__label" for="route">
 
-								<input type="text"
-						              id="state" disabled="true">
+								</label>
 
-							</label>
+								<input type="text" id="route" class="mdl-textfield__input" disabled="true">
 
-							<label for="postal-code">
-								
-								Zip Code
+								<br />
 
-								<input type="text" id="postal-code"
-						              disabled="true">
+								<label class="mdl-textfield__label" for="city">
 
-							</label>
+									City
 
-							<br />
+								</label>
 
-							<label for="country">
+								<input type="text" id="city" class="mdl-textfield__input" disabled="true"></input>
 
-								Country
+								<br />
 
-								<input type="text"
-						              id="country" disabled="true">
+								<label class="mdl-textfield__label" for="state">
+									
+									State
 
-							</label>	
+								</label>
 
-						</p>
+								<input type="text" id="state" class="mdl-textfield__input" disabled="true">
 
-						<p>
+								<label class="mdl-textfield__label" for="postal-code">
+									
+									Zip Code
 
-							<!-- Message -->
-							<label for="message">
+								</label>
 
-								<textarea id="message" name="textarea" rows="10" cols="50">Leave a message for your guests!</textarea>
+								<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true">
 
-							</label>
+								<br />
 
-						</p>
+								<label class="mdl-textfield__label" for="country">
 
-						<!-- Submit Button -->
-						<input type="submit" value="Submit" title="Submit Event">
+									Country
 
-					</form>
+								</label>
+
+								<input type="text" id="country" class="mdl-textfield__input" disabled="true">
+
+							</div>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<!-- Message -->
+								<label class="mdl-textfield__label" for="message">
+
+								</label>
+
+								<textarea id="message" class="mdl-textfield__input" name="textarea" rows="10" cols="50">Leave a message for your guests!</textarea>
+
+							</div>
+
+							<p>
+
+								<!-- Submit Button -->
+								<input type="submit" value="Submit" title="Submit Event">
+
+							</p>
+
+						</form>
+
+					</div>
 
 				</div>
 				
