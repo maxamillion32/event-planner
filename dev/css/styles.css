@@ -15,9 +15,13 @@ body {
     margin-right: auto;
     margin-top: 7%; }
   body .card-width.mdl-card {
-    width: 55%; }
+    width: 70%; }
     body .card-width.mdl-card .authForm {
       text-align: center; }
+    body .card-width.mdl-card .address-field {
+      margin-left: 1em;
+      margin-right: 1em;
+      width: 13em; }
   body .link {
     line-height: 1.5em; }
   body .card-width > .mdl-card__title {
