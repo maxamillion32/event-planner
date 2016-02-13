@@ -11,14 +11,16 @@
 	let signInEmailEl = 			document.getElementById('signin-email');
 	let signInPasswordEl = 			document.getElementById('signin-password');
 	let signInContainerEl = 		document.getElementById('signInContainer');
+	let signOutLinkEl =				document.getElementById('sign-out-link');
+	let signInLinkEl =				document.getElementById('sign-in-link');
 
 	//signing up
 	let signUpContainerEl = 		document.getElementById('signUpContainer');
 	let eventPlannerContainerEl = 	document.getElementById('event-planner-container');
 	let signupNameEl = 				document.getElementById('signup-name');
 	let signupEmailEl = 			document.getElementById('signup-email');
-	let signupPasswordEl = 			document.getElementById('signupPassword');
-	let signupPassword2El = 		document.getElementById('signupPassword2');
+	let signupPasswordEl = 			document.getElementById('signup-password');
+	let signupPassword2El = 		document.getElementById('signup-password2');
 	let signupEmployerEl =			document.getElementById('signup-employer');
 	let signupTitleEl =				document.getElementById('signup-title');
 	let signupBirthday =			document.getElementById('signup-birthday');
@@ -50,6 +52,7 @@
 
 	//event display
 	let eventContainerEl =			document.getElementById('event-container');
+	let showEventContainerEl =		document.getElementById('show-event-container');
 
 	let events = [];		//The users events
 	let userRef;			//Tag input list
@@ -207,11 +210,12 @@
 
 				});
 
-				//signupNameEl signupEmployerEl signupTitleEl signupBirthday
-
 			}
 
-			APP.showEventPlanner();
+			signOutLinkEl.hidden = false;
+			signInLinkEl.hidden = true;
+
+			APP.displayEventCreation();
 
 			/**
 			 * Get the data
@@ -260,20 +264,23 @@
 	 */
 	APP.signOut = function() {
 
+		signOutLinkEl.hidden = true;
+		signInLinkEl.hidden = false;
 		ref.unauth();
 		eventRef.off();
 		extraRef.off();
 		userRef = undefined;
 		eventRef = undefined;
 		extraRef = undefined;
-		signInEmailEl = 			'';
-		signInPasswordEl = 			'';
-		signupNameEl = 				'';
-		signupEmailEl = 			'';
-		signupPasswordEl = 			'';
-		signupPassword2El = 		'';
+		signInEmailEl.value = 		'';
+		signInPasswordEl.value = 	'';
+		signupNameEl.value = 		'';
+		signupEmailEl.value = 		'';
+		signupPasswordEl.value = 	'';
+		signupPassword2El.value = 	'';
 		_clearElements();
 		_clearEl(eventContainerEl);
+		APP.showSignIn();
 
 	};
 
@@ -320,6 +327,34 @@
 		objectPath: { writable: true,  configurable:true, value: 'VTILAPP.vtil' }
 
 	});
+
+	/**
+	 * Display event creation if user has logged in
+	 * 
+	 */
+	APP.displayEventCreation = function() {
+
+		if(eventRef) {
+
+			showEventPlanner();
+
+		}
+
+	};
+
+	/**
+	 * Display events if user has logged in
+	 * 
+	 */
+	APP.displayEvents = function() {
+
+		if(eventRef) {
+
+			showEventContainer();
+
+		}
+
+	};
 
 	/**
 	* Clear all child elements
@@ -635,6 +670,7 @@
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = false;
 		resetPasswordContainerEl.hidden = true;
+		showEventContainerEl.hidden = true;
 
 	};
 
@@ -648,6 +684,7 @@
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = true
+		showEventContainerEl.hidden = true;
 
 	};
 
@@ -655,12 +692,13 @@
 	 * Show the event planner
 	 * 
 	 */
-	APP.showEventPlanner = function() {
+	function showEventPlanner () {
 
 		signInContainerEl.hidden = true;
 		eventPlannerContainerEl.hidden = false;
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = true;
+		showEventContainerEl.hidden = true;
 
 	};
 
@@ -668,12 +706,27 @@
 	 * Show the reset password screen
 	 * 
 	 */
-	APP.showResetPassword= function() {
+	APP.showResetPassword = function() {
 
 		signInContainerEl.hidden = true;
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = false;
+		showEventContainerEl.hidden = true;
+
+	};
+
+	/**
+	 * Show the events
+	 * 
+	 */
+	function showEventContainer () {
+
+		signInContainerEl.hidden = true;
+		eventPlannerContainerEl.hidden = true;
+		signUpContainerEl.hidden = true;
+		resetPasswordContainerEl.hidden = true;
+		showEventContainerEl.hidden = false;
 
 	};
 

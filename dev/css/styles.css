@@ -9,8 +9,9 @@ body {
     /* This background is dark, so we set text to white. Use 87% black instead if
 	     your background is light. */
     color: white; }
+  body .center {
+    text-align: center; }
   body .vert-cent {
-    position: relative;
     margin-left: auto;
     margin-right: auto;
     margin-top: 7%; }

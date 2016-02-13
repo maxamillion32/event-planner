@@ -39,15 +39,22 @@
 		      <div class="mdl-layout-spacer"></div>
 		      <!-- Navigation -->
 		      <nav class="mdl-navigation">
-		        <a class="mdl-navigation__link" href="#">Add Event</a>
-		        <a class="mdl-navigation__link" href="#">Show Events</a>
+
+		      	<a class="mdl-navigation__link" onclick="APP.displayEventCreation()" href="#">Add Event</a>
+
+		      	<a class="mdl-navigation__link" onclick="APP.displayEvents()" href="#">Show Events</a>
+
+		      	<a class="mdl-navigation__link" id="sign-out-link" hidden="true" onclick="APP.signOut()" href="#">Sign Out</a>
+
+		      	<a class="mdl-navigation__link" id="sign-in-link" onclick="APP.showSignIn()" href="#">Sign In</a>
+
 		      </nav>
 		    </div>
 		  </header>
 		  <main class="mdl-layout__content">
 
 			<!-- Sign In -->
-			<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
+			<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInLeft">
 
 				<div class="mdl-card__title">
 
@@ -542,10 +549,10 @@
 
 							</div>
 
-							<p>
+							<p class="center">
 
 								<!-- Submit Button -->
-								<input type="submit" value="Submit" title="Submit Event">
+								<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit" title="Submit Event">
 
 							</p>
 
@@ -554,6 +561,10 @@
 					</div>
 
 				</div>
+
+			</div>
+
+			<div id="show-event-container" hidden="true">
 				
 				<!-- Events -->
 				<p id="event-container">

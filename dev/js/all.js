@@ -13,14 +13,16 @@
 	var signInEmailEl = document.getElementById('signin-email');
 	var signInPasswordEl = document.getElementById('signin-password');
 	var signInContainerEl = document.getElementById('signInContainer');
+	var signOutLinkEl = document.getElementById('sign-out-link');
+	var signInLinkEl = document.getElementById('sign-in-link');
 
 	//signing up
 	var signUpContainerEl = document.getElementById('signUpContainer');
 	var eventPlannerContainerEl = document.getElementById('event-planner-container');
 	var signupNameEl = document.getElementById('signup-name');
 	var signupEmailEl = document.getElementById('signup-email');
-	var signupPasswordEl = document.getElementById('signupPassword');
-	var signupPassword2El = document.getElementById('signupPassword2');
+	var signupPasswordEl = document.getElementById('signup-password');
+	var signupPassword2El = document.getElementById('signup-password2');
 	var signupEmployerEl = document.getElementById('signup-employer');
 	var signupTitleEl = document.getElementById('signup-title');
 	var signupBirthday = document.getElementById('signup-birthday');
@@ -52,6 +54,7 @@
 
 	//event display
 	var eventContainerEl = document.getElementById('event-container');
+	var showEventContainerEl = document.getElementById('show-event-container');
 
 	var events = []; //The users events
 	var userRef = undefined; //Tag input list
@@ -184,11 +187,12 @@
 						birthday: signupBirthday.value
 
 					});
-
-					//signupNameEl signupEmployerEl signupTitleEl signupBirthday
 				}
 
-				APP.showEventPlanner();
+				signOutLinkEl.hidden = false;
+				signInLinkEl.hidden = true;
+
+				APP.displayEventCreation();
 
 				/**
      * Get the data
@@ -231,20 +235,23 @@
   */
 	APP.signOut = function () {
 
+		signOutLinkEl.hidden = true;
+		signInLinkEl.hidden = false;
 		ref.unauth();
 		eventRef.off();
 		extraRef.off();
 		userRef = undefined;
 		eventRef = undefined;
 		extraRef = undefined;
-		signInEmailEl = '';
-		signInPasswordEl = '';
-		signupNameEl = '';
-		signupEmailEl = '';
-		signupPasswordEl = '';
-		signupPassword2El = '';
+		signInEmailEl.value = '';
+		signInPasswordEl.value = '';
+		signupNameEl.value = '';
+		signupEmailEl.value = '';
+		signupPasswordEl.value = '';
+		signupPassword2El.value = '';
 		_clearElements();
 		_clearEl(eventContainerEl);
+		APP.showSignIn();
 	};
 
 	/******************************************************************
@@ -287,6 +294,30 @@
 		objectPath: { writable: true, configurable: true, value: 'VTILAPP.vtil' }
 
 	});
+
+	/**
+  * Display event creation if user has logged in
+  * 
+  */
+	APP.displayEventCreation = function () {
+
+		if (eventRef) {
+
+			showEventPlanner();
+		}
+	};
+
+	/**
+  * Display events if user has logged in
+  * 
+  */
+	APP.displayEvents = function () {
+
+		if (eventRef) {
+
+			showEventContainer();
+		}
+	};
 
 	/**
  * Clear all child elements
@@ -599,6 +630,7 @@
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = false;
 		resetPasswordContainerEl.hidden = true;
+		showEventContainerEl.hidden = true;
 	};
 
 	/**
@@ -611,18 +643,20 @@
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = true;
+		showEventContainerEl.hidden = true;
 	};
 
 	/**
   * Show the event planner
   * 
   */
-	APP.showEventPlanner = function () {
+	function showEventPlanner() {
 
 		signInContainerEl.hidden = true;
 		eventPlannerContainerEl.hidden = false;
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = true;
+		showEventContainerEl.hidden = true;
 	};
 
 	/**
@@ -635,6 +669,20 @@
 		eventPlannerContainerEl.hidden = true;
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = false;
+		showEventContainerEl.hidden = true;
+	};
+
+	/**
+  * Show the events
+  * 
+  */
+	function showEventContainer() {
+
+		signInContainerEl.hidden = true;
+		eventPlannerContainerEl.hidden = true;
+		signUpContainerEl.hidden = true;
+		resetPasswordContainerEl.hidden = true;
+		showEventContainerEl.hidden = false;
 	};
 })(document);
 //# sourceMappingURL=../maps/all.js.map
