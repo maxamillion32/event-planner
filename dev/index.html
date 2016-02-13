@@ -71,6 +71,8 @@
 
 						</div>
 
+						<br>
+
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 							<label class="mdl-textfield__label" for="signin-password" title="Password">
@@ -342,7 +344,7 @@
 
 								</label>
 
-								<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" placeholder="Birthday, Conference, Wedding, etc" title="Event Type" list="guest-list" required>
+								<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" required>
 								<datalist id="guest-list">
 								  <option value="Birthday">
 								  <option value="Conference">
@@ -364,7 +366,7 @@
 
 								</label>
 
-								<input id="event-host" class="mdl-textfield__input" type="text" name="name" placeholder="First and Last Name or Organization Name" title="Event Host" required>
+								<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" required>
 
 							</div>
 							
@@ -377,7 +379,7 @@
 
 								</label>
 
-								<input id="start-date" class="mdl-textfield__input" type="datetime-local" name="start-date" title="Start Date" required>
+								<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" required>
 
 							</div>
 							
@@ -390,7 +392,7 @@
 
 								</label>
 
-								<input id="end-date" class="mdl-textfield__input" type="datetime-local" name="end-date" title="End Date" required>
+								<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" required>
 
 							</div>
 							
@@ -403,7 +405,9 @@
 
 								</label>
 
-								<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" placeholder="Who will be attending?">
+								<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?">
+								
+								<br>
 
 								<button id="add-button" type="button" onclick="VTILAPP.vtil.addTag()">Add</button>
 
@@ -423,11 +427,9 @@
 
 								<label class="mdl-textfield__label" for="location-input">
 
-									Where will you have the event?
-
 								</label>
 
-								<input id="location-input" class="mdl-textfield__input" placeholder="Enter the address of the event" onfocus="APP.geolocate()" type="text">
+								<input id="location-input" class="mdl-textfield__input" onfocus="APP.geolocate()" type="text">
 
 							</div>
 
@@ -436,8 +438,6 @@
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 								<label class="mdl-textfield__label" for="street-number">
-
-									Street Address
 									
 								</label>
 
@@ -453,8 +453,6 @@
 
 								<label class="mdl-textfield__label" for="city">
 
-									City
-
 								</label>
 
 								<input type="text" id="city" class="mdl-textfield__input" disabled="true">
@@ -462,16 +460,12 @@
 								<br>
 
 								<label class="mdl-textfield__label" for="state">
-									
-									State
 
 								</label>
 
 								<input type="text" id="state" class="mdl-textfield__input" disabled="true">
 
 								<label class="mdl-textfield__label" for="postal-code">
-									
-									Zip Code
 
 								</label>
 
@@ -481,11 +475,9 @@
 
 								<label class="mdl-textfield__label" for="country">
 
-									Country
-
 								</label>
 
-								<input type="text" id="country" class="mdl-textfield__input" disabled="true">
+								<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country">
 
 							</div>
 
