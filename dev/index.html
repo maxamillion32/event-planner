@@ -54,7 +54,7 @@
 		  <main class="mdl-layout__content">
 
 			<!-- Sign In -->
-			<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInLeft">
+			<div id="signInContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
 
 				<div class="mdl-card__title">
 
@@ -121,7 +121,7 @@
 			</div>
 			
 			<!-- Sign up -->
-			<div id="signUpContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp" hidden="true">
+			<div id="signUpContainer" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown" hidden="true">
 
 				<div class="mdl-card__title">
 
@@ -141,9 +141,11 @@
 
 							</label>
 
-							<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
+							<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="APP.validateSignUp(true)" required>
 
 						</div>
+
+						<br>
 
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
@@ -153,9 +155,11 @@
 
 							</label>
 
-							<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" required>
+							<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="APP.validateSignUp(true)" required>
 
 						</div>
+
+						<br>
 
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
@@ -165,9 +169,11 @@
 
 							</label>
 
-							<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" required>
+							<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="APP.validateSignUp(true)" required>
 
 						</div>
+
+						<br>
 
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
@@ -177,9 +183,11 @@
 
 							</label>
 
-							<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" required>
+							<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="APP.validateSignUp(true)" required>
 
 						</div>
+
+						<br>
 
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
@@ -191,6 +199,8 @@
 							</label>
 
 						</div>
+
+						<br>
 						
 						<!-- Additional signup info -->
 						<div id="signup-additional-info" hidden="true">
@@ -207,6 +217,8 @@
 
 							</div>
 
+							<br>
+
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 								<label class="mdl-textfield__label" for="signup-title" title="Title">
@@ -218,6 +230,8 @@
 								<input class="mdl-textfield__input" id="signup-title" type="text" title="Title" name="organization-title">
 
 							</div>
+
+							<br>
 
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
@@ -231,6 +245,8 @@
 
 							</div>
 
+							<br>
+
 						</div>
 
 						<p>
@@ -240,6 +256,46 @@
 						</p>
 
 					</form>
+
+					<div class="center-container">
+
+							<div class="left-container">
+
+								<span class="val-check-email" id="val-check-email"></span>
+
+								<br>
+
+								<span class="val-check-bad" id="val-check-length"></span>
+
+								<br>
+
+								<span class="val-check-bad" id="val-check-special"></span>
+
+								<br>
+
+								<span class="val-check-bad" id="val-check-upper"></span>
+
+								<br>
+
+								<span class="val-check-bad" id="val-check-lower"></span>
+
+								<br>
+
+								<span class="val-check-bad" id="val-check-number"></span>
+
+								<br>
+
+								<span class="val-check-bad" id="val-check-match"></span>
+
+								<br>
+
+								<span class="val-check-bad" id="val-check-required"></span>
+
+							</div>
+
+						</div>
+
+					<br>
 
 					<p>
 
@@ -262,7 +318,7 @@
 			</div>
 			
 			<!-- Reset Password -->
-			<div id="reset-password-container" hidden="true" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
+			<div id="reset-password-container" hidden="true" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
 
 				<div class="mdl-card__title">
 
@@ -317,7 +373,7 @@
 			<!-- Event Planner -->
 			<div id="event-planner-container" hidden="true">
 
-				<div class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp">
+				<div class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
 
 					<div class="mdl-card__title">
 

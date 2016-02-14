@@ -2,6 +2,8 @@ $primary-color: #F50057;
 $secondary-color: #FF4081;
 $dark-text-color: #000000;
 $light-text-color: #FFFFFF;
+$good-text-color: #1B5E20;
+$bad-text-color: #D50000;
 
 body {
 
@@ -29,6 +31,21 @@ body {
 
 	}
 
+	.center-container {
+
+		margin-left: auto;
+		margin-right: auto;
+		width: 70%;
+
+	}
+
+	.left-container {
+
+		text-align: left;
+		padding-left: 3em;
+
+	}
+
 	.vert-cent {
 		
 		margin-left: auto;
@@ -52,6 +69,18 @@ body {
 			margin-left: 1em;
 			margin-right: 1em;
 			width: 13em;
+
+		}
+
+		.val-check-bad {
+
+			color: $bad-text-color;
+
+		}
+
+		.val-check-good {
+
+			color: $good-text-color;
 
 		}
 

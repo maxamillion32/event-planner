@@ -13,7 +13,9 @@ FV.Constraint = function () {
 
 	var UPPERREGEX = /[A-Z]/g,
 	    LOWERREGEX = /[a-z]/g,
-	    SPECIALREGEX = /[\!\@\#\$\%\^\&\*]/g;
+	    SPECIALREGEX = /[\!\@\#\$\%\^\&\*]/g,
+	    EMAILREGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g,
+	    NUMBERREGEX = /\d+/g;
 
 	/**
   * Holds a single constraint, error message, and helpful properties
@@ -59,20 +61,37 @@ FV.Constraint = function () {
 
 		}, {
 			key: 'NUMBERREGEX',
+
+			/**
+    * Number regex
+    * 
+    */
 			get: function get() {
 
 				return NUMBERREGEX;
 			}
+		}, {
+			key: 'SPECIALREGEX',
 
 			/**
     * Special characters regex
+    * 
     */
-
-		}, {
-			key: 'SPECIALREGEX',
 			get: function get() {
 
 				return SPECIALREGEX;
+			}
+
+			/**
+    * Email Regex
+    * 
+    */
+
+		}, {
+			key: 'EMAILREGEX',
+			get: function get() {
+
+				return EMAILREGEX;
 			}
 		}]);
 
@@ -123,7 +142,9 @@ FV.Validator = function () {
 	    CONTAINSLOWER = 4,
 	    CONTAINSSPECIAL = 5,
 	    REGEX = 6,
-	    EQUALSFIELD = 7;
+	    EQUALSFIELD = 7,
+	    EMAIL = 8,
+	    CONTAINSNUMBER = 9;
 
 	/**
   *Validates your entire form
@@ -166,7 +187,8 @@ FV.Validator = function () {
 
 									errorMessages.push({
 										name: field.name,
-										error: constraint.errorMessage
+										error: constraint.errorMessage,
+										type: MINLENGTH
 									});
 								}
 
@@ -177,7 +199,8 @@ FV.Validator = function () {
 
 									errorMessages.push({
 										name: field.name,
-										error: constraint.errorMessage
+										error: constraint.errorMessage,
+										type: MAXLENGTH
 									});
 								}
 
@@ -188,7 +211,8 @@ FV.Validator = function () {
 
 									errorMessages.push({
 										name: field.name,
-										error: constraint.errorMessage
+										error: constraint.errorMessage,
+										type: CONTAINSUPPER
 									});
 								}
 
@@ -199,7 +223,8 @@ FV.Validator = function () {
 
 									errorMessages.push({
 										name: field.name,
-										error: constraint.errorMessage
+										error: constraint.errorMessage,
+										type: CONTAINSLOWER
 									});
 								}
 
@@ -210,7 +235,8 @@ FV.Validator = function () {
 
 									errorMessages.push({
 										name: field.name,
-										error: constraint.errorMessage
+										error: constraint.errorMessage,
+										type: CONTAINSSPECIAL
 									});
 								}
 
@@ -221,7 +247,8 @@ FV.Validator = function () {
 
 									errorMessages.push({
 										name: field.name,
-										error: constraint.errorMessage
+										error: constraint.errorMessage,
+										type: REGEX
 									});
 								}
 
@@ -233,9 +260,38 @@ FV.Validator = function () {
 
 									errorMessages.push({
 										name: field.name,
-										error: constraint.errorMessage
+										error: constraint.errorMessage,
+										type: EQUALSFIELD
 									});
 								}
+
+								break;
+
+							case EMAIL:
+
+								if (!field.element.value.match(FV.Constraint.EMAILREGEX)) {
+
+									errorMessages.push({
+										name: field.name,
+										error: constraint.errorMessage,
+										type: EMAIL
+									});
+								}
+
+								break;
+
+							case CONTAINSNUMBER:
+
+								if (!field.element.value.match(FV.Constraint.NUMBERREGEX)) {
+
+									errorMessages.push({
+										name: field.name,
+										error: constraint.errorMessage,
+										type: CONTAINSNUMBER
+									});
+								}
+
+								break;
 
 						}
 					});
@@ -320,6 +376,30 @@ FV.Validator = function () {
 			get: function get() {
 
 				return EQUALSFIELD;
+			}
+
+			/**
+    * Field is a valid email address
+    * 
+    */
+
+		}, {
+			key: "EMAIL",
+			get: function get() {
+
+				return EMAIL;
+			}
+
+			/**
+    * Field contains a number
+    * 
+    */
+
+		}, {
+			key: "CONTAINSNUMBER",
+			get: function get() {
+
+				return CONTAINSNUMBER;
 			}
 		}]);
 

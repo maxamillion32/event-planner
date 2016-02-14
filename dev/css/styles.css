@@ -11,6 +11,13 @@ body {
     color: white; }
   body .center {
     text-align: center; }
+  body .center-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%; }
+  body .left-container {
+    text-align: left;
+    padding-left: 3em; }
   body .vert-cent {
     margin-left: auto;
     margin-right: auto;
@@ -23,6 +30,10 @@ body {
       margin-left: 1em;
       margin-right: 1em;
       width: 13em; }
+    body .card-width.mdl-card .val-check-bad {
+      color: #D50000; }
+    body .card-width.mdl-card .val-check-good {
+      color: #1B5E20; }
   body .link {
     line-height: 1.5em; }
   body .card-width > .mdl-card__title {

@@ -7,6 +7,7 @@
 	var passwordEl = 		document.getElementById('password-input');
 	var regexEl =			document.getElementById('regex-input');
 	var repeatPasswordEl =	document.getElementById('repeat-password');
+	var emailInputEl =		document.getElementById('email-input');
 	var submitButton = 		document.getElementById('submit-button');
 
 	//Validation fields
@@ -14,6 +15,7 @@
 	var passwordField = 		new FV.Field("Password1", passwordEl);
 	var regexField =			new FV.Field("RegexField", regexEl);
 	var repeatPasswordField =	new FV.Field("RepeatPassword", repeatPasswordEl, passwordEl);
+	var emailInputField =		new FV.Field("EmailField", emailInputEl);
 
 	passwordField.constraints = [
 		new FV.Constraint(FV.Validator.MINLENGTH, 
@@ -27,7 +29,9 @@
 		new FV.Constraint(FV.Validator.CONTAINSLOWER,
 			"* Password must contain at least one lower case letter.\n"),
 		new FV.Constraint(FV.Validator.CONTAINSSPECIAL,
-			"* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n")
+			"* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n"),
+		new FV.Constraint(FV.Validator.CONTAINSNUMBER,
+			"* Password must contain at least one number.\n")
 
 	];
 
@@ -37,7 +41,10 @@
 	repeatPasswordField.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD,
 			"* Must match your password.\n")];
 
-	validator.fields = [passwordField, regexField, repeatPasswordField];
+	emailInputField.constraints = [new FV.Constraint(FV.Validator.EMAIL,
+			"* Must be a valid email address.\n")];
+
+	validator.fields = [passwordField, regexField, repeatPasswordField, emailInputField];
 
 	/**
 	 * Check the form
@@ -49,6 +56,7 @@
 		var passwordErrors = 	"";
 		var regexErrors = 		"";
 		var repeatErrors =		"";
+		var emailErrors =		"";
 
 		errors.forEach(function(error) {
 
@@ -67,6 +75,10 @@
 				case "RepeatPassword":
 
 					repeatErrors = error.error;
+					break;
+
+				case "EmailField":
+					emailErrors = error.error;
 					break;
 
 			}
@@ -91,10 +103,17 @@
 
 		}
 
+		if(emailErrors !== '') {
+
+			emailErrors = "Please correct the following errors:\n" + emailErrors;
+
+		}
+
 		//These will only display one at a time
 		passwordEl.setCustomValidity(passwordErrors);
 		repeatPasswordEl.setCustomValidity(repeatErrors);
 		regexEl.setCustomValidity(regexErrors);
+		emailInputEl.setCustomValidity(emailErrors);
 
 	};
 

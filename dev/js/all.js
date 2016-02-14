@@ -68,12 +68,24 @@
 	var validator = new FV.Validator();
 	var passwordField = new FV.Field("Password1", signupPasswordEl);
 	var password2Field = new FV.Field("Password2", signupPassword2El, signupPasswordEl);
+	var emailField = new FV.Field('EmailError', signupEmailEl);
 
-	passwordField.constraints = [new FV.Constraint(FV.Validator.MINLENGTH, "* Password must be at least 8 characters long.\n", 8), new FV.Constraint(FV.Validator.CONTAINSUPPER, "* Password must contain at least one upper case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSLOWER, "* Password must contain at least one lower case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSSPECIAL, "* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n")];
+	var valCheckLengthEl = document.getElementById('val-check-length');
+	var valCheckSpecialEl = document.getElementById('val-check-special');
+	var valCheckUpperEl = document.getElementById('val-check-upper');
+	var valCheckLowerEl = document.getElementById('val-check-lower');
+	var valCheckMatchEl = document.getElementById('val-check-match');
+	var valCheckRequiredEl = document.getElementById('val-check-required');
+	var valCheckNumberEl = document.getElementById('val-check-number');
+	var valCheckEmailEl = document.getElementById('val-check-email');
+
+	passwordField.constraints = [new FV.Constraint(FV.Validator.MINLENGTH, "* Password must be at least 8 characters long.\n", 8), new FV.Constraint(FV.Validator.CONTAINSUPPER, "* Password must contain at least one upper case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSLOWER, "* Password must contain at least one lower case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSSPECIAL, "* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n"), new FV.Constraint(FV.Validator.CONTAINSNUMBER, "* Password must contain at least one number.\n")];
 
 	password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD, "* Must match your password.\n")];
 
-	validator.fields = [passwordField, password2Field];
+	emailField.constraints = [new FV.Constraint(FV.Validator.EMAIL, "* Must be a valid email address.\n")];
+
+	validator.fields = [passwordField, password2Field, emailField];
 
 	/******************************************************************
  Sign up functionality
@@ -102,14 +114,105 @@
 	};
 
 	/**
-  * Validating input before submitting the password
+  * Check for various validation errors
   * 
   */
-	submitPasswordButton.onclick = function () {
+	function checkValFields(errorTypes) {
+
+		if (errorTypes.indexOf(FV.Validator.EMAIL) === -1) {
+
+			valCheckEmailEl.className = 'val-check-good';
+			valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Must use a valid email address';
+		} else {
+
+			valCheckEmailEl.className = 'val-check-bad';
+			valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Must use a valid email address';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
+
+			valCheckLengthEl.className = 'val-check-good';
+			valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must be at least 8 characters long';
+		} else {
+
+			valCheckLengthEl.className = 'val-check-bad';
+			valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must be at least 8 characters long';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
+
+			valCheckUpperEl.className = 'val-check-good';
+			valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one upper case character';
+		} else {
+
+			valCheckUpperEl.className = 'val-check-bad';
+			valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one upper case character';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
+
+			valCheckLowerEl.className = 'val-check-good';
+			valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one lower case character';
+		} else {
+
+			valCheckLowerEl.className = 'val-check-bad';
+			valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one lower case character';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.CONTAINSSPECIAL) === -1) {
+
+			valCheckSpecialEl.className = 'val-check-good';
+			valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
+		} else {
+
+			valCheckSpecialEl.className = 'val-check-bad';
+			valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 && signupPasswordEl.value !== '' && signupPassword2El.value !== '') {
+
+			valCheckMatchEl.className = 'val-check-good';
+			valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Passwords must match';
+		} else {
+
+			valCheckMatchEl.className = 'val-check-bad';
+			valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Passwords must match';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
+
+			valCheckNumberEl.className = 'val-check-good';
+			valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one number';
+		} else {
+
+			valCheckNumberEl.className = 'val-check-bad';
+			valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one number';
+		}
+
+		if (signupNameEl.value === '' || signupEmailEl.value === '' || signupPasswordEl.value === '' || signupPassword2El.value === '') {
+
+			valCheckRequiredEl.className = 'val-check-bad';
+			valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> All required fields must be filled out';
+		} else {
+
+			valCheckRequiredEl.className = 'val-check-good';
+			valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> All required fields must be filled out';
+		}
+	}
+
+	/**
+  * Validate sign up page
+  * 
+  * @param  {Boolean} skipCustomValidation checks if we will show custom validation
+  * 
+  */
+	APP.validateSignUp = function (skipCustomValidation) {
 
 		var errors = validator.checkForErrors();
+		var errorTypes = [];
 		var passwordErrors = "";
 		var password2Errors = "";
+		var emailErrors = "";
 
 		errors.forEach(function (error) {
 
@@ -118,11 +221,19 @@
 				case "Password1":
 
 					passwordErrors += error.error;
+					errorTypes.push(error.type);
 					break;
 
 				case "Password2":
 
 					password2Errors += error.error;
+					errorTypes.push(error.type);
+					break;
+
+				case "EmailError":
+
+					emailErrors += error.error;
+					errorTypes.push(error.type);
 					break;
 
 			}
@@ -138,10 +249,26 @@
 			password2Errors = "Please correct the following errors:\n" + password2Errors;
 		}
 
+		if (emailErrors !== '') {
+
+			emailErrors = "Please correct the following errors:\n" + emailErrors;
+		}
+
 		//These will only display one at a time
-		signupPasswordEl.setCustomValidity(passwordErrors);
-		signupPassword2El.setCustomValidity(password2Errors);
+		if (!skipCustomValidation) {
+
+			signupPasswordEl.setCustomValidity(passwordErrors);
+			signupPassword2El.setCustomValidity(password2Errors);
+		}
+
+		checkValFields(errorTypes);
 	};
+
+	/**
+  * Validating input before submitting the password
+  * 
+  */
+	submitPasswordButton.onclick = APP.validateSignUp;
 
 	/**
   * Show/hide additional info
@@ -343,7 +470,7 @@
 
 			//Create the card
 			var cardDiv = document.createElement('div');
-			cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInUp";
+			cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown";
 
 			//Card Title
 			var cardTitleDiv = document.createElement('div');
@@ -631,6 +758,7 @@
 		signUpContainerEl.hidden = false;
 		resetPasswordContainerEl.hidden = true;
 		showEventContainerEl.hidden = true;
+		APP.validateSignUp(true);
 	};
 
 	/**

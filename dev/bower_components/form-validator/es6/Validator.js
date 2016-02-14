@@ -12,7 +12,9 @@ FV.Validator = (function() {
 			CONTAINSLOWER =		4,
 			CONTAINSSPECIAL =	5,
 			REGEX =				6,
-			EQUALSFIELD =		7;
+			EQUALSFIELD =		7,
+			EMAIL =				8,
+			CONTAINSNUMBER =	9;
 
 	/**
 	 *Validates your entire form
@@ -97,6 +99,26 @@ FV.Validator = (function() {
 		}
 
 		/**
+		 * Field is a valid email address
+		 * 
+		 */
+		static get EMAIL() {
+
+			return EMAIL;
+
+		}
+
+		/**
+		 * Field contains a number
+		 * 
+		 */
+		static get CONTAINSNUMBER() {
+
+			return CONTAINSNUMBER;
+
+		}
+
+		/**
 		 * Checks the fields for errors
 		 * 
 		 * @return {Array} Errors as [{name: '', error: ''}]
@@ -118,7 +140,8 @@ FV.Validator = (function() {
 
 								errorMessages.push({
 									name: field.name,
-									error: constraint.errorMessage
+									error: constraint.errorMessage,
+									type: MINLENGTH
 								});
 
 							}
@@ -130,7 +153,8 @@ FV.Validator = (function() {
 
 								errorMessages.push({
 									name: field.name,
-									error: constraint.errorMessage
+									error: constraint.errorMessage,
+									type: MAXLENGTH
 								});
 
 							}
@@ -142,7 +166,8 @@ FV.Validator = (function() {
 
 								errorMessages.push({
 									name: field.name,
-									error: constraint.errorMessage
+									error: constraint.errorMessage,
+									type: CONTAINSUPPER
 								});
 
 							}
@@ -154,7 +179,8 @@ FV.Validator = (function() {
 
 								errorMessages.push({
 									name: field.name,
-									error: constraint.errorMessage
+									error: constraint.errorMessage,
+									type: CONTAINSLOWER
 								});
 
 							}
@@ -166,7 +192,8 @@ FV.Validator = (function() {
 
 								errorMessages.push({
 									name: field.name,
-									error: constraint.errorMessage
+									error: constraint.errorMessage,
+									type: CONTAINSSPECIAL
 								});
 
 							}
@@ -178,7 +205,8 @@ FV.Validator = (function() {
 
 								errorMessages.push({
 									name: field.name,
-									error: constraint.errorMessage
+									error: constraint.errorMessage,
+									type: REGEX
 								});
 
 							}
@@ -191,10 +219,41 @@ FV.Validator = (function() {
 
 								errorMessages.push({
 									name: field.name,
-									error: constraint.errorMessage
+									error: constraint.errorMessage,
+									type: EQUALSFIELD
 								});
 
 							}
+
+							break;
+
+						case EMAIL:
+						
+							if(!field.element.value.match(FV.Constraint.EMAILREGEX)) {
+
+								errorMessages.push({
+									name: field.name,
+									error: constraint.errorMessage,
+									type: EMAIL
+								});
+
+							}
+
+							break;
+
+						case CONTAINSNUMBER:
+						
+							if(!field.element.value.match(FV.Constraint.NUMBERREGEX)) {
+
+								errorMessages.push({
+									name: field.name,
+									error: constraint.errorMessage,
+									type: CONTAINSNUMBER
+								});
+
+							}
+
+							break;
 
 					}
 
