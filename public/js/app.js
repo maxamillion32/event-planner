@@ -33,6 +33,7 @@
 	let resetPasswordEmail =		document.getElementById('reset-password-email');
 
 	//event creation
+	let progressBarEl =				document.getElementById('progress-bar');
 	let eventNameEl =				document.getElementById('event-name');
 	let eventTypeEl =				document.getElementById('event-type');
 	let eventHostEl =				document.getElementById('event-host');

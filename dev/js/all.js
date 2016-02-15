@@ -35,6 +35,7 @@
 	var resetPasswordEmail = document.getElementById('reset-password-email');
 
 	//event creation
+	var progressBarEl = document.getElementById('progress-bar');
 	var eventNameEl = document.getElementById('event-name');
 	var eventTypeEl = document.getElementById('event-type');
 	var eventHostEl = document.getElementById('event-host');

@@ -383,6 +383,18 @@
 
 					<div class="mdl-card__supporting-text">
 
+						<p>
+
+							<label for="progress-bar" title="Fields Completed">
+
+									7 of 13 Fields Completed
+										
+									<progress id="progress-bar" value="7" max="13"></progress>
+
+							</label>
+
+						</p>
+
 						<form action="javascript:APP.submitForm()" autocomplete="on">
 						
 							<!-- Name of the event -->
@@ -478,7 +490,7 @@
 
 								</label>
 
-								<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?">
+								<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" required>
 
 							</div>
 
@@ -512,12 +524,10 @@
 							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
 
 								<label class="mdl-textfield__label" for="street-number">
-
-									Street Address
 									
 								</label>
 
-								<input type="text" id="street-number" class="mdl-textfield__input" disabled="true">
+								<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" required>
 
 							</div>
 							
@@ -525,11 +535,9 @@
 								
 								<label class="mdl-textfield__label" for="route">
 
-									Secondary Address
-
 								</label>
 
-								<input type="text" id="route" class="mdl-textfield__input" disabled="true">
+								<input type="text" id="route" class="mdl-textfield__input" disabled="true" placeholder="Secondary Address" required>
 
 							</div>	
 
@@ -539,11 +547,9 @@
 
 								<label class="mdl-textfield__label" for="city">
 
-								City
-
 								</label>
 
-								<input type="text" id="city" class="mdl-textfield__input" disabled="true">
+								<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" required>
 
 							</div>	
 
@@ -551,11 +557,9 @@
 
 								<label class="mdl-textfield__label" for="state">
 
-									State
-
 								</label>
 
-								<input type="text" id="state" class="mdl-textfield__input" disabled="true">
+								<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" required>
 
 							</div>
 							
@@ -563,11 +567,9 @@
 
 								<label class="mdl-textfield__label" for="postal-code">
 
-									Zip
-
 								</label>
 
-								<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true">
+								<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" required>
 
 							</div>
 
@@ -577,11 +579,9 @@
 
 								<label class="mdl-textfield__label" for="country">
 
-									Country
-
 								</label>
 
-								<input type="text" id="country" class="mdl-textfield__input" disabled="true">
+								<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" required>
 
 							</div>
 
@@ -596,7 +596,7 @@
 
 								</label>
 
-								<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="80"></textarea>
+								<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="80" required></textarea>
 
 							</div>
 
