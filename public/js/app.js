@@ -10,12 +10,12 @@
 	//signing in
 	let signInEmailEl = 			document.getElementById('signin-email');
 	let signInPasswordEl = 			document.getElementById('signin-password');
-	let signInContainerEl = 		document.getElementById('signInContainer');
+	let signInContainerEl = 		document.getElementById('sign-in-container');
 	let signOutLinkEl =				document.getElementById('sign-out-link');
 	let signInLinkEl =				document.getElementById('sign-in-link');
 
 	//signing up
-	let signUpContainerEl = 		document.getElementById('signUpContainer');
+	let signUpContainerEl = 		document.getElementById('sign-up-container');
 	let eventPlannerContainerEl = 	document.getElementById('event-planner-container');
 	let signupNameEl = 				document.getElementById('signup-name');
 	let signupEmailEl = 			document.getElementById('signup-email');
@@ -33,7 +33,6 @@
 	let resetPasswordEmail =		document.getElementById('reset-password-email');
 
 	//event creation
-	let progressBarEl =				document.getElementById('progress-bar');
 	let eventNameEl =				document.getElementById('event-name');
 	let eventTypeEl =				document.getElementById('event-type');
 	let eventHostEl =				document.getElementById('event-host');
@@ -49,19 +48,22 @@
 	let postalCodeEl =				document.getElementById('postal-code');
 	let countryEl =					document.getElementById('country');
 	let messageEl =					document.getElementById('message');
+	let progressBarEl =				document.getElementById('progress-bar');
+	let progressBarLabelEl =		document.getElementById('progress-bar-label');
 	let addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
 
 	//event display
 	let eventContainerEl =			document.getElementById('event-container');
 	let showEventContainerEl =		document.getElementById('show-event-container');
 
-	let events = [];		//The users events
-	let userRef;			//Tag input list
-	let eventRef;			//Events
-	let extraRef;			//Extra user data
-	let placeSearch;		//Location search
-	let autocomplete;		//Location search
-	let storeExtra = false;	//Store extra user info
+	let events = [];			//The users events
+	let userRef;				//Tag input list
+	let eventRef;				//Events
+	let extraRef;				//Extra user data
+	let placeSearch;			//Location search
+	let autocomplete;			//Location search
+	let storeExtra = false;		//Store extra user info
+	let fieldsCompleted = 0;	//Fields filled out
 
 	//Validation
 	let validator = 			new FV.Validator();
@@ -478,6 +480,98 @@
 	});
 
 	/**
+	 * Checks if fields are completed
+	 * 
+	 */
+	APP.checkEventFields = function() {
+
+		let completed = 0;
+
+		if(eventNameEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(eventTypeEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(eventHostEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(startDateEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(endDateEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(VTILAPP.vtil.tags.length > 0) {
+
+			completed += 1;
+
+		}
+		
+		if(streetNumberEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(routeEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(cityEl.value !== '') {
+
+			completed += 1;
+
+		}
+		
+		if(stateEl.value !== '') {
+
+			completed += 1;
+
+		}
+		
+		if(postalCodeEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(countryEl.value !== '') {
+
+			completed += 1;
+
+		}
+
+		if(messageEl.value !== '') {
+
+			completed += 1;
+
+		}
+		
+		fieldsCompleted = completed;
+		progressBarLabelEl.innerHTML = fieldsCompleted.toString() + ' of 13 fields completed'
+		progressBarEl.value = fieldsCompleted;
+
+	};
+
+	/**
 	 * Display event creation if user has logged in
 	 * 
 	 */
@@ -585,6 +679,17 @@
 		});
 
 	}
+
+	/**
+	 * Add a person
+	 * 
+	 */
+	APP.addTag = function() {
+
+		VTILAPP.vtil.addTag();
+		APP.checkEventFields();
+
+	};
  
 	/**
 	 * Clear guests
@@ -849,6 +954,8 @@
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = true;
 		showEventContainerEl.hidden = true;
+
+		APP.checkEventFields();
 
 	};
 

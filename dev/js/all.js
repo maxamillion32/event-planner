@@ -12,12 +12,12 @@
 	//signing in
 	var signInEmailEl = document.getElementById('signin-email');
 	var signInPasswordEl = document.getElementById('signin-password');
-	var signInContainerEl = document.getElementById('signInContainer');
+	var signInContainerEl = document.getElementById('sign-in-container');
 	var signOutLinkEl = document.getElementById('sign-out-link');
 	var signInLinkEl = document.getElementById('sign-in-link');
 
 	//signing up
-	var signUpContainerEl = document.getElementById('signUpContainer');
+	var signUpContainerEl = document.getElementById('sign-up-container');
 	var eventPlannerContainerEl = document.getElementById('event-planner-container');
 	var signupNameEl = document.getElementById('signup-name');
 	var signupEmailEl = document.getElementById('signup-email');
@@ -35,7 +35,6 @@
 	var resetPasswordEmail = document.getElementById('reset-password-email');
 
 	//event creation
-	var progressBarEl = document.getElementById('progress-bar');
 	var eventNameEl = document.getElementById('event-name');
 	var eventTypeEl = document.getElementById('event-type');
 	var eventHostEl = document.getElementById('event-host');
@@ -51,6 +50,8 @@
 	var postalCodeEl = document.getElementById('postal-code');
 	var countryEl = document.getElementById('country');
 	var messageEl = document.getElementById('message');
+	var progressBarEl = document.getElementById('progress-bar');
+	var progressBarLabelEl = document.getElementById('progress-bar-label');
 	var addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
 
 	//event display
@@ -64,6 +65,7 @@
 	var placeSearch = undefined; //Location search
 	var autocomplete = undefined; //Location search
 	var storeExtra = false; //Store extra user info
+	var fieldsCompleted = 0; //Fields filled out
 
 	//Validation
 	var validator = new FV.Validator();
@@ -424,6 +426,84 @@
 	});
 
 	/**
+  * Checks if fields are completed
+  * 
+  */
+	APP.checkEventFields = function () {
+
+		var completed = 0;
+
+		if (eventNameEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (eventTypeEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (eventHostEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (startDateEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (endDateEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (VTILAPP.vtil.tags.length > 0) {
+
+			completed += 1;
+		}
+
+		if (streetNumberEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (routeEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (cityEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (stateEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (postalCodeEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (countryEl.value !== '') {
+
+			completed += 1;
+		}
+
+		if (messageEl.value !== '') {
+
+			completed += 1;
+		}
+
+		fieldsCompleted = completed;
+		progressBarLabelEl.innerHTML = fieldsCompleted.toString() + ' of 13 fields completed';
+		progressBarEl.value = fieldsCompleted;
+	};
+
+	/**
   * Display event creation if user has logged in
   * 
   */
@@ -520,6 +600,16 @@
 			eventContainerEl.appendChild(cardDiv);
 		});
 	}
+
+	/**
+  * Add a person
+  * 
+  */
+	APP.addTag = function () {
+
+		VTILAPP.vtil.addTag();
+		APP.checkEventFields();
+	};
 
 	/**
   * Clear guests
@@ -786,6 +876,8 @@
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = true;
 		showEventContainerEl.hidden = true;
+
+		APP.checkEventFields();
 	};
 
 	/**
