@@ -387,116 +387,124 @@
 
 					<div class="mdl-card__supporting-text">
 
-						<p>
+						<form class="text-container" action="javascript:APP.submitForm()" autocomplete="on">
 
-							<label id="progress-bar-label" for="progress-bar" title="Fields Completed">
+							<div class="center">
 
-							</label>
+								<p>
 
-							<progress id='progress-bar' value="" max="13"></progress>
+									<label id="progress-bar-label" for="progress-bar" title="Fields Completed">
 
-						</p>
+									</label>
 
-						<form action="javascript:APP.submitForm()" autocomplete="on">
-						
-							<!-- Name of the event -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<progress id='progress-bar' value="" max="13"></progress>
 
-								<label class="mdl-textfield__label" for="event-name" title="Event Name">
+								</p>
+
+								<!-- Name of the event -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="event-name" title="Event Name">
+											
+										<span>Event Title</span>
+
+									</label>
+
+									<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="APP.checkEventFields()" required>
+
+								</div>
+
+								<br />
+								
+								<!-- Event Type -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="event-type" title="Event Type">
+											
+										<span>What kind of event is it?</span>
+
+									</label>
+
+									<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="APP.checkEventFields()" required>
+									<datalist id="guest-list">
+									  <option value="Birthday">
+									  <option value="Conference">
+									  <option value="Wedding">
+									  <option value="Anniversary">
+									  <option value="Holiday">
+									  <option value="Graduation">
+									  <option value="Funeral">
+									</datalist>
+
+								</div>
+
+								<br />
+								
+								<!-- Host of the event -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="event-host" title="Event Host">
+											
+										<span>Who's hosting it?</span>
+
+									</label>
+
+									<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" onchange="APP.checkEventFields()" required>
+
+								</div>
+
+								<br />
+								
+								<!-- Begin Date -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="start-date" title="Start Date">
 										
-									<span>Event Title</span>
+										<span>When will it begin?</span>
 
-								</label>
+									</label>
 
-								<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="APP.checkEventFields()" required>
+									<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.checkEventFields()" required>
 
-							</div>
+								</div>
 
-							<br />
-							
-							<!-- Event Type -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<br />
+								
+								<!-- End Date -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-								<label class="mdl-textfield__label" for="event-type" title="Event Type">
+									<label class="mdl-textfield__label" for="end-date" title="End Date">
 										
-									<span>What kind of event is it?</span>
+										<span>When will it end?</span>
 
-								</label>
+									</label>
 
-								<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="APP.checkEventFields()" required>
-								<datalist id="guest-list">
-								  <option value="Birthday">
-								  <option value="Conference">
-								  <option value="Wedding">
-								  <option value="Anniversary">
-								  <option value="Holiday">
-								  <option value="Graduation">
-								  <option value="Funeral">
-								</datalist>
+									<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.checkEventFields()" required>
 
-							</div>
+								</div>
+								
+								<br />	
 
-							<br />
-							
-							<!-- Host of the event -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+									<!-- People attending -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				      				
+				      				<label class="mdl-textfield__label" for="vtil-input">
 
-								<label class="mdl-textfield__label" for="event-host" title="Event Host">
-										
-									<span>Who's hosting it?</span>
+											Who's going?
 
-								</label>
+										</label>
 
-								<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" onchange="APP.checkEventFields()" required>
+										<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" required></input>
 
-							</div>
+								</div>
 
-							<br />
-							
-							<!-- Begin Date -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<br />
 
-								<label class="mdl-textfield__label" for="start-date" title="Start Date">
-									
-									<span>When will it begin?</span>
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' onclick="APP.addTag()">Add Guest</button>
 
-								</label>
+								<br />
 
-								<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.checkEventFields()" required>
-
-							</div>
-
-							<br />
-							
-							<!-- End Date -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-								<label class="mdl-textfield__label" for="end-date" title="End Date">
-									
-									<span>When will it end?</span>
-
-								</label>
-
-								<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.checkEventFields()" required>
-
-							</div>
-
-							<br />
-							
-							<!-- People attending -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-		      
-								<label class="mdl-textfield__label" for="vtil-input">
-
-									Who's going?
-
-								</label>
-
-								<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" required></input>
-
-							</div>
-
-								<button id="add-button" type='button' onclick="APP.addTag()">Add</button>
+							</div>	
 
 							<p class="tag-wrapper">
 
