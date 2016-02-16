@@ -46,3 +46,16 @@ body {
     margin-bottom: 2em; }
     body .tag-wrapper .tag-style {
       font-size: 0.55em; }
+  @media (max-width: 1000px) and (orientation: portrait) {
+    body .card-width.mdl-card {
+      width: 90%; }
+      body .card-width.mdl-card .authForm {
+        text-align: center; }
+      body .card-width.mdl-card .address-field {
+        margin-left: 1em;
+        margin-right: 1em;
+        width: 13em; }
+      body .card-width.mdl-card .val-check-bad {
+        color: #D50000; }
+      body .card-width.mdl-card .val-check-good {
+        color: #1B5E20; } }

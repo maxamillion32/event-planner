@@ -54,9 +54,10 @@ body {
 
 	}
 
+	
 	.card-width.mdl-card {
   
-	  width: 70%;
+		width: 70%;
 
 		.authForm {
 
@@ -119,5 +120,41 @@ body {
 		}
 
 	}
+
+	@media (max-width: 1000px) and (orientation: portrait) {
+
+		.card-width.mdl-card {
+  
+			width: 90%;
+
+			.authForm {
+
+				text-align: center;
+
+			}
+
+			.address-field {
+
+				margin-left: 1em;
+				margin-right: 1em;
+				width: 13em;
+
+			}
+
+			.val-check-bad {
+
+				color: $bad-text-color;
+
+			}
+
+			.val-check-good {
+
+				color: $good-text-color;
+
+			}
+
+		}
+
+	}	
 
 }
