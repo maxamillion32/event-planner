@@ -471,13 +471,7 @@
 	* Instantiate a new vtil object
 	* 
 	**/ 
-	VTILAPP.vtil = Object.create(VTIL.prototype, {
-
-		contentElement: { writable: true,  configurable:true, value: contentEl },
-		inputElement: { writable: true,  configurable:true, value: inputEl },
-		objectPath: { writable: true,  configurable:true, value: 'VTILAPP.vtil' }
-
-	});
+	VTILAPP.vtil = new VTIL(contentEl, inputEl, 'VTILAPP.vtil');
 
 	/**
 	 * Checks if fields are completed
