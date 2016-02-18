@@ -44,7 +44,6 @@
 	var inputEl = document.getElementById('vtil-input');
 	var locationInputEl = document.getElementById('location-input');
 	var streetNumberEl = document.getElementById('street-number');
-	var routeEl = document.getElementById('route');
 	var cityEl = document.getElementById('city');
 	var stateEl = document.getElementById('state');
 	var postalCodeEl = document.getElementById('postal-code');
@@ -52,7 +51,7 @@
 	var messageEl = document.getElementById('message');
 	var progressBarEl = document.getElementById('progress-bar');
 	var progressBarLabelEl = document.getElementById('progress-bar-label');
-	var addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
+	var addressList = [streetNumberEl, cityEl, stateEl, postalCodeEl, countryEl];
 
 	//event display
 	var eventContainerEl = document.getElementById('event-container');
@@ -417,13 +416,7 @@
  * Instantiate a new vtil object
  * 
  **/
-	VTILAPP.vtil = Object.create(VTIL.prototype, {
-
-		contentElement: { writable: true, configurable: true, value: contentEl },
-		inputElement: { writable: true, configurable: true, value: inputEl },
-		objectPath: { writable: true, configurable: true, value: 'VTILAPP.vtil' }
-
-	});
+	VTILAPP.vtil = new VTIL(contentEl, inputEl, 'VTILAPP.vtil');
 
 	/**
   * Checks if fields are completed
@@ -464,11 +457,6 @@
 		}
 
 		if (streetNumberEl.value !== '') {
-
-			completed += 1;
-		}
-
-		if (routeEl.value !== '') {
 
 			completed += 1;
 		}
@@ -688,7 +676,7 @@
 
 					//Address2
 					case 'route':
-						routeEl.value = component.short_name;
+						streetNumberEl.value += ' ' + component.short_name;
 						break;
 
 					//City

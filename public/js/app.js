@@ -42,7 +42,6 @@
 	let inputEl = 					document.getElementById('vtil-input');
 	let locationInputEl	=			document.getElementById('location-input');
 	let streetNumberEl =			document.getElementById('street-number');
-	let routeEl =					document.getElementById('route');
 	let cityEl =					document.getElementById('city');
 	let stateEl =					document.getElementById('state');
 	let postalCodeEl =				document.getElementById('postal-code');
@@ -50,7 +49,7 @@
 	let messageEl =					document.getElementById('message');
 	let progressBarEl =				document.getElementById('progress-bar');
 	let progressBarLabelEl =		document.getElementById('progress-bar-label');
-	let addressList = [streetNumberEl, routeEl, cityEl, stateEl, postalCodeEl, countryEl];
+	let addressList = [streetNumberEl, cityEl, stateEl, postalCodeEl, countryEl];
 
 	//event display
 	let eventContainerEl =			document.getElementById('event-container');
@@ -523,12 +522,6 @@
 
 		}
 
-		if(routeEl.value !== '') {
-
-			completed += 1;
-
-		}
-
 		if(cityEl.value !== '') {
 
 			completed += 1;
@@ -760,7 +753,7 @@
 
 	    	//Address2
 	    	case 'route':
-	    		routeEl.value = component.short_name;
+	    		streetNumberEl.value += ' ' + component.short_name;
 	    		break;
 
 	    	//City
@@ -883,7 +876,7 @@
 			'begin': 	startDateEl.value,
 			'end': 		endDateEl.value,
 			'guests': 	VTILAPP.vtil.tags,
-			'address': 	streetNumberEl.value + ' ' + routeEl.value,
+			'address': 	streetNumberEl.value
 			'city': 	cityEl.value,
 			'state': 	stateEl.value,
 			'zip': 		postalCodeEl.value,

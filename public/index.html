@@ -53,8 +53,10 @@
 		  </header>
 		  <main class="mdl-layout__content">
 
+		  	<br />
+
 			<!-- Sign In -->
-			<div id="sign-in-container" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
+			<div id="sign-in-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
 
 				<div class="mdl-card__title">
 
@@ -74,7 +76,7 @@
 
 							</label>
 
-							<input class="mdl-textfield__input" id="signin-email" type="email" name="email" title="Email" required>
+							<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" required>
 
 						</div>
 
@@ -122,7 +124,7 @@
 			</div>
 			
 			<!-- Sign up -->
-			<div id="sign-up-container" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown" hidden="true">
+			<div id="sign-up-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
 
 				<div class="mdl-card__title">
 
@@ -320,7 +322,7 @@
 			</div>
 			
 			<!-- Reset Password -->
-			<div id="reset-password-container" hidden="true" class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
+			<div id="reset-password-container" hidden="true" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
 
 				<div class="mdl-card__title">
 
@@ -377,7 +379,7 @@
 			<!-- Event Planner -->
 			<div id="event-planner-container" hidden="true">
 
-				<div class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
+				<div class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
 
 					<div class="mdl-card__title">
 
@@ -387,7 +389,7 @@
 
 					<div class="mdl-card__supporting-text">
 
-						<form class="text-container" action="javascript:APP.submitForm()" autocomplete="on">
+						<form action="javascript:APP.submitForm()" autocomplete="on">
 
 							<div class="center">
 
@@ -540,16 +542,6 @@
 								<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="APP.checkEventFields()" required></input>
 
 							</div>
-							
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">	
-								
-								<label class="mdl-textfield__label" for="route">
-
-								</label>
-
-								<input type="text" id="route" class="mdl-textfield__input" disabled="true" placeholder="Secondary Address" onchange="APP.checkEventFields()" required>
-
-							</div>	
 
 							<br />
 
@@ -597,25 +589,25 @@
 
 							<br />
 
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+							<div class="center">
 
-								<!-- Message -->
-								<label class="mdl-textfield__label" for="message">
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 
-									Leave a message for your guests!
+									<!-- Message -->
+									<label class="mdl-textfield__label" for="message">
 
-								</label>
+										Leave a message for your guests!
 
-								<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="80" onchange="APP.checkEventFields()" required></textarea>
+									</label>
 
-							</div>
+									<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="APP.checkEventFields()" required></textarea>
 
-							<p class="center">
+								</div>	
 
 								<!-- Submit Button -->
 								<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit" title="Submit Event">
 
-							</p>
+							</div>
 
 						</form>
 

@@ -9,6 +9,8 @@ body {
     /* This background is dark, so we set text to white. Use 87% black instead if
 	     your background is light. */
     color: white; }
+  body .long-input {
+    min-width: 43em; }
   body .center {
     text-align: center; }
   body .center-container {
@@ -23,9 +25,10 @@ body {
     margin-right: auto;
     margin-top: 7%; }
   body .card-width.mdl-card {
-    width: 70%; }
+    width: 75%; }
     body .card-width.mdl-card .authForm {
-      text-align: center; }
+      text-align: center;
+      width: 100%; }
     body .card-width.mdl-card .address-field {
       margin-left: 1em;
       margin-right: 1em;
@@ -47,10 +50,13 @@ body {
     body .tag-wrapper .tag-style {
       font-size: 0.55em; }
   @media (max-width: 1000px) and (orientation: portrait) {
+    body .input-style {
+      font-size: 1.75em; }
     body .card-width.mdl-card {
-      width: 90%; }
+      width: 85%; }
       body .card-width.mdl-card .authForm {
-        text-align: center; }
+        text-align: center;
+        width: 100%; }
       body .card-width.mdl-card .address-field {
         margin-left: 1em;
         margin-right: 1em;

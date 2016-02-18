@@ -25,6 +25,12 @@ body {
 
 	}
 
+	.long-input {
+
+		min-width: 43em;
+
+	}
+
 	.center {
 
 		text-align: center;
@@ -57,11 +63,12 @@ body {
 	
 	.card-width.mdl-card {
   
-		width: 70%;
+		width: 75%;
 
 		.authForm {
 
 			text-align: center;
+			width: 100%;
 
 		}
 
@@ -123,13 +130,20 @@ body {
 
 	@media (max-width: 1000px) and (orientation: portrait) {
 
+		.input-style {
+
+    		font-size:1.75em;
+
+		}
+
 		.card-width.mdl-card {
   
-			width: 90%;
+			width: 85%;
 
 			.authForm {
 
 				text-align: center;
+				width: 100%;
 
 			}
 
