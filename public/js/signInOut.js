@@ -1,7 +1,16 @@
 (function() {
 	'use strict';
 
-	var APP = window.APP || {};
+	var APP = window.APP || Object.create(null);
+
+	//signing in
+	let signInEmailEl = 	document.getElementById('signin-email');
+	let signInPasswordEl = 	document.getElementById('signin-password');
+	let signOutLinkEl =		document.getElementById('sign-out-link');
+	let signInLinkEl =		document.getElementById('sign-in-link');
+	let signupEmployerEl =	document.getElementById('signup-employer');
+	let signupTitleEl =		document.getElementById('signup-title');
+	let signupBirthdayEl =	document.getElementById('signup-birthday');
 
 	/******************************************************************
 	Sign in functionality
@@ -35,16 +44,16 @@
 				APP.extraRef.set({
 
 					name: 		APP.signupNameEl.value,
-					employer: 	APP.signupEmployerEl.value,
-					title: 		APP.signupTitleEl.value,
-					birthday: 	APP.signupBirthdayEl.value
+					employer: 	signupEmployerEl.value,
+					title: 		signupTitleEl.value,
+					birthday: 	signupBirthdayEl.value
 
 				});
 
 			}
 
-			APP.signOutLinkEl.hidden = 	false;
-			APP.signInLinkEl.hidden = 	true;
+			signOutLinkEl.hidden = 	false;
+			signInLinkEl.hidden = 	true;
 
 			APP.displayEventCreation();
 
@@ -74,7 +83,7 @@
 	 */
 	APP.signIn = function(emailIn, passwordIn) {
 
-		let email = 	emailIn || APP.signInEmailEl.value;
+		let email = 	emailIn || signInEmailEl.value;
 		let password = 	passwordIn || APP.signInPasswordEl.value;
 
 		// Sign in with an email/password combination
@@ -95,15 +104,15 @@
 	 */
 	APP.signOut = function() {
 
-		APP.signOutLinkEl.hidden = 		true;
-		APP.signInLinkEl.hidden = 		false;
+		signOutLinkEl.hidden = 			true;
+		signInLinkEl.hidden = 			false;
 		APP.ref.unauth();
 		APP.eventRef.off();
 		APP.extraRef.off();
 		APP.userRef = 					undefined;
 		APP.eventRef = 					undefined;
 		APP.extraRef = 					undefined;
-		APP.signInEmailEl.value = 		'';
+		signInEmailEl.value = 			'';
 		APP.signInPasswordEl.value = 	'';
 		APP.signupNameEl.value = 		'';
 		APP.signupEmailEl.value = 		'';

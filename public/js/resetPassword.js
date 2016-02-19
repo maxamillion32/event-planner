@@ -1,7 +1,9 @@
 (function() {
 	'use strict';
 
-	var APP = window.APP || {};
+	var APP = window.APP || Object.create(null);
+
+	let resetPasswordEmail =		document.getElementById('reset-password-email');
 
 	/******************************************************************
 	Reset password functionality
@@ -14,7 +16,7 @@
 	APP.resetPassword = function() {
 
 		APP.ref.resetPassword({
-		  email: ""
+		  email: resetPasswordEmail.value
 		}, function(error) {
 		  if (error) {
 		    switch (error.code) {

@@ -1,56 +1,25 @@
 (function(document) {
 	'use strict';
 
-	var APP = window.APP || {};
+	var APP = window.APP || Object.create(null);
 	var VTILAPP = Object.create(null);
 
 	// Register the callback to be fired every time auth state changes
 	APP.ref = new Firebase("https://swanky-event-planner.firebaseIO.com");
 
-	//signing in
-	APP.signInEmailEl = 			document.getElementById('signin-email');
-	APP.signInPasswordEl = 			document.getElementById('signin-password');
-	APP.signInContainerEl = 		document.getElementById('sign-in-container');
-	APP.signOutLinkEl =				document.getElementById('sign-out-link');
-	APP.signInLinkEl =				document.getElementById('sign-in-link');
-	APP.userInfoLinkEl =			document.getElementById('user-info-link');
+	//HTML Partial containers
+	let signInContainerEl = 		document.getElementById('sign-in-container');
+	let signUpContainerEl = 		document.getElementById('sign-up-container');
+	let eventPlannerContainerEl = 	document.getElementById('event-planner-container');
+	let resetPasswordContainerEl =	document.getElementById('reset-password-container');
 
 	//signing up
-	APP.signUpContainerEl = 		document.getElementById('sign-up-container');
-	APP.eventPlannerContainerEl = 	document.getElementById('event-planner-container');
 	APP.signupNameEl = 				document.getElementById('signup-name');
 	APP.signupEmailEl = 			document.getElementById('signup-email');
 	APP.signupPasswordEl = 			document.getElementById('signup-password');
 	APP.signupPassword2El = 		document.getElementById('signup-password2');
-	APP.signupEmployerEl =			document.getElementById('signup-employer');
-	APP.signupTitleEl =				document.getElementById('signup-title');
-	APP.signupBirthdayEl =			document.getElementById('signup-birthday');
-	APP.submitPasswordButton =		document.getElementById('submit-password-button');
-	APP.signupAdditionalInfoEl =	document.getElementById('signup-additional-info');
-	APP.signupSwitchEl =			document.getElementById('switch-1');
 
-	//Reset Password
-	APP.resetPasswordContainerEl =	document.getElementById('reset-password-container');
-	APP.resetPasswordEmail =		document.getElementById('reset-password-email');
-
-	//event creation
-	APP.eventNameEl =				document.getElementById('event-name');
-	APP.eventTypeEl =				document.getElementById('event-type');
-	APP.eventHostEl =				document.getElementById('event-host');
-	APP.startDateEl =				document.getElementById('start-date');
-	APP.endDateEl =					document.getElementById('end-date');
-	APP.contentEl = 				document.getElementById('vtil-content');
-	APP.inputEl = 					document.getElementById('vtil-input');
-	APP.locationInputEl	=			document.getElementById('location-input');
-	APP.streetNumberEl =			document.getElementById('street-number');
-	APP.cityEl =					document.getElementById('city');
-	APP.stateEl =					document.getElementById('state');
-	APP.postalCodeEl =				document.getElementById('postal-code');
-	APP.countryEl =					document.getElementById('country');
-	APP.messageEl =					document.getElementById('message');
-	APP.progressBarEl =				document.getElementById('progress-bar');
-	APP.progressBarLabelEl =		document.getElementById('progress-bar-label');
-	APP.addressList = [streetNumberEl, cityEl, stateEl, postalCodeEl, countryEl];
+	
 
 	//event display
 	APP.eventContainerEl =			document.getElementById('event-container');

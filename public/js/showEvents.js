@@ -1,7 +1,9 @@
 (function(document) {
 	'use strict';
 
-	var APP = window.APP || {};
+	var APP = window.APP || Object.create(null);
+
+	let events = [];			//The users events
 
 	/******************************************************************
 	Event functionality
