@@ -15,6 +15,7 @@
 	var signInContainerEl = document.getElementById('sign-in-container');
 	var signOutLinkEl = document.getElementById('sign-out-link');
 	var signInLinkEl = document.getElementById('sign-in-link');
+	var userInfoLinkEl = document.getElementById('user-info-link');
 
 	//signing up
 	var signUpContainerEl = document.getElementById('sign-up-container');
@@ -25,7 +26,7 @@
 	var signupPassword2El = document.getElementById('signup-password2');
 	var signupEmployerEl = document.getElementById('signup-employer');
 	var signupTitleEl = document.getElementById('signup-title');
-	var signupBirthday = document.getElementById('signup-birthday');
+	var signupBirthdayEl = document.getElementById('signup-birthday');
 	var submitPasswordButton = document.getElementById('submit-password-button');
 	var signupAdditionalInfoEl = document.getElementById('signup-additional-info');
 	var signupSwitchEl = document.getElementById('switch-1');
@@ -313,7 +314,7 @@
 						name: signupNameEl.value,
 						employer: signupEmployerEl.value,
 						title: signupTitleEl.value,
-						birthday: signupBirthday.value
+						birthday: signupBirthdayEl.value
 
 					});
 				}
@@ -803,7 +804,7 @@
 			'begin': startDateEl.value,
 			'end': endDateEl.value,
 			'guests': VTILAPP.vtil.tags,
-			'address': streetNumberEl.value + ' ' + routeEl.value,
+			'address': streetNumberEl.value,
 			'city': cityEl.value,
 			'state': stateEl.value,
 			'zip': postalCodeEl.value,
@@ -879,6 +880,11 @@
 		signUpContainerEl.hidden = true;
 		resetPasswordContainerEl.hidden = false;
 		showEventContainerEl.hidden = true;
+	};
+
+	APP.showUserInfo = function () {
+
+		if (extraRef) {}
 	};
 
 	/**

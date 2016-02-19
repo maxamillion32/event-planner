@@ -1,0 +1,237 @@
+<!-- Sign up -->
+<div id="sign-up-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
+
+	<div class="mdl-card__title">
+
+		<h2 class="mdl-card__title-text">Sign Up</h2>
+
+	</div>
+
+	<div class="mdl-card__supporting-text">
+
+		<form action="javascript:APP.signUp()" class="authForm" autocomplete="on">
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="signup-name" title="Name">
+						
+						<span>Name</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="APP.validateSignUp(true)" required>
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="signup-email" title="Email">
+						
+						<span>Email</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="APP.validateSignUp(true)" required>
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="signup-password" title="Password">
+						
+						<span>Password</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="APP.validateSignUp(true)" required>
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
+						
+						<span>Retype Password</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="APP.validateSignUp(true)" required>
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+
+						<input type="checkbox" id="switch-1" class="mdl-switch__input"
+						onclick="APP.showAdditionalInfo()">
+						<span class="mdl-switch__label">Care to tell us more about yourself?</span>
+
+					</label>
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<!-- Additional signup info -->
+				<div id="signup-additional-info" hidden="true">
+
+					<p>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signup-employer" title="Employer">
+								
+								<span>Employer</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signup-employer" type="text" title="Employer" name="organization">
+
+						</div>
+
+					</p>
+
+					<p>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signup-title" title="Title">
+								
+								<span>Job Title</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signup-title" type="text" title="Title" name="organization-title">
+
+						</div>
+
+					</p>
+
+					<p>
+
+						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+							<label class="mdl-textfield__label" for="signup-birthday" title="Birthday">
+								
+								<span>When's your birthday?</span>
+
+							</label>
+
+							<input class="mdl-textfield__input" id="signup-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+						</div>
+
+					</p>
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
+
+			</p>
+
+		</form>
+
+		<p>
+
+			<div class="center-container">
+
+				<div class="left-container">
+
+					<p>
+
+						<span class="val-check-email" id="val-check-email"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-length"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-special"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-upper"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-lower"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-number"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-match"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-required"></span>
+
+					</p>
+
+				</div>
+
+			</div>
+
+		</p>
+
+		<p>
+
+			<div class="link">
+
+				Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+			</div>
+
+			<div class="link">
+
+				Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+			</div>
+
+		</p>
+
+	</div>	
+
+</div>

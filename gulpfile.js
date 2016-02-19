@@ -7,6 +7,7 @@ var htmlmin =    	require('gulp-htmlmin');
 var mergeStream = 	require('merge-stream');
 var babel = 		require('gulp-babel');
 var sourcemaps = 	require('gulp-sourcemaps');
+var inject = require('gulp-inject');
  
 gulp.task('serve', function() {
   connect.server({
@@ -85,14 +86,31 @@ gulp.task('dist-js', function() {
 /******************
 	html
 *******************/
-gulp.task('dev-minify', function() {
-  return gulp.src('./public/**/*.html')
+gulp.task('dev-concat-minify', function() {
+
+  return gulp.src('./public/index.html')
+    .pipe(inject(gulp.src(['./public/partials/**/*.html']), {
+      starttag: '<!-- inject:body:{{ext}} -->',
+      transform: function(filePath, file) {
+        return file.contents.toString('utf8')
+      }
+    }).on('error', function(e) {
+      console.log('Inject Error: ', e)
+    }))
     .pipe(htmlmin())
     .pipe(gulp.dest('./dev'))
 });
 
-gulp.task('dist-minify', function() {
-  return gulp.src('./public/**/*.html')
+gulp.task('dist-concat-minify', function() {
+  return gulp.src('./public/index.html')
+    .pipe(inject(gulp.src(['./public/partials/**/*.html']), {
+      starttag: '<!-- inject:body:{{ext}} -->',
+      transform: function(filePath, file) {
+        return file.contents.toString('utf8')
+      }
+    }).on('error', function(e) {
+      console.log('Inject Error: ', e)
+    }))
     .pipe(htmlmin({collapseWhitespace: true}))
     .pipe(gulp.dest('./dist'))
 });
@@ -100,8 +118,8 @@ gulp.task('dist-minify', function() {
 /******************
 	tasks
 *******************/
-gulp.task('dev', ['dev-copy', 'dev-styles', 'dev-js', 'dev-minify']);
-gulp.task('dist', ['dist-copy', 'dist-styles', 'dist-js', 'dist-minify']);
+gulp.task('dev', ['dev-copy', 'dev-styles', 'dev-js', 'dev-concat-minify']);
+gulp.task('dist', ['dist-copy', 'dist-styles', 'dist-js', 'dist-concat-minify']);
 gulp.task('default', ['dist']);
 gulp.task('watch', function() {
 
