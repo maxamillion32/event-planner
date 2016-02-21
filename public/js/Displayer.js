@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
+var APP = window.APP || Object.create(null);
 
-(function(document) {
+var Displayer = (function(document) {
 	'use strict';
 
 	let _signInContainerEl = 		document.getElementById('sign-in-container');

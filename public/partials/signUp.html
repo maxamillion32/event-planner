@@ -9,7 +9,7 @@
 
 	<div class="mdl-card__supporting-text">
 
-		<form action="javascript:APP.signUp()" class="authForm" autocomplete="on">
+		<form action="javascript:app.signUp.signUp()" class="authForm" autocomplete="on">
 
 			<p>
 
@@ -21,7 +21,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -37,7 +37,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -53,7 +53,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -69,7 +69,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -82,7 +82,7 @@
 					<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
 
 						<input type="checkbox" id="switch-1" class="mdl-switch__input"
-						onclick="APP.showAdditionalInfo()">
+						onclick="app.signUp.showAdditionalInfo()">
 						<span class="mdl-switch__label">Care to tell us more about yourself?</span>
 
 					</label>

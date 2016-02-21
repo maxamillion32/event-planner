@@ -11,7 +11,7 @@
 
 		<div class="mdl-card__supporting-text">
 
-			<form action="javascript:APP.eventPlanner.submitForm()" autocomplete="on">
+			<form action="javascript:app.eventPlanner.submitForm()" autocomplete="on">
 
 				<div class="center">
 
@@ -36,7 +36,7 @@
 
 							</label>
 
-							<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -53,7 +53,7 @@
 
 							</label>
 
-							<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="app.eventPlanner.checkEventFields()" required>
 							<datalist id="guest-list">
 							  <option value="Birthday">
 							  <option value="Conference">
@@ -79,7 +79,7 @@
 
 							</label>
 
-							<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -96,7 +96,7 @@
 
 							</label>
 
-							<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -113,7 +113,7 @@
 
 							</label>
 
-							<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -140,7 +140,7 @@
 
 						<p>
 
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' onclick="APP.eventPlanner.addTag()">Add Guest</button>	
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' onclick="app.eventPlanner.addTag()">Add Guest</button>	
 
 						</p>
 
@@ -166,7 +166,7 @@
 
 						</label>
 
-						<input id="location-input" class="mdl-textfield__input" onFocus="APP.eventPlanner.geolocate()" type="text"></input>
+						<input id="location-input" class="mdl-textfield__input" onFocus="app.eventPlanner.geolocate()" type="text"></input>
 
 					</div>
 
@@ -181,7 +181,7 @@
 							
 						</label>
 
-						<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="APP.eventPlanner.checkEventFields()" required></input>
+						<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="app.eventPlanner.checkEventFields()" required></input>
 
 					</div>
 
@@ -195,7 +195,7 @@
 
 						</label>
 
-						<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" onchange="APP.eventPlanner.checkEventFields()" required></input>
+						<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" onchange="app.eventPlanner.checkEventFields()" required></input>
 
 					</div>	
 
@@ -205,7 +205,7 @@
 
 						</label>
 
-						<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>
 					
@@ -215,7 +215,7 @@
 
 						</label>
 
-						<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>
 
@@ -229,7 +229,7 @@
 
 						</label>
 
-						<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>
 
@@ -248,7 +248,7 @@
 
 							</label>
 
-							<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="APP.eventPlanner.checkEventFields()" required></textarea>
+							<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="app.eventPlanner.checkEventFields()" required></textarea>
 
 						</div>	
 

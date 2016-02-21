@@ -44,7 +44,7 @@
 
 		      	<a class="mdl-navigation__link" onclick="APP.displayEvents()" href="#">Show Events</a>
 
-		      	<a class="mdl-navigation__link" id="sign-out-link" hidden="true" onclick="APP.signOut()" href="#">Sign Out</a>
+		      	<a class="mdl-navigation__link" id="sign-out-link" hidden="true" onclick="APP.signInOut.signOut()" href="#">Sign Out</a>
 
 		      	<a class="mdl-navigation__link" id="user-info-link" onclick="APP.showUserInfo()" href="#">User Info</a>
 
@@ -71,7 +71,7 @@
 
 		<div class="mdl-card__supporting-text">
 
-			<form action="javascript:APP.eventPlanner.submitForm()" autocomplete="on">
+			<form action="javascript:app.eventPlanner.submitForm()" autocomplete="on">
 
 				<div class="center">
 
@@ -96,7 +96,7 @@
 
 							</label>
 
-							<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -113,7 +113,7 @@
 
 							</label>
 
-							<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="app.eventPlanner.checkEventFields()" required>
 							<datalist id="guest-list">
 							  <option value="Birthday">
 							  <option value="Conference">
@@ -139,7 +139,7 @@
 
 							</label>
 
-							<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -156,7 +156,7 @@
 
 							</label>
 
-							<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -173,7 +173,7 @@
 
 							</label>
 
-							<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="APP.eventPlanner.checkEventFields()" required>
+							<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="app.eventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -200,7 +200,7 @@
 
 						<p>
 
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type="button" onclick="APP.eventPlanner.addTag()">Add Guest</button>	
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type="button" onclick="app.eventPlanner.addTag()">Add Guest</button>	
 
 						</p>
 
@@ -226,7 +226,7 @@
 
 						</label>
 
-						<input id="location-input" class="mdl-textfield__input" onfocus="APP.eventPlanner.geolocate()" type="text">
+						<input id="location-input" class="mdl-textfield__input" onfocus="app.eventPlanner.geolocate()" type="text">
 
 					</div>
 
@@ -241,7 +241,7 @@
 							
 						</label>
 
-						<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>
 
@@ -255,7 +255,7 @@
 
 						</label>
 
-						<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>	
 
@@ -265,7 +265,7 @@
 
 						</label>
 
-						<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>
 					
@@ -275,7 +275,7 @@
 
 						</label>
 
-						<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>
 
@@ -289,7 +289,7 @@
 
 						</label>
 
-						<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="APP.eventPlanner.checkEventFields()" required>
+						<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="app.eventPlanner.checkEventFields()" required>
 
 					</div>
 
@@ -308,7 +308,7 @@
 
 							</label>
 
-							<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="APP.eventPlanner.checkEventFields()" required></textarea>
+							<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="app.eventPlanner.checkEventFields()" required></textarea>
 
 						</div>	
 
@@ -337,7 +337,7 @@
 	
 	<div class="mdl-card__supporting-text">
 
-		<form action="javascript:APP.resetPassword()" class="authForm" autocomplete="on">
+		<form action="javascript:app.resetPassword.resetPassword()" class="authForm" autocomplete="on">
 
 			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
@@ -363,13 +363,13 @@
 
 			<div class="link">
 
-				Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
+				Don't have an account?  <a onclick="Displayer.showSignUp()" href="#" title="Sign Up">Sign Up</a>
 
 			</div>
 
 			<div class="link">
 
-				Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+				Already have an account?  <a onclick="Displayer.showSignIn()" href="#" title="Sign In">Sign In</a>
 
 			</div>
 
@@ -397,7 +397,7 @@
 	
 	<div class="mdl-card__supporting-text">
 
-		<form action="javascript:APP.signIn()" class="authForm" autocomplete="on">
+		<form action="javascript:app.signInOut.signIn()" class="authForm" autocomplete="on">
 			
 			<p>
 
@@ -443,13 +443,13 @@
 			
 			<div class="link">
 
-				Don't have an account?  <a onclick="APP.showSignUp()" href="#" title="Sign Up">Sign Up</a>
+				Don't have an account?  <a onclick="Displayer.showSignUp()" href="#" title="Sign Up">Sign Up</a>
 
 			</div>
 
 			<div class="link">
 
-				Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+				Forgot your password?  <a onclick="Displayer.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
 
 			</div>
 
@@ -469,7 +469,7 @@
 
 	<div class="mdl-card__supporting-text">
 
-		<form action="javascript:APP.signUp()" class="authForm" autocomplete="on">
+		<form action="javascript:app.signUp.signUp()" class="authForm" autocomplete="on">
 
 			<p>
 
@@ -481,7 +481,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -497,7 +497,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -513,7 +513,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -529,7 +529,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="APP.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="app.signUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -541,7 +541,7 @@
 
 					<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
 
-						<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="APP.showAdditionalInfo()">
+						<input type="checkbox" id="switch-1" class="mdl-switch__input" onclick="app.signUp.showAdditionalInfo()">
 						<span class="mdl-switch__label">Care to tell us more about yourself?</span>
 
 					</label>
@@ -663,12 +663,6 @@
 
 					</p>
 
-					<p>
-
-						<span class="val-check-bad" id="val-check-required"></span>
-
-					</p>
-
 				</div>
 
 			</div>
@@ -679,13 +673,13 @@
 
 			<div class="link">
 
-				Already have an account?  <a onclick="APP.showSignIn()" href="#" title="Sign In">Sign In</a>
+				Already have an account?  <a onclick="Displayer.showSignIn()" href="#" title="Sign In">Sign In</a>
 
 			</div>
 
 			<div class="link">
 
-				Forgot your password?  <a onclick="APP.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+				Forgot your password?  <a onclick="Displayer.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
 
 			</div>
 
@@ -694,7 +688,9 @@
 	</div>	
 
 </div>
-				
+				<div id="user-info-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
+
+</div>
 				<!-- endinject -->
 
 		  	</div>
@@ -716,10 +712,17 @@
 		<script src="../bower_components/form-validator/dist/all.js"></script>
 
 		<!-- App Logic -->
-		<script src="js/all.js"></script>
+		<script src="js/EventPlanner.js"></script>
+		<script src="js/ResetPassword.js"></script>
+		<script src="js/ShowEvents.js"></script>
+		<script src="js/SignInOut.js"></script>
+		<script src="js/SignUp.js"></script>
+		<script src="js/Displayer.js"></script>
+		<script src="js/UserInfo.js"></script>
+		<script src="js/App.js"></script>
 
 		<!-- google places -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBazGsBMgeOxWxTx6oZlTM3TaAiLGsrUZY&signed_in=true&libraries=places&callback=APP.initAutocomplete"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBazGsBMgeOxWxTx6oZlTM3TaAiLGsrUZY&signed_in=true&libraries=places&callback=EventPlanner.initAutocomplete"></script>
 
 	</body>
 

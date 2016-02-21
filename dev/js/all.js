@@ -1,12 +1,364 @@
+"use strict";
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*jshint esversion: 6 */
+(function (document) {
+	'use strict';
+
+	/**
+  * App
+  * @class App
+  * @description Starting point for the event planner application
+  * 
+  */
+
+	var App = function () {
+
+		/**
+      * App constructor.
+      * @constructs App
+      */
+
+		function App() {
+			_classCallCheck(this, App);
+
+			// Register the callback to be fired every time auth state changes
+			var fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
+
+			this.signInOut = new SignInOut(fbRef);
+			this.eventPlanner = new EventPlanner();
+			this.resetPassword = new ResetPassword(fbRef);
+			this.showEvents = new ShowEvents();
+			this.signUp = new SignUp(fbRef);
+
+			// Fired after the user signs up
+			document.addEventListener("signed-up", function () {
+
+				this.signInOut.signIn(this.signUp.signupEmailEl.value, this.signUp.signupPasswordEl.value);
+			});
+
+			// Fired after user signs in
+			document.addEventListener("signed-in", function () {
+
+				this.eventPlanner.eventRef = this.signInOut.eventRef;
+				this.showEvents.eventRef = this.signInOut.eventRef;
+			});
+
+			/**
+    * Sign out on exit
+    * 
+    */
+			window.onbeforeunload = function () {
+
+				this.signInOut.signOut();
+				document.removeEventListener('signed-out');
+			};
+		}
+
+		/**
+   * Remove the registered events
+   *  @function removeEvents
+   * 	@memberof App
+   *  @instance
+   *
+   */
+
+
+		_createClass(App, [{
+			key: "removeEvents",
+			value: function removeEvents() {
+
+				document.removeEventListener('signed-up');
+				document.removeEventListener('signed-in');
+				window.onbeforeunload = undefined;
+			}
+		}]);
+
+		return App;
+	}();
+
+	// Fired after user signs out
+
+
+	document.addEventListener("signed-out", function () {
+
+		app.removeEvents();
+		app = new App();
+	});
+
+	var app = new App();
+})(document);
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-(function (document) {
+/*jshint esversion: 6 */
+var APP = window.APP || Object.create(null);
+
+var Displayer = function (document) {
 	'use strict';
-	/*jshint esversion: 6 */
+
+	var _signInContainerEl = document.getElementById('sign-in-container');
+	var _signUpContainerEl = document.getElementById('sign-up-container');
+	var _eventPlannerContainerEl = document.getElementById('event-planner-container');
+	var _resetPasswordContainerEl = document.getElementById('reset-password-container');
+	var _eventContainerEl = document.getElementById('event-container');
+	var _showEventContainerEl = document.getElementById('show-event-container');
+	var _userInfoContainerEl = document.getElementById('user-info-container');
+
+	/**
+  * Shows and hides blocks, like a super simple router
+  * @class SignInOut
+  * 
+  */
+	return function () {
+
+		/**
+      * Displayer constructor.
+      * @constructs Displayer
+      */
+
+		function Displayer() {
+			_classCallCheck(this, Displayer);
+		}
+
+		/**
+   * SignInContainer Element
+   * @return {Object} SignInContainer Element
+   * @memberof Displayer
+   * @type {Object}
+   * 
+   */
+
+
+		_createClass(Displayer, null, [{
+			key: 'showSignUp',
+
+
+			/**
+    * Show the sign up form
+    * @memberof Displayer
+    * 
+    */
+			value: function showSignUp() {
+
+				_signInContainerEl.hidden = true;
+				_eventPlannerContainerEl.hidden = true;
+				_signUpContainerEl.hidden = false;
+				_resetPasswordContainerEl.hidden = true;
+				_showEventContainerEl.hidden = true;
+				_userInfoContainerEl.hidden = true;
+
+				SignUp.validateSignUp(true); //<-Validate the sign up
+			}
+
+			/**
+    * Show the sign in form
+    * @memberof Displayer
+    * 
+    */
+
+		}, {
+			key: 'showSignIn',
+			value: function showSignIn() {
+
+				_signInContainerEl.hidden = false;
+				_eventPlannerContainerEl.hidden = true;
+				_signUpContainerEl.hidden = true;
+				_resetPasswordContainerEl.hidden = true;
+				_showEventContainerEl.hidden = true;
+				_userInfoContainerEl.hidden = true;
+			}
+
+			/**
+    * Show the event planner
+    * @memberof Displayer
+    * 
+    */
+
+		}, {
+			key: 'showEventPlanner',
+			value: function showEventPlanner() {
+
+				_signInContainerEl.hidden = true;
+				_eventPlannerContainerEl.hidden = false;
+				_signUpContainerEl.hidden = true;
+				_resetPasswordContainerEl.hidden = true;
+				_showEventContainerEl.hidden = true;
+				_userInfoContainerEl.hidden = true;
+
+				EventPlanner.checkEventFields(); //<-Check event fields
+			}
+
+			/**
+    * Show the reset password form
+    * @memberof Displayer
+    * 
+    */
+
+		}, {
+			key: 'showResetPassword',
+			value: function showResetPassword() {
+
+				_signInContainerEl.hidden = true;
+				_eventPlannerContainerEl.hidden = true;
+				_signUpContainerEl.hidden = true;
+				_resetPasswordContainerEl.hidden = false;
+				_showEventContainerEl.hidden = true;
+				_userInfoContainerEl.hidden = true;
+			}
+
+			/**
+    * Show the event container form
+    * @memberof Displayer
+    * 
+    */
+
+		}, {
+			key: 'showEventContainer',
+			value: function showEventContainer() {
+
+				_signInContainerEl.hidden = true;
+				_eventPlannerContainerEl.hidden = true;
+				_signUpContainerEl.hidden = true;
+				_resetPasswordContainerEl.hidden = true;
+				_showEventContainerEl.hidden = false;
+				_userInfoContainerEl.hidden = true;
+			}
+
+			/**
+    * Show the user info form
+    * @memberof Displayer
+    * 
+    */
+
+		}, {
+			key: 'showUserInfo',
+			value: function showUserInfo() {
+
+				_signInContainerEl.hidden = true;
+				_eventPlannerContainerEl.hidden = true;
+				_signUpContainerEl.hidden = true;
+				_resetPasswordContainerEl.hidden = true;
+				_showEventContainerEl.hidden = true;
+				_userInfoContainerEl.hidden = false;
+			}
+		}, {
+			key: 'signInContainerEl',
+			get: function get() {
+
+				return _signInContainerEl;
+			}
+
+			/**
+    * SignUp Container Element
+    * @return {Object} SignUp Container Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signUpContainerEl',
+			get: function get() {
+
+				return _signUpContainerEl;
+			}
+
+			/**
+    * Event Planner Container Element
+    * @return {Object} Event Planner Container Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'eventPlannerContainerEl',
+			get: function get() {
+
+				return _eventPlannerContainerEl;
+			}
+
+			/**
+    * Reset Password Container Element
+    * @return {Object} Reset Password Container Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'resetPasswordContainerEl',
+			get: function get() {
+
+				return _resetPasswordContainerEl;
+			}
+
+			/**
+    * Event Container Element
+    * @return {Object} Event Container Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'eventContainerEl',
+			get: function get() {
+
+				return _eventContainerEl;
+			}
+
+			/**
+    * Show Event Container Element
+    * @return {Object} Show Event Container Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'showEventContainerEl',
+			get: function get() {
+
+				return _showEventContainerEl;
+			}
+
+			/**
+    * User Info Container Element
+    * @return {Object} User Info Container Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'userInfoContainerEl',
+			get: function get() {
+
+				return _userInfoContainerEl;
+			}
+		}]);
+
+		return Displayer;
+	}();
+}(document);
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*jshint esversion: 6 */
+
+var EventPlanner = function (document) {
+	'use strict';
 
 	var _eventNameEl = document.getElementById('event-name');
 	var _eventTypeEl = document.getElementById('event-type');
@@ -60,14 +412,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			_addressEl.value = '';
 			_addressEl.disabled = pred;
 		});
-	};
+	}
 
 	/**
   * Fills in the address when the location is retrieved
-  *  @function _fillInAddress
-  * 	@memberof EventPlanner
-  * 	@private
-  *  @instance
   * 
   */
 	function _fillInAddress() {
@@ -137,25 +485,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				}
 			}
 		}
-	};
-
-	/**
-  * Initializes the autocomplete object using the location
-  *  @function initAutocomplete
-  * 	@memberof EventPlanner
-  *  @instance
-  * 
-  */
-	function _initAutocomplete() {
-		// Create the autocomplete object, restricting the search to geographical
-		// location types.
-		_autocomplete = new google.maps.places.Autocomplete(
-		/** @type {!HTMLInputElement} */_locationInputEl, { types: ['geocode'] });
-
-		// When the user selects an address from the dropdown, populate the address
-		// fields in the form.
-		_autocomplete.addListener('place_changed', _fillInAddress);
-	};
+	}
 
 	/**
   * Represents an Event Planner Page
@@ -167,6 +497,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 		/**
       * EventPlanner constructor.
       * @constructs EventPlanner
+      * @param {object} eventRef Reference to the firebase event route
       */
 
 		function EventPlanner(eventRef) {
@@ -185,11 +516,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
    * 	@type {Object}
    */
 			this.eventRef = eventRef;
-
-			/**
-    * Listen for address change
-    */
-			_initAutocomplete();
 		}
 
 		/**
@@ -202,13 +528,138 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 		_createClass(EventPlanner, [{
+			key: 'removeEvent',
+
+
+			/**
+    * Remove an event from events
+    * @function removeEvent
+    * @memberof EventPlanner
+    * @param  {string} id Dom id of event to remove
+    * @instance
+    * 
+    */
+			value: function removeEvent(id) {
+
+				var index = -1;
+
+				for (var i = 0; i < this.events.length; ++i) {
+
+					if (id === this.events[i].id) {
+
+						index = i;
+						break;
+					}
+				}
+
+				if (index !== -1) {
+
+					this.events = this.events.splice(index, 1);
+					this.eventRef.set(this.events);
+				}
+			}
+
+			/**
+    *  Get the location
+    *  @function geolocate
+    * 	@memberof EventPlanner
+    *  @instance
+    * 
+    */
+
+		}, {
+			key: 'geolocate',
+			value: function geolocate() {
+
+				if (navigator.geolocation) {
+
+					navigator.geolocation.getCurrentPosition(function (position) {
+
+						var geolocation = {
+
+							lat: position.coords.latitude,
+							lng: position.coords.longitude
+
+						};
+
+						var circle = new google.maps.Circle({
+
+							center: geolocation,
+							radius: position.coords.accuracy
+
+						});
+
+						_autocomplete.setBounds(circle.getBounds());
+					});
+				}
+			}
+
+			/**
+    * Save the event
+    *  @function submitForm
+    * 	@memberof EventPlanner
+    *  @instance
+    *
+    */
+
+		}, {
+			key: 'submitForm',
+			value: function submitForm() {
+
+				var d = new Date();
+
+				this.events.push({
+
+					'id': d.toISOString(),
+					'title': _eventNameEl.value,
+					'type': _eventTypeEl.value,
+					'host': _eventHostEl.value,
+					'begin': _startDateEl.value,
+					'end': _endDateEl.value,
+					'guests': _VTILAPP.vtil.tags,
+					'address': _streetNumberEl.value,
+					'city': _cityEl.value,
+					'state': _stateEl.value,
+					'zip': _postalCodeEl.value,
+					'country': _countryEl.value,
+					'message': _messageEl.value
+
+				});
+
+				this.eventRef.set(this.events);
+
+				this.clearElements(); //<- YOU ARE HERE
+			}
+
+			/**
+    *  Add a person
+    *  @function addTag
+    * 	@memberof EventPlanner
+    *  @instance
+    *
+    */
+
+		}, {
+			key: 'addTag',
+			value: function addTag() {
+
+				VTILAPP.vtil.addTag();
+				this.checkEventFields();
+			}
+
+			/**
+    * Initializes the autocomplete object using the location
+    * 
+    */
+
+		}], [{
 			key: 'clearElements',
 
 
 			/** 
    *   @function clearElements
    *   @memberof EventPlanner
-   *   @instance
+   *   
    */
 			value: function clearElements() {
 
@@ -222,17 +673,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				_clearAddress(true);
 				_clearGuests();
 			}
-		}, {
-			key: 'checkEventFields',
-
 
 			/**
     *  Checks if fields are completed
     *  @function checkEventFields
     * 	@memberof EventPlanner
-    * 	@instance
     * 
     */
+
+		}, {
+			key: 'checkEventFields',
 			value: function checkEventFields() {
 
 				var completed = 0;
@@ -301,109 +751,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				_progressBarEl.value = completed;
 			}
 		}, {
-			key: 'removeEvent',
+			key: 'initAutocomplete',
+			value: function initAutocomplete() {
+				// Create the autocomplete object, restricting the search to geographical
+				// location types.
+				_autocomplete = new google.maps.places.Autocomplete(
+				/** @type {!HTMLInputElement} */_locationInputEl, { types: ['geocode'] });
 
-
-			/**
-    * Remove an event from events
-    * @function removeEvent
-    * @memberof EventPlanner
-    * @param  {string} id Dom id of event to remove
-    * @instance
-    * 
-    */
-			value: function removeEvent(id) {
-
-				var index = -1;
-
-				for (var i = 0; i < this.events.length; ++i) {
-
-					if (id === this.events[i].id) {
-
-						index = i;
-						break;
-					}
-				}
-
-				if (index !== -1) {
-
-					this.events = this.events.splice(index, 1);
-					this.eventRef.set(this.events);
-				}
+				// When the user selects an address from the dropdown, populate the address
+				// fields in the form.
+				_autocomplete.addListener('place_changed', _fillInAddress);
 			}
 		}, {
-			key: 'geolocate',
-
-
-			/**
-    *  Get the location
-    *  @function geolocate
-    * 	@memberof EventPlanner
-    *  @instance
-    * 
-    */
-			value: function geolocate() {
-
-				if (navigator.geolocation) {
-
-					navigator.geolocation.getCurrentPosition(function (position) {
-
-						var geolocation = {
-
-							lat: position.coords.latitude,
-							lng: position.coords.longitude
-
-						};
-
-						var circle = new google.maps.Circle({
-
-							center: geolocation,
-							radius: position.coords.accuracy
-
-						});
-
-						_autocomplete.setBounds(circle.getBounds());
-					});
-				}
-			}
-		}, {
-			key: 'submitForm',
-
-
-			/**
-    * Save the event
-    *  @function submitForm
-    * 	@memberof EventPlanner
-    *  @instance
-    *
-    */
-			value: function submitForm() {
-
-				var d = new Date();
-
-				this.events.push({
-
-					'id': d.toISOString(),
-					'title': _eventNameEl.value,
-					'type': _eventTypeEl.value,
-					'host': _eventHostEl.value,
-					'begin': _startDateEl.value,
-					'end': _endDateEl.value,
-					'guests': _VTILAPP.vtil.tags,
-					'address': _streetNumberEl.value,
-					'city': _cityEl.value,
-					'state': _stateEl.value,
-					'zip': _postalCodeEl.value,
-					'country': _countryEl.value,
-					'message': _messageEl.value
-
-				});
-
-				this.eventRef.set(this.events);
-
-				this.clearElements(); //<- YOU ARE HERE
-			}
-		}], [{
 			key: 'eventNameEl',
 			get: function get() {
 
@@ -638,101 +997,119 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		return EventPlanner;
 	}();
-})(document);
+}(document);
 'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-(function (document) {
+/*jshint esversion: 6 */
+
+var ResetPassword = function (document) {
 	'use strict';
 
-	return function PageBase() {
-		_classCallCheck(this, PageBase);
-	};
-})(document);
-'use strict';
+	var _resetPasswordEmail = document.getElementById('reset-password-email');
 
-(function () {
-	'use strict';
-
-	var APP = window.APP || Object.create(null);
-
-	var resetPasswordEmail = document.getElementById('reset-password-email');
-
-	/******************************************************************
- Reset password functionality
- /******************************************************************
- 	/**
-  * Reset the users password
+	/**
+  * Represents a ResetPassword Page
+  * @class ResetPassword
   * 
   */
-	APP.resetPassword = function () {
-
-		APP.ref.resetPassword({
-			email: resetPasswordEmail.value
-		}, function (error) {
-			if (error) {
-				switch (error.code) {
-					case "INVALID_USER":
-						console.log("The specified user account does not exist.");
-						break;
-					default:
-						console.log("Error resetting password:", error);
-				}
-			} else {
-				console.log("Password reset email sent successfully!");
-			}
-		});
-	};
-})();
-'use strict';
-
-(function (document) {
-	'use strict';
-
-	var APP = window.APP || Object.create(null);
-
-	var events = []; //The users events
-
-	/******************************************************************
- Event functionality
- /******************************************************************
- 	/**
-  * Display events if user has logged in
-  * 
-  */
-	APP.displayEvents = function () {
-
-		if (eventRef) {
-
-			APP.showEventContainer();
-		}
-	};
-
-	function listenForEvents() {
+	return function () {
 
 		/**
-   * Get the data
-   * @param  {Object} snapshot value of the event
+      * ResetPassword constructor.
+      * @constructs ResetPassword
+      * @param {object} fbRef Reference to firebase
+      */
+
+		function ResetPassword(fbRef) {
+			_classCallCheck(this, ResetPassword);
+
+			this.fbRef = fbRef;
+		}
+
+		/**
+   * Reset Password Email Element
+   * @return {Object} Reset Password Email Element
+   * @memberof ResetPassword
+   * @type {Object}
+   * 
    */
-		this.eventRef.on("value", function (snapshot) {
 
-			this.events = snapshot.val();
 
-			_redrawEvents();
-		}, function (err) {
+		_createClass(ResetPassword, [{
+			key: 'resetPassword',
 
-			console.log('Error: ', err);
-		});
+
+			/**
+    * Send a reset password email
+    * @function resetPassword
+    * @memberof ResetPassword
+    * @instance
+    * 
+    */
+			value: function resetPassword() {
+
+				this.fbRef.resetPassword({
+					email: _resetPasswordEmail.value
+				}, function (error) {
+					if (error) {
+						switch (error.code) {
+							case "INVALID_USER":
+								console.log("The specified user account does not exist.");
+								break;
+							default:
+								console.log("Error resetting password:", error);
+						}
+					} else {
+						console.log("Password reset email sent successfully!");
+					}
+				});
+			}
+		}], [{
+			key: 'resetPasswordEmail',
+			get: function get() {
+
+				return _resetPasswordEmail;
+			}
+		}]);
+
+		return ResetPassword;
+	}();
+}(document);
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*jshint esversion: 6 */
+
+var ShowEvents = function (document) {
+	'use strict';
+
+	/**
+ * Clear all child elements
+ *
+ **/
+
+	function _clearEl(el) {
+
+		while (el.firstChild) {
+
+			el.removeChild(el.firstChild);
+		}
 	}
 
 	/**
   * Draw the events to te screen
   * 
   */
-	function _redrawEvents() {
+	function _redrawEvents(events) {
 
-		APP.clearEl(APP.eventContainerEl);
+		_clearEl(Displayer.eventContainerEl);
 
 		events.forEach(function (event) {
 
@@ -784,25 +1161,87 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			cardContentDiv.appendChild(p);
 
 			cardDiv.appendChild(cardContentDiv);
-			APP.eventContainerEl.appendChild(cardDiv);
+			Displayer.eventContainerEl.appendChild(cardDiv);
 		});
 	}
 
 	/**
-  * Add a person
+  * Represents a ShowEvents Page
+  * @class ShowEvents
   * 
   */
-	APP.addTag = function () {
+	return function () {
 
-		VTILAPP.vtil.addTag();
-		APP.checkEventFields();
-	};
-})(document);
+		/**
+      * ShowEvents constructor.
+      * @constructs ShowEvents
+      * @param {array} events events to display
+      * @param {object} eventRef Firebase reference to the events route
+      */
+
+		function ShowEvents(events, eventRef) {
+			_classCallCheck(this, ShowEvents);
+
+			/**
+          * The events
+          * @member ShowEvents#events
+          * @type {array}
+          */
+			this.events = events || [];
+
+			/**
+          * Frebase events reference
+          * @member ShowEvents#eventRef
+          * @type {object}
+          */
+			this.eventRef = eventRef;
+
+			if (this.eventRef) {
+
+				thisllistenForEvents();
+			}
+		}
+
+		/**
+   * @function listenForEvents
+   * @memberof ShowEvents#eventRef
+   * @instance
+   * 
+   */
+
+
+		_createClass(ShowEvents, [{
+			key: 'listenForEvents',
+			value: function listenForEvents() {
+
+				/**
+     * Get the data
+     * @param  {Object} snapshot value of the event
+     */
+				this.eventRef.on("value", function (snapshot) {
+
+					this.events = snapshot.val();
+
+					_redrawEvents(this.events);
+				}, function (err) {
+
+					console.log('Error: ', err);
+				});
+			}
+		}]);
+
+		return ShowEvents;
+	}();
+}(document);
 'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-(function () {
+/*jshint esversion: 6 */
+
+var SignInOut = function (document) {
 	'use strict';
 
 	//signing in
@@ -815,475 +1254,786 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	var _signupTitleEl = document.getElementById('signup-title');
 	var _signupBirthdayEl = document.getElementById('signup-birthday');
 
-	return function SignInOut() {
-		_classCallCheck(this, SignInOut);
-	};
+	var _storeExtra = false;
 
 	/**
-  * User has signed in
-  *
-  */
-	function _authHandler(error, authData) {
+ * Clear all child elements
+ *
+ **/
+	function _clearEl(el) {
 
-		if (error) {
+		while (el.firstChild) {
 
-			//Handle the error
-
-		} else if (!authData) {
-
-				console.log("User is logged out");
-			} else {
-
-				APP.userRef = APP.ref.child('users/' + authData.uid);
-				APP.eventRef = APP.userRef.child('events/');
-				APP.extraRef = APP.userRef.child('extra/');
-
-				//If just signing up store the extra user data
-				if (APP.storeExtra === true) {
-
-					APP.storeExtra = false;
-
-					APP.extraRef.set({
-
-						name: APP.signupNameEl.value,
-						employer: signupEmployerEl.value,
-						title: signupTitleEl.value,
-						birthday: signupBirthdayEl.value
-
-					});
-				}
-
-				signOutLinkEl.hidden = false;
-				signInLinkEl.hidden = true;
-
-				APP.displayEventCreation();
-
-				/**
-     * Get the data
-     * @param  {Object} snapshot value of the event
-     */
-				APP.eventRef.on("value", function (snapshot) {
-
-					APP.events = snapshot.val();
-
-					_redrawEvents();
-				}, function (err) {
-
-					console.log('Error: ', err);
-				});
-			}
+			el.removeChild(el.firstChild);
+		}
 	}
 
 	/**
-  * User is signing in
+  * Represents an Sign In page and includes sign out functionality
+  * @class SignInOut
   * 
   */
-	APP.signIn = function (emailIn, passwordIn) {
+	return function () {
 
-		var email = emailIn || signInEmailEl.value;
-		var password = passwordIn || APP.signInPasswordEl.value;
+		/**
+      * SignInOut constructor.
+      * @constructs SignInOut
+      * @param {object} fbRef Firebase Reference
+      */
 
-		// Sign in with an email/password combination
-		ref.authWithPassword({
-			email: email,
-			password: password
-		}, _authHandler);
-	};
+		function SignInOut(fbRef) {
+			_classCallCheck(this, SignInOut);
 
-	/******************************************************************
- Sign out functionality
- /******************************************************************
- 	/**
-  * User is signing out
-  * 
-  */
-	APP.signOut = function () {
+			/**
+          * Firebase Reference
+          * @member SignInOut#fbRef
+          * @type {Object}
+          */
+			this.fbRef = fbRef;
 
-		signOutLinkEl.hidden = true;
-		signInLinkEl.hidden = false;
-		APP.ref.unauth();
-		APP.eventRef.off();
-		APP.extraRef.off();
-		APP.userRef = undefined;
-		APP.eventRef = undefined;
-		APP.extraRef = undefined;
-		signInEmailEl.value = '';
-		APP.signInPasswordEl.value = '';
-		APP.signupNameEl.value = '';
-		APP.signupEmailEl.value = '';
-		APP.signupPasswordEl.value = '';
-		APP.signupPassword2El.value = '';
-		APP.clearElements();
-		APP.clearEl(eventContainerEl);
-		APP.showSignIn();
-	};
-})();
+			/**
+          * Firebase User Route Reference
+          * @member SignInOut#userRef
+          * @type {Object}
+          */
+			this.userRef = undefined;
+
+			/**
+          * Firebase Event Route Reference
+          * @member SignInOut#eventRef
+          * @type {Object}
+          */
+			this.eventRef = undefined;
+
+			/**
+          * Firebase Extra Info Route Reference
+          * @member SignInOut#extraRef
+          * @type {Object}
+          */
+			this.extraRef = undefined;
+		}
+
+		/**
+   * SignIn Email Element
+   * @return {Object} SignIn Email Element
+   * @memberof SignInOut
+   * @type {Object}
+   * 
+   */
+
+
+		_createClass(SignInOut, [{
+			key: 'authHandler',
+
+
+			/** 
+   *   @function authHandler
+   *   @memberof SignInOut
+   *   @param {object} error Holds the error if set
+   *   @param {object} authData Users auth data from firebase
+   *   @instance
+   */
+			value: function authHandler(error, authData) {
+
+				if (error) {
+
+					//Handle the error
+
+				} else if (!authData) {
+
+						console.log("User is logged out");
+					} else {
+
+						this.userRef = this.fbRef.child('users/' + authData.uid);
+						this.eventRef = this.userRef.child('events/');
+						this.extraRef = this.userRef.child('extra/');
+
+						//If just signing up store the extra user data
+						if (_storeExtra === true) {
+
+							_storeExtra = false;
+
+							this.extraRef.set({
+
+								name: _signupNameEl.value,
+								employer: _signupEmployerEl.value,
+								title: _signupTitleEl.value,
+								birthday: _signupBirthdayEl.value
+
+							});
+						}
+
+						_signOutLinkEl.hidden = false;
+						_signInLinkEl.hidden = true;
+
+						// Dispatch/Trigger/Fire the event
+						document.dispatchEvent(new CustomEvent("signed-in"));
+
+						Displayer.showEventContainer();
+					}
+			}
+
+			/**
+    * @function signIn
+    *   @memberof SignInOut
+    *   @param {string} emailIn Holds the users email
+    *   @param {string} passwordIn Holds the users password
+    *   @instance
+    * 
+    */
+
+		}, {
+			key: 'signIn',
+			value: function signIn(emailIn, passwordIn) {
+
+				var email = emailIn || signInEmailEl.value;
+				var password = passwordIn || APP.signInPasswordEl.value;
+
+				// Sign in with an email/password combination
+				this.fbRef.authWithPassword({
+					email: email,
+					password: password
+				}, this.authHandler);
+			}
+
+			/**
+    * @function signOut
+    * @memberof SignInOut
+    * @instance
+    * 
+    */
+
+		}, {
+			key: 'signOut',
+			value: function signOut() {
+
+				_signOutLinkEl.hidden = true;
+				_signInLinkEl.hidden = false;
+				this.fbRef.unauth();
+				this.eventRef.off();
+				this.extraRef.off();
+				this.userRef = undefined;
+				this.eventRef = undefined;
+				this.extraRef = undefined;
+				_signInEmailEl.value = '';
+				_signInPasswordEl.value = '';
+
+				SignUp.signupNameEl.value = '';
+				SignUp.signupEmailEl.value = '';
+				SignUp.signupPasswordEl.value = '';
+				SignUp.signupPassword2El.value = '';
+				EventPlanner.clearElements();
+				_clearEl(_eventContainerEl);
+
+				document.dispatchEvent(new CustomEvent("signed-out"));
+
+				APP.showSignIn(); //<- Display the sign in page
+			}
+		}], [{
+			key: 'signInEmailEl',
+			get: function get() {
+
+				return _signInEmailEl;
+			}
+
+			/**
+    * SgnIn Password Element
+    * @return {Object} SignIn Password Element
+    * @memberof SignInOut
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signInPasswordEl',
+			get: function get() {
+
+				return _signInPasswordEl;
+			}
+
+			/**
+    * SignOut Link Element
+    * @return {Object} SignOut Link Element
+    * @memberof SignInOut
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signOutLinkEl',
+			get: function get() {
+
+				return _signOutLinkEl;
+			}
+
+			/**
+    * SignIn Link Element
+    * @return {Object} SignIn Link Element
+    * @memberof SignInOut
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signInLinkEl',
+			get: function get() {
+
+				return _signInLinkEl;
+			}
+
+			/**
+    * SignUp Employer Element
+    * @return {Object} SignUp Employer Element
+    * @memberof SignInOut
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupEmployerEl',
+			get: function get() {
+
+				return _signupEmployerEl;
+			}
+
+			/**
+    * Signup Title Element
+    * @return {Object} Signup Title Element
+    * @memberof SignInOut
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupTitleEl',
+			get: function get() {
+
+				return _signupTitleEl;
+			}
+
+			/**
+    * Signup Birthday Element
+    * @return {Object} Signup Birthday Element
+    * @memberof SignInOut
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupBirthdayEl',
+			get: function get() {
+
+				return _signupBirthdayEl;
+			}
+
+			/**
+    * Indicates if we will be storing additional user info when signing in (after a signup)
+    * @return {boolean} Indicates if we will be storing additional user info when signing in (after a signup)
+    * @memberof SignInOut
+    * @type {boolean}
+    * 
+    */
+
+		}, {
+			key: 'storeExtra',
+			get: function get() {
+
+				return _storeExtra;
+			}
+
+			/**
+    * Indicates if we will be storing additional user info when signing in (after a signup)
+    * @memberof SignInOut
+    * @param {boolean} pred Indicates if we will be storing additional user info when signing in (after a signup)
+    * @type {boolean}
+    * 
+    */
+			,
+			set: function set(pred) {
+
+				_storeExtra = pred;
+			}
+		}]);
+
+		return SignInOut;
+	}();
+}(document);
 'use strict';
 
-(function () {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+/*jshint esversion: 6 */
+
+var SignUp = function () {
 	'use strict';
 
-	var APP = window.APP || Object.create(null);
+	//signing up
 
-	var submitPasswordButton = document.getElementById('submit-password-button');
-	var signupAdditionalInfoEl = document.getElementById('signup-additional-info');
-	var signupSwitchEl = document.getElementById('switch-1');
-	var validator = new FV.Validator();
-	var passwordField = new FV.Field("Password1", signupPasswordEl);
-	var password2Field = new FV.Field("Password2", signupPassword2El, signupPasswordEl);
-	var emailField = new FV.Field('EmailError', signupEmailEl);
-	var valCheckLengthEl = document.getElementById('val-check-length');
-	var valCheckSpecialEl = document.getElementById('val-check-special');
-	var valCheckUpperEl = document.getElementById('val-check-upper');
-	var valCheckLowerEl = document.getElementById('val-check-lower');
-	var valCheckMatchEl = document.getElementById('val-check-match');
-	var valCheckNumberEl = document.getElementById('val-check-number');
-	var valCheckEmailEl = document.getElementById('val-check-email');
+	var _signupNameEl = document.getElementById('signup-name');
+	var _signupEmailEl = document.getElementById('signup-email');
+	var _signupPasswordEl = document.getElementById('signup-password');
+	var _signupPassword2El = document.getElementById('signup-password2');
+	var _submitPasswordButton = document.getElementById('submit-password-button');
+	var _signupAdditionalInfoEl = document.getElementById('signup-additional-info');
+	var _signupSwitchEl = document.getElementById('switch-1');
+	var _valCheckLengthEl = document.getElementById('val-check-length');
+	var _valCheckSpecialEl = document.getElementById('val-check-special');
+	var _valCheckUpperEl = document.getElementById('val-check-upper');
+	var _valCheckLowerEl = document.getElementById('val-check-lower');
+	var _valCheckMatchEl = document.getElementById('val-check-match');
+	var _valCheckNumberEl = document.getElementById('val-check-number');
+	var _valCheckEmailEl = document.getElementById('val-check-email');
 
-	/******************************************************************
- Sign up functionality
- /******************************************************************
- 	/**
-  * User is signing up
-  * 
-  */
-	APP.signUp = function () {
+	var _validator = new FV.Validator();
+	var _passwordField = new FV.Field("Password1", _signupPasswordEl);
+	var _password2Field = new FV.Field("Password2", _signupPassword2El, _signupPasswordEl);
+	var _emailField = new FV.Field('EmailError', _signupEmailEl);
 
-		APP.ref.createUser({
-			email: APP.signupEmailEl.value,
-			password: APP.signupPasswordEl.value
-		}, function (error, userData) {
+	_passwordField.constraints = [new FV.Constraint(FV.Validator.MINLENGTH, "* Password must be at least 8 characters long.\n", 8), new FV.Constraint(FV.Validator.CONTAINSUPPER, "* Password must contain at least one upper case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSLOWER, "* Password must contain at least one lower case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSSPECIAL, "* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n"), new FV.Constraint(FV.Validator.CONTAINSNUMBER, "* Password must contain at least one number.\n")];
 
-			if (error) {
+	_password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD, "* Must match your password.\n")];
 
-				console.log("Error creating user:", error);
-			} else {
+	_emailField.constraints = [new FV.Constraint(FV.Validator.EMAIL, "* Must be a valid email address.\n")];
 
-				APP.storeExtra = true;
-
-				APP.signIn(signupEmailEl.value, signupPasswordEl.value);
-			}
-		});
-	};
+	_validator.fields = [_passwordField, _password2Field, _emailField];
 
 	/**
-  * Check for various validation errors
+  * Private function for showing good/bad auth messages
+  * @param  {array} errorTypes Holds the errors present
   * 
   */
 	function _checkValFields(errorTypes) {
 
 		if (errorTypes.indexOf(FV.Validator.EMAIL) === -1) {
 
-			valCheckEmailEl.className = 'val-check-good';
-			valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Must use a valid email address';
+			_valCheckEmailEl.className = 'val-check-good';
+			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Must use a valid email address';
 		} else {
 
-			valCheckEmailEl.className = 'val-check-bad';
-			valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Must use a valid email address';
+			_valCheckEmailEl.className = 'val-check-bad';
+			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Must use a valid email address';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
 
-			valCheckLengthEl.className = 'val-check-good';
-			valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must be at least 8 characters long';
+			_valCheckLengthEl.className = 'val-check-good';
+			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must be at least 8 characters long';
 		} else {
 
-			valCheckLengthEl.className = 'val-check-bad';
-			valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must be at least 8 characters long';
+			_valCheckLengthEl.className = 'val-check-bad';
+			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must be at least 8 characters long';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
 
-			valCheckUpperEl.className = 'val-check-good';
-			valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one upper case character';
+			_valCheckUpperEl.className = 'val-check-good';
+			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one upper case character';
 		} else {
 
-			valCheckUpperEl.className = 'val-check-bad';
-			valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one upper case character';
+			_valCheckUpperEl.className = 'val-check-bad';
+			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one upper case character';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
 
-			valCheckLowerEl.className = 'val-check-good';
-			valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one lower case character';
+			_valCheckLowerEl.className = 'val-check-good';
+			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one lower case character';
 		} else {
 
-			valCheckLowerEl.className = 'val-check-bad';
-			valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one lower case character';
+			_valCheckLowerEl.className = 'val-check-bad';
+			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one lower case character';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSSPECIAL) === -1) {
 
-			valCheckSpecialEl.className = 'val-check-good';
-			valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
+			_valCheckSpecialEl.className = 'val-check-good';
+			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
 		} else {
 
-			valCheckSpecialEl.className = 'val-check-bad';
-			valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
+			_valCheckSpecialEl.className = 'val-check-bad';
+			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 && APP.signupPasswordEl.value !== '' && APP.signupPassword2El.value !== '') {
 
-			valCheckMatchEl.className = 'val-check-good';
-			valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Passwords must match';
+			_valCheckMatchEl.className = 'val-check-good';
+			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Passwords must match';
 		} else {
 
-			valCheckMatchEl.className = 'val-check-bad';
-			valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Passwords must match';
+			_valCheckMatchEl.className = 'val-check-bad';
+			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Passwords must match';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
 
-			valCheckNumberEl.className = 'val-check-good';
-			valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one number';
+			_valCheckNumberEl.className = 'val-check-good';
+			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one number';
 		} else {
 
-			valCheckNumberEl.className = 'val-check-bad';
-			valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one number';
+			_valCheckNumberEl.className = 'val-check-bad';
+			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one number';
 		}
 
-		if (APP.signupNameEl.value === '' || APP.signupEmailEl.value === '' || APP.signupPasswordEl.value === '' || APP.signupPassword2El.value === '') {
+		if (_signupNameEl.value === '' || _signupEmailEl.value === '' || _signupPasswordEl.value === '' || _signupPassword2El.value === '') {
 
-			APP.valCheckRequiredEl.className = 'val-check-bad';
-			APP.valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> All required fields must be filled out';
+			_valCheckRequiredEl.className = 'val-check-bad';
+			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> All required fields must be filled out';
 		} else {
 
-			APP.valCheckRequiredEl.className = 'val-check-good';
-			APP.valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> All required fields must be filled out';
+			_valCheckRequiredEl.className = 'val-check-good';
+			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> All required fields must be filled out';
 		}
 	}
 
 	/**
-  * Validate sign up page
-  * 
-  * @param  {Boolean} skipCustomValidation checks if we will show custom validation
+  * Represents a SignUp Page
+  * @class SignUp
   * 
   */
-	APP.validateSignUp = function (skipCustomValidation) {
+	return function () {
+		function SignUp(fbRef) {
+			_classCallCheck(this, SignUp);
 
-		var errors = validator.checkForErrors();
-		var errorTypes = [];
-		var passwordErrors = "";
-		var password2Errors = "";
-		var emailErrors = "";
+			/**
+          * Firebase Reference
+          * @member SignUp#fbRef
+          * @type {Object}
+          */
+			this.fbRef = fbRef;
 
-		errors.forEach(function (error) {
+			/**
+    * Validating input before submitting the password
+    * 
+    */
+			_submitPasswordButton.onclick = this.validateSignUp;
+		}
 
-			switch (error.name) {
+		/**
+   * Signup Container Element
+   * @return {Object} SignupContainer Element
+   * @memberof SignUp
+   * @type {Object}
+   * 
+   */
 
-				case "Password1":
 
-					passwordErrors += error.error;
-					errorTypes.push(error.type);
-					break;
+		_createClass(SignUp, [{
+			key: 'signUp',
 
-				case "Password2":
 
-					password2Errors += error.error;
-					errorTypes.push(error.type);
-					break;
+			/**
+    * @function signUp
+    * @memberof SignUp
+    * @instance
+    * 
+    */
+			value: function signUp() {
 
-				case "EmailError":
+				this.fbRef.createUser({
+					email: _signupEmailEl.value,
+					password: _signupPasswordEl.value
+				}, function (error, userData) {
 
-					emailErrors += error.error;
-					errorTypes.push(error.type);
-					break;
+					if (error) {
 
+						console.log("Error creating user:", error);
+					} else {
+
+						SignInOut.storeExtra = true;
+
+						document.dispatchEvent(new CustomEvent("signed-up"));
+					}
+				});
 			}
-		});
 
-		if (passwordErrors !== '') {
+			/**
+    * Validate sign up page
+    * @memberof SignUp
+    * @param  {Boolean} skipCustomValidation checks if we will show custom validation
+    * @instance
+    */
 
-			passwordErrors = "Please correct the following errors:\n" + passwordErrors;
-		}
+		}, {
+			key: 'validateSignUp',
+			value: function validateSignUp(skipCustomValidation) {
 
-		if (password2Errors !== '') {
+				var errors = _validator.checkForErrors();
+				var errorTypes = [];
+				var passwordErrors = "";
+				var password2Errors = "";
+				var emailErrors = "";
 
-			password2Errors = "Please correct the following errors:\n" + password2Errors;
-		}
+				errors.forEach(function (error) {
 
-		if (emailErrors !== '') {
+					switch (error.name) {
 
-			emailErrors = "Please correct the following errors:\n" + emailErrors;
-		}
+						case "Password1":
 
-		//These will only display one at a time
-		if (!skipCustomValidation) {
+							passwordErrors += error.error;
+							errorTypes.push(error.type);
+							break;
 
-			APP.signupPasswordEl.setCustomValidity(passwordErrors);
-			APP.signupPassword2El.setCustomValidity(password2Errors);
-		}
+						case "Password2":
 
-		_checkValFields(errorTypes);
-	};
+							password2Errors += error.error;
+							errorTypes.push(error.type);
+							break;
 
-	/**
-  * Validating input before submitting the password
-  * 
-  */
-	submitPasswordButton.onclick = APP.validateSignUp;
+						case "EmailError":
 
-	/**
-  * Show/hide additional info
-  * 
-  */
-	APP.showAdditionalInfo = function () {
+							emailErrors += error.error;
+							errorTypes.push(error.type);
+							break;
 
-		signupAdditionalInfoEl.hidden = !signupSwitchEl.checked;
-	};
+					}
+				});
 
-	passwordField.constraints = [new FV.Constraint(FV.Validator.MINLENGTH, "* Password must be at least 8 characters long.\n", 8), new FV.Constraint(FV.Validator.CONTAINSUPPER, "* Password must contain at least one upper case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSLOWER, "* Password must contain at least one lower case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSSPECIAL, "* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n"), new FV.Constraint(FV.Validator.CONTAINSNUMBER, "* Password must contain at least one number.\n")];
+				if (passwordErrors !== '') {
 
-	password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD, "* Must match your password.\n")];
+					passwordErrors = "Please correct the following errors:\n" + passwordErrors;
+				}
 
-	emailField.constraints = [new FV.Constraint(FV.Validator.EMAIL, "* Must be a valid email address.\n")];
+				if (password2Errors !== '') {
 
-	validator.fields = [passwordField, password2Field, emailField];
-})();
+					password2Errors = "Please correct the following errors:\n" + password2Errors;
+				}
+
+				if (emailErrors !== '') {
+
+					emailErrors = "Please correct the following errors:\n" + emailErrors;
+				}
+
+				//These will only display one at a time
+				if (!skipCustomValidation) {
+
+					_signupPasswordEl.setCustomValidity(passwordErrors);
+					_signupPassword2El.setCustomValidity(password2Errors);
+				}
+
+				_checkValFields(errorTypes);
+			}
+
+			/**
+    * Show/hide additional info
+    * @memberOf SignUp
+    * @instance
+    */
+
+		}, {
+			key: 'showAdditionalInfo',
+			value: function showAdditionalInfo() {
+
+				_signupAdditionalInfoEl.hidden = !_signupSwitchEl.checked;
+			}
+		}], [{
+			key: 'signupNameEl',
+			get: function get() {
+
+				return _signupNameEl;
+			}
+
+			/**
+    * Signup Email Element
+    * @return {Object} Signup Email Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupEmailEl',
+			get: function get() {
+
+				return _signupEmailEl;
+			}
+
+			/**
+    * Signup Password Element
+    * @return {Object} Signup Password Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupPasswordEl',
+			get: function get() {
+
+				return _signupPasswordEl;
+			}
+
+			/**
+    * Signup Password 2 Element
+    * @return {Object} Signup Password 2 Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupPassword2El',
+			get: function get() {
+
+				return _signupPassword2El;
+			}
+
+			/**
+    * Submit Password Button Element
+    * @return {Object} Submit Password Button Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'submitPasswordButton',
+			get: function get() {
+
+				return _submitPasswordButton;
+			}
+
+			/**
+    * SignUp Additional Info Element
+    * @return {Object} SignUp Additional Info Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupAdditionalInfoEl',
+			get: function get() {
+
+				return _signupAdditionalInfoEl;
+			}
+
+			/**
+    * Signup Switch Element
+    * @return {Object} Signup Switch Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupSwitchEl',
+			get: function get() {
+
+				return _signupSwitchEl;
+			}
+
+			/**
+    * Val Check Length Element
+    * @return {Object} Val Check Length Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckLengthEl',
+			get: function get() {
+
+				return _valCheckLengthEl;
+			}
+
+			/**
+    * Val Check Special Element
+    * @return {Object} Val Check Special Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckSpecialEl',
+			get: function get() {
+
+				return _valCheckSpecialEl;
+			}
+
+			/**
+    * Val Check Upper Element
+    * @return {Object} Val Check Upper Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckUpperEl',
+			get: function get() {
+
+				return _valCheckUpperEl;
+			}
+
+			/**
+    * Val Check Lower Element
+    * @return {Object} Val Check Lower Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckLowerEl',
+			get: function get() {
+
+				return _valCheckLowerEl;
+			}
+
+			/**
+    * Val Check Match Element
+    * @return {Object} Val Check Match Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckMatchEl',
+			get: function get() {
+
+				return _valCheckMatchEl;
+			}
+
+			/**
+    * Val Check Number Element
+    * @return {Object} Val Check Number Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckNumberEl',
+			get: function get() {
+
+				return _valCheckNumberEl;
+			}
+
+			/**
+    * Val Check Email Element
+    * @return {Object} Val Check Email Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckEmailEl',
+			get: function get() {
+
+				return _valCheckEmailEl;
+			}
+		}]);
+
+		return SignUp;
+	}();
+}();
 'use strict';
 
-(function () {
-	'use strict';
-
-	var APP = window.APP || Object.create(null);
-})();
-'use strict';
-
-(function (document) {
-	'use strict';
-
-	var APP = window.APP || Object.create(null);
-	var VTILAPP = Object.create(null);
-
-	// Register the callback to be fired every time auth state changes
-	APP.ref = new Firebase("https://swanky-event-planner.firebaseIO.com");
-
-	//HTML Partial containers
-	var signInContainerEl = document.getElementById('sign-in-container');
-	var signUpContainerEl = document.getElementById('sign-up-container');
-	var eventPlannerContainerEl = document.getElementById('event-planner-container');
-	var resetPasswordContainerEl = document.getElementById('reset-password-container');
-	APP.eventContainerEl = document.getElementById('event-container');
-	var showEventContainerEl = document.getElementById('show-event-container');
-
-	//signing up
-	APP.signupNameEl = document.getElementById('signup-name');
-	APP.signupEmailEl = document.getElementById('signup-email');
-	APP.signupPasswordEl = document.getElementById('signup-password');
-	APP.signupPassword2El = document.getElementById('signup-password2');
-
-	APP.userRef; //Tag input list
-	APP.eventRef; //Events
-	APP.extraRef; //Extra user data
-	APP.storeExtra = false; //Store extra user info
-
-	APP.eventPlanner = new EventPlanner();
-	APP.signInOut = new SignInOut();
-
-	/**
- * Clear all child elements
- *
- **/
-	APP.clearEl = function (el) {
-
-		while (el.firstChild) {
-
-			el.removeChild(el.firstChild);
-		}
-	};
-
-	/**
-  * Display event creation if user has logged in
-  * 
-  */
-	APP.displayEventCreation = function () {
-
-		if (eventRef) {
-
-			showEventPlanner();
-		}
-	};
-
-	/**
-  * Sign out on exit
-  * 
-  */
-	window.onbeforeunload = APP.signOut;
-
-	/******************************************************************
- Display functionality
- /******************************************************************
- 	/**
-  * Show the sign up form
-  * 
-  */
-	APP.showSignUp = function () {
-
-		signInContainerEl.hidden = true;
-		eventPlannerContainerEl.hidden = true;
-		signUpContainerEl.hidden = false;
-		resetPasswordContainerEl.hidden = true;
-		showEventContainerEl.hidden = true;
-		APP.validateSignUp(true);
-	};
-
-	/**
-  * Show the sign in form
-  * 
-  */
-	APP.showSignIn = function () {
-
-		signInContainerEl.hidden = false;
-		eventPlannerContainerEl.hidden = true;
-		signUpContainerEl.hidden = true;
-		resetPasswordContainerEl.hidden = true;
-		showEventContainerEl.hidden = true;
-	};
-
-	/**
-  * Show the event planner
-  * 
-  */
-	function showEventPlanner() {
-
-		signInContainerEl.hidden = true;
-		eventPlannerContainerEl.hidden = false;
-		signUpContainerEl.hidden = true;
-		resetPasswordContainerEl.hidden = true;
-		showEventContainerEl.hidden = true;
-
-		APP.checkEventFields();
-	};
-
-	/**
-  * Show the reset password screen
-  * 
-  */
-	APP.showResetPassword = function () {
-
-		signInContainerEl.hidden = true;
-		eventPlannerContainerEl.hidden = true;
-		signUpContainerEl.hidden = true;
-		resetPasswordContainerEl.hidden = false;
-		showEventContainerEl.hidden = true;
-	};
-
-	APP.showUserInfo = function () {
-
-		if (extraRef) {}
-	};
-
-	/**
-  * Show the events
-  * 
-  */
-	function showEventContainer() {
-
-		signInContainerEl.hidden = true;
-		eventPlannerContainerEl.hidden = true;
-		signUpContainerEl.hidden = true;
-		resetPasswordContainerEl.hidden = true;
-		showEventContainerEl.hidden = false;
-	};
-})(document);
+var UserInfo = function () {}();
 //# sourceMappingURL=../maps/all.js.map

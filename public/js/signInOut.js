@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-(function(document) {
+var SignInOut = (function(document) {
 	'use strict';
 
 	//signing in

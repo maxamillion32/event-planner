@@ -26,248 +26,33 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>(function() {
+            <pre class="prettyprint source linenums"><code>/*jshint esversion: 6 */
+
+var SignUp = (function() {
 	'use strict';
 
-	var APP = window.APP || Object.create(null);
-
-	let submitPasswordButton =		document.getElementById('submit-password-button');
-	let signupAdditionalInfoEl =	document.getElementById('signup-additional-info');
-	let signupSwitchEl =			document.getElementById('switch-1');
-	let validator = 				new FV.Validator();
-	let passwordField = 			new FV.Field("Password1", signupPasswordEl);
-	let password2Field = 			new FV.Field("Password2", signupPassword2El, signupPasswordEl);
-	let emailField =				new FV.Field('EmailError', signupEmailEl);
-	let valCheckLengthEl =			document.getElementById('val-check-length');
-	let valCheckSpecialEl =			document.getElementById('val-check-special');
-	let valCheckUpperEl =			document.getElementById('val-check-upper');
-	let valCheckLowerEl =			document.getElementById('val-check-lower');
-	let valCheckMatchEl =			document.getElementById('val-check-match');
-	let valCheckNumberEl =			document.getElementById('val-check-number');
-	let valCheckEmailEl =			document.getElementById('val-check-email');
-
-	/******************************************************************
-	Sign up functionality
-	/******************************************************************
-
-	/**
-	 * User is signing up
-	 * 
-	 */
-	APP.signUp = function() {
-
-		APP.ref.createUser({
-		  email    : APP.signupEmailEl.value,
-		  password : APP.signupPasswordEl.value
-		}, function(error, userData) {
-
-		  if (error) {
-
-		    console.log("Error creating user:", error);
-
-		  } else {
-
-		  	APP.storeExtra = true;
-
-		    APP.signIn(signupEmailEl.value, signupPasswordEl.value);
-
-		  }
-		  
-		});
-
-	};
-
-	/**
-	 * Check for various validation errors
-	 * 
-	 */
-	function _checkValFields(errorTypes) {
-
-		if(errorTypes.indexOf(FV.Validator.EMAIL) === -1) {
-
-			valCheckEmailEl.className = 'val-check-good';
-			valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Must use a valid email address';
-
-		} else {
-
-			valCheckEmailEl.className = 'val-check-bad';
-			valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Must use a valid email address';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
-
-			valCheckLengthEl.className = 'val-check-good';
-			valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must be at least 8 characters long';
-
-		} else {
-
-			valCheckLengthEl.className = 'val-check-bad';
-			valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must be at least 8 characters long';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
-
-			valCheckUpperEl.className = 'val-check-good';
-			valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one upper case character';
-
-		} else {
-
-			valCheckUpperEl.className = 'val-check-bad';
-			valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one upper case character';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
-
-			valCheckLowerEl.className = 'val-check-good';
-			valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one lower case character';
-
-		} else {
-
-			valCheckLowerEl.className = 'val-check-bad';
-			valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one lower case character';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSSPECIAL) === -1) {
-
-			valCheckSpecialEl.className = 'val-check-good';
-			valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
-
-		} else {
-
-			valCheckSpecialEl.className = 'val-check-bad';
-			valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 &amp;&amp; APP.signupPasswordEl.value !== '' &amp;&amp; APP.signupPassword2El.value !== '') {
-
-			valCheckMatchEl.className = 'val-check-good';
-			valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Passwords must match';
-
-		} else {
-
-			valCheckMatchEl.className = 'val-check-bad';
-			valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Passwords must match';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
-
-			valCheckNumberEl.className = 'val-check-good';
-			valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one number';
-
-		} else {
-
-			valCheckNumberEl.className = 'val-check-bad';
-			valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one number';
-
-		}
-
-		if( APP.signupNameEl.value === '' || APP.signupEmailEl.value === '' || APP.signupPasswordEl.value === '' || APP.signupPassword2El.value === '') {
-
-			APP.valCheckRequiredEl.className = 'val-check-bad';
-			APP.valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> All required fields must be filled out';
-
-		} else {
-
-			APP.valCheckRequiredEl.className = 'val-check-good';
-			APP.valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> All required fields must be filled out';
-
-		}
-
-	}
-
-	/**
-	 * Validate sign up page
-	 * 
-	 * @param  {Boolean} skipCustomValidation checks if we will show custom validation
-	 * 
-	 */
-	APP.validateSignUp = function (skipCustomValidation) {
-
-		let errors = 			validator.checkForErrors();
-		let errorTypes = 		[];
-		let passwordErrors = 	"";
-		let password2Errors = 	"";
-		let emailErrors =		"";
-
-		errors.forEach(error => {
-
-			switch(error.name) {
-
-				case "Password1":
-
-					passwordErrors += error.error;
-					errorTypes.push(error.type);
-					break;
-
-				case "Password2":
-
-					password2Errors += error.error;
-					errorTypes.push(error.type);
-					break;
-
-				case "EmailError":
-				
-					emailErrors += error.error;
-					errorTypes.push(error.type);
-					break;	
-
-			}
-
-		});
-
-		if(passwordErrors !== '') {
-
-			passwordErrors = "Please correct the following errors:\n" + passwordErrors;
-
-		}
-
-		if(password2Errors !== '') {
-
-			password2Errors = "Please correct the following errors:\n" + password2Errors;
-
-		}
-
-		if(emailErrors !== '') {
-
-			emailErrors = "Please correct the following errors:\n" + emailErrors;
-
-		}
-
-		//These will only display one at a time
-		if (!skipCustomValidation) {
-
-			APP.signupPasswordEl.setCustomValidity(passwordErrors);
-			APP.signupPassword2El.setCustomValidity(password2Errors);
-
-		}
-
-		_checkValFields(errorTypes);
-
-	};
-
-	/**
-	 * Validating input before submitting the password
-	 * 
-	 */
-	submitPasswordButton.onclick = APP.validateSignUp;
-
-	/**
-	 * Show/hide additional info
-	 * 
-	 */
-	APP.showAdditionalInfo = function() {
-
-		signupAdditionalInfoEl.hidden = !signupSwitchEl.checked;
-
-	};
-
-	passwordField.constraints = [
+	//signing up
+	let _signupNameEl = 			document.getElementById('signup-name');
+	let _signupEmailEl = 			document.getElementById('signup-email');
+	let _signupPasswordEl = 		document.getElementById('signup-password');
+	let _signupPassword2El = 		document.getElementById('signup-password2');
+	let _submitPasswordButton =		document.getElementById('submit-password-button');
+	let _signupAdditionalInfoEl =	document.getElementById('signup-additional-info');
+	let _signupSwitchEl =			document.getElementById('switch-1');
+	let _valCheckLengthEl =			document.getElementById('val-check-length');
+	let _valCheckSpecialEl =		document.getElementById('val-check-special');
+	let _valCheckUpperEl =			document.getElementById('val-check-upper');
+	let _valCheckLowerEl =			document.getElementById('val-check-lower');
+	let _valCheckMatchEl =			document.getElementById('val-check-match');
+	let _valCheckNumberEl =			document.getElementById('val-check-number');
+	let _valCheckEmailEl =			document.getElementById('val-check-email');
+
+	let _validator = 				new FV.Validator();
+	let _passwordField = 			new FV.Field("Password1", _signupPasswordEl);
+	let _password2Field = 			new FV.Field("Password2", _signupPassword2El, _signupPasswordEl);
+	let _emailField =				new FV.Field('EmailError', _signupEmailEl);
+
+	_passwordField.constraints = [
 		new FV.Constraint(FV.Validator.MINLENGTH, 
 			"* Password must be at least 8 characters long.\n",
 			8),
@@ -281,12 +66,421 @@
 			"* Password must contain at least one number.\n")
 	];
 
-	password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD,
+	_password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD,
 			"* Must match your password.\n")];
 
-	emailField.constraints = [new FV.Constraint(FV.Validator.EMAIL, "* Must be a valid email address.\n")];
+	_emailField.constraints = [new FV.Constraint(FV.Validator.EMAIL, "* Must be a valid email address.\n")];
 
-	validator.fields = [passwordField, password2Field, emailField];
+	_validator.fields = [_passwordField, _password2Field, _emailField];
+
+	/**
+	 * Private function for showing good/bad auth messages
+	 * @param  {array} errorTypes Holds the errors present
+	 * 
+	 */
+	function _checkValFields(errorTypes) {
+
+		if(errorTypes.indexOf(FV.Validator.EMAIL) === -1) {
+
+			_valCheckEmailEl.className = 'val-check-good';
+			_valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Must use a valid email address';
+
+		} else {
+
+			_valCheckEmailEl.className = 'val-check-bad';
+			_valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Must use a valid email address';
+
+		}
+
+		if(errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
+
+			_valCheckLengthEl.className = 'val-check-good';
+			_valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must be at least 8 characters long';
+
+		} else {
+
+			_valCheckLengthEl.className = 'val-check-bad';
+			_valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must be at least 8 characters long';
+
+		}
+
+		if(errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
+
+			_valCheckUpperEl.className = 'val-check-good';
+			_valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one upper case character';
+
+		} else {
+
+			_valCheckUpperEl.className = 'val-check-bad';
+			_valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one upper case character';
+
+		}
+
+		if(errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
+
+			_valCheckLowerEl.className = 'val-check-good';
+			_valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one lower case character';
+
+		} else {
+
+			_valCheckLowerEl.className = 'val-check-bad';
+			_valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one lower case character';
+
+		}
+
+		if(errorTypes.indexOf(FV.Validator.CONTAINSSPECIAL) === -1) {
+
+			_valCheckSpecialEl.className = 'val-check-good';
+			_valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
+
+		} else {
+
+			_valCheckSpecialEl.className = 'val-check-bad';
+			_valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
+
+		}
+
+		if(errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 &amp;&amp; _signupPasswordEl.value !== '' &amp;&amp; _signupPassword2El.value !== '') {
+
+			_valCheckMatchEl.className = 'val-check-good';
+			_valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Passwords must match';
+
+		} else {
+
+			_valCheckMatchEl.className = 'val-check-bad';
+			_valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Passwords must match';
+
+		}
+
+		if(errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
+
+			_valCheckNumberEl.className = 'val-check-good';
+			_valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one number';
+
+		} else {
+
+			_valCheckNumberEl.className = 'val-check-bad';
+			_valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one number';
+
+		}
+
+		if( _signupNameEl.value === '' || _signupEmailEl.value === '' || _signupPasswordEl.value === '' || _signupPassword2El.value === '') {
+
+			_valCheckRequiredEl.className = 'val-check-bad';
+			_valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> All required fields must be filled out';
+
+		} else {
+
+			_valCheckRequiredEl.className = 'val-check-good';
+			_valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> All required fields must be filled out';
+
+		}
+
+	}
+
+	/**
+	 * Represents a SignUp Page
+	 * @class SignUp
+	 * 
+	 */
+	return class SignUp {
+
+		constructor(fbRef) {
+
+			/**
+	         * Firebase Reference
+	         * @member SignUp#fbRef
+	         * @type {Object}
+	         */
+			this.fbRef = fbRef;
+
+			/**
+			 * Validating input before submitting the password
+			 * 
+			 */
+			_submitPasswordButton.onclick = this.validateSignUp;
+
+		}
+
+		/**
+		 * Signup Container Element
+		 * @return {Object} SignupContainer Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupNameEl() {
+
+			return _signupNameEl;
+		}
+
+		/**
+		 * Signup Email Element
+		 * @return {Object} Signup Email Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupEmailEl() {
+
+			return _signupEmailEl;
+		}
+
+		/**
+		 * Signup Password Element
+		 * @return {Object} Signup Password Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupPasswordEl() {
+
+			return _signupPasswordEl;
+		}
+
+		/**
+		 * Signup Password 2 Element
+		 * @return {Object} Signup Password 2 Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupPassword2El() {
+
+			return _signupPassword2El;
+		}
+
+		/**
+		 * Submit Password Button Element
+		 * @return {Object} Submit Password Button Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get submitPasswordButton() {
+
+			return _submitPasswordButton;
+		}
+
+		/**
+		 * SignUp Additional Info Element
+		 * @return {Object} SignUp Additional Info Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupAdditionalInfoEl() {
+
+			return _signupAdditionalInfoEl;
+		}
+
+		/**
+		 * Signup Switch Element
+		 * @return {Object} Signup Switch Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupSwitchEl() {
+
+			return _signupSwitchEl;
+		}
+
+		/**
+		 * Val Check Length Element
+		 * @return {Object} Val Check Length Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckLengthEl() {
+
+			return _valCheckLengthEl;
+		}
+
+		/**
+		 * Val Check Special Element
+		 * @return {Object} Val Check Special Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckSpecialEl() {
+
+			return _valCheckSpecialEl;
+		}
+
+		/**
+		 * Val Check Upper Element
+		 * @return {Object} Val Check Upper Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckUpperEl() {
+
+			return _valCheckUpperEl;
+		}
+
+		/**
+		 * Val Check Lower Element
+		 * @return {Object} Val Check Lower Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckLowerEl() {
+
+			return _valCheckLowerEl;
+		}
+
+		/**
+		 * Val Check Match Element
+		 * @return {Object} Val Check Match Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckMatchEl() {
+
+			return _valCheckMatchEl;
+		}
+
+		/**
+		 * Val Check Number Element
+		 * @return {Object} Val Check Number Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckNumberEl() {
+
+			return _valCheckNumberEl;
+		}
+
+		/**
+		 * Val Check Email Element
+		 * @return {Object} Val Check Email Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckEmailEl() {
+
+			return _valCheckEmailEl;
+		}
+
+		/**
+		 * @function signUp
+		 * @memberof SignUp
+		 * @instance
+		 * 
+		 */
+		signUp() {
+
+			this.fbRef.createUser({
+			  email    : _signupEmailEl.value,
+			  password : _signupPasswordEl.value
+			}, function(error, userData) {
+
+			  if (error) {
+
+			    console.log("Error creating user:", error);
+
+			  } else {
+
+			  	SignInOut.storeExtra = true;
+
+			  	document.dispatchEvent(new CustomEvent("signed-up"));
+
+			  }
+			  
+			});
+
+		}
+
+		/**
+		 * Validate sign up page
+		 * @memberof SignUp
+		 * @param  {Boolean} skipCustomValidation checks if we will show custom validation
+		 * 
+		 */
+		static validateSignUp(skipCustomValidation) {
+
+			let errors = 			_validator.checkForErrors();
+			let errorTypes = 		[];
+			let passwordErrors = 	"";
+			let password2Errors = 	"";
+			let emailErrors =		"";
+
+			errors.forEach(error => {
+
+				switch(error.name) {
+
+					case "Password1":
+
+						passwordErrors += error.error;
+						errorTypes.push(error.type);
+						break;
+
+					case "Password2":
+
+						password2Errors += error.error;
+						errorTypes.push(error.type);
+						break;
+
+					case "EmailError":
+					
+						emailErrors += error.error;
+						errorTypes.push(error.type);
+						break;	
+
+				}
+
+			});
+
+			if(passwordErrors !== '') {
+
+				passwordErrors = "Please correct the following errors:\n" + passwordErrors;
+
+			}
+
+			if(password2Errors !== '') {
+
+				password2Errors = "Please correct the following errors:\n" + password2Errors;
+
+			}
+
+			if(emailErrors !== '') {
+
+				emailErrors = "Please correct the following errors:\n" + emailErrors;
+
+			}
+
+			//These will only display one at a time
+			if (!skipCustomValidation) {
+
+				_signupPasswordEl.setCustomValidity(passwordErrors);
+				_signupPassword2El.setCustomValidity(password2Errors);
+
+			}
+
+			_checkValFields(errorTypes);
+
+		}
+
+		/**
+		 * Show/hide additional info
+		 * @memberOf SignUp
+		 * @instance
+		 */
+		showAdditionalInfo() {
+
+			_signupAdditionalInfoEl.hidden = !_signupSwitchEl.checked;
+
+		}
+
+	};
 
 })();</code></pre>
         </article>
@@ -298,13 +492,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Displayer.html">Displayer</a></li><li><a href="EventPlanner.html">EventPlanner</a></li><li><a href="SignInOut.html">SignInOut</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Displayer.html">Displayer</a></li><li><a href="EventPlanner.html">EventPlanner</a></li><li><a href="ResetPassword.html">ResetPassword</a></li><li><a href="ShowEvents.html">ShowEvents</a></li><li><a href="SignInOut.html">SignInOut</a></li><li><a href="SignUp.html">SignUp</a></li></ul><h3>Global</h3><ul><li><a href="global.html#.initAutocomplete">.initAutocomplete</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sat Feb 20 2016 23:10:59 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Feb 21 2016 13:23:33 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

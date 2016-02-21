@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-(function(document) {
+var EventPlanner = (function(document) {
 	'use strict';
 
 	let _eventNameEl = 			document.getElementById('event-name');
@@ -116,22 +116,6 @@
 	}
 
 	/**
-	 * Initializes the autocomplete object using the location
-	 * 
-	 */
-	function _initAutocomplete() {
-	  // Create the autocomplete object, restricting the search to geographical
-	  // location types.
-	  _autocomplete = new google.maps.places.Autocomplete(
-	      /** @type {!HTMLInputElement} */(_locationInputEl),
-	      {types: ['geocode']});
-
-	  // When the user selects an address from the dropdown, populate the address
-	  // fields in the form.
-	  _autocomplete.addListener('place_changed', _fillInAddress);
-	}
-
-	/**
 	 * Represents an Event Planner Page
 	 * @class EventPlanner
 	 * 
@@ -158,11 +142,6 @@
 			* 	@type {Object}
 			*/
 			this.eventRef = eventRef;
-
-			/**
-			 * Listen for address change
-			 */
-			_initAutocomplete();
 
 		}
 
@@ -578,6 +557,22 @@
 			VTILAPP.vtil.addTag();
 			this.checkEventFields();
 
+		}
+
+		/**
+		 * Initializes the autocomplete object using the location
+		 * 
+		 */
+		static initAutocomplete() {
+		  // Create the autocomplete object, restricting the search to geographical
+		  // location types.
+		  _autocomplete = new google.maps.places.Autocomplete(
+		      /** @type {!HTMLInputElement} */(_locationInputEl),
+		      {types: ['geocode']});
+
+		  // When the user selects an address from the dropdown, populate the address
+		  // fields in the form.
+		  _autocomplete.addListener('place_changed', _fillInAddress);
 		}
 
 	};

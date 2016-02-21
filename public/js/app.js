@@ -1,43 +1,83 @@
 /*jshint esversion: 6 */
-
 (function(document) {
 	'use strict';
 
-	var APP = window.APP || Object.create(null);
-
-	// Register the callback to be fired every time auth state changes
-	let fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
-
-	APP.signInOut = 	new SignInOut(fbRef);
-	APP.eventPlanner = 	new EventPlanner();
-	APP.resetPassword = new ResetPassword(fbRef);
-	APP.showEvents =	new showEvents();
-	APP.Displayer = Displayer;
-
-	// Fired after user signs in
-	document.addEventListener("signed-in", function(e) {
-
-	  APP.eventPlanner.eventRef = 	APP.signInOut.eventRef;
-	  APP.showEvents.eventRef = 	APP.signInOut.eventRef;
-
-	});
-
-	// Fired after user signs out
-	document.addEventListener("signed-out", function(e) {
-
-	  APP.eventPlanner.eventRef = 	undefined;
-	  APP.showEvents.eventRef = 	undefined;
-
-	});
-
 	/**
-	 * Sign out on exit
+	 * App
+	 * @class App
+	 * @description Starting point for the event planner application
 	 * 
 	 */
-	window.onbeforeunload = APP.signInOut.signOut;
+	class App {
 
-	/******************************************************************
-	Display functionality
-	/******************************************************************/
+		/**
+	     * App constructor.
+	     * @constructs App
+	     */
+		constructor() {
+
+			// Register the callback to be fired every time auth state changes
+			let fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
+
+			this.signInOut = 	 new SignInOut(fbRef);
+			this.eventPlanner =  new EventPlanner();
+			this.resetPassword = new ResetPassword(fbRef);
+			this.showEvents =	 new ShowEvents();
+			this.signUp =		 new SignUp(fbRef);
+
+			// Fired after the user signs up
+			document.addEventListener("signed-up", function() {
+
+				this.signInOut.signIn(this.signUp.signupEmailEl.value, this.signUp.signupPasswordEl.value);
+
+			});
+
+			// Fired after user signs in
+			document.addEventListener("signed-in", function() {
+
+			  this.eventPlanner.eventRef = 	this.signInOut.eventRef;
+			  this.showEvents.eventRef = 	this.signInOut.eventRef;
+
+			});
+
+			/**
+			 * Sign out on exit
+			 * 
+			 */
+			window.onbeforeunload = function() {
+
+				this.signInOut.signOut();
+				document.removeEventListener('signed-out');
+
+			};
+
+		}
+
+		/**
+		 * Remove the registered events
+		 *  @function removeEvents
+		 * 	@memberof App
+		 *  @instance
+		 *
+		 */
+		removeEvents() {
+
+			document.removeEventListener('signed-up');
+			document.removeEventListener('signed-in');
+			window.onbeforeunload = undefined;
+
+		}
+
+	}
+
+	// Fired after user signs out
+	document.addEventListener("signed-out", function() {
+
+		app.removeEvents();
+		app = new App();
+
+	});
+
+	var app = new App();
 
 })(document);

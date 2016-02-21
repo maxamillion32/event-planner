@@ -1,0 +1,1 @@
+{"version":3,"sources":["UserInfo.js"],"names":[],"mappings":";;AAAA,IAAI,WAAW,YAAY,EAAX,EAAZ","file":"UserInfo.js","sourcesContent":["var UserInfo = (function() {\n\t'use strict';\n\n\n})();"],"sourceRoot":"/source/"}

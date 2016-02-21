@@ -79,7 +79,6 @@ gulp.task('dev-js', function() {
     .pipe(babel().on('error', function(e){
             console.log('Bablify Error: ', e);
          }))
-    .pipe(concat('all.js'))
     .pipe(sourcemaps.write('../maps'))
     .pipe(gulp.dest('./dev/js'));
 
@@ -92,7 +91,6 @@ gulp.task('dist-js', function() {
     .pipe(babel().on('error', function(e){
             console.log('Bablify Error: ', e);
          }))
-    .pipe(concat('all.js'))
     .pipe(uglify().on('error', function(e){
             console.log('Uglify Error: ', e);
          }))
@@ -136,7 +134,7 @@ gulp.task('dist-concat-minify', function() {
 /******************
 	tasks
 *******************/
-gulp.task('dev', ['dev-copy', 'dev-styles', 'lint', 'dev-js', 'dev-concat-minify', 'js-doc', 'serve-docs', 'serve', 'watch']);
+gulp.task('dev', ['dev-copy', 'dev-styles', 'lint', 'dev-js', 'dev-concat-minify', 'js-doc', 'watch']);
 gulp.task('dist', ['dist-copy', 'dist-styles', 'lint', 'dist-js', 'dist-concat-minify']);
 gulp.task('default', ['dev']);
 gulp.task('watch', function() {

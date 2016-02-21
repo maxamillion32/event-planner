@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-(function(document) {
+var ShowEvents = (function(document) {
 	'use strict';
 
 	/**

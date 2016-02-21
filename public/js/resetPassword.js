@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-(function(document) {
+var ResetPassword = (function(document) {
 	'use strict';
 
 	let _resetPasswordEmail = document.getElementById('reset-password-email');
