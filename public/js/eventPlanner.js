@@ -566,6 +566,20 @@
 
 		}
 
+		/**
+		 *  Add a person
+		 *  @function addTag
+		 * 	@memberof EventPlanner
+		 *  @instance
+		 *
+		 */
+		addTag() {
+
+			VTILAPP.vtil.addTag();
+			this.checkEventFields();
+
+		}
+
 	};
 
 })(document);

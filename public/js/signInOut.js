@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */
 
-(function() {
+(function(document) {
 	'use strict';
 
 	//signing in
@@ -222,7 +222,10 @@
 				_signOutLinkEl.hidden = 	false;
 				_signInLinkEl.hidden = 	true;
 
-				APP.displayEventCreation(); //<- Display the event creation page
+				// Dispatch/Trigger/Fire the event
+				document.dispatchEvent(new CustomEvent("signed-in"));
+
+				Displayer.showEventContainer();
 
 			}
 
@@ -275,10 +278,12 @@
 			EventPlanner.clearElements();
 			_clearEl(_eventContainerEl);
 
+			document.dispatchEvent(new CustomEvent("signed-out"));
+
 			APP.showSignIn(); //<- Display the sign in page
 
 		}
 
 	};
 
-})();
+})(document);

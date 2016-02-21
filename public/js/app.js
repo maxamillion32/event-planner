@@ -1,45 +1,40 @@
+/*jshint esversion: 6 */
+
 (function(document) {
 	'use strict';
 
 	var APP = window.APP || Object.create(null);
-	var VTILAPP = Object.create(null);
 
 	// Register the callback to be fired every time auth state changes
-	let fbRef new Firebase("https://swanky-event-planner.firebaseIO.com");
+	let fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
 
-	//signing up
-	APP.signupNameEl = 				document.getElementById('signup-name');
-	APP.signupEmailEl = 			document.getElementById('signup-email');
-	APP.signupPasswordEl = 			document.getElementById('signup-password');
-	APP.signupPassword2El = 		document.getElementById('signup-password2');
+	APP.signInOut = 	new SignInOut(fbRef);
+	APP.eventPlanner = 	new EventPlanner();
+	APP.resetPassword = new ResetPassword(fbRef);
+	APP.showEvents =	new showEvents();
+	APP.Displayer = Displayer;
 
-	APP.userRef;				//Tag input list
-	APP.eventRef;				//Events
-	APP.extraRef;				//Extra user data
-	APP.storeExtra = false;		//Store extra user info
+	// Fired after user signs in
+	document.addEventListener("signed-in", function(e) {
 
-	APP.signInOut = new SignInOut(fbRef);
-	APP.eventPlanner = new EventPlanner();
+	  APP.eventPlanner.eventRef = 	APP.signInOut.eventRef;
+	  APP.showEvents.eventRef = 	APP.signInOut.eventRef;
 
-	/**
-	 * Display event creation if user has logged in
-	 * 
-	 */
-	APP.displayEventCreation = function() {
+	});
 
-		if(eventRef) {
+	// Fired after user signs out
+	document.addEventListener("signed-out", function(e) {
 
-			showEventPlanner();
+	  APP.eventPlanner.eventRef = 	undefined;
+	  APP.showEvents.eventRef = 	undefined;
 
-		}
-
-	};
+	});
 
 	/**
 	 * Sign out on exit
 	 * 
 	 */
-	window.onbeforeunload = APP.signOut;
+	window.onbeforeunload = APP.signInOut.signOut;
 
 	/******************************************************************
 	Display functionality

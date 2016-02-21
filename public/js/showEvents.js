@@ -1,45 +1,19 @@
+/*jshint esversion: 6 */
+
 (function(document) {
 	'use strict';
 
-	var APP = window.APP || Object.create(null);
-
-	let events = [];			//The users events
-
-	/******************************************************************
-	Event functionality
-	/******************************************************************
-
 	/**
-	 * Display events if user has logged in
-	 * 
-	 */
-	APP.displayEvents = function() {
+	* Clear all child elements
+	*
+	**/ 
+	function _clearEl(el) {
 
-		if(eventRef) {
+		while (el.firstChild) {
 
-			APP.showEventContainer();
+			el.removeChild(el.firstChild);
 
 		}
-
-	};
-
-	function listenForEvents() {
-
-		/**
-		 * Get the data
-		 * @param  {Object} snapshot value of the event
-		 */
-		this.eventRef.on("value", function(snapshot) {
-
-		  this.events = snapshot.val();
-
-		  _redrawEvents();
-		  
-		}, function(err) {
-
-			console.log('Error: ', err);
-
-		});
 
 	}
 
@@ -47,15 +21,15 @@
 	 * Draw the events to te screen
 	 * 
 	 */
-	function _redrawEvents() {
+	function _redrawEvents(events) {
 
-		APP.clearEl(APP.eventContainerEl);
+		_clearEl(Displayer.eventContainerEl);
 
-		events.forEach(function(event) {
+		events.forEach(event => {
 
 			//Create the card
 			let cardDiv = document.createElement('div');
-			cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown"
+			cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown";
 
 			//Card Title
 			let cardTitleDiv = document.createElement('div');
@@ -104,20 +78,74 @@
 			cardContentDiv.appendChild(p);
 
 			cardDiv.appendChild(cardContentDiv);
-			APP.eventContainerEl.appendChild(cardDiv);
+			Displayer.eventContainerEl.appendChild(cardDiv);
 
 		});
 
 	}
 
 	/**
-	 * Add a person
+	 * Represents a ShowEvents Page
+	 * @class ShowEvents
 	 * 
 	 */
-	APP.addTag = function() {
+	return class ShowEvents {
 
-		VTILAPP.vtil.addTag();
-		APP.checkEventFields();
+		/**
+	     * ShowEvents constructor.
+	     * @constructs ShowEvents
+	     * @param {array} events events to display
+	     * @param {object} eventRef Firebase reference to the events route
+	     */
+		constructor(events, eventRef) {
+
+			/**
+	         * The events
+	         * @member ShowEvents#events
+	         * @type {array}
+	         */
+			this.events = events || [];
+
+			/**
+	         * Frebase events reference
+	         * @member ShowEvents#eventRef
+	         * @type {object}
+	         */
+			this.eventRef = eventRef;
+
+			if(this.eventRef) {
+
+				thisllistenForEvents();
+
+			}
+
+		}
+
+		/**
+		 * @function listenForEvents
+		 * @memberof ShowEvents#eventRef
+		 * @instance
+		 * 
+		 */
+		listenForEvents() {
+
+			/**
+			 * Get the data
+			 * @param  {Object} snapshot value of the event
+			 */
+			this.eventRef.on("value", function(snapshot) {
+
+			  this.events = snapshot.val();
+
+			  _redrawEvents(this.events);
+			  
+			}, function(err) {
+
+				console.log('Error: ', err);
+
+			});
+
+		}
 
 	};
 

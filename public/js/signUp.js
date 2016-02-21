@@ -3,6 +3,11 @@
 
 	var APP = window.APP || Object.create(null);
 
+	//signing up
+	APP.signupNameEl = 				document.getElementById('signup-name');
+	APP.signupEmailEl = 			document.getElementById('signup-email');
+	APP.signupPasswordEl = 			document.getElementById('signup-password');
+	APP.signupPassword2El = 		document.getElementById('signup-password2');
 	let submitPasswordButton =		document.getElementById('submit-password-button');
 	let signupAdditionalInfoEl =	document.getElementById('signup-additional-info');
 	let signupSwitchEl =			document.getElementById('switch-1');
