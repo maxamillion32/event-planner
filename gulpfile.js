@@ -8,6 +8,24 @@ var mergeStream = 	require('merge-stream');
 var babel = 		require('gulp-babel');
 var sourcemaps = 	require('gulp-sourcemaps');
 var inject = require('gulp-inject');
+var shell = require('gulp-shell');
+var jshint = require('gulp-jshint');
+var stylish = require('jshint-stylish');
+ 
+gulp.task('lint', function() {
+  return gulp.src('./public/**/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish));
+});
+
+gulp.task('js-doc', shell.task(['./node_modules/jsdoc/jsdoc.js -r ./public/js -d ./docs']));
+
+gulp.task('serve-docs', function() {
+  connect.server({
+    root: ['docs'],
+    port: 8800
+  });
+});
  
 gulp.task('serve', function() {
   connect.server({
@@ -118,9 +136,9 @@ gulp.task('dist-concat-minify', function() {
 /******************
 	tasks
 *******************/
-gulp.task('dev', ['dev-copy', 'dev-styles', 'dev-js', 'dev-concat-minify']);
-gulp.task('dist', ['dist-copy', 'dist-styles', 'dist-js', 'dist-concat-minify']);
-gulp.task('default', ['dist']);
+gulp.task('dev', ['dev-copy', 'dev-styles', 'lint', 'dev-js', 'dev-concat-minify', 'js-doc', 'serve-docs', 'serve', 'watch']);
+gulp.task('dist', ['dist-copy', 'dist-styles', 'lint', 'dist-js', 'dist-concat-minify']);
+gulp.task('default', ['dev']);
 gulp.task('watch', function() {
 
 	gulp.watch(['./public/**/*'], ['dev']);
