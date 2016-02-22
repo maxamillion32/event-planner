@@ -38,14 +38,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			document.addEventListener("signed-up", function () {
 
 				this.signInOut.signIn(this.signUp.signupEmailEl.value, this.signUp.signupPasswordEl.value);
-			});
+			}.bind(this));
 
 			// Fired after user signs in
 			document.addEventListener("signed-in", function () {
 
 				this.eventPlanner.eventRef = this.signInOut.eventRef;
 				this.showEvents.eventRef = this.signInOut.eventRef;
-			});
+			}.bind(this));
 
 			/**
     * Sign out on exit
@@ -87,8 +87,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 		app.removeEvents();
 		app = new App();
-	});
+	}.bind(this));
 
-	var app = new App();
+	window.app = new App();
 })(document);
-//# sourceMappingURL=../maps/App.js.map

@@ -256,4 +256,3 @@ var Displayer = function (document) {
 		return Displayer;
 	}();
 }(document);
-//# sourceMappingURL=../maps/Displayer.js.map

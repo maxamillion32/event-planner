@@ -75,11 +75,11 @@ gulp.task('dist-styles', function() {
 gulp.task('dev-js', function() {
 
     gulp.src('./public/js/**/*.js')
-    .pipe(sourcemaps.init())
+    //.pipe(sourcemaps.init())
     .pipe(babel().on('error', function(e){
             console.log('Bablify Error: ', e);
          }))
-    .pipe(sourcemaps.write('../maps'))
+    //.pipe(sourcemaps.write('../maps'))
     .pipe(gulp.dest('./dev/js'));
 
 });

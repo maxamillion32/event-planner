@@ -134,7 +134,7 @@ var SignInOut = function (document) {
 						// Dispatch/Trigger/Fire the event
 						document.dispatchEvent(new CustomEvent("signed-in"));
 
-						Displayer.showEventContainer();
+						Displayer.showEventPlanner();
 					}
 			}
 
@@ -151,14 +151,14 @@ var SignInOut = function (document) {
 			key: 'signIn',
 			value: function signIn(emailIn, passwordIn) {
 
-				var email = emailIn || signInEmailEl.value;
-				var password = passwordIn || APP.signInPasswordEl.value;
+				var email = emailIn || _signInEmailEl.value;
+				var password = passwordIn || _signInPasswordEl.value;
 
 				// Sign in with an email/password combination
 				this.fbRef.authWithPassword({
 					email: email,
 					password: password
-				}, this.authHandler);
+				}, this.authHandler.bind(this));
 			}
 
 			/**
@@ -192,7 +192,7 @@ var SignInOut = function (document) {
 
 				document.dispatchEvent(new CustomEvent("signed-out"));
 
-				APP.showSignIn(); //<- Display the sign in page
+				Display.showSignIn();
 			}
 		}], [{
 			key: 'signInEmailEl',
@@ -323,4 +323,3 @@ var SignInOut = function (document) {
 		return SignInOut;
 	}();
 }(document);
-//# sourceMappingURL=../maps/SignInOut.js.map

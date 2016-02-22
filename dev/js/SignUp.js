@@ -473,4 +473,3 @@ var SignUp = function () {
 		return SignUp;
 	}();
 }();
-//# sourceMappingURL=../maps/SignUp.js.map

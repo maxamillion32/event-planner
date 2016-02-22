@@ -225,7 +225,7 @@ var SignInOut = (function(document) {
 				// Dispatch/Trigger/Fire the event
 				document.dispatchEvent(new CustomEvent("signed-in"));
 
-				Displayer.showEventContainer();
+				Displayer.showEventPlanner();
 
 			}
 
@@ -241,14 +241,14 @@ var SignInOut = (function(document) {
 		 */
 		signIn(emailIn, passwordIn) {
 
-			let email = 	emailIn || signInEmailEl.value;
-			let password = 	passwordIn || APP.signInPasswordEl.value;
+			let email = 	emailIn || _signInEmailEl.value;
+			let password = 	passwordIn || _signInPasswordEl.value;
 
 			// Sign in with an email/password combination
 			this.fbRef.authWithPassword({
 			  email : 		email ,
 			  password : 	password
-			}, this.authHandler);
+			}, this.authHandler.bind(this));
 
 		}
 
@@ -280,7 +280,7 @@ var SignInOut = (function(document) {
 
 			document.dispatchEvent(new CustomEvent("signed-out"));
 
-			APP.showSignIn(); //<- Display the sign in page
+			Display.showSignIn();
 
 		}
 

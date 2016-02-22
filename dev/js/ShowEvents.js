@@ -152,4 +152,3 @@ var ShowEvents = function (document) {
 		return ShowEvents;
 	}();
 }(document);
-//# sourceMappingURL=../maps/ShowEvents.js.map

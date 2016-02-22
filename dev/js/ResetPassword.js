@@ -79,4 +79,3 @@ var ResetPassword = function (document) {
 		return ResetPassword;
 	}();
 }(document);
-//# sourceMappingURL=../maps/ResetPassword.js.map

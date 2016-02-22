@@ -647,4 +647,3 @@ var EventPlanner = function (document) {
 		return EventPlanner;
 	}();
 }(document);
-//# sourceMappingURL=../maps/EventPlanner.js.map
