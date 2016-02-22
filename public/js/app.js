@@ -68,6 +68,40 @@
 
 		}
 
+		/**
+		 * Show the event creation div
+		 *  @function deisplayEventCreation
+		 * 	@memberof App
+		 *  @instance
+		 *
+		 */
+		displayEventCreation() {
+
+			if(this.eventPlanner.eventRef) {
+
+				Displayer.showEventPlanner();
+
+			}
+
+		}
+
+		/**
+		 * Display the events div
+		 *  @function displayEvents
+		 * 	@memberof App
+		 *  @instance
+		 *
+		 */
+		displayEvents() {
+
+			if(this.eventPlanner.eventRef) {
+
+				Displayer.showEventContainer();
+				
+			}
+
+		}
+
 	}
 
 	// Fired after user signs out

@@ -6,6 +6,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /*jshint esversion: 6 */
 
+/**
+* Instantiate a new vtil object
+* 
+**/
+var VTILAPP = VTILAPP || Object.create(null);
+
 var EventPlanner = function (document) {
 	'use strict';
 
@@ -28,11 +34,6 @@ var EventPlanner = function (document) {
 	var _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	var _autocomplete = undefined;
 
-	/**
- * Instantiate a new vtil object
- * 
- **/
-	var VTILAPP = VTILAPP || Object.create(null);
 	VTILAPP.vtil = new VTIL(_contentEl, _inputEl, 'VTILAPP.vtil');
 
 	/**
@@ -293,7 +294,7 @@ var EventPlanner = function (document) {
 			value: function addTag() {
 
 				VTILAPP.vtil.addTag();
-				this.checkEventFields();
+				EventPlanner.checkEventFields();
 			}
 
 			/**

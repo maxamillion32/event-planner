@@ -1,5 +1,11 @@
 /*jshint esversion: 6 */
 
+/**
+* Instantiate a new vtil object
+* 
+**/
+var VTILAPP = VTILAPP || Object.create(null);
+
 var EventPlanner = (function(document) {
 	'use strict';
 
@@ -22,11 +28,6 @@ var EventPlanner = (function(document) {
 	let _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	let _autocomplete;
 
-	/**
-	* Instantiate a new vtil object
-	* 
-	**/
-	var VTILAPP = VTILAPP || Object.create(null);
 	VTILAPP.vtil = new VTIL(_contentEl, _inputEl, 'VTILAPP.vtil');
 
 	/**
@@ -555,7 +556,7 @@ var EventPlanner = (function(document) {
 		addTag() {
 
 			VTILAPP.vtil.addTag();
-			this.checkEventFields();
+			EventPlanner.checkEventFields();
 
 		}
 

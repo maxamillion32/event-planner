@@ -75,6 +75,42 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				document.removeEventListener('signed-in');
 				window.onbeforeunload = undefined;
 			}
+
+			/**
+    * Show the event creation div
+    *  @function deisplayEventCreation
+    * 	@memberof App
+    *  @instance
+    *
+    */
+
+		}, {
+			key: "displayEventCreation",
+			value: function displayEventCreation() {
+
+				if (this.eventPlanner.eventRef) {
+
+					Displayer.showEventPlanner();
+				}
+			}
+
+			/**
+    * Display the events div
+    *  @function displayEvents
+    * 	@memberof App
+    *  @instance
+    *
+    */
+
+		}, {
+			key: "displayEvents",
+			value: function displayEvents() {
+
+				if (this.eventPlanner.eventRef) {
+
+					Displayer.showEventContainer();
+				}
+			}
 		}]);
 
 		return App;
