@@ -355,13 +355,13 @@
 
 				</label>
 
-				<input class="mdl-textfield__input" id="reset-password-email" type="email" name="email" title="Email" required>
+				<input class="mdl-textfield__input" id="reset-password-email" type="email" name="email" title="Email" oninput="ResetPassword.validateResetPassword()" required>
 
 			</div>
 
 			<p>
 
-				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Reset Password" title="Reset Password">
+				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Reset Password" id="reset-password-button" title="Reset Password">
 
 			</p>
 
@@ -417,7 +417,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" required>
+					<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" oninput="SignInOut.validateSignIn()" required>
 
 				</div>
 
@@ -433,7 +433,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" required>
+					<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" oninput="SignInOut.validateSignIn()" required>
 
 				</div>
 
@@ -441,7 +441,7 @@
 
 			<p>
 
-				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sign In" title="Sign In">
+				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sign In" id="sign-in-button" title="Sign In">
 
 			</p>
 
@@ -489,7 +489,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="app.signUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="SignUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -505,7 +505,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="app.signUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="SignUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -521,7 +521,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="app.signUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -537,7 +537,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="app.signUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp(true)" required>
 
 				</div>
 
@@ -631,7 +631,13 @@
 
 					<p>
 
-						<span class="val-check-email" id="val-check-email"></span>
+						<span class="val-check-bad" id="val-check-required"></span>
+
+					</p>
+
+					<p>
+
+						<span class="val-check-bad" id="val-check-email"></span>
 
 					</p>
 

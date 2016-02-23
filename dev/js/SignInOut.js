@@ -18,6 +18,7 @@ var SignInOut = function (document) {
 	var _signupEmployerEl = document.getElementById('signup-employer');
 	var _signupTitleEl = document.getElementById('signup-title');
 	var _signupBirthdayEl = document.getElementById('signup-birthday');
+	var _signInButton = document.getElementById('sign-in-button');
 
 	var _storeExtra = false;
 
@@ -195,6 +196,19 @@ var SignInOut = function (document) {
 				Display.showSignIn();
 			}
 		}], [{
+			key: 'validateSignIn',
+
+
+			/** 
+   *   @function validateSignIn
+   *   @memberof SignInOut
+   *   
+   */
+			value: function validateSignIn() {
+
+				_signInButton.disabled = _signInEmailEl.value === '' || _signInPasswordEl.value === '';
+			}
+		}, {
 			key: 'signInEmailEl',
 			get: function get() {
 
@@ -247,7 +261,7 @@ var SignInOut = function (document) {
 			}
 
 			/**
-    * SignUp Employer Element
+    * SignIn Employer Element
     * @return {Object} SignUp Employer Element
     * @memberof SignInOut
     * @type {Object}
@@ -262,7 +276,7 @@ var SignInOut = function (document) {
 			}
 
 			/**
-    * Signup Title Element
+    * SignIn Title Element
     * @return {Object} Signup Title Element
     * @memberof SignInOut
     * @type {Object}
@@ -277,7 +291,7 @@ var SignInOut = function (document) {
 			}
 
 			/**
-    * Signup Birthday Element
+    * SignIn Birthday Element
     * @return {Object} Signup Birthday Element
     * @memberof SignInOut
     * @type {Object}
@@ -289,6 +303,21 @@ var SignInOut = function (document) {
 			get: function get() {
 
 				return _signupBirthdayEl;
+			}
+
+			/**
+    * SignIn Button Element
+    * @return {Object} SignIn Button Element
+    * @memberof SignInOut
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signInButton',
+			get: function get() {
+
+				return _signInButton;
 			}
 
 			/**

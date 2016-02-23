@@ -18,6 +18,7 @@ var SignUp = (function() {
 	let _valCheckMatchEl =			document.getElementById('val-check-match');
 	let _valCheckNumberEl =			document.getElementById('val-check-number');
 	let _valCheckEmailEl =			document.getElementById('val-check-email');
+	let _valCheckRequiredEl =		document.getElementById('val-check-required');
 
 	let _validator = 				new FV.Validator();
 	let _passwordField = 			new FV.Field("Password1", _signupPasswordEl);
@@ -343,6 +344,19 @@ var SignUp = (function() {
 		}
 
 		/**
+		 * Val Check Required Element
+		 * @return {Object} Val Check Required Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get valCheckRequiredEl() {
+
+			return _valCheckRequiredEl;
+
+		}
+
+		/**
 		 * @function signUp
 		 * @memberof SignUp
 		 * @instance
@@ -437,6 +451,7 @@ var SignUp = (function() {
 
 			}
 
+			_submitPasswordButton.disabled = errorTypes.length > 0;
 			_checkValFields(errorTypes);
 
 		}

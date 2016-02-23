@@ -25,6 +25,7 @@ var SignUp = function () {
 	var _valCheckMatchEl = document.getElementById('val-check-match');
 	var _valCheckNumberEl = document.getElementById('val-check-number');
 	var _valCheckEmailEl = document.getElementById('val-check-email');
+	var _valCheckRequiredEl = document.getElementById('val-check-required');
 
 	var _validator = new FV.Validator();
 	var _passwordField = new FV.Field("Password1", _signupPasswordEl);
@@ -265,6 +266,7 @@ var SignUp = function () {
 					_signupPassword2El.setCustomValidity(password2Errors);
 				}
 
+				_submitPasswordButton.disabled = errorTypes.length > 0;
 				_checkValFields(errorTypes);
 			}
 		}, {
@@ -467,6 +469,21 @@ var SignUp = function () {
 			get: function get() {
 
 				return _valCheckEmailEl;
+			}
+
+			/**
+    * Val Check Required Element
+    * @return {Object} Val Check Required Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'valCheckRequiredEl',
+			get: function get() {
+
+				return _valCheckRequiredEl;
 			}
 		}]);
 

@@ -33,6 +33,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			this.resetPassword = new ResetPassword(fbRef);
 			this.showEvents = new ShowEvents();
 			this.signUp = new SignUp(fbRef);
+			this.resetPassword = new ResetPassword(fbRef);
+
+			// Check the sign in button
+			SignInOut.validateSignIn();
+
+			//Check the reset password button
+			ResetPassword.validateResetPassword();
 
 			// Fired after the user signs up
 			document.addEventListener("signed-up", function () {

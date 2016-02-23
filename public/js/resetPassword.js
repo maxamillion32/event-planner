@@ -3,7 +3,8 @@
 var ResetPassword = (function(document) {
 	'use strict';
 
-	let _resetPasswordEmail = document.getElementById('reset-password-email');
+	let _resetPasswordEmailEl = document.getElementById('reset-password-email');
+	let _resetPasswordButtonEl = document.getElementById('reset-password-button');
 
 	/**
 	 * Represents a ResetPassword Page
@@ -30,9 +31,21 @@ var ResetPassword = (function(document) {
 		 * @type {Object}
 		 * 
 		 */
-		static get resetPasswordEmail() {
+		static get resetPasswordEmailEl() {
 
-			return _resetPasswordEmail;
+			return _resetPasswordEmailEl;
+		}
+
+		/**
+		 * Validate Reset Password
+		 * @memberof ResetPassword
+		 * @function validateResetPassword
+		 * 
+		 */
+		static validateResetPassword() {
+
+			_resetPasswordButtonEl.disabled = _resetPasswordEmailEl.value === '';
+
 		}
 
 		/**
@@ -45,7 +58,7 @@ var ResetPassword = (function(document) {
 		resetPassword() {
 
 			this.fbRef.resetPassword({
-			  email: _resetPasswordEmail.value
+			  email: _resetPasswordEmailEl.value
 			}, function(error) {
 			  if (error) {
 			    switch (error.code) {

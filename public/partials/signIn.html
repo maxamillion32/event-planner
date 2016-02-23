@@ -21,7 +21,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" required>
+					<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" oninput="SignInOut.validateSignIn()" required>
 
 				</div>
 
@@ -37,7 +37,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" required>
+					<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" oninput="SignInOut.validateSignIn()" required>
 
 				</div>
 
@@ -45,7 +45,7 @@
 
 			<p>
 
-				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sign In" title="Sign In">
+				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Sign In" id="sign-in-button" title="Sign In">
 
 			</p>
 

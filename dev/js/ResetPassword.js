@@ -9,7 +9,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var ResetPassword = function (document) {
 	'use strict';
 
-	var _resetPasswordEmail = document.getElementById('reset-password-email');
+	var _resetPasswordEmailEl = document.getElementById('reset-password-email');
+	var _resetPasswordButtonEl = document.getElementById('reset-password-button');
 
 	/**
   * Represents a ResetPassword Page
@@ -53,7 +54,7 @@ var ResetPassword = function (document) {
 			value: function resetPassword() {
 
 				this.fbRef.resetPassword({
-					email: _resetPasswordEmail.value
+					email: _resetPasswordEmailEl.value
 				}, function (error) {
 					if (error) {
 						switch (error.code) {
@@ -69,10 +70,24 @@ var ResetPassword = function (document) {
 				});
 			}
 		}], [{
-			key: 'resetPasswordEmail',
+			key: 'validateResetPassword',
+
+
+			/**
+    * Validate Reset Password
+    * @memberof ResetPassword
+    * @function validateResetPassword
+    * 
+    */
+			value: function validateResetPassword() {
+
+				_resetPasswordButtonEl.disabled = _resetPasswordEmailEl.value === '';
+			}
+		}, {
+			key: 'resetPasswordEmailEl',
 			get: function get() {
 
-				return _resetPasswordEmail;
+				return _resetPasswordEmailEl;
 			}
 		}]);
 
