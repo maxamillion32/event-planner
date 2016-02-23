@@ -20,6 +20,11 @@ var ResetPassword = (function(document) {
 	     */
 		constructor(fbRef) {
 
+			/**
+	         * Firebase reference
+	         * @member ResetPassword#fbRef
+	         * @type {object}
+	         */
 			this.fbRef = fbRef;
 
 		}

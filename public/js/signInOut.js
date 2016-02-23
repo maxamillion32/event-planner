@@ -224,8 +224,25 @@ var SignInOut = (function(document) {
 
 			} else {
 
+				/**
+		         * Firebase user route reference
+		         * @member SignInOut#userRef
+		         * @type {object}
+		         */
 				this.userRef = 	this.fbRef.child('users/' + authData.uid);
+
+				/**
+		         * Firebase events route reference
+		         * @member SignInOut#eventRef
+		         * @type {object}
+		         */
 				this.eventRef = this.userRef.child('events/');
+
+				/**
+		         * Firebase extras route reference
+		         * @member SignInOut#extraRef
+		         * @type {object}
+		         */
 				this.extraRef = this.userRef.child('extra/');
 
 				//If just signing up store the extra user data

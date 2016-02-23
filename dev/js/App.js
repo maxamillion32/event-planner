@@ -28,11 +28,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			// Register the callback to be fired every time auth state changes
 			var fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
 
+			/**
+          * SignInOut Object
+          * @member App#signInOut
+          * @type {object}
+          */
 			this.signInOut = new SignInOut(fbRef);
+
+			/**
+          * EventPlanner Object
+          * @member App#eventPlanner
+          * @type {object}
+          */
 			this.eventPlanner = new EventPlanner();
+
+			/**
+          * ResetPassword Object
+          * @member App#resetPassword
+          * @type {object}
+          */
 			this.resetPassword = new ResetPassword(fbRef);
+
+			/**
+          * ShowEvents Object
+          * @member App#showEvents
+          * @type {object}
+          */
 			this.showEvents = new ShowEvents();
+
+			/**
+          * SignUp Object
+          * @member App#signUp 
+          * @type {object}
+          */
 			this.signUp = new SignUp(fbRef);
+
+			/**
+          * ResetPassword Object
+          * @member App#resetPassword
+          * @type {object}
+          */
 			this.resetPassword = new ResetPassword(fbRef);
 
 			// Check the sign in button
