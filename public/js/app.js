@@ -80,6 +80,8 @@
 			  this.eventPlanner.eventRef = 	this.signInOut.eventRef;
 			  this.showEvents.eventRef = 	this.signInOut.eventRef;
 
+			  this.showEvents.listenForEvents();
+
 			}.bind(this));
 
 			/**

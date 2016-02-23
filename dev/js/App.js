@@ -87,6 +87,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				this.eventPlanner.eventRef = this.signInOut.eventRef;
 				this.showEvents.eventRef = this.signInOut.eventRef;
+
+				this.showEvents.listenForEvents();
 			}.bind(this));
 
 			/**

@@ -236,14 +236,14 @@ var SignInOut = (function(document) {
 		         * @member SignInOut#eventRef
 		         * @type {object}
 		         */
-				this.eventRef = this.userRef.child('events/');
+				this.eventRef = this.userRef.child('/events');
 
 				/**
 		         * Firebase extras route reference
 		         * @member SignInOut#extraRef
 		         * @type {object}
 		         */
-				this.extraRef = this.userRef.child('extra/');
+				this.extraRef = this.userRef.child('/extra');
 
 				//If just signing up store the extra user data
 				if(_storeExtra === true) {
@@ -318,11 +318,11 @@ var SignInOut = (function(document) {
 			SignUp.signupPasswordEl.value = 	'';
 			SignUp.signupPassword2El.value = 	'';
 			EventPlanner.clearElements();
-			_clearEl(_eventContainerEl);
+			_clearEl(Displayer.eventContainerEl);
 
 			document.dispatchEvent(new CustomEvent("signed-out"));
 
-			Display.showSignIn();
+			Displayer.showSignIn();
 
 		}
 

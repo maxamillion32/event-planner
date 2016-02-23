@@ -55,8 +55,8 @@ var EventPlanner = (function(document) {
 
 		_addressList.forEach(function(addressEl) {
 
-			_addressEl.value = 		'';
-			_addressEl.disabled = 	pred;
+			addressEl.value = 		'';
+			addressEl.disabled = 	pred;
 
 		});
 

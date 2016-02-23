@@ -115,7 +115,7 @@ var ShowEvents = (function(document) {
 
 			if(this.eventRef) {
 
-				thisllistenForEvents();
+				this.listenForEvents();
 
 			}
 
@@ -139,7 +139,7 @@ var ShowEvents = (function(document) {
 
 			  _redrawEvents(this.events);
 			  
-			}, function(err) {
+			}.bind(this), function(err) {
 
 				console.log('Error: ', err);
 
