@@ -439,7 +439,7 @@ var EventPlanner = (function(document) {
 
 			}
 			
-			_progressBarLabelEl.innerHTML = 	completed.toString() + ' of 13 fields completed';
+			_progressBarLabelEl.innerHTML = 	completed.toString() + ' of 12 fields completed';
 			_progressBarEl.value = 				completed;
 
 		}

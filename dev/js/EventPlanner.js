@@ -397,7 +397,7 @@ var EventPlanner = function (document) {
 					completed += 1;
 				}
 
-				_progressBarLabelEl.innerHTML = completed.toString() + ' of 13 fields completed';
+				_progressBarLabelEl.innerHTML = completed.toString() + ' of 12 fields completed';
 				_progressBarEl.value = completed;
 			}
 		}, {
