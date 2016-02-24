@@ -17,6 +17,7 @@ var Displayer = function (document) {
 	var _eventContainerEl = document.getElementById('event-container');
 	var _showEventContainerEl = document.getElementById('show-event-container');
 	var _userInfoContainerEl = document.getElementById('user-info-container');
+	var _snackbarMessageEl = document.getElementById('snackbar-message');
 
 	/**
   * Shows and hides blocks, like a super simple router
@@ -44,14 +45,32 @@ var Displayer = function (document) {
 
 
 		_createClass(Displayer, null, [{
-			key: 'showSignUp',
+			key: 'showSnackbar',
 
+
+			/**
+    * Show Snack Bar
+    * @memberOf Displayer
+    * 
+    */
+			value: function showSnackbar(message) {
+
+				Displayer.snackbarMessageEl.MaterialSnackbar.showSnackbar({
+
+					message: message,
+					timeout: 3000
+
+				});
+			}
 
 			/**
     * Show the sign up form
     * @memberof Displayer
     * 
     */
+
+		}, {
+			key: 'showSignUp',
 			value: function showSignUp() {
 
 				_signInContainerEl.hidden = true;
@@ -250,6 +269,21 @@ var Displayer = function (document) {
 			get: function get() {
 
 				return _userInfoContainerEl;
+			}
+
+			/**
+    * Snackbar Element
+    * @return {Object} Snackbar Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'snackbarMessageEl',
+			get: function get() {
+
+				return _snackbarMessageEl;
 			}
 		}]);
 

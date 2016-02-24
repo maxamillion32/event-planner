@@ -11,6 +11,7 @@ var Displayer = (function(document) {
 	let _eventContainerEl =			document.getElementById('event-container');
 	let _showEventContainerEl =		document.getElementById('show-event-container');
 	let _userInfoContainerEl =		document.getElementById('user-info-container');
+	let _snackbarMessageEl =		document.getElementById('snackbar-message');
 
 	/**
 	 * Shows and hides blocks, like a super simple router
@@ -109,6 +110,35 @@ var Displayer = (function(document) {
 		static get userInfoContainerEl() {
 
 			return _userInfoContainerEl;
+		}
+
+		/**
+		 * Snackbar Element
+		 * @return {Object} Snackbar Element
+		 * @memberof Displayer
+		 * @type {Object}
+		 * 
+		 */
+		static get snackbarMessageEl() {
+
+			return _snackbarMessageEl;
+
+		}
+
+		/**
+		 * Show Snack Bar
+		 * @memberOf Displayer
+		 * 
+		 */
+		static showSnackbar(message) {
+
+			Displayer.snackbarMessageEl.MaterialSnackbar.showSnackbar({
+
+				message: message,
+				timeout: 3000,
+
+			});
+
 		}
 
 		/**

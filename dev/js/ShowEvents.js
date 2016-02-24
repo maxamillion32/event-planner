@@ -137,15 +137,22 @@ var ShowEvents = function (document) {
      * Get the data
      * @param  {Object} snapshot value of the event
      */
-				this.eventRef.on("value", function (snapshot) {
+				try {
 
-					this.events = snapshot.val();
+					this.eventRef.on("value", function (snapshot) {
 
-					_redrawEvents(this.events);
-				}.bind(this), function (err) {
+						this.events = snapshot.val();
 
-					console.log('Error: ', err);
-				});
+						_redrawEvents(this.events);
+					}.bind(this), function (err) {
+
+						console.log('Error: ', err);
+					});
+				} catch (e) {
+
+					//Sometimes we end up here signing out
+
+				}
 			}
 		}]);
 

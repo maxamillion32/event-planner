@@ -217,10 +217,11 @@ var SignInOut = (function(document) {
 			if(error) {
 
 				//Handle the error
+				Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
 
 			} else if (!authData) {
 
-				console.log("User is logged out");
+				Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
 
 			} else {
 
@@ -268,6 +269,8 @@ var SignInOut = (function(document) {
 				document.dispatchEvent(new CustomEvent("signed-in"));
 
 				Displayer.showEventPlanner();
+
+				Displayer.showSnackbar('You are one AWESOME Signer Inner!... Go You! :-D');
 
 			}
 
@@ -321,6 +324,8 @@ var SignInOut = (function(document) {
 			_clearEl(Displayer.eventContainerEl);
 
 			document.dispatchEvent(new CustomEvent("signed-out"));
+
+			Displayer.showSnackbar('Success!  You just Signed Out like a champ... This RAWKS! :-D');
 
 			Displayer.showSignIn();
 

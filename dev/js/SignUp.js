@@ -179,8 +179,12 @@ var SignUp = function () {
 
 					if (error) {
 
+						Displayer.showSnackbar('Sorry!  There was an error signing you up.  :-(');
+
 						console.log("Error creating user:", error);
 					} else {
+
+						Displayer.showSnackbar('Successfully Signed Up!  :-D');
 
 						SignInOut.storeExtra = true;
 

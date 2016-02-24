@@ -104,56 +104,58 @@ var SignInOut = function (document) {
 				if (error) {
 
 					//Handle the error
-
+					Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
 				} else if (!authData) {
 
-						console.log("User is logged out");
-					} else {
+					Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
+				} else {
 
-						/**
-             * Firebase user route reference
-             * @member SignInOut#userRef
-             * @type {object}
-             */
-						this.userRef = this.fbRef.child('users/' + authData.uid);
+					/**
+            * Firebase user route reference
+            * @member SignInOut#userRef
+            * @type {object}
+            */
+					this.userRef = this.fbRef.child('users/' + authData.uid);
 
-						/**
-             * Firebase events route reference
-             * @member SignInOut#eventRef
-             * @type {object}
-             */
-						this.eventRef = this.userRef.child('/events');
+					/**
+            * Firebase events route reference
+            * @member SignInOut#eventRef
+            * @type {object}
+            */
+					this.eventRef = this.userRef.child('/events');
 
-						/**
-             * Firebase extras route reference
-             * @member SignInOut#extraRef
-             * @type {object}
-             */
-						this.extraRef = this.userRef.child('/extra');
+					/**
+            * Firebase extras route reference
+            * @member SignInOut#extraRef
+            * @type {object}
+            */
+					this.extraRef = this.userRef.child('/extra');
 
-						//If just signing up store the extra user data
-						if (_storeExtra === true) {
+					//If just signing up store the extra user data
+					if (_storeExtra === true) {
 
-							_storeExtra = false;
+						_storeExtra = false;
 
-							this.extraRef.set({
+						this.extraRef.set({
 
-								name: _signupNameEl.value,
-								employer: _signupEmployerEl.value,
-								title: _signupTitleEl.value,
-								birthday: _signupBirthdayEl.value
+							name: _signupNameEl.value,
+							employer: _signupEmployerEl.value,
+							title: _signupTitleEl.value,
+							birthday: _signupBirthdayEl.value
 
-							});
-						}
-
-						_signOutLinkEl.hidden = false;
-						_signInLinkEl.hidden = true;
-
-						// Dispatch/Trigger/Fire the event
-						document.dispatchEvent(new CustomEvent("signed-in"));
-
-						Displayer.showEventPlanner();
+						});
 					}
+
+					_signOutLinkEl.hidden = false;
+					_signInLinkEl.hidden = true;
+
+					// Dispatch/Trigger/Fire the event
+					document.dispatchEvent(new CustomEvent("signed-in"));
+
+					Displayer.showEventPlanner();
+
+					Displayer.showSnackbar('You are one AWESOME Signer Inner!... Go You! :-D');
+				}
 			}
 
 			/**
@@ -209,6 +211,8 @@ var SignInOut = function (document) {
 				_clearEl(Displayer.eventContainerEl);
 
 				document.dispatchEvent(new CustomEvent("signed-out"));
+
+				Displayer.showSnackbar('Success!  You just Signed Out like a champ... This RAWKS! :-D');
 
 				Displayer.showSignIn();
 			}

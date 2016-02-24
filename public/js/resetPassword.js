@@ -68,14 +68,17 @@ var ResetPassword = (function(document) {
 			  if (error) {
 			    switch (error.code) {
 			      case "INVALID_USER":
-			        console.log("The specified user account does not exist.");
+			      	Displayer.showSnackbar('Hmmmm never seen that email before');
 			        break;
 			      default:
-			        console.log("Error resetting password:", error);
+			        Displayer.showSnackbar('Mayday Mayday!  Uh... this didn\'t work :-(');
 			    }
 			  } else {
-			    console.log("Password reset email sent successfully!");
+
+			  	Displayer.showSnackbar('Yo DAWG, I heard you like passwords!  Also check your email :-D');
+
 			  }
+
 			});
 
 		}
