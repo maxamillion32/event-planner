@@ -114,6 +114,8 @@ var EventPlanner = (function(document) {
 
 	  }
 
+	  EventPlanner.checkEventFields();
+
 	}
 
 	/**
@@ -530,7 +532,7 @@ var EventPlanner = (function(document) {
 				'host': 	_eventHostEl.value,
 				'begin': 	_startDateEl.value,
 				'end': 		_endDateEl.value,
-				'guests': 	_VTILAPP.vtil.tags,
+				'guests': 	VTILAPP.vtil.tags,
 				'address': 	_streetNumberEl.value,
 				'city': 	_cityEl.value,
 				'state': 	_stateEl.value,

@@ -135,7 +135,7 @@ var Displayer = (function(document) {
 			Displayer.snackbarMessageEl.MaterialSnackbar.showSnackbar({
 
 				message: message,
-				timeout: 3000,
+				timeout: 4000,
 
 			});
 
