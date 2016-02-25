@@ -1,3 +1,88 @@
 <div id="user-info-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
 
+	<div class="mdl-card__title">
+
+		<h2 class="mdl-card__title-text">User Info</h2>
+
+	</div>
+	
+	<!-- Card Content -->
+	<div class="mdl-card__supporting-text">
+
+		<form action="javascript:app.userInfo.saveInfo()" class="authForm" autocomplete="on">
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="user-info-name" title="Name">
+						
+						<span>Name</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" required>
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="user-info-employer" title="Employer">
+						
+						<span>Employer</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="user-info-employer" type="text" title="Employer" name="organization">
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="user-info-title" title="Title">
+						
+						<span>Job Title</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="user-info-title" type="text" title="Title" name="organization-title">
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+					<label class="mdl-textfield__label" for="user-info-birthday" title="Birthday">
+						
+						<span>When's your birthday?</span>
+
+					</label>
+
+					<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+				</div>
+
+			</p>
+
+			<p>
+
+				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-user-info-button" type="submit" value="Update Info" title="Update Info">
+
+			</p>
+
+		</form>
+
+	</div>
+
 </div>

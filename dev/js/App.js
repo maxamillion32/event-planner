@@ -64,6 +64,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			this.signUp = new SignUp(fbRef);
 
 			/**
+          * UserInfo Object
+          * @member App#signUp 
+          * @type {object}
+          */
+			this.userInfo = new UserInfo();
+
+			/**
           * ResetPassword Object
           * @member App#resetPassword
           * @type {object}
@@ -87,6 +94,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 				this.eventPlanner.eventRef = this.signInOut.eventRef;
 				this.showEvents.eventRef = this.signInOut.eventRef;
+				this.userInfo.extraRef = this.signInOut.extraRef;
 
 				this.showEvents.listenForEvents();
 			}.bind(this));
