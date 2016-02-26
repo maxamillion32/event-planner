@@ -129,7 +129,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			}
 
 			/**
-    * Show the event creation div
+    *  Show the event creation div
     *  @function deisplayEventCreation
     * 	@memberof App
     *  @instance
@@ -143,6 +143,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				if (this.eventPlanner.eventRef) {
 
 					Displayer.showEventPlanner();
+				}
+			}
+
+			/**
+    *  Show the user info div
+    *  @function displayUserInfo
+    * 	@memberof App
+    *  @instance
+    *
+    */
+
+		}, {
+			key: "displayUserInfo",
+			value: function displayUserInfo() {
+
+				if (this.eventPlanner.eventRef) {
+
+					Displayer.showUserInfo();
 				}
 			}
 

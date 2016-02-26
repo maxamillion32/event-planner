@@ -66,3 +66,7 @@ body {
         color: #D50000; }
       body .card-width.mdl-card .val-check-good {
         color: #1B5E20; } }
+  body .card-trash {
+    color: #FFFFFF;
+    position: absolute;
+    right: 1em; }
