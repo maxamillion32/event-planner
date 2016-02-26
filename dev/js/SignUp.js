@@ -15,6 +15,9 @@ var SignUp = function () {
 	var _signupEmailEl = document.getElementById('signup-email');
 	var _signupPasswordEl = document.getElementById('signup-password');
 	var _signupPassword2El = document.getElementById('signup-password2');
+	var _signupEmployerEl = document.getElementById('signup-employer');
+	var _signupTitleEl = document.getElementById('signup-title');
+	var _signupBirthdayEl = document.getElementById('signup-birthday');
 	var _submitPasswordButton = document.getElementById('submit-password-button');
 	var _signupAdditionalInfoEl = document.getElementById('signup-additional-info');
 	var _signupSwitchEl = document.getElementById('switch-1');
@@ -206,12 +209,36 @@ var SignUp = function () {
 
 			/**
     * Show/hide additional info
+    * @function showAdditionalInfo
     * @memberOf SignUp
     * @instance
     */
 			value: function showAdditionalInfo() {
 
 				_signupAdditionalInfoEl.hidden = !_signupSwitchEl.checked;
+			}
+
+			/**
+    * Show/hide additional info
+    * @function dispose
+    * @memberOf SignUp
+    * @instance
+    */
+
+		}, {
+			key: 'dispose',
+			value: function dispose() {
+
+				this.fbRef = undefined;
+				_signupNameEl.value = '';
+				_signupEmailEl.value = '';
+				_signupPasswordEl.value = '';
+				_signupPassword2El.value = '';
+				_signupEmployerEl.value = '';
+				_signupTitleEl.value = '';
+				_signupBirthdayEl.value = '';
+				_signupAdditionalInfoEl.hidden = true;
+				SignUp.validateSignUp(false);
 			}
 		}], [{
 			key: 'validateSignUp',
@@ -488,6 +515,51 @@ var SignUp = function () {
 			get: function get() {
 
 				return _valCheckRequiredEl;
+			}
+
+			/**
+    * Sign Up Employer Element
+    * @return {Object} Sign Up Employer Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupEmployerEl',
+			get: function get() {
+
+				return _signupEmployerEl;
+			}
+
+			/**
+    * Sign Up Title Element
+    * @return {Object} Sign Up Title Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupTitleEl',
+			get: function get() {
+
+				return _signupTitleEl;
+			}
+
+			/**
+    * Sign Up Birthday Element
+    * @return {Object} Sign Up Birthday Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signupBirthdayEl',
+			get: function get() {
+
+				return _signupBirthdayEl;
 			}
 		}]);
 

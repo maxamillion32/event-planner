@@ -358,25 +358,6 @@ var EventPlanner = (function(document) {
 
 		}
 
-		/** 
-		*   @function clearElements
-		*   @memberof EventPlanner
-		*   
-		*/
-		static clearElements() {
-
-			_eventNameEl.value =		'';
-			_eventTypeEl.value =		'';
-			_eventHostEl.value =		'';
-			_startDateEl.value =		'';
-			_endDateEl.value =			'';
-			_locationInputEl.value =	'';
-
-			_clearAddress(true);
-			_clearGuests();
-
-		}
-
 		/**
 		 *  Checks if fields are completed
 		 *  @function checkEventFields
@@ -459,6 +440,22 @@ var EventPlanner = (function(document) {
 			//Disable the submit button until all the fields are filled out
 			_submitEventButton.disabled = completed !== _totalInputs;
 
+		}
+
+		/**
+		 * Initializes the autocomplete object using the location
+		 * 
+		 */
+		static initAutocomplete() {
+		  // Create the autocomplete object, restricting the search to geographical
+		  // location types.
+		  _autocomplete = new google.maps.places.Autocomplete(
+		      /** @type {!HTMLInputElement} */(_locationInputEl),
+		      {types: ['geocode']});
+
+		  // When the user selects an address from the dropdown, populate the address
+		  // fields in the form.
+		  _autocomplete.addListener('place_changed', _fillInAddress);
 		}
 
 		/**
@@ -578,19 +575,27 @@ var EventPlanner = (function(document) {
 		}
 
 		/**
-		 * Initializes the autocomplete object using the location
-		 * 
+		 *  Restore EventPlanner back to defaults
+		 *  @function dispose
+		 * 	@memberof EventPlanner
+		 *  @instance
+		 *
 		 */
-		static initAutocomplete() {
-		  // Create the autocomplete object, restricting the search to geographical
-		  // location types.
-		  _autocomplete = new google.maps.places.Autocomplete(
-		      /** @type {!HTMLInputElement} */(_locationInputEl),
-		      {types: ['geocode']});
+		dispose() {
 
-		  // When the user selects an address from the dropdown, populate the address
-		  // fields in the form.
-		  _autocomplete.addListener('place_changed', _fillInAddress);
+			_eventNameEl.value = 				''; 			
+			_eventTypeEl.value = 				'';	
+			_eventHostEl.value = 				'';
+			_startDateEl.value = 				'';
+			_endDateEl.value = 					''; 				
+			_locationInputEl.value = 			'';	
+			_messageEl.value = 					'';
+			_progressBarEl.value =				0;
+			_progressBarLabelEl.innerHTML = 	'0 of ' + _totalInputs.toString() + ' fields completed';
+			_clearAddress(true);
+			_clearGuests();
+			this.eventRef = undefined;
+
 		}
 
 	};

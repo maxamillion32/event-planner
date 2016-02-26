@@ -177,7 +177,13 @@
 	document.addEventListener("signed-out", function() {
 
 		app.removeEvents();
-		app = new App();
+		app.showEvents.dispose();
+		app.userInfo.dispose();
+		app.eventPlanner.dispose();
+		app.resetPassword.dispose();
+		app.signUp.dispose();
+
+		window.app = new App();
 
 	}.bind(this));
 

@@ -8,9 +8,6 @@ var SignInOut = (function(document) {
 	let _signInPasswordEl = 	document.getElementById('signin-password');
 	let _signOutLinkEl =		document.getElementById('sign-out-link');
 	let _signInLinkEl =			document.getElementById('sign-in-link');
-	let _signupEmployerEl =		document.getElementById('signup-employer');
-	let _signupTitleEl =		document.getElementById('signup-title');
-	let _signupBirthdayEl =		document.getElementById('signup-birthday');
 	let _signInButton =			document.getElementById('sign-in-button');
 
 	let _storeExtra = false;
@@ -122,42 +119,6 @@ var SignInOut = (function(document) {
 		}
 
 		/**
-		 * SignIn Employer Element
-		 * @return {Object} SignUp Employer Element
-		 * @memberof SignInOut
-		 * @type {Object}
-		 * 
-		 */
-		static get signupEmployerEl() {
-
-			return _signupEmployerEl;
-		}
-
-		/**
-		 * SignIn Title Element
-		 * @return {Object} Signup Title Element
-		 * @memberof SignInOut
-		 * @type {Object}
-		 * 
-		 */
-		static get signupTitleEl() {
-
-			return _signupTitleEl;
-		}
-
-		/**
-		 * SignIn Birthday Element
-		 * @return {Object} Signup Birthday Element
-		 * @memberof SignInOut
-		 * @type {Object}
-		 * 
-		 */
-		static get signupBirthdayEl() {
-
-			return _signupBirthdayEl;
-		}
-
-		/**
 		 * SignIn Button Element
 		 * @return {Object} SignIn Button Element
 		 * @memberof SignInOut
@@ -253,10 +214,10 @@ var SignInOut = (function(document) {
 
 					this.extraRef.set({
 
-						name: 		_signupNameEl.value,
-						employer: 	_signupEmployerEl.value,
-						title: 		_signupTitleEl.value,
-						birthday: 	_signupBirthdayEl.value
+						name: 		SignUp.signupNameEl.value,
+						employer: 	SignUp.signupEmployerEl.value,
+						title: 		SignUp.signupTitleEl.value,
+						birthday: 	SignUp.signupBirthdayEl.value
 
 					});
 
@@ -304,30 +265,40 @@ var SignInOut = (function(document) {
 		 * 
 		 */
 		signOut() {
-
-			_signOutLinkEl.hidden = 		true;
-			_signInLinkEl.hidden = 			false;
+			
 			this.fbRef.unauth();
-			this.eventRef.off();
-			this.extraRef.off();
-			this.userRef = 					undefined;
-			this.eventRef = 				undefined;
-			this.extraRef = 				undefined;
-			_signInEmailEl.value = 			'';
-			_signInPasswordEl.value = 		'';
-
-			SignUp.signupNameEl.value = 		'';
-			SignUp.signupEmailEl.value = 		'';
-			SignUp.signupPasswordEl.value = 	'';
-			SignUp.signupPassword2El.value = 	'';
-			EventPlanner.clearElements();
-			_clearEl(Displayer.eventContainerEl);
+			
+			this.dispose();
 
 			document.dispatchEvent(new CustomEvent("signed-out"));
 
 			Displayer.showSnackbar('Success!  You just Signed Out like a champ... This RAWKS! :-D');
 
 			Displayer.showSignIn();
+
+		}
+
+		/**
+		 * Resets elements to default
+		 * @function dispose
+		 * @memberof SignInOut
+		 * @instance
+		 * 
+		 */
+		dispose() {
+
+			this.fbRef =					undefined;
+			this.userRef = 					undefined;
+			this.eventRef = 				undefined;
+			this.extraRef = 				undefined;
+
+			_signOutLinkEl.hidden = 		true;
+			_signInLinkEl.hidden = 			false;
+
+			_signInEmailEl.value = '';
+			_signInPasswordEl.value = '';
+			_signOutLinkEl.value = '';
+			_signInLinkEl.value = '';
 
 		}
 

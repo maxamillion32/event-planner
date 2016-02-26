@@ -85,6 +85,16 @@ var ShowEvents = function (document) {
 	}
 
 	/**
+  * Handle the fb error
+  * @param  {object} err fb error
+  * 
+  */
+	function _handleError(err) {
+
+		console.log('Error: ', err);
+	}
+
+	/**
   * Represents a ShowEvents Page
   * @class ShowEvents
   * 
@@ -122,14 +132,33 @@ var ShowEvents = function (document) {
 		}
 
 		/**
-   * @function listenForEvents
-   * @memberof ShowEvents#eventRef
+   * Add events to the screen
+   * @function _addEvents
+   * @param {object} snapshot fb event data
+   * @private
    * @instance
    * 
    */
 
 
 		_createClass(ShowEvents, [{
+			key: '_addEvents',
+			value: function _addEvents(snapshot) {
+
+				this.events = snapshot.val();
+
+				_redrawEvents(this.events);
+			}
+
+			/**
+    * Listen for new event data
+    * @function listenForEvents
+    * @memberof ShowEvents#eventRef
+    * @instance
+    * 
+    */
+
+		}, {
 			key: 'listenForEvents',
 			value: function listenForEvents() {
 
@@ -139,20 +168,30 @@ var ShowEvents = function (document) {
      */
 				try {
 
-					this.eventRef.on("value", function (snapshot) {
-
-						this.events = snapshot.val();
-
-						_redrawEvents(this.events);
-					}.bind(this), function (err) {
-
-						console.log('Error: ', err);
-					});
+					this.eventRef.on("value", this._addEvents.bind(this), _handleError);
 				} catch (e) {
 
 					//Sometimes we end up here signing out
 
 				}
+			}
+
+			/**
+    * Turn off the event fb listener
+    * @function dispose
+    * @memberof ShowEvents#dispose
+    * @instance
+    * 
+    */
+
+		}, {
+			key: 'dispose',
+			value: function dispose() {
+
+				this.eventRef.off("value", this._addEvents.bind(this), _handleError);
+				this.events = [];
+				_redrawEvents(this.events);
+				this.eventRef = undefined;
 			}
 		}]);
 

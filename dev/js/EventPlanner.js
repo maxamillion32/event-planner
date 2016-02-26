@@ -305,20 +305,16 @@ var EventPlanner = function (document) {
 			}
 
 			/**
-    * Initializes the autocomplete object using the location
-    * 
+    *  Restore EventPlanner back to defaults
+    *  @function dispose
+    * 	@memberof EventPlanner
+    *  @instance
+    *
     */
 
-		}], [{
-			key: 'clearElements',
-
-
-			/** 
-   *   @function clearElements
-   *   @memberof EventPlanner
-   *   
-   */
-			value: function clearElements() {
+		}, {
+			key: 'dispose',
+			value: function dispose() {
 
 				_eventNameEl.value = '';
 				_eventTypeEl.value = '';
@@ -326,10 +322,16 @@ var EventPlanner = function (document) {
 				_startDateEl.value = '';
 				_endDateEl.value = '';
 				_locationInputEl.value = '';
-
+				_messageEl.value = '';
+				_progressBarEl.value = 0;
+				_progressBarLabelEl.innerHTML = '0 of ' + _totalInputs.toString() + ' fields completed';
 				_clearAddress(true);
 				_clearGuests();
+				this.eventRef = undefined;
 			}
+		}], [{
+			key: 'checkEventFields',
+
 
 			/**
     *  Checks if fields are completed
@@ -337,9 +339,6 @@ var EventPlanner = function (document) {
     * 	@memberof EventPlanner
     * 
     */
-
-		}, {
-			key: 'checkEventFields',
 			value: function checkEventFields() {
 
 				var completed = 0;
@@ -405,6 +404,12 @@ var EventPlanner = function (document) {
 				//Disable the submit button until all the fields are filled out
 				_submitEventButton.disabled = completed !== _totalInputs;
 			}
+
+			/**
+    * Initializes the autocomplete object using the location
+    * 
+    */
+
 		}, {
 			key: 'initAutocomplete',
 			value: function initAutocomplete() {

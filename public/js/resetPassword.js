@@ -83,6 +83,20 @@ var ResetPassword = (function(document) {
 
 		}
 
+		/**
+		 * Reset to default
+		 * @function dispose
+		 * @memberof ResetPassword
+		 * @instance
+		 * 
+		 */
+		dispose() {
+
+			_resetPasswordEmailEl.value = '';
+			this.fbRef = undefined;
+
+		}
+
 	};
 
 })(document);

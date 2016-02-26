@@ -8,6 +8,9 @@ var SignUp = (function() {
 	let _signupEmailEl = 			document.getElementById('signup-email');
 	let _signupPasswordEl = 		document.getElementById('signup-password');
 	let _signupPassword2El = 		document.getElementById('signup-password2');
+	let _signupEmployerEl =			document.getElementById('signup-employer');
+	let _signupTitleEl =			document.getElementById('signup-title');
+	let _signupBirthdayEl =			document.getElementById('signup-birthday');
 	let _submitPasswordButton =		document.getElementById('submit-password-button');
 	let _signupAdditionalInfoEl =	document.getElementById('signup-additional-info');
 	let _signupSwitchEl =			document.getElementById('switch-1');
@@ -357,6 +360,45 @@ var SignUp = (function() {
 		}
 
 		/**
+		 * Sign Up Employer Element
+		 * @return {Object} Sign Up Employer Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupEmployerEl() {
+
+			return _signupEmployerEl;
+
+		}
+		
+		/**
+		 * Sign Up Title Element
+		 * @return {Object} Sign Up Title Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupTitleEl() {
+
+			return _signupTitleEl;
+
+		}
+
+		/**
+		 * Sign Up Birthday Element
+		 * @return {Object} Sign Up Birthday Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signupBirthdayEl() {
+
+			return _signupBirthdayEl;
+
+		}
+
+		/**
 		 * @function signUp
 		 * @memberof SignUp
 		 * @instance
@@ -462,12 +504,34 @@ var SignUp = (function() {
 
 		/**
 		 * Show/hide additional info
+		 * @function showAdditionalInfo
 		 * @memberOf SignUp
 		 * @instance
 		 */
 		showAdditionalInfo() {
 
 			_signupAdditionalInfoEl.hidden = !_signupSwitchEl.checked;
+
+		}
+
+		/**
+		 * Show/hide additional info
+		 * @function dispose
+		 * @memberOf SignUp
+		 * @instance
+		 */
+		dispose() {
+
+			this.fbRef =						undefined;
+			_signupNameEl.value = 				'';
+			_signupEmailEl.value = 				'';
+			_signupPasswordEl.value = 			'';
+			_signupPassword2El.value = 			'';
+			_signupEmployerEl.value = 			'';
+			_signupTitleEl.value = 				'';
+			_signupBirthdayEl.value = 			'';
+			_signupAdditionalInfoEl.hidden = 	true;
+			SignUp.validateSignUp(false);
 
 		}
 

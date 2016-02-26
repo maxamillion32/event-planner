@@ -83,6 +83,17 @@ var ShowEvents = (function(document) {
 		});
 
 	}
+	
+	/**
+	 * Handle the fb error
+	 * @param  {object} err fb error
+	 * 
+	 */
+	function _handleError(err) {
+
+		console.log('Error: ', err);
+
+	}
 
 	/**
 	 * Represents a ShowEvents Page
@@ -122,6 +133,23 @@ var ShowEvents = (function(document) {
 		}
 
 		/**
+		 * Add events to the screen
+		 * @function _addEvents
+		 * @param {object} snapshot fb event data
+		 * @private
+		 * @instance
+		 * 
+		 */
+		_addEvents(snapshot) {
+
+			this.events = snapshot.val();
+
+			_redrawEvents(this.events);
+
+		}
+
+		/**
+		 * Listen for new event data
 		 * @function listenForEvents
 		 * @memberof ShowEvents#eventRef
 		 * @instance
@@ -135,23 +163,29 @@ var ShowEvents = (function(document) {
 			 */
 			try {
 
-				this.eventRef.on("value", function(snapshot) {
-
-				  this.events = snapshot.val();
-
-				  _redrawEvents(this.events);
-				  
-				}.bind(this), function(err) {
-
-					console.log('Error: ', err);
-
-				});
+				this.eventRef.on("value", this._addEvents.bind(this), _handleError);
 
 			} catch(e) {
 
 				//Sometimes we end up here signing out
 
 			}
+
+		}
+
+		/**
+		 * Turn off the event fb listener
+		 * @function dispose
+		 * @memberof ShowEvents#dispose
+		 * @instance
+		 * 
+		 */
+		dispose() {
+
+			this.eventRef.off("value", this._addEvents.bind(this), _handleError);
+			this.events = [];
+			_redrawEvents(this.events);
+			this.eventRef = undefined;
 
 		}
 

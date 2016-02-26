@@ -75,6 +75,22 @@ var ResetPassword = function (document) {
 					}
 				});
 			}
+
+			/**
+    * Reset to default
+    * @function dispose
+    * @memberof ResetPassword
+    * @instance
+    * 
+    */
+
+		}, {
+			key: 'dispose',
+			value: function dispose() {
+
+				_resetPasswordEmailEl.value = '';
+				this.fbRef = undefined;
+			}
 		}], [{
 			key: 'validateResetPassword',
 

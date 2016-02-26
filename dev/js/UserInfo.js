@@ -18,6 +18,30 @@ var UserInfo = function () {
 	_submitUserInfoButtonEl.disabled = true;
 
 	/**
+  * Add info to the page
+  * @param {object} snapshot The user info
+  */
+	function _addInfo(snapshot) {
+
+		var info = snapshot.val();
+
+		_userInfoNameEl.value = info.name;
+		_userInfoEmployerEl.value = info.employer;
+		_userInfoTitleEl.value = info.title;
+		_userInfoBirthdayEl.value = info.birthday;
+	}
+
+	/**
+  * Handle data error
+  * @param  {object} err fb error
+  * 
+  */
+	function _handleError(err) {
+
+		console.log('Error: ', err);
+	}
+
+	/**
   * Represents an UserInfo Planner Page
   * @class UserInfo
   * 
@@ -95,23 +119,35 @@ var UserInfo = function () {
 
 				try {
 
-					this.extraRef.on("value", function (snapshot) {
-
-						var info = snapshot.val();
-
-						_userInfoNameEl.value = info.name;
-						_userInfoEmployerEl.value = info.employer;
-						_userInfoTitleEl.value = info.title;
-						_userInfoBirthdayEl.value = info.birthday;
-					}.bind(this), function (err) {
-
-						console.log('Error: ', err);
-					});
+					this.extraRef.on("value", _addInfo, _handleError);
 				} catch (e) {
 
 					//Sometimes we end up here signing out
 
 				}
+			}
+
+			/**
+    * Turn off the extra fb listener
+    * @function dispose
+    * @memberof UserInfo
+    * @private
+    * @instance
+    * 
+    */
+
+		}, {
+			key: 'dispose',
+			value: function dispose() {
+
+				this.extraRef.off("value", _addInfo, _handleError);
+
+				this.extraRef = undefined;
+
+				_userInfoNameEl.value = '';
+				_userInfoEmployerEl.value = '';
+				_userInfoTitleEl.value = '';
+				_userInfoBirthdayEl.value = '';
 			}
 		}], [{
 			key: 'checkFields',
