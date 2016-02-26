@@ -15,6 +15,8 @@ var VTILAPP = VTILAPP || Object.create(null);
 var EventPlanner = function (document) {
 	'use strict';
 
+	var _totalInputs = 11;
+
 	var _eventNameEl = document.getElementById('event-name');
 	var _eventTypeEl = document.getElementById('event-type');
 	var _eventHostEl = document.getElementById('event-host');
@@ -31,8 +33,11 @@ var EventPlanner = function (document) {
 	var _messageEl = document.getElementById('message');
 	var _progressBarEl = document.getElementById('progress-bar');
 	var _progressBarLabelEl = document.getElementById('progress-bar-label');
+	var _submitEventButton = document.getElementById('submit-event-button');
 	var _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	var _autocomplete = undefined;
+
+	_submitEventButton.disabled = true;
 
 	VTILAPP.vtil = new VTIL(_contentEl, _inputEl, 'VTILAPP.vtil');
 
@@ -394,13 +399,11 @@ var EventPlanner = function (document) {
 					completed += 1;
 				}
 
-				if (_messageEl.value !== '') {
-
-					completed += 1;
-				}
-
-				_progressBarLabelEl.innerHTML = completed.toString() + ' of 12 fields completed';
+				_progressBarLabelEl.innerHTML = completed.toString() + ' of ' + _totalInputs.toString() + ' fields completed';
 				_progressBarEl.value = completed;
+
+				//Disable the submit button until all the fields are filled out
+				_submitEventButton.disabled = completed !== _totalInputs;
 			}
 		}, {
 			key: 'initAutocomplete',
@@ -644,6 +647,21 @@ var EventPlanner = function (document) {
 			get: function get() {
 
 				return _progressBarLabelEl;
+			}
+
+			/**
+    * Submit Event Button Element
+    * @return {Object} Submit Event Button Element
+    * @memberof EventPlanner
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'submitEventButton',
+			get: function get() {
+
+				return _submitEventButton;
 			}
 		}]);
 

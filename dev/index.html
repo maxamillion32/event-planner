@@ -321,7 +321,7 @@
 					<div class="center">
 
 						<!-- Submit Button -->
-						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit" title="Submit Event">
+						<input id="submit-event-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit" title="Submit Event">
 
 					</div>
 
@@ -726,7 +726,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" required>
+					<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" onchange="UserInfo.checkFields()" required>
 
 				</div>
 

@@ -9,6 +9,8 @@ var UserInfo = (function() {
 	let _userInfoBirthdayEl = document.getElementById('user-info-birthday');
 	let _submitUserInfoButtonEl = document.getElementById('submit-user-info-button');
 
+	_submitUserInfoButtonEl.disabled = true;
+
 	/**
 	 * Represents an UserInfo Planner Page
 	 * @class UserInfo
@@ -94,6 +96,17 @@ var UserInfo = (function() {
 
 			return _submitUserInfoButtonEl;
 			
+		}
+
+		/** 
+		*   @function checkFields
+		*   @memberof UserInfo
+		*   
+		*/
+		static checkFields() {
+
+			_submitUserInfoButtonEl.disabled = _userInfoNameEl.value === '';
+
 		}
 
 		/**

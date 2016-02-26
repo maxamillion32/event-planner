@@ -9,6 +9,8 @@ var VTILAPP = VTILAPP || Object.create(null);
 var EventPlanner = (function(document) {
 	'use strict';
 
+	const _totalInputs = 11;
+
 	let _eventNameEl = 			document.getElementById('event-name');
 	let _eventTypeEl = 			document.getElementById('event-type');
 	let _eventHostEl = 			document.getElementById('event-host');
@@ -25,8 +27,11 @@ var EventPlanner = (function(document) {
 	let _messageEl =			document.getElementById('message');
 	let _progressBarEl =		document.getElementById('progress-bar');
 	let _progressBarLabelEl =	document.getElementById('progress-bar-label');
+	let _submitEventButton = 	document.getElementById('submit-event-button');
 	let _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	let _autocomplete;
+
+	_submitEventButton.disabled = true;
 
 	VTILAPP.vtil = new VTIL(_contentEl, _inputEl, 'VTILAPP.vtil');
 
@@ -340,6 +345,19 @@ var EventPlanner = (function(document) {
 			return _progressBarLabelEl;
 		}
 
+		/**
+		 * Submit Event Button Element
+		 * @return {Object} Submit Event Button Element
+		 * @memberof EventPlanner
+		 * @type {Object}
+		 * 
+		 */
+		static get submitEventButton() {
+
+			return _submitEventButton;
+
+		}
+
 		/** 
 		*   @function clearElements
 		*   @memberof EventPlanner
@@ -434,15 +452,12 @@ var EventPlanner = (function(document) {
 				completed += 1;
 
 			}
-
-			if(_messageEl.value !== '') {
-
-				completed += 1;
-
-			}
 			
-			_progressBarLabelEl.innerHTML = 	completed.toString() + ' of 12 fields completed';
+			_progressBarLabelEl.innerHTML = 	completed.toString() + ' of ' + _totalInputs.toString() + ' fields completed';
 			_progressBarEl.value = 				completed;
+
+			//Disable the submit button until all the fields are filled out
+			_submitEventButton.disabled = completed !== _totalInputs;
 
 		}
 

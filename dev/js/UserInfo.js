@@ -15,6 +15,8 @@ var UserInfo = function () {
 	var _userInfoBirthdayEl = document.getElementById('user-info-birthday');
 	var _submitUserInfoButtonEl = document.getElementById('submit-user-info-button');
 
+	_submitUserInfoButtonEl.disabled = true;
+
 	/**
   * Represents an UserInfo Planner Page
   * @class UserInfo
@@ -112,6 +114,19 @@ var UserInfo = function () {
 				}
 			}
 		}], [{
+			key: 'checkFields',
+
+
+			/** 
+   *   @function checkFields
+   *   @memberof UserInfo
+   *   
+   */
+			value: function checkFields() {
+
+				_submitUserInfoButtonEl.disabled = _userInfoNameEl.value === '';
+			}
+		}, {
 			key: 'userInfoNameEl',
 			get: function get() {
 
