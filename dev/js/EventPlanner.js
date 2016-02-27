@@ -34,6 +34,8 @@ var EventPlanner = function (document) {
 	var _progressBarEl = document.getElementById('progress-bar');
 	var _progressBarLabelEl = document.getElementById('progress-bar-label');
 	var _submitEventButton = document.getElementById('submit-event-button');
+	var _addButton = document.getElementById('add-button');
+	var _eventPlannerSpinnerEl = document.getElementById('event-planner-spinner');
 	var _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	var _autocomplete = undefined;
 
@@ -67,6 +69,25 @@ var EventPlanner = function (document) {
 			addressEl.value = '';
 			addressEl.disabled = pred;
 		});
+	}
+
+	/**
+  * Clear the elements in the form
+  * 
+  */
+	function _clearElements() {
+
+		_eventNameEl.value = '';
+		_eventTypeEl.value = '';
+		_eventHostEl.value = '';
+		_startDateEl.value = '';
+		_endDateEl.value = '';
+		_locationInputEl.value = '';
+		_messageEl.value = '';
+		_progressBarEl.value = 0;
+		_progressBarLabelEl.innerHTML = '0 of ' + _totalInputs.toString() + ' fields completed';
+		_clearAddress(true);
+		_clearGuests();
 	}
 
 	/**
@@ -263,6 +284,9 @@ var EventPlanner = function (document) {
 			key: 'submitForm',
 			value: function submitForm() {
 
+				_eventPlannerSpinnerEl.hidden = false;
+				Displayer.eventPlannerContainerEl.hidden = true;
+
 				var d = new Date();
 
 				this.events.push({
@@ -283,9 +307,21 @@ var EventPlanner = function (document) {
 
 				});
 
-				this.eventRef.set(this.events);
+				this.eventRef.set(this.events, function (err) {
 
-				this.clearElements(); //<- YOU ARE HERE
+					_eventPlannerSpinnerEl.hidden = true;
+					Displayer.eventPlannerContainerEl.hidden = false;
+
+					if (err) {
+
+						Displayer.showSnackbar('There was an error adding the event, how rude!  :-(');
+					} else {
+
+						Displayer.showSnackbar('Event popped and locked!  :-)');
+					}
+				});
+
+				_clearElements();
 			}
 
 			/**
@@ -302,6 +338,7 @@ var EventPlanner = function (document) {
 
 				VTILAPP.vtil.addTag();
 				EventPlanner.checkEventFields();
+				_addButton.disabled = true;
 			}
 
 			/**
@@ -316,17 +353,7 @@ var EventPlanner = function (document) {
 			key: 'dispose',
 			value: function dispose() {
 
-				_eventNameEl.value = '';
-				_eventTypeEl.value = '';
-				_eventHostEl.value = '';
-				_startDateEl.value = '';
-				_endDateEl.value = '';
-				_locationInputEl.value = '';
-				_messageEl.value = '';
-				_progressBarEl.value = 0;
-				_progressBarLabelEl.innerHTML = '0 of ' + _totalInputs.toString() + ' fields completed';
-				_clearAddress(true);
-				_clearGuests();
+				_clearElements();
 				this.eventRef = undefined;
 			}
 		}], [{
@@ -406,7 +433,9 @@ var EventPlanner = function (document) {
 			}
 
 			/**
-    * Initializes the autocomplete object using the location
+    *  Initializes the autocomplete object using the location
+    *  @function initAutocomplete
+    * 	@memberof EventPlanner
     * 
     */
 
@@ -421,6 +450,20 @@ var EventPlanner = function (document) {
 				// When the user selects an address from the dropdown, populate the address
 				// fields in the form.
 				_autocomplete.addListener('place_changed', _fillInAddress);
+			}
+
+			/**
+    *  Checks if add guest button should be disabled
+    *  @function checkGuestField
+    * 	@memberof EventPlanner
+    * 
+    */
+
+		}, {
+			key: 'checkGuestField',
+			value: function checkGuestField() {
+
+				_addButton.disabled = _inputEl.value === '';
 			}
 		}, {
 			key: 'eventNameEl',
@@ -667,6 +710,36 @@ var EventPlanner = function (document) {
 			get: function get() {
 
 				return _submitEventButton;
+			}
+
+			/**
+    * Add a guest
+    * @return { object } Add a guest
+    * @memberof EventPlanner
+    * @type { object }
+    * 
+    */
+
+		}, {
+			key: 'addButton',
+			get: function get() {
+
+				return _addButton;
+			}
+
+			/**
+    * Event Planner Spinner Element
+    * @return { object } Event Planner Spinner Element
+    * @memberof EventPlanner
+    * @type { object }
+    * 
+    */
+
+		}, {
+			key: 'eventPlannerSpinnerEl',
+			get: function get() {
+
+				return _eventPlannerSpinnerEl;
 			}
 		}]);
 

@@ -1,3 +1,11 @@
+<!-- MDL Spinner Component -->
+<div id="user-info-spinner" class="spinner" hidden="true">
+
+	<div class="mdl-spinner mdl-js-spinner is-active"></div>
+
+</div>
+
+<!-- User info form -->
 <div id="user-info-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
 
 	<div class="mdl-card__title">
@@ -16,12 +24,10 @@
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="user-info-name" title="Name">
-						
-						<span>Name</span>
 
 					</label>
 
-					<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" onchange="UserInfo.checkFields()" required>
+					<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" oninput="UserInfo.checkFields()" placeholder="Whooo are you?  Who who" required>
 
 				</div>
 
@@ -32,12 +38,10 @@
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="user-info-employer" title="Employer">
-						
-						<span>Employer</span>
 
 					</label>
 
-					<input class="mdl-textfield__input" id="user-info-employer" type="text" title="Employer" name="organization">
+					<input class="mdl-textfield__input" id="user-info-employer" type="text" title="Employer" name="organization" placeholder="Where do you work?">
 
 				</div>
 
@@ -48,12 +52,10 @@
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="user-info-title" title="Title">
-						
-						<span>Job Title</span>
 
 					</label>
 
-					<input class="mdl-textfield__input" id="user-info-title" type="text" title="Title" name="organization-title">
+					<input class="mdl-textfield__input" id="user-info-title" type="text" title="Title" name="organization-title" placeholder="What's your job title?">
 
 				</div>
 
@@ -64,12 +66,10 @@
 				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="user-info-birthday" title="Birthday">
-						
-						<span>When's your birthday?</span>
 
 					</label>
 
-					<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
+					<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="When's your birthday?">
 
 				</div>
 

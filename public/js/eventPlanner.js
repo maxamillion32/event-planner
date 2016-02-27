@@ -11,23 +11,25 @@ var EventPlanner = (function(document) {
 
 	const _totalInputs = 11;
 
-	let _eventNameEl = 			document.getElementById('event-name');
-	let _eventTypeEl = 			document.getElementById('event-type');
-	let _eventHostEl = 			document.getElementById('event-host');
-	let _startDateEl = 			document.getElementById('start-date');
-	let _endDateEl =			document.getElementById('end-date');
-	let _contentEl = 			document.getElementById('vtil-content');
-	let _inputEl = 				document.getElementById('vtil-input');
-	let _locationInputEl =		document.getElementById('location-input');
-	let _streetNumberEl =		document.getElementById('street-number');
-	let _cityEl =				document.getElementById('city');
-	let _stateEl =				document.getElementById('state');
-	let _postalCodeEl =			document.getElementById('postal-code');
-	let _countryEl =			document.getElementById('country');
-	let _messageEl =			document.getElementById('message');
-	let _progressBarEl =		document.getElementById('progress-bar');
-	let _progressBarLabelEl =	document.getElementById('progress-bar-label');
-	let _submitEventButton = 	document.getElementById('submit-event-button');
+	let _eventNameEl = 				document.getElementById('event-name');
+	let _eventTypeEl = 				document.getElementById('event-type');
+	let _eventHostEl = 				document.getElementById('event-host');
+	let _startDateEl = 				document.getElementById('start-date');
+	let _endDateEl =				document.getElementById('end-date');
+	let _contentEl = 				document.getElementById('vtil-content');
+	let _inputEl = 					document.getElementById('vtil-input');
+	let _locationInputEl =			document.getElementById('location-input');
+	let _streetNumberEl =			document.getElementById('street-number');
+	let _cityEl =					document.getElementById('city');
+	let _stateEl =					document.getElementById('state');
+	let _postalCodeEl =				document.getElementById('postal-code');
+	let _countryEl =				document.getElementById('country');
+	let _messageEl =				document.getElementById('message');
+	let _progressBarEl =			document.getElementById('progress-bar');
+	let _progressBarLabelEl =		document.getElementById('progress-bar-label');
+	let _submitEventButton = 		document.getElementById('submit-event-button');
+	let _addButton =				document.getElementById('add-button');
+	let _eventPlannerSpinnerEl =	document.getElementById('event-planner-spinner');
 	let _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	let _autocomplete;
 
@@ -64,6 +66,26 @@ var EventPlanner = (function(document) {
 			addressEl.disabled = 	pred;
 
 		});
+
+	}
+
+	/**
+	 * Clear the elements in the form
+	 * 
+	 */
+	function _clearElements() {
+
+		_eventNameEl.value = 				''; 			
+		_eventTypeEl.value = 				'';	
+		_eventHostEl.value = 				'';
+		_startDateEl.value = 				'';
+		_endDateEl.value = 					''; 				
+		_locationInputEl.value = 			'';	
+		_messageEl.value = 					'';
+		_progressBarEl.value =				0;
+		_progressBarLabelEl.innerHTML = 	'0 of ' + _totalInputs.toString() + ' fields completed';
+		_clearAddress(true);
+		_clearGuests();
 
 	}
 
@@ -359,6 +381,32 @@ var EventPlanner = (function(document) {
 		}
 
 		/**
+		 * Add a guest
+		 * @return { object } Add a guest
+		 * @memberof EventPlanner
+		 * @type { object }
+		 * 
+		 */
+		static get addButton() {
+
+			return _addButton;
+
+		}
+
+		/**
+		 * Event Planner Spinner Element
+		 * @return { object } Event Planner Spinner Element
+		 * @memberof EventPlanner
+		 * @type { object }
+		 * 
+		 */
+		static get eventPlannerSpinnerEl() {
+
+			return _eventPlannerSpinnerEl;
+
+		}
+
+		/**
 		 *  Checks if fields are completed
 		 *  @function checkEventFields
 		 * 	@memberof EventPlanner
@@ -441,9 +489,11 @@ var EventPlanner = (function(document) {
 			_submitEventButton.disabled = completed !== _totalInputs;
 
 		}
-
+		
 		/**
-		 * Initializes the autocomplete object using the location
+		 *  Initializes the autocomplete object using the location
+		 *  @function initAutocomplete
+		 * 	@memberof EventPlanner
 		 * 
 		 */
 		static initAutocomplete() {
@@ -456,6 +506,18 @@ var EventPlanner = (function(document) {
 		  // When the user selects an address from the dropdown, populate the address
 		  // fields in the form.
 		  _autocomplete.addListener('place_changed', _fillInAddress);
+		}
+
+		/**
+		 *  Checks if add guest button should be disabled
+		 *  @function checkGuestField
+		 * 	@memberof EventPlanner
+		 * 
+		 */
+		static checkGuestField() {
+
+			_addButton.disabled = _inputEl.value === '';
+
 		}
 
 		/**
@@ -534,6 +596,9 @@ var EventPlanner = (function(document) {
 		 */
 		submitForm() {
 
+			_eventPlannerSpinnerEl.hidden = false;
+			Displayer.eventPlannerContainerEl.hidden = true;
+
 			let d = new Date();
 
 			this.events.push({
@@ -554,9 +619,24 @@ var EventPlanner = (function(document) {
 
 			});
 
-			this.eventRef.set(this.events);
+			this.eventRef.set(this.events, function(err) {
 
-			this.clearElements(); //<- YOU ARE HERE
+				_eventPlannerSpinnerEl.hidden = true;
+				Displayer.eventPlannerContainerEl.hidden = false;
+
+				if(err) {
+
+					Displayer.showSnackbar('There was an error adding the event, how rude!  :-(');
+
+				} else {
+
+					Displayer.showSnackbar('Event popped and locked!  :-)');
+
+				}
+
+			});
+
+			_clearElements();
 
 		}
 
@@ -571,6 +651,7 @@ var EventPlanner = (function(document) {
 
 			VTILAPP.vtil.addTag();
 			EventPlanner.checkEventFields();
+			_addButton.disabled = true;
 
 		}
 
@@ -583,17 +664,7 @@ var EventPlanner = (function(document) {
 		 */
 		dispose() {
 
-			_eventNameEl.value = 				''; 			
-			_eventTypeEl.value = 				'';	
-			_eventHostEl.value = 				'';
-			_startDateEl.value = 				'';
-			_endDateEl.value = 					''; 				
-			_locationInputEl.value = 			'';	
-			_messageEl.value = 					'';
-			_progressBarEl.value =				0;
-			_progressBarLabelEl.innerHTML = 	'0 of ' + _totalInputs.toString() + ' fields completed';
-			_clearAddress(true);
-			_clearGuests();
+			_clearElements();
 			this.eventRef = undefined;
 
 		}

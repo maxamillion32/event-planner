@@ -3,8 +3,9 @@
 var ResetPassword = (function(document) {
 	'use strict';
 
-	let _resetPasswordEmailEl = document.getElementById('reset-password-email');
-	let _resetPasswordButtonEl = document.getElementById('reset-password-button');
+	let _resetPasswordEmailEl = 	document.getElementById('reset-password-email');
+	let _resetPasswordButtonEl = 	document.getElementById('reset-password-button');
+	let _resetPasswordSpinnerEl =	document.getElementById('reset-password-spinner');
 
 	/**
 	 * Represents a ResetPassword Page
@@ -42,6 +43,19 @@ var ResetPassword = (function(document) {
 		}
 
 		/**
+		 * Reset Password Spinner Element
+		 * @return {Object} Reset Password Spinner Element
+		 * @memberof ResetPassword
+		 * @type {Object}
+		 * 
+		 */
+		static get resetPasswordSpinnerEl() {
+
+			return _resetPasswordSpinnerEl;
+
+		}
+
+		/**
 		 * Validate Reset Password
 		 * @memberof ResetPassword
 		 * @function validateResetPassword
@@ -62,22 +76,31 @@ var ResetPassword = (function(document) {
 		 */
 		resetPassword() {
 
+			_resetPasswordSpinnerEl.hidden = false;
+			Displayer.resetPasswordContainerEl.hidden = true;
+
 			this.fbRef.resetPassword({
 			  email: _resetPasswordEmailEl.value
 			}, function(error) {
-			  if (error) {
-			    switch (error.code) {
-			      case "INVALID_USER":
-			      	Displayer.showSnackbar('Hmmmm never seen that email before');
-			        break;
-			      default:
-			        Displayer.showSnackbar('Mayday Mayday!  Uh... this didn\'t work :-(');
-			    }
-			  } else {
 
-			  	Displayer.showSnackbar('Yo DAWG, I heard you like passwords!  Also check your email :-D');
+				_resetPasswordSpinnerEl.hidden = true;
+				Displayer.resetPasswordContainerEl.hidden = false;
 
-			  }
+				if (error) {
+
+					switch (error.code) {
+					  case "INVALID_USER":
+					  	Displayer.showSnackbar('Hmmmm never seen that email before');
+					    break;
+					  default:
+					    Displayer.showSnackbar('Mayday Mayday!  Uh... this didn\'t work :-(');
+				    
+				}
+				} else {
+
+					Displayer.showSnackbar('Yo DAWG, I heard you like passwords!  Also check your email :-D');
+
+				}
 
 			});
 

@@ -14,6 +14,7 @@ var UserInfo = function () {
 	var _userInfoTitleEl = document.getElementById('user-info-title');
 	var _userInfoBirthdayEl = document.getElementById('user-info-birthday');
 	var _submitUserInfoButtonEl = document.getElementById('submit-user-info-button');
+	var _userInfoSpinnerEl = document.getElementById('user-info-spinner');
 
 	_submitUserInfoButtonEl.disabled = true;
 
@@ -86,14 +87,20 @@ var UserInfo = function () {
     */
 			value: function saveInfo() {
 
+				_userInfoSpinnerEl.hidden = false;
+				Displayer.userInfoContainerEl.hidden = true;
+
 				this.extraRef.update({
 
 					name: _userInfoNameEl.value,
 					employer: _userInfoEmployerEl.value,
 					title: _userInfoTitleEl.value,
-					birthday: _submitUserInfoButtonEl.value
+					birthday: _userInfoBirthdayEl.value
 
 				}, function (error) {
+
+					_userInfoSpinnerEl.hidden = true;
+					Displayer.userInfoContainerEl.hidden = false;
 
 					if (error) {
 
@@ -227,6 +234,21 @@ var UserInfo = function () {
 			get: function get() {
 
 				return _submitUserInfoButtonEl;
+			}
+
+			/**
+    * User Info Spinner Element
+    * @return {Object} User Info Spinner Element
+    * @memberof UserInfo
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'userInfoSpinnerEl',
+			get: function get() {
+
+				return _userInfoSpinnerEl;
 			}
 		}]);
 

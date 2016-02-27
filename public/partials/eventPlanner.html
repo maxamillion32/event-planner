@@ -1,4 +1,13 @@
 <!-- Event Planner -->
+
+<!-- MDL Spinner Component -->
+<div id="event-planner-spinner" class="spinner" hidden="true">
+
+	<div class="mdl-spinner mdl-js-spinner is-active"></div>
+
+</div>
+
+<!-- Event Planner Form -->
 <div id="event-planner-container" hidden="true">
 
 	<div class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
@@ -79,7 +88,7 @@
 
 							</label>
 
-							<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" onchange="EventPlanner.checkEventFields()" required>
+							<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" oninput="EventPlanner.checkEventFields()" required>
 
 						</div>
 
@@ -132,7 +141,7 @@
 
 									</label>
 
-									<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?"></input>
+									<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" onchange="EventPlanner.checkGuestField()"></input>
 
 							</div>
 
@@ -140,7 +149,7 @@
 
 						<p>
 
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' onclick="app.eventPlanner.addTag()">Add Guest</button>	
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' disabled="true" onclick="app.eventPlanner.addTag()">Add Guest</button>	
 
 						</p>
 

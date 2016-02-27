@@ -29,6 +29,7 @@ var SignUp = function () {
 	var _valCheckNumberEl = document.getElementById('val-check-number');
 	var _valCheckEmailEl = document.getElementById('val-check-email');
 	var _valCheckRequiredEl = document.getElementById('val-check-required');
+	var _signUpSpinner = document.getElementById('sign-up-spinner');
 
 	var _validator = new FV.Validator();
 	var _passwordField = new FV.Field("Password1", _signupPasswordEl);
@@ -175,6 +176,9 @@ var SignUp = function () {
     */
 			value: function signUp() {
 
+				_signUpSpinner.hidden = false;
+				Displayer.SignupContainer.hidden = true;
+
 				this.fbRef.createUser({
 					email: _signupEmailEl.value,
 					password: _signupPasswordEl.value
@@ -184,7 +188,8 @@ var SignUp = function () {
 
 						Displayer.showSnackbar('Sorry!  There was an error signing you up.  :-(');
 
-						console.log("Error creating user:", error);
+						_signUpSpinner.hidden = true;
+						Displayer.SignupContainer.hidden = false;
 					} else {
 
 						Displayer.showSnackbar('Successfully Signed Up!  :-D');
@@ -560,6 +565,21 @@ var SignUp = function () {
 			get: function get() {
 
 				return _signupBirthdayEl;
+			}
+
+			/**
+    * Sign Up Spinner Element
+    * @return {Object} Sign Up Spinner Element
+    * @memberof SignUp
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'signUpSpinner',
+			get: function get() {
+
+				return _signUpSpinner;
 			}
 		}]);
 

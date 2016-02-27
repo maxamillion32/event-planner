@@ -11,6 +11,7 @@ var ResetPassword = function (document) {
 
 	var _resetPasswordEmailEl = document.getElementById('reset-password-email');
 	var _resetPasswordButtonEl = document.getElementById('reset-password-button');
+	var _resetPasswordSpinnerEl = document.getElementById('reset-password-spinner');
 
 	/**
   * Represents a ResetPassword Page
@@ -58,16 +59,25 @@ var ResetPassword = function (document) {
     */
 			value: function resetPassword() {
 
+				_resetPasswordSpinnerEl.hidden = false;
+				Displayer.resetPasswordContainerEl.hidden = true;
+
 				this.fbRef.resetPassword({
 					email: _resetPasswordEmailEl.value
 				}, function (error) {
+
+					_resetPasswordSpinnerEl.hidden = true;
+					Displayer.resetPasswordContainerEl.hidden = false;
+
 					if (error) {
+
 						switch (error.code) {
 							case "INVALID_USER":
 								Displayer.showSnackbar('Hmmmm never seen that email before');
 								break;
 							default:
 								Displayer.showSnackbar('Mayday Mayday!  Uh... this didn\'t work :-(');
+
 						}
 					} else {
 
@@ -110,6 +120,21 @@ var ResetPassword = function (document) {
 			get: function get() {
 
 				return _resetPasswordEmailEl;
+			}
+
+			/**
+    * Reset Password Spinner Element
+    * @return {Object} Reset Password Spinner Element
+    * @memberof ResetPassword
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'resetPasswordSpinnerEl',
+			get: function get() {
+
+				return _resetPasswordSpinnerEl;
 			}
 		}]);
 

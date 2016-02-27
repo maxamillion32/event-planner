@@ -97,6 +97,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this.userInfo.extraRef = this.signInOut.extraRef;
 
 				this.showEvents.listenForEvents();
+				this.userInfo.listenForData();
 			}.bind(this));
 
 			/**

@@ -9,6 +9,7 @@ var SignInOut = (function(document) {
 	let _signOutLinkEl =		document.getElementById('sign-out-link');
 	let _signInLinkEl =			document.getElementById('sign-in-link');
 	let _signInButton =			document.getElementById('sign-in-button');
+	let _signInSpinner = 		document.getElementById('sign-in-spinner');
 
 	let _storeExtra = false;
 
@@ -155,6 +156,17 @@ var SignInOut = (function(document) {
 			_storeExtra = pred;
 		}
 
+		/**
+		 * Spinner that displays when signing in
+		 * @memberOf  SignInOut
+		 * @type {object}
+		 */
+		static get signInSpinner() {
+
+			return _signInSpinner;
+
+		}
+
 		/** 
 		*   @function validateSignIn
 		*   @memberof SignInOut
@@ -175,14 +187,21 @@ var SignInOut = (function(document) {
 		*/
 		authHandler(error, authData) {
 
+			_signInSpinner.hidden = true;
+			SignUp.signUpSpinner.hidden = true;
+
 			if(error) {
 
 				//Handle the error
 				Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
 
+				Displayer.signInContainerEl.hidden = false;
+
 			} else if (!authData) {
 
 				Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
+
+				Displayer.signInContainerEl.hidden = false;
 
 			} else {
 
@@ -234,6 +253,7 @@ var SignInOut = (function(document) {
 				Displayer.showSnackbar('You are one AWESOME Signer Inner!... Go You! :-D');
 
 			}
+			
 
 		}
 
@@ -249,6 +269,9 @@ var SignInOut = (function(document) {
 
 			let email = 	emailIn || _signInEmailEl.value;
 			let password = 	passwordIn || _signInPasswordEl.value;
+
+			Displayer.signInContainerEl.hidden = true;
+			_signInSpinner.hidden = false;
 
 			// Sign in with an email/password combination
 			this.fbRef.authWithPassword({

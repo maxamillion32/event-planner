@@ -70,3 +70,7 @@ body {
     color: #FFFFFF;
     position: absolute;
     right: 1em; }
+  body .spinner {
+    position: relative;
+    text-align: center;
+    margin-top: 15%; }

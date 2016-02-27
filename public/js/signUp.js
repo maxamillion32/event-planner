@@ -22,6 +22,7 @@ var SignUp = (function() {
 	let _valCheckNumberEl =			document.getElementById('val-check-number');
 	let _valCheckEmailEl =			document.getElementById('val-check-email');
 	let _valCheckRequiredEl =		document.getElementById('val-check-required');
+	let _signUpSpinner = 			document.getElementById('sign-up-spinner');
 
 	let _validator = 				new FV.Validator();
 	let _passwordField = 			new FV.Field("Password1", _signupPasswordEl);
@@ -399,6 +400,19 @@ var SignUp = (function() {
 		}
 
 		/**
+		 * Sign Up Spinner Element
+		 * @return {Object} Sign Up Spinner Element
+		 * @memberof SignUp
+		 * @type {Object}
+		 * 
+		 */
+		static get signUpSpinner() {
+
+			return _signUpSpinner;
+
+		}
+
+		/**
 		 * @function signUp
 		 * @memberof SignUp
 		 * @instance
@@ -406,26 +420,30 @@ var SignUp = (function() {
 		 */
 		signUp() {
 
+			_signUpSpinner.hidden = false;
+			Displayer.SignupContainer.hidden = true;
+
 			this.fbRef.createUser({
 			  email    : _signupEmailEl.value,
 			  password : _signupPasswordEl.value
-			}, function(error, userData) {
+			}, function(error, userData) {	
 
-			  if (error) {
+				if (error) {
 
-			  	Displayer.showSnackbar('Sorry!  There was an error signing you up.  :-(');
+					Displayer.showSnackbar('Sorry!  There was an error signing you up.  :-(');
 
-			    console.log("Error creating user:", error);
+					_signUpSpinner.hidden = true;
+					Displayer.SignupContainer.hidden = false;
 
-			  } else {
+				} else {
 
-			  	Displayer.showSnackbar('Successfully Signed Up!  :-D');
+					Displayer.showSnackbar('Successfully Signed Up!  :-D');
 
-			  	SignInOut.storeExtra = true;
+					SignInOut.storeExtra = true;
 
-			  	document.dispatchEvent(new CustomEvent("signed-up"));
+					document.dispatchEvent(new CustomEvent("signed-up"));
 
-			  }
+				}
 			  
 			});
 

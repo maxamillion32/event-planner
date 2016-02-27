@@ -16,6 +16,7 @@ var SignInOut = function (document) {
 	var _signOutLinkEl = document.getElementById('sign-out-link');
 	var _signInLinkEl = document.getElementById('sign-in-link');
 	var _signInButton = document.getElementById('sign-in-button');
+	var _signInSpinner = document.getElementById('sign-in-spinner');
 
 	var _storeExtra = false;
 
@@ -98,13 +99,20 @@ var SignInOut = function (document) {
    */
 			value: function authHandler(error, authData) {
 
+				_signInSpinner.hidden = true;
+				SignUp.signUpSpinner.hidden = true;
+
 				if (error) {
 
 					//Handle the error
 					Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
+
+					Displayer.signInContainerEl.hidden = false;
 				} else if (!authData) {
 
 					Displayer.showSnackbar('Sorry, there was an error signing you in!  :-(');
+
+					Displayer.signInContainerEl.hidden = false;
 				} else {
 
 					/**
@@ -170,6 +178,9 @@ var SignInOut = function (document) {
 
 				var email = emailIn || _signInEmailEl.value;
 				var password = passwordIn || _signInPasswordEl.value;
+
+				Displayer.signInContainerEl.hidden = true;
+				_signInSpinner.hidden = false;
 
 				// Sign in with an email/password combination
 				this.fbRef.authWithPassword({
@@ -331,6 +342,19 @@ var SignInOut = function (document) {
 			set: function set(pred) {
 
 				_storeExtra = pred;
+			}
+
+			/**
+    * Spinner that displays when signing in
+    * @memberOf  SignInOut
+    * @type {object}
+    */
+
+		}, {
+			key: 'signInSpinner',
+			get: function get() {
+
+				return _signInSpinner;
 			}
 		}]);
 

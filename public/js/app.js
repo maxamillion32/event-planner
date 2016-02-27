@@ -89,6 +89,7 @@
 			  this.userInfo.extraRef = 		this.signInOut.extraRef;
 
 			  this.showEvents.listenForEvents();
+			  this.userInfo.listenForData();
 
 			}.bind(this));
 

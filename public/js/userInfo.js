@@ -3,11 +3,12 @@
 var UserInfo = (function() {
 	'use strict';
 
-	let _userInfoNameEl = document.getElementById('user-info-name');
-	let _userInfoEmployerEl = document.getElementById('user-info-employer');
-	let _userInfoTitleEl = document.getElementById('user-info-title');
-	let _userInfoBirthdayEl = document.getElementById('user-info-birthday');
-	let _submitUserInfoButtonEl = document.getElementById('submit-user-info-button');
+	let _userInfoNameEl = 			document.getElementById('user-info-name');
+	let _userInfoEmployerEl = 		document.getElementById('user-info-employer');
+	let _userInfoTitleEl = 			document.getElementById('user-info-title');
+	let _userInfoBirthdayEl = 		document.getElementById('user-info-birthday');
+	let _submitUserInfoButtonEl = 	document.getElementById('submit-user-info-button');
+	let _userInfoSpinnerEl =		document.getElementById('user-info-spinner');
 
 	_submitUserInfoButtonEl.disabled = true;
 
@@ -21,7 +22,7 @@ var UserInfo = (function() {
 
 		_userInfoNameEl.value =		info.name;
 		_userInfoEmployerEl.value =	info.employer;
-		_userInfoTitleEl.value =		info.title;
+		_userInfoTitleEl.value =	info.title;
 		_userInfoBirthdayEl.value =	info.birthday;
 
 	}
@@ -124,6 +125,19 @@ var UserInfo = (function() {
 			
 		}
 
+		/**
+		 * User Info Spinner Element
+		 * @return {Object} User Info Spinner Element
+		 * @memberof UserInfo
+		 * @type {Object}
+		 * 
+		 */
+		static get userInfoSpinnerEl() {
+
+			return _userInfoSpinnerEl;
+
+		}
+
 		/** 
 		*   @function checkFields
 		*   @memberof UserInfo
@@ -144,14 +158,20 @@ var UserInfo = (function() {
 		 */
 		saveInfo() {
 
+			_userInfoSpinnerEl.hidden = false;
+			Displayer.userInfoContainerEl.hidden = true;
+
 			this.extraRef.update({
 
 				name: 		_userInfoNameEl.value,
 				employer: 	_userInfoEmployerEl.value,
 				title: 		_userInfoTitleEl.value,
-				birthday: 	_submitUserInfoButtonEl.value
+				birthday: 	_userInfoBirthdayEl.value
 
 			}, function(error) {
+
+				_userInfoSpinnerEl.hidden = true;
+				Displayer.userInfoContainerEl.hidden = false;
 
 				if(error) {
 
