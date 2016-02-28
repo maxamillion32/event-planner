@@ -133,7 +133,8 @@ body {
 		}
 
 	}
-
+	
+	/**
 	@media (max-width: 1000px) and (orientation: portrait) {
 
 		body {
@@ -182,6 +183,7 @@ body {
 		}
 
 	}
+	**/
 
 	.card-trash {
 
@@ -196,6 +198,12 @@ body {
 		position: relative;
 		text-align: center;
 		margin-top: 15%;
+
+	}
+
+	.loading {
+		
+		color: $light-text-color;
 
 	}
 

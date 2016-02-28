@@ -18,6 +18,8 @@ var Displayer = function (document) {
 	var _showEventContainerEl = document.getElementById('show-event-container');
 	var _userInfoContainerEl = document.getElementById('user-info-container');
 	var _snackbarMessageEl = document.getElementById('snackbar-message');
+	var _contentEl = document.getElementById('content');
+	var _loadingEl = document.getElementById('loading');
 
 	/**
   * Shows and hides blocks, like a super simple router
@@ -284,6 +286,36 @@ var Displayer = function (document) {
 			get: function get() {
 
 				return _snackbarMessageEl;
+			}
+
+			/**
+    * Content Element
+    * @return {Object} Content Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'contentEl',
+			get: function get() {
+
+				return _contentEl;
+			}
+
+			/**
+    * Loading Element
+    * @return {Object} Loading Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'loadingEl',
+			get: function get() {
+
+				return _loadingEl;
 			}
 		}]);
 

@@ -29,7 +29,7 @@
 
 	<body>
 
-		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
+		<div id="content" class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs" hidden="true">
 
 		  <header class="mdl-layout__header">
 
@@ -441,6 +441,10 @@
 <div id="sign-in-spinner" class="spinner" hidden="true">
 
 	<div class="mdl-spinner mdl-js-spinner is-active"></div>
+
+</div>
+
+<div class="mdl-grid">
 
 </div>
 
@@ -875,6 +879,16 @@
 				</div>
 
 		  	</div>
+
+		</div>
+		
+		<div id="loading" class="loading spinner">
+
+			<span class="animated fadeOut infinite">
+
+				Loading...
+
+			</span>
 
 		</div>
 		

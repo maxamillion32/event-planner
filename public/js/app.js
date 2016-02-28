@@ -200,6 +200,16 @@
 
 	}.bind(this));
 
+	//After the Dom is loaded show the sign in container
+	//I'm using this because I'm getting a double load, seems to have
+	//something to do with the tab bar
+	window.addEventListener("load", function(event) {
+
+		Displayer.loadingEl.hidden = true;
+	    Displayer.contentEl.hidden = false;
+	
+	});
+
 	window.app = new App();
 
 })(document);
