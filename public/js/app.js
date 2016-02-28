@@ -134,6 +134,10 @@
 
 				Displayer.showEventPlanner();
 
+			} else {
+
+				Displayer.showSnackbar('Sorry but you must be signed in to do that!  :-(');
+
 			}
 
 		}
@@ -150,6 +154,10 @@
 			if(this.eventPlanner.eventRef) {
 
 				Displayer.showUserInfo();
+
+			} else {
+
+				Displayer.showSnackbar('Sorry but you must be signed in to do that!  :-(');
 
 			}
 
@@ -168,6 +176,10 @@
 
 				Displayer.showEventContainer();
 				
+			} else {
+
+				Displayer.showSnackbar('Sorry but you must be signed in to do that!  :-(');
+
 			}
 
 		}

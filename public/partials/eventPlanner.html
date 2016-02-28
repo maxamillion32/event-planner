@@ -1,147 +1,185 @@
 <!-- Event Planner -->
 
-<!-- MDL Spinner Component -->
-<div id="event-planner-spinner" class="spinner" hidden="true">
+<section class="mdl-layout__tab-panel is-active" id="add-events-tab">
+	
+	<div class="page-content">
 
-	<div class="mdl-spinner mdl-js-spinner is-active"></div>
+		<!-- MDL Spinner Component -->
+		<div id="event-planner-spinner" class="spinner" hidden="true">
 
-</div>
-
-<!-- Event Planner Form -->
-<div id="event-planner-container" hidden="true">
-
-	<div class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
-		
-		<div class="mdl-card__title">
-
-			<h2 class="mdl-card__title-text">Plan That Event!</h2>	
+			<div class="mdl-spinner mdl-js-spinner is-active"></div>
 
 		</div>
 
-		<div class="mdl-card__supporting-text">
+		<!-- Event Planner Form -->
+		<div id="event-planner-container" hidden="true">
 
-			<form action="javascript:app.eventPlanner.submitForm()" autocomplete="on">
+			<div class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
+				
+				<div class="mdl-card__title">
 
-				<div class="center">
+					<h2 class="mdl-card__title-text">Plan That Event!</h2>	
 
-					<p>
+				</div>
 
-						<label id="progress-bar-label" for="progress-bar" title="Fields Completed">
+				<div class="mdl-card__supporting-text">
 
-						</label>
+					<form action="javascript:app.eventPlanner.submitForm()" autocomplete="on">
 
-						<progress id='progress-bar' value="" max="11"></progress>
+						<div class="center">
 
-					</p>
+							<p>
 
-					<p>
+								<label id="progress-bar-label" for="progress-bar" title="Fields Completed">
 
-						<!-- Name of the event -->
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								</label>
 
-							<label class="mdl-textfield__label" for="event-name" title="Event Name">
-									
-								<span>Event Title</span>
+								<progress id='progress-bar' value="" max="11"></progress>
 
-							</label>
+							</p>
 
-							<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="EventPlanner.checkEventFields()" required>
+							<p>
 
-						</div>
+								<!-- Name of the event -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-					</p>
-
-					<p>
-
-						<!-- Event Type -->
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="event-type" title="Event Type">
-									
-								<span>What kind of event is it?</span>
-
-							</label>
-
-							<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="EventPlanner.checkEventFields()" required>
-							<datalist id="guest-list">
-							  <option value="Birthday">
-							  <option value="Conference">
-							  <option value="Wedding">
-							  <option value="Anniversary">
-							  <option value="Holiday">
-							  <option value="Graduation">
-							  <option value="Funeral">
-							</datalist>
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<!-- Host of the event -->
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="event-host" title="Event Host">
-									
-								<span>Who's hosting it?</span>
-
-							</label>
-
-							<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" oninput="EventPlanner.checkEventFields()" required>
-
-						</div>
-
-					</p>
-					
-					<p>
-
-						<!-- Begin Date -->
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="start-date" title="Start Date">
-								
-								<span>When will it begin?</span>
-
-							</label>
-
-							<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="EventPlanner.checkEventFields()" required>
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<!-- End Date -->
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="end-date" title="End Date">
-								
-								<span>When will it end?</span>
-
-							</label>
-
-							<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="EventPlanner.checkEventFields()" required>
-
-						</div>
-
-					</p>
-					
-					<p>
-
-						<p>
-
-							<!-- People attending -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-			      				
-			      				<label class="mdl-textfield__label" for="vtil-input">
-
-										Who's going?
+									<label class="mdl-textfield__label" for="event-name" title="Event Name">
+											
+										<span>Event Title</span>
 
 									</label>
 
-									<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" onchange="EventPlanner.checkGuestField()"></input>
+									<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<!-- Event Type -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="event-type" title="Event Type">
+											
+										<span>What kind of event is it?</span>
+
+									</label>
+
+									<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="EventPlanner.checkEventFields()" required>
+									<datalist id="guest-list">
+									  <option value="Birthday">
+									  <option value="Conference">
+									  <option value="Wedding">
+									  <option value="Anniversary">
+									  <option value="Holiday">
+									  <option value="Graduation">
+									  <option value="Funeral">
+									</datalist>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<!-- Host of the event -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="event-host" title="Event Host">
+											
+										<span>Who's hosting it?</span>
+
+									</label>
+
+									<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" oninput="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+							</p>
+							
+							<p>
+
+								<!-- Begin Date -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="start-date" title="Start Date">
+										
+										<span>When will it begin?</span>
+
+									</label>
+
+									<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<!-- End Date -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="end-date" title="End Date">
+										
+										<span>When will it end?</span>
+
+									</label>
+
+									<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+							</p>
+							
+							<p>
+
+								<p>
+
+									<!-- People attending -->
+									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					      				
+					      				<label class="mdl-textfield__label" for="vtil-input">
+
+												Who's going?
+
+											</label>
+
+											<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" onchange="EventPlanner.checkGuestField()"></input>
+
+									</div>
+
+								</p>
+
+								<p>
+
+									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' disabled="true" onclick="app.eventPlanner.addTag()">Add Guest</button>	
+
+								</p>
+
+							</p>
+
+						</div>	
+
+						<p class="tag-wrapper">
+
+							<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
+
+
+							</div>  
+
+						</p>
+
+						<p>
+
+							<!-- Location autocomplete field -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="location-input">
+
+								</label>
+
+								<input id="location-input" class="mdl-textfield__input" onFocus="app.eventPlanner.geolocate()" type="text"></input>
 
 							</div>
 
@@ -149,137 +187,107 @@
 
 						<p>
 
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' disabled="true" onclick="app.eventPlanner.addTag()">Add Guest</button>	
+							<!-- Event location -->
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+
+								<label class="mdl-textfield__label" for="street-number">
+									
+								</label>
+
+								<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="EventPlanner.checkEventFields()" required></input>
+
+							</div>
 
 						</p>
 
-					</p>
+						<p>
 
-				</div>	
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
 
-				<p class="tag-wrapper">
+								<label class="mdl-textfield__label" for="city">
 
-					<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
+								</label>
 
+								<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" onchange="EventPlanner.checkEventFields()" required></input>
 
-					</div>  
+							</div>	
 
-				</p>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
 
-				<p>
+								<label class="mdl-textfield__label" for="state">
 
-					<!-- Location autocomplete field -->
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								</label>
 
-						<label class="mdl-textfield__label" for="location-input">
+								<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" onchange="EventPlanner.checkEventFields()" required>
 
-						</label>
-
-						<input id="location-input" class="mdl-textfield__input" onFocus="app.eventPlanner.geolocate()" type="text"></input>
-
-					</div>
-
-				</p>
-
-				<p>
-
-					<!-- Event location -->
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
-
-						<label class="mdl-textfield__label" for="street-number">
+							</div>
 							
-						</label>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">	
 
-						<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="EventPlanner.checkEventFields()" required></input>
+								<label class="mdl-textfield__label" for="postal-code">
 
-					</div>
+								</label>
 
-				</p>
+								<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" onchange="EventPlanner.checkEventFields()" required>
 
-				<p>
+							</div>
 
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+						</p>
 
-						<label class="mdl-textfield__label" for="city">
+						<p>
 
-						</label>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
 
-						<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" onchange="EventPlanner.checkEventFields()" required></input>
+								<label class="mdl-textfield__label" for="country">
 
-					</div>	
+								</label>
 
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+								<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="EventPlanner.checkEventFields()" required>
 
-						<label class="mdl-textfield__label" for="state">
+							</div>
 
-						</label>
+						</p>
 
-						<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" onchange="EventPlanner.checkEventFields()" required>
+						<p>
 
-					</div>
-					
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">	
+							<div class="center">
 
-						<label class="mdl-textfield__label" for="postal-code">
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 
-						</label>
+									<!-- Message -->
+									<label class="mdl-textfield__label" for="message">
 
-						<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" onchange="EventPlanner.checkEventFields()" required>
+										Leave a message for your guests!
 
-					</div>
+									</label>
 
-				</p>
+									<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="EventPlanner.checkEventFields()" required></textarea>
 
-				<p>
+								</div>	
 
-					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+							</div>
 
-						<label class="mdl-textfield__label" for="country">
+						</p>
 
-						</label>
+						<p>
 
-						<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="EventPlanner.checkEventFields()" required>
+							<div class="center">
 
-					</div>
+								<!-- Submit Button -->
+								<input id="submit-event-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit" title="Submit Event">
 
-				</p>
+							</div>
 
-				<p>
+						</p>
 
-					<div class="center">
+					</form>
 
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+				</div>
 
-							<!-- Message -->
-							<label class="mdl-textfield__label" for="message">
-
-								Leave a message for your guests!
-
-							</label>
-
-							<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="EventPlanner.checkEventFields()" required></textarea>
-
-						</div>	
-
-					</div>
-
-				</p>
-
-				<p>
-
-					<div class="center">
-
-						<!-- Submit Button -->
-						<input id="submit-event-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit" title="Submit Event">
-
-					</div>
-
-				</p>
-
-			</form>
+			</div>
 
 		</div>
 
 	</div>
 
-</div>
+</section>

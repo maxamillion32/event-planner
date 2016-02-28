@@ -144,6 +144,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				if (this.eventPlanner.eventRef) {
 
 					Displayer.showEventPlanner();
+				} else {
+
+					Displayer.showSnackbar('Sorry but you must be signed in to do that!  :-(');
 				}
 			}
 
@@ -162,6 +165,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				if (this.eventPlanner.eventRef) {
 
 					Displayer.showUserInfo();
+				} else {
+
+					Displayer.showSnackbar('Sorry but you must be signed in to do that!  :-(');
 				}
 			}
 
@@ -180,6 +186,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				if (this.eventPlanner.eventRef) {
 
 					Displayer.showEventContainer();
+				} else {
+
+					Displayer.showSnackbar('Sorry but you must be signed in to do that!  :-(');
 				}
 			}
 		}]);

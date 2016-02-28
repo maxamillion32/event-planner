@@ -6,6 +6,7 @@
 		<!-- Material Design Lite Stylin -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.pink-indigo.min.css" />
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 
 		<!-- Animate.css -->
 		<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
@@ -28,31 +29,37 @@
 
 	<body>
 
-		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
 
 		  <header class="mdl-layout__header">
 
 		    <div class="mdl-layout__header-row">
 		      <!-- Title -->
 		      <span class="mdl-layout-title">Event Planner!</span>
+
 		      <!-- Add spacer, to align navigation to the right -->
 		      <div class="mdl-layout-spacer"></div>
+
 		      <!-- Navigation -->
 		      <nav class="mdl-navigation">
-
-		      	<a class="mdl-navigation__link" onclick="app.displayEventCreation()" href="#">Add Event</a>
-
-		      	<a class="mdl-navigation__link" onclick="app.displayEvents()" href="#">Show Events</a>
-
-		      	<a class="mdl-navigation__link" id="user-info-link" onclick="app.displayUserInfo()" href="#">User Info</a>
 
 		      	<a class="mdl-navigation__link" id="sign-out-link" hidden="true" onclick="app.signInOut.signOut()" href="#">Sign Out</a>
 
 		      	<a class="mdl-navigation__link" id="sign-in-link" onclick="Displayer.showSignIn()" href="#">Sign In</a>
 
 		      </nav>
+
 		    </div>
+
+		    <!-- Tabs -->
+		    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+		      <a href="#add-events-tab" class="mdl-layout__tab" onclick="app.displayEventCreation()">Add Event</a>
+		      <a href="#show-events-tab" class="mdl-layout__tab" onclick="app.displayEvents()">Show Events</a>
+		      <a href="#user-info-tab" class="mdl-layout__tab" onclick="app.displayUserInfo()">User Info</a>
+		    </div>
+
 		  </header>
+
 		  <main class="mdl-layout__content">
 
 		  	<div class="top-pad-sm">
