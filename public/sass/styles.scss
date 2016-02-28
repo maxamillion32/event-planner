@@ -136,40 +136,46 @@ body {
 
 	@media (max-width: 1000px) and (orientation: portrait) {
 
-		.input-style {
+		body {
 
-    		font-size:1.75em;
+			padding-top: 20em;
 
-		}
+			.input-style {
 
-		.card-width.mdl-card {
-  
-			width: 85%;
-
-			.authForm {
-
-				text-align: center;
-				width: 100%;
+	    		font-size:1.75em;
 
 			}
 
-			.address-field {
+			.card-width.mdl-card {
+	  
+				width: 85%;
 
-				margin-left: 1em;
-				margin-right: 1em;
-				width: 13em;
+				.authForm {
 
-			}
+					text-align: center;
+					width: 100%;
 
-			.val-check-bad {
+				}
 
-				color: $bad-text-color;
+				.address-field {
 
-			}
+					margin-left: 1em;
+					margin-right: 1em;
+					width: 13em;
 
-			.val-check-good {
+				}
 
-				color: $good-text-color;
+				.val-check-bad {
+
+					color: $bad-text-color;
+
+				}
+
+				.val-check-good {
+
+					color: $good-text-color;
+
+				}
 
 			}
 
@@ -190,6 +196,12 @@ body {
 		position: relative;
 		text-align: center;
 		margin-top: 15%;
+
+	}
+
+	.mdl-card__supporting-text p.event-content {
+
+		font-size: 1.9em;
 
 	}
 

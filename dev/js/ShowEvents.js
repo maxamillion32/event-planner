@@ -58,24 +58,39 @@ var ShowEvents = function (document) {
 			var cardContentDiv = document.createElement('div');
 			cardContentDiv.className = "mdl-card__supporting-text";
 			var p = document.createElement('p');
+			p.className = 'event-content';
 			p.innerHTML = "<b>" + event.host + '</b> is hosting a ' + '<b>' + event.type + '</b> at ';
 			cardContentDiv.appendChild(p);
 
 			p = document.createElement('p');
+			p.className = 'event-content';
 			p.innerHTML = event.address + '<br />' + event.city + ', ' + event.state + ' ' + event.zip + '<br />' + event.country;
 			cardContentDiv.appendChild(p);
 
 			p = document.createElement('p');
+			p.className = 'event-content';
 			p.appendChild(document.createTextNode("on"));
 			cardContentDiv.appendChild(p);
 
 			p = document.createElement('p');
+			p.className = 'event-content';
 			var begin = new Date(event.begin);
 			var end = new Date(event.end);
 			p.innerHTML = '<b>' + begin.toLocaleString() + '</b>' + ' to ' + '<b>' + end.toLocaleString() + '</b>';
 			cardContentDiv.appendChild(p);
 
 			p = document.createElement('p');
+			p.className = 'event-content';
+			var guestlist = 'Everybody who\'s anybody is going including ';
+			event.guests.forEach(function (guest) {
+
+				guestlist += '<b>' + guest.value + '</b> ';
+			});
+			p.innerHTML = guestlist;
+			cardContentDiv.appendChild(p);
+
+			p = document.createElement('p');
+			p.className = 'event-content';
 			p.innerHTML = 'and <b>' + event.host + '</b> wishes to let you know that<br/>' + event.message;
 			cardContentDiv.appendChild(p);
 

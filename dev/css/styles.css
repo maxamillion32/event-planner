@@ -51,21 +51,23 @@ body {
     body .tag-wrapper .tag-style {
       font-size: 0.55em; }
   @media (max-width: 1000px) and (orientation: portrait) {
-    body .input-style {
-      font-size: 1.75em; }
-    body .card-width.mdl-card {
-      width: 85%; }
-      body .card-width.mdl-card .authForm {
-        text-align: center;
-        width: 100%; }
-      body .card-width.mdl-card .address-field {
-        margin-left: 1em;
-        margin-right: 1em;
-        width: 13em; }
-      body .card-width.mdl-card .val-check-bad {
-        color: #D50000; }
-      body .card-width.mdl-card .val-check-good {
-        color: #1B5E20; } }
+    body body {
+      padding-top: 20em; }
+      body body .input-style {
+        font-size: 1.75em; }
+      body body .card-width.mdl-card {
+        width: 85%; }
+        body body .card-width.mdl-card .authForm {
+          text-align: center;
+          width: 100%; }
+        body body .card-width.mdl-card .address-field {
+          margin-left: 1em;
+          margin-right: 1em;
+          width: 13em; }
+        body body .card-width.mdl-card .val-check-bad {
+          color: #D50000; }
+        body body .card-width.mdl-card .val-check-good {
+          color: #1B5E20; } }
   body .card-trash {
     color: #FFFFFF;
     position: absolute;
@@ -74,3 +76,5 @@ body {
     position: relative;
     text-align: center;
     margin-top: 15%; }
+  body .mdl-card__supporting-text p.event-content {
+    font-size: 1.9em; }
