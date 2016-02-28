@@ -88,96 +88,96 @@ var SignUp = (function() {
 		if(errorTypes.indexOf(FV.Validator.EMAIL) === -1) {
 
 			_valCheckEmailEl.className = 'val-check-good';
-			_valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Must use a valid email address';
+			_valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;Must use a valid email address';
 
 		} else {
 
 			_valCheckEmailEl.className = 'val-check-bad';
-			_valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Must use a valid email address';
+			_valCheckEmailEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;Must use a valid email address';
 
 		}
 
 		if(errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
 
 			_valCheckLengthEl.className = 'val-check-good';
-			_valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must be at least 8 characters long';
+			_valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;Password must be at least 8 characters long';
 
 		} else {
 
 			_valCheckLengthEl.className = 'val-check-bad';
-			_valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must be at least 8 characters long';
+			_valCheckLengthEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;Password must be at least 8 characters long';
 
 		}
 
 		if(errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
 
 			_valCheckUpperEl.className = 'val-check-good';
-			_valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one upper case character';
+			_valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one upper case character';
 
 		} else {
 
 			_valCheckUpperEl.className = 'val-check-bad';
-			_valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one upper case character';
+			_valCheckUpperEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one upper case character';
 
 		}
 
 		if(errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
 
 			_valCheckLowerEl.className = 'val-check-good';
-			_valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one lower case character';
+			_valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one lower case character';
 
 		} else {
 
 			_valCheckLowerEl.className = 'val-check-bad';
-			_valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one lower case character';
+			_valCheckLowerEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one lower case character';
 
 		}
 
 		if(errorTypes.indexOf(FV.Validator.CONTAINSSPECIAL) === -1) {
 
 			_valCheckSpecialEl.className = 'val-check-good';
-			_valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
+			_valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
 
 		} else {
 
 			_valCheckSpecialEl.className = 'val-check-bad';
-			_valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
+			_valCheckSpecialEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one special character (!, @, #, $, %, ^, &amp;, *)';
 
 		}
 
 		if(errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 &amp;&amp; _signupPasswordEl.value !== '' &amp;&amp; _signupPassword2El.value !== '') {
 
 			_valCheckMatchEl.className = 'val-check-good';
-			_valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Passwords must match';
+			_valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;Passwords must match';
 
 		} else {
 
 			_valCheckMatchEl.className = 'val-check-bad';
-			_valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Passwords must match';
+			_valCheckMatchEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;Passwords must match';
 
 		}
 
 		if(errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
 
 			_valCheckNumberEl.className = 'val-check-good';
-			_valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> Password must contain at least one number';
+			_valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one number';
 
 		} else {
 
 			_valCheckNumberEl.className = 'val-check-bad';
-			_valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> Password must contain at least one number';
+			_valCheckNumberEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;Password must contain at least one number';
 
 		}
 
 		if( _signupNameEl.value === '' || _signupEmailEl.value === '' || _signupPasswordEl.value === '' || _signupPassword2El.value === '') {
 
 			_valCheckRequiredEl.className = 'val-check-bad';
-			_valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i> All required fields must be filled out';
+			_valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-down">&lt;/i>&amp;nbsp;&amp;nbsp;All required fields must be filled out';
 
 		} else {
 
 			_valCheckRequiredEl.className = 'val-check-good';
-			_valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i> All required fields must be filled out';
+			_valCheckRequiredEl.innerHTML = '&lt;i class="fa fa-thumbs-o-up">&lt;/i>&amp;nbsp;&amp;nbsp;All required fields must be filled out';
 
 		}
 
@@ -599,7 +599,7 @@ var SignUp = (function() {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Feb 28 2016 14:57:34 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Sun Feb 28 2016 17:23:11 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -2,57 +2,7 @@ body {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: black;
   background-image: radial-gradient(white, rgba(255, 255, 255, 0.2) 2px, transparent 40px), radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 30px), radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 40px), radial-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1) 2px, transparent 30px);
-  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
-  /**
-	@media (max-width: 1000px) and (orientation: portrait) {
-
-		body {
-
-			padding-top: 20em;
-
-			.input-style {
-
-	    		font-size:1.75em;
-
-			}
-
-			.card-width.mdl-card {
-	  
-				width: 85%;
-
-				.authForm {
-
-					text-align: center;
-					width: 100%;
-
-				}
-
-				.address-field {
-
-					margin-left: 1em;
-					margin-right: 1em;
-					width: 13em;
-
-				}
-
-				.val-check-bad {
-
-					color: $bad-text-color;
-
-				}
-
-				.val-check-good {
-
-					color: $good-text-color;
-
-				}
-
-			}
-
-		}
-
-	}
-	**/ }
+  background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; }
   body .demo-layout-transparent .mdl-layout__header,
   body .demo-layout-transparent .mdl-layout__drawer-button {
     /* This background is dark, so we set text to white. Use 87% black instead if
@@ -67,7 +17,7 @@ body {
   body .center-container {
     margin-left: auto;
     margin-right: auto;
-    width: 70%; }
+    width: 60%; }
   body .left-container {
     text-align: left;
     padding-left: 3em; }
@@ -75,19 +25,17 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 7%; }
-  body .card-width.mdl-card {
-    width: 75%; }
-    body .card-width.mdl-card .authForm {
-      text-align: center;
-      width: 100%; }
-    body .card-width.mdl-card .address-field {
-      margin-left: 1em;
-      margin-right: 1em;
-      width: 13em; }
-    body .card-width.mdl-card .val-check-bad {
-      color: #D50000; }
-    body .card-width.mdl-card .val-check-good {
-      color: #1B5E20; }
+  body .card-width.mdl-card .authForm {
+    text-align: center;
+    width: 100%; }
+  body .card-width.mdl-card .address-field {
+    margin-left: 1em;
+    margin-right: 1em;
+    width: 13em; }
+  body .card-width.mdl-card .val-check-bad {
+    color: #D50000; }
+  body .card-width.mdl-card .val-check-good {
+    color: #1B5E20; }
   body .link {
     line-height: 1.5em; }
   body .card-width > .mdl-card__title {
@@ -100,6 +48,35 @@ body {
     margin-bottom: 2em; }
     body .tag-wrapper .tag-style {
       font-size: 0.55em; }
+  @media screen and (max-width: 1000px) {
+    body .center-container {
+      margin-left: auto;
+      margin-right: auto;
+      width: 95%; }
+    body .vert-cent {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 7%;
+      width: 95%; }
+    body .mdl-textfield {
+      width: 80%; }
+    body .mdl-textfield__input {
+      font-size: 1.75em; }
+    body .link {
+      line-height: 2.25em;
+      font-size: 1.75em; }
+    body .card-width.mdl-card .authForm {
+      text-align: center;
+      width: 100%;
+      margin-bottom: 1.75em; }
+    body .card-width.mdl-card .address-field {
+      margin-left: 1em;
+      margin-right: 1em;
+      width: 13em; }
+    body .card-width.mdl-card .val-check-bad {
+      color: #D50000; }
+    body .card-width.mdl-card .val-check-good {
+      color: #1B5E20; } }
   body .card-trash {
     color: #FFFFFF;
     position: absolute;

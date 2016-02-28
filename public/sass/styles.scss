@@ -47,7 +47,7 @@ body {
 
 		margin-left: auto;
 		margin-right: auto;
-		width: 70%;
+		width: 60%;
 
 	}
 
@@ -68,8 +68,6 @@ body {
 
 	
 	.card-width.mdl-card {
-  
-		width: 75%;
 
 		.authForm {
 
@@ -134,56 +132,78 @@ body {
 
 	}
 	
-	/**
-	@media (max-width: 1000px) and (orientation: portrait) {
+	@media screen and (max-width: 1000px) {
 
-		body {
+		.center-container {
 
-			padding-top: 20em;
+			margin-left: auto;
+			margin-right: auto;
+			width: 95%;
 
-			.input-style {
+		}
 
-	    		font-size:1.75em;
+		.vert-cent {
+		
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 7%;
+			width: 95%;
+
+		}
+
+		.mdl-textfield {
+
+			width: 80%;
+
+		}
+
+		.mdl-textfield__input {
+
+			font-size: 1.75em;
+
+		}
+
+		.link {
+			
+			line-height: 2.25em;
+			font-size: 1.75em;
+
+		}
+		
+		
+		.card-width.mdl-card {
+
+			.authForm {
+
+				text-align: center;
+				width: 100%;
+				margin-bottom: 1.75em;
 
 			}
 
-			.card-width.mdl-card {
-	  
-				width: 85%;
+			.address-field {
 
-				.authForm {
+				margin-left: 1em;
+				margin-right: 1em;
+				width: 13em;
 
-					text-align: center;
-					width: 100%;
+			}
 
-				}
+			.val-check-bad {
 
-				.address-field {
+				color: $bad-text-color;
 
-					margin-left: 1em;
-					margin-right: 1em;
-					width: 13em;
+			}
 
-				}
+			.val-check-good {
 
-				.val-check-bad {
-
-					color: $bad-text-color;
-
-				}
-
-				.val-check-good {
-
-					color: $good-text-color;
-
-				}
+				color: $good-text-color;
 
 			}
 
 		}
 
 	}
-	**/
 
 	.card-trash {
 

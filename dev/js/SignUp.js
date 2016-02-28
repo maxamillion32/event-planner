@@ -54,81 +54,81 @@ var SignUp = function () {
 		if (errorTypes.indexOf(FV.Validator.EMAIL) === -1) {
 
 			_valCheckEmailEl.className = 'val-check-good';
-			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Must use a valid email address';
+			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Must use a valid email address';
 		} else {
 
 			_valCheckEmailEl.className = 'val-check-bad';
-			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Must use a valid email address';
+			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Must use a valid email address';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
 
 			_valCheckLengthEl.className = 'val-check-good';
-			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must be at least 8 characters long';
+			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
 		} else {
 
 			_valCheckLengthEl.className = 'val-check-bad';
-			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must be at least 8 characters long';
+			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
 
 			_valCheckUpperEl.className = 'val-check-good';
-			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one upper case character';
+			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
 		} else {
 
 			_valCheckUpperEl.className = 'val-check-bad';
-			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one upper case character';
+			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
 
 			_valCheckLowerEl.className = 'val-check-good';
-			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one lower case character';
+			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
 		} else {
 
 			_valCheckLowerEl.className = 'val-check-bad';
-			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one lower case character';
+			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSSPECIAL) === -1) {
 
 			_valCheckSpecialEl.className = 'val-check-good';
-			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
+			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
 		} else {
 
 			_valCheckSpecialEl.className = 'val-check-bad';
-			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
+			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 && _signupPasswordEl.value !== '' && _signupPassword2El.value !== '') {
 
 			_valCheckMatchEl.className = 'val-check-good';
-			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Passwords must match';
+			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Passwords must match';
 		} else {
 
 			_valCheckMatchEl.className = 'val-check-bad';
-			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Passwords must match';
+			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Passwords must match';
 		}
 
 		if (errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
 
 			_valCheckNumberEl.className = 'val-check-good';
-			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> Password must contain at least one number';
+			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one number';
 		} else {
 
 			_valCheckNumberEl.className = 'val-check-bad';
-			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> Password must contain at least one number';
+			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one number';
 		}
 
 		if (_signupNameEl.value === '' || _signupEmailEl.value === '' || _signupPasswordEl.value === '' || _signupPassword2El.value === '') {
 
 			_valCheckRequiredEl.className = 'val-check-bad';
-			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i> All required fields must be filled out';
+			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;All required fields must be filled out';
 		} else {
 
 			_valCheckRequiredEl.className = 'val-check-good';
-			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i> All required fields must be filled out';
+			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;All required fields must be filled out';
 		}
 	}
 
