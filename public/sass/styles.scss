@@ -63,6 +63,7 @@ body {
 		margin-left: auto;
 		margin-right: auto;
 		margin-top: 7%;
+		width: 60%;
 
 	}
 
@@ -131,79 +132,6 @@ body {
 		}
 
 	}
-	
-	@media screen and (max-width: 1000px) {
-
-		.center-container {
-
-			margin-left: auto;
-			margin-right: auto;
-			width: 95%;
-
-		}
-
-		.vert-cent {
-		
-			margin-left: auto;
-			margin-right: auto;
-			margin-top: 7%;
-			width: 95%;
-
-		}
-
-		.mdl-textfield {
-
-			width: 80%;
-
-		}
-
-		.mdl-textfield__input {
-
-			font-size: 1.75em;
-
-		}
-
-		.link {
-			
-			line-height: 2.25em;
-			font-size: 1.75em;
-
-		}
-		
-		
-		.card-width.mdl-card {
-
-			.authForm {
-
-				text-align: center;
-				width: 100%;
-				margin-bottom: 1.75em;
-
-			}
-
-			.address-field {
-
-				margin-left: 1em;
-				margin-right: 1em;
-				width: 13em;
-
-			}
-
-			.val-check-bad {
-
-				color: $bad-text-color;
-
-			}
-
-			.val-check-good {
-
-				color: $good-text-color;
-
-			}
-
-		}
-
-	}
 
 	.card-trash {
 
@@ -230,6 +158,41 @@ body {
 	.mdl-card__supporting-text p.event-content {
 
 		font-size: 1.7em;
+
+	}
+
+	@media screen and (max-width: 1000px) {
+
+		.center-container {
+
+			margin-left: auto;
+			margin-right: auto;
+			width: 95%;
+
+		}
+
+		.link {
+			
+			line-height: 2.25em;
+
+		}
+
+		.mdl-layout__content {
+
+			padding-bottom: 5em;
+
+		}
+
+		.vert-cent {
+		
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 7%;
+			width: 95%;
+
+		}
+
+		.mdl-card__supporting-text p.event-content {}
 
 	}
 

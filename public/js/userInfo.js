@@ -25,6 +25,8 @@ var UserInfo = (function() {
 		_userInfoTitleEl.value =	info.title;
 		_userInfoBirthdayEl.value =	info.birthday;
 
+		UserInfo.checkFields();
+
 	}
 
 	/**

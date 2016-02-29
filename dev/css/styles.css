@@ -24,7 +24,8 @@ body {
   body .vert-cent {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 7%; }
+    margin-top: 7%;
+    width: 60%; }
   body .card-width.mdl-card .authForm {
     text-align: center;
     width: 100%; }
@@ -48,35 +49,6 @@ body {
     margin-bottom: 2em; }
     body .tag-wrapper .tag-style {
       font-size: 0.55em; }
-  @media screen and (max-width: 1000px) {
-    body .center-container {
-      margin-left: auto;
-      margin-right: auto;
-      width: 95%; }
-    body .vert-cent {
-      margin-left: auto;
-      margin-right: auto;
-      margin-top: 7%;
-      width: 95%; }
-    body .mdl-textfield {
-      width: 80%; }
-    body .mdl-textfield__input {
-      font-size: 1.75em; }
-    body .link {
-      line-height: 2.25em;
-      font-size: 1.75em; }
-    body .card-width.mdl-card .authForm {
-      text-align: center;
-      width: 100%;
-      margin-bottom: 1.75em; }
-    body .card-width.mdl-card .address-field {
-      margin-left: 1em;
-      margin-right: 1em;
-      width: 13em; }
-    body .card-width.mdl-card .val-check-bad {
-      color: #D50000; }
-    body .card-width.mdl-card .val-check-good {
-      color: #1B5E20; } }
   body .card-trash {
     color: #FFFFFF;
     position: absolute;
@@ -89,3 +61,17 @@ body {
     color: #FFFFFF; }
   body .mdl-card__supporting-text p.event-content {
     font-size: 1.7em; }
+  @media screen and (max-width: 1000px) {
+    body .center-container {
+      margin-left: auto;
+      margin-right: auto;
+      width: 95%; }
+    body .link {
+      line-height: 2.25em; }
+    body .mdl-layout__content {
+      padding-bottom: 5em; }
+    body .vert-cent {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 7%;
+      width: 95%; } }
