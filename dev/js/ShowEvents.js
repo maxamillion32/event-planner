@@ -9,11 +9,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var ShowEvents = function (document) {
 	'use strict';
 
+	var _noEventsContainerEl = document.getElementById('no-events-container');
+
 	/**
  * Clear all child elements
  *
  **/
-
 	function _clearEl(el) {
 
 		while (el.firstChild) {
@@ -30,73 +31,81 @@ var ShowEvents = function (document) {
 
 		_clearEl(Displayer.eventContainerEl);
 
-		events.forEach(function (event) {
+		if (events === null || events.length === 0) {
 
-			//Create the card
-			var cardDiv = document.createElement('div');
-			cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown";
+			_noEventsContainerEl.hidden = false;
+		} else {
 
-			//Card Title
-			var cardTitleDiv = document.createElement('div');
-			cardTitleDiv.className = "mdl-card__title";
-			var headerDiv = document.createElement('h2');
-			headerDiv.className = "mdl-card__title-text";
-			headerDiv.appendChild(document.createTextNode(event.title));
+			_noEventsContainerEl.hidden = true;
 
-			var del = document.createElement('a');
-			del.setAttribute('href', "#");
-			del.setAttribute('title', "Delete");
-			del.className = "card-trash";
-			del.setAttribute('onclick', 'APP.removeEvent("' + event.id + '")');
-			del.innerHTML = '<i class="fa fa-trash-o"></i>';
+			events.forEach(function (event) {
 
-			headerDiv.appendChild(del);
-			cardTitleDiv.appendChild(headerDiv);
-			cardDiv.appendChild(cardTitleDiv);
+				//Create the card
+				var cardDiv = document.createElement('div');
+				cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown";
 
-			//Card Body
-			var cardContentDiv = document.createElement('div');
-			cardContentDiv.className = "mdl-card__supporting-text";
-			var p = document.createElement('p');
-			p.className = 'event-content';
-			p.innerHTML = "<b>" + event.host + '</b> is hosting a ' + '<b>' + event.type + '</b> at ';
-			cardContentDiv.appendChild(p);
+				//Card Title
+				var cardTitleDiv = document.createElement('div');
+				cardTitleDiv.className = "mdl-card__title";
+				var headerDiv = document.createElement('h2');
+				headerDiv.className = "mdl-card__title-text";
+				headerDiv.appendChild(document.createTextNode(event.title));
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			p.innerHTML = event.address + '<br />' + event.city + ', ' + event.state + ' ' + event.zip + '<br />' + event.country;
-			cardContentDiv.appendChild(p);
+				var del = document.createElement('a');
+				del.setAttribute('href', "#");
+				del.setAttribute('title', "Delete");
+				del.className = "card-trash";
+				del.setAttribute('onclick', 'app.showEvents.removeEvent("' + event.id + '")');
+				del.innerHTML = '<i class="fa fa-trash-o"></i>';
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			p.appendChild(document.createTextNode("on"));
-			cardContentDiv.appendChild(p);
+				headerDiv.appendChild(del);
+				cardTitleDiv.appendChild(headerDiv);
+				cardDiv.appendChild(cardTitleDiv);
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			var begin = new Date(event.begin);
-			var end = new Date(event.end);
-			p.innerHTML = '<b>' + begin.toLocaleString() + '</b>' + ' to ' + '<b>' + end.toLocaleString() + '</b>';
-			cardContentDiv.appendChild(p);
+				//Card Body
+				var cardContentDiv = document.createElement('div');
+				cardContentDiv.className = "mdl-card__supporting-text";
+				var p = document.createElement('p');
+				p.className = 'event-content';
+				p.innerHTML = "<b>" + event.host + '</b> is hosting a ' + '<b>' + event.type + '</b> at ';
+				cardContentDiv.appendChild(p);
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			var guestlist = 'Everybody who\'s anybody is going including ';
-			event.guests.forEach(function (guest) {
+				p = document.createElement('p');
+				p.className = 'event-content';
+				p.innerHTML = event.address + '<br />' + event.city + ', ' + event.state + ' ' + event.zip + '<br />' + event.country;
+				cardContentDiv.appendChild(p);
 
-				guestlist += '<b>' + guest.value + '</b> ';
+				p = document.createElement('p');
+				p.className = 'event-content';
+				p.appendChild(document.createTextNode("on"));
+				cardContentDiv.appendChild(p);
+
+				p = document.createElement('p');
+				p.className = 'event-content';
+				var begin = new Date(event.begin);
+				var end = new Date(event.end);
+				p.innerHTML = '<b>' + begin.toLocaleString() + '</b>' + ' to ' + '<b>' + end.toLocaleString() + '</b>';
+				cardContentDiv.appendChild(p);
+
+				p = document.createElement('p');
+				p.className = 'event-content';
+				var guestlist = 'Everybody who\'s anybody is going including ';
+				event.guests.forEach(function (guest) {
+
+					guestlist += '<b>' + guest.value + '</b> ';
+				});
+				p.innerHTML = guestlist;
+				cardContentDiv.appendChild(p);
+
+				p = document.createElement('p');
+				p.className = 'event-content';
+				p.innerHTML = 'and <b>' + event.host + '</b> wishes to let you know that<br/>' + event.message;
+				cardContentDiv.appendChild(p);
+
+				cardDiv.appendChild(cardContentDiv);
+				Displayer.eventContainerEl.appendChild(cardDiv);
 			});
-			p.innerHTML = guestlist;
-			cardContentDiv.appendChild(p);
-
-			p = document.createElement('p');
-			p.className = 'event-content';
-			p.innerHTML = 'and <b>' + event.host + '</b> wishes to let you know that<br/>' + event.message;
-			cardContentDiv.appendChild(p);
-
-			cardDiv.appendChild(cardContentDiv);
-			Displayer.eventContainerEl.appendChild(cardDiv);
-		});
+		}
 	}
 
 	/**
@@ -106,7 +115,7 @@ var ShowEvents = function (document) {
   */
 	function _handleError(err) {
 
-		console.log('Error: ', err);
+		Displayer.showSnackbar('We totally failed to retrieve the event data. :-(');
 	}
 
 	/**
@@ -188,6 +197,39 @@ var ShowEvents = function (document) {
 
 					//Sometimes we end up here signing out
 
+				}
+			}
+
+			/**
+    * Remove an event from events
+    * @function removeEvent
+    * @memberof ShowEvents
+    * @param  {string} id Dom id of event to remove
+    * @instance
+    * 
+    */
+
+		}, {
+			key: 'removeEvent',
+			value: function removeEvent(id) {
+
+				var index = -1;
+
+				for (var i = 0; i < this.events.length; ++i) {
+
+					if (id === this.events[i].id) {
+
+						index = i;
+						break;
+					}
+				}
+
+				if (index !== -1) {
+
+					var l = this.events.length > 1 ? 1 : undefined;
+
+					this.events = this.events.splice(index, l);
+					this.eventRef.set(this.events);
 				}
 			}
 

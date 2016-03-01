@@ -43,19 +43,6 @@ var ResetPassword = (function(document) {
 		}
 
 		/**
-		 * Reset Password Spinner Element
-		 * @return {Object} Reset Password Spinner Element
-		 * @memberof ResetPassword
-		 * @type {Object}
-		 * 
-		 */
-		static get resetPasswordSpinnerEl() {
-
-			return _resetPasswordSpinnerEl;
-
-		}
-
-		/**
 		 * Validate Reset Password
 		 * @memberof ResetPassword
 		 * @function validateResetPassword

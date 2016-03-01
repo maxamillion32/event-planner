@@ -3,6 +3,8 @@
 	
 	<head>
 
+		<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		
 		<!-- Material Design Lite Stylin -->
@@ -55,7 +57,7 @@
 
 		    <!-- Tabs -->
 		    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-		      <a href="#add-events-tab" class="mdl-layout__tab" onclick="app.displayEventCreation()">Add Event</a>
+		      <a href="#add-events-tab" class="mdl-layout__tab is-active" onclick="app.displayEventCreation()">Add Event</a>
 		      <a href="#show-events-tab" class="mdl-layout__tab" onclick="app.displayEvents()">Show Events</a>
 		      <a href="#user-info-tab" class="mdl-layout__tab" onclick="app.displayUserInfo()">User Info</a>
 		    </div>
@@ -118,7 +120,7 @@
 
 									</label>
 
-									<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" onchange="EventPlanner.checkEventFields()" required>
+									<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" oninput="EventPlanner.checkEventFields()" required>
 
 								</div>
 
@@ -135,7 +137,7 @@
 
 									</label>
 
-									<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" onchange="EventPlanner.checkEventFields()" required>
+									<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" oninput="EventPlanner.checkEventFields()" required>
 									<datalist id="guest-list">
 									  <option value="Birthday">
 									  <option value="Conference">
@@ -153,7 +155,7 @@
 							<p>
 
 								<!-- Host of the event -->
-								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<div id="event-host-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 									<label class="mdl-textfield__label" for="event-host" title="Event Host">
 											
@@ -178,7 +180,7 @@
 
 									</label>
 
-									<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="EventPlanner.checkEventFields()" required>
+									<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" oninput="EventPlanner.checkEventFields()" required>
 
 								</div>
 
@@ -195,40 +197,136 @@
 
 									</label>
 
-									<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" onchange="EventPlanner.checkEventFields()" required>
+									<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" oninput="EventPlanner.checkEventFields()" required>
 
 								</div>
 
 							</p>
-							
+
+						</div>
+
+						<div class="center">
+
 							<p>
 
-								</p><p>
+								<!-- Location autocomplete field -->
+								<div id="location-input-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
-									<!-- People attending -->
-									<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-					      				
-					      				<label class="mdl-textfield__label" for="vtil-input">
+									<label class="mdl-textfield__label" for="location-input">
 
-												Who's going?
+									</label>
 
-											</label>
+									<input id="location-input" class="mdl-textfield__input" onfocus="app.eventPlanner.geolocate()">
 
-											<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" oninput="EventPlanner.checkGuestField()">
+									<span id="address-reminder" class="val-check-bad small-text">Be sure to select an address from the dropdown!</span>
 
-									</div>
+								</div>
 
-								</p>
+								<button id="location-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect location-button" id="add-button" type="button" onclick="EventPlanner.setCurrentAddress()" title="Set current location as address"><i class="material-icons">location_on</i></button>
 
-								<p>
+							</p>
 
-									<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type="button" disabled="true" onclick="app.eventPlanner.addTag()">Add Guest</button>	
+						</div>
 
-								</p>
+						<div id="address-container" class="address-container" hidden="true">
 
-							
+							<p>
 
-						</div>	
+								<!-- Event location -->
+								<div id="address-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+
+									<label class="mdl-textfield__label" for="street-number">
+
+										Street Address
+										
+									</label>
+
+									<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<div id="city-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+
+									<label class="mdl-textfield__label" for="city">
+
+										City
+
+									</label>
+
+									<input type="text" id="city" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>	
+
+								<div id="state-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+
+									<label class="mdl-textfield__label" for="state">
+
+										State
+
+									</label>
+
+									<input type="text" id="state" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>
+								
+								<div id="zip-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">	
+
+									<label class="mdl-textfield__label" for="postal-code">
+
+										Zip Code
+
+									</label>
+
+									<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<div id="country-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
+
+									<label class="mdl-textfield__label" for="country">
+
+										Country
+
+									</label>
+
+									<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+							</p>
+
+						</div>
+
+						<div class="center">
+
+							<p>
+
+								<!-- People attending -->
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				      				
+				      				<label class="mdl-textfield__label" for="vtil-input">
+
+										Who's going?
+
+									</label>
+
+									<input id="vtil-input" class="mdl-textfield__input" type="text" title="Who's going?" oninput="EventPlanner.checkGuestField()">
+
+								</div>
+
+								<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect guest-button" id="add-button" type="button" disabled="true" onclick="app.eventPlanner.addTag()">Add Guest</button>
+
+							</p>
+
+						</div>
 
 						<p class="tag-wrapper">
 
@@ -239,87 +337,9 @@
 
 						</p>
 
-						<p>
+						<div class="center">
 
-							<!-- Location autocomplete field -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-								<label class="mdl-textfield__label" for="location-input">
-
-								</label>
-
-								<input id="location-input" class="mdl-textfield__input" onfocus="app.eventPlanner.geolocate()" type="text">
-
-							</div>
-
-						</p>
-
-						<p>
-
-							<!-- Event location -->
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
-
-								<label class="mdl-textfield__label" for="street-number">
-									
-								</label>
-
-								<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" placeholder="Street Address" onchange="EventPlanner.checkEventFields()" required>
-
-							</div>
-
-						</p>
-
-						<p>
-
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
-
-								<label class="mdl-textfield__label" for="city">
-
-								</label>
-
-								<input type="text" id="city" class="mdl-textfield__input" disabled="true" placeholder="City" onchange="EventPlanner.checkEventFields()" required>
-
-							</div>	
-
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
-
-								<label class="mdl-textfield__label" for="state">
-
-								</label>
-
-								<input type="text" id="state" class="mdl-textfield__input" disabled="true" placeholder="State" onchange="EventPlanner.checkEventFields()" required>
-
-							</div>
-							
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">	
-
-								<label class="mdl-textfield__label" for="postal-code">
-
-								</label>
-
-								<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" placeholder="Zip" onchange="EventPlanner.checkEventFields()" required>
-
-							</div>
-
-						</p>
-
-						<p>
-
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field">
-
-								<label class="mdl-textfield__label" for="country">
-
-								</label>
-
-								<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="EventPlanner.checkEventFields()" required>
-
-							</div>
-
-						</p>
-
-						<p>
-
-							<div class="center">
+							<p>
 
 								<div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
 
@@ -330,24 +350,24 @@
 
 									</label>
 
-									<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" onchange="EventPlanner.checkEventFields()" required></textarea>
+									<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" oninput="EventPlanner.checkEventFields()" required></textarea>
 
-								</div>	
+								</div>
 
-							</div>
+							</p>
 
-						</p>
+						</div>
 
-						<p>
+						<div class="center">
 
-							<div class="center">
+							<p>
 
 								<!-- Submit Button -->
 								<input id="submit-event-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Submit" title="Submit Event">
 
-							</div>
+							</p>
 
-						</p>
+						</div>
 
 					</form>
 
@@ -421,11 +441,32 @@
 	</div>
 
 </div>
-				<section class="mdl-layout__tab-panel is-active" id="show-events-tab">
+				<section class="mdl-layout__tab-panel" id="show-events-tab">
 	
 	<div class="page-content">
 
 		<div id="show-event-container" hidden="true">
+
+			<!-- No events -->
+			<div id="no-events-container" hidden="true" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
+
+				<div class="mdl-card__title">
+
+					<h2 class="mdl-card__title-text">No events created</h2>
+
+				</div>
+				
+				<div class="mdl-card__supporting-text">
+
+					<p>
+
+						Nothing to see here!  How about clicking the <strong>ADD EVENT</strong> tab and creating an event.
+
+					</p>
+
+				</div>
+
+			</div>
 
 			<!-- Events -->
 			<p id="event-container">
@@ -469,7 +510,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" oninput="SignInOut.validateSignIn()" required>
+					<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" oninput="SignInOut.validateSignIn()" autofocus="true" required>
 
 				</div>
 
@@ -551,7 +592,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -567,7 +608,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -583,7 +624,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -599,7 +640,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -711,12 +752,6 @@
 
 					<p>
 
-						<span class="val-check-bad" id="val-check-special"></span>
-
-					</p>
-
-					<p>
-
 						<span class="val-check-bad" id="val-check-upper"></span>
 
 					</p>
@@ -764,7 +799,7 @@
 	</div>
 
 </div>
-				<section class="mdl-layout__tab-panel is-active" id="user-info-tab">
+				<section class="mdl-layout__tab-panel" id="user-info-tab">
 	
 	<div class="page-content">
 
@@ -775,83 +810,217 @@
 
 		</div>
 
-		<!-- User info form -->
-		<div id="user-info-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
+		<div id="user-info-container" hidden="true">
 
-			<div class="mdl-card__title">
+			<!-- User info form -->
+			<div class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
 
-				<h2 class="mdl-card__title-text">User Info</h2>
+				<div class="mdl-card__title">
+
+					<h2 class="mdl-card__title-text">User Info</h2>
+
+				</div>
+				
+				<!-- Card Content -->
+				<div class="mdl-card__supporting-text">
+
+					<form action="javascript:app.userInfo.saveInfo()" class="authForm" autocomplete="on">
+
+						<p>
+
+							<div id="user-name-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-name" title="Name">
+
+									What's your name?
+									
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" oninput="UserInfo.checkFields()" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div id="user-organization-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-employer" title="Employer">
+
+									Where do you work?
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-employer" type="text" title="Employer" name="organization">
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div id="user-job-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-title" title="Title">
+
+									What's your job title?
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-title" type="text" title="Title" name="organization-title">
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div id="user-bday-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-birthday" title="Birthday">
+
+									When's your birthday?
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-user-info-button" type="submit" value="Update Info" title="Update Info">
+
+						</p>
+
+					</form>
+
+				</div>
 
 			</div>
-			
-			<!-- Card Content -->
-			<div class="mdl-card__supporting-text">
 
-				<form action="javascript:app.userInfo.saveInfo()" class="authForm" autocomplete="on">
+			<!-- Change Password form -->
+			<div class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
+
+				<div class="mdl-card__title">
+
+					<h2 class="mdl-card__title-text">Change Password</h2>
+
+				</div>
+				
+				<!-- Card Content -->
+				<div class="mdl-card__supporting-text">
+
+					<form action="javascript:app.userInfo.changePassword()" class="authForm" autocomplete="on">
+
+						<p>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-old-password" title="Old Password">
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-old-password" type="password" name="old-password" title="Old Password" placeholder="Old Password" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-new-password" title="New Password">
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-new-password" type="password" name="new-password" title="New Password" oninput="UserInfo.checkPasswords()" placeholder="New Password" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-new-password-repeated" title="New Password Repeated">
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-new-password-repeated" type="password" name="new-password-repeated" title="New Password Repeated" oninput="UserInfo.checkPasswords()" placeholder="New Password Repeated" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="change-password-button" type="submit" value="Change Password" title="Change Password">
+
+						</p>
+
+					</form>
 
 					<p>
 
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<div class="center-container">
 
-							<label class="mdl-textfield__label" for="user-info-name" title="Name">
+							<div class="left-container">
 
-							</label>
+								<p>
 
-							<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" oninput="UserInfo.checkFields()" placeholder="Whooo are you?  Who who" required>
+									<span class="val-check-bad" id="user-val-check-required"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-email"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-length"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-upper"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-lower"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-number"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-match"></span>
+
+								</p>
+
+							</div>
 
 						</div>
 
 					</p>
 
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="user-info-employer" title="Employer">
-
-							</label>
-
-							<input class="mdl-textfield__input" id="user-info-employer" type="text" title="Employer" name="organization" placeholder="Where do you work?">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="user-info-title" title="Title">
-
-							</label>
-
-							<input class="mdl-textfield__input" id="user-info-title" type="text" title="Title" name="organization-title" placeholder="What's your job title?">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="user-info-birthday" title="Birthday">
-
-							</label>
-
-							<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="When's your birthday?">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-user-info-button" type="submit" value="Update Info" title="Update Info">
-
-					</p>
-
-				</form>
+				</div>
 
 			</div>
 

@@ -15,7 +15,6 @@ var SignUp = (function() {
 	let _signupAdditionalInfoEl =	document.getElementById('signup-additional-info');
 	let _signupSwitchEl =			document.getElementById('switch-1');
 	let _valCheckLengthEl =			document.getElementById('val-check-length');
-	let _valCheckSpecialEl =		document.getElementById('val-check-special');
 	let _valCheckUpperEl =			document.getElementById('val-check-upper');
 	let _valCheckLowerEl =			document.getElementById('val-check-lower');
 	let _valCheckMatchEl =			document.getElementById('val-check-match');
@@ -37,8 +36,6 @@ var SignUp = (function() {
 			"* Password must contain at least one upper case letter.\n"),
 		new FV.Constraint(FV.Validator.CONTAINSLOWER,
 			"* Password must contain at least one lower case letter.\n"),
-		new FV.Constraint(FV.Validator.CONTAINSSPECIAL,
-			"* Password must contain at least one special character (!, @, #, $, %, ^, &, *).\n"),
 		new FV.Constraint(FV.Validator.CONTAINSNUMBER,
 			"* Password must contain at least one number.\n")
 	];
@@ -102,18 +99,6 @@ var SignUp = (function() {
 
 			_valCheckLowerEl.className = 'val-check-bad';
 			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSSPECIAL) === -1) {
-
-			_valCheckSpecialEl.className = 'val-check-good';
-			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
-
-		} else {
-
-			_valCheckSpecialEl.className = 'val-check-bad';
-			_valCheckSpecialEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one special character (!, @, #, $, %, ^, &, *)';
 
 		}
 
@@ -216,42 +201,6 @@ var SignUp = (function() {
 		}
 
 		/**
-		 * Signup Password 2 Element
-		 * @return {Object} Signup Password 2 Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get signupPassword2El() {
-
-			return _signupPassword2El;
-		}
-
-		/**
-		 * Submit Password Button Element
-		 * @return {Object} Submit Password Button Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get submitPasswordButton() {
-
-			return _submitPasswordButton;
-		}
-
-		/**
-		 * SignUp Additional Info Element
-		 * @return {Object} SignUp Additional Info Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get signupAdditionalInfoEl() {
-
-			return _signupAdditionalInfoEl;
-		}
-
-		/**
 		 * Signup Switch Element
 		 * @return {Object} Signup Switch Element
 		 * @memberof SignUp
@@ -261,103 +210,6 @@ var SignUp = (function() {
 		static get signupSwitchEl() {
 
 			return _signupSwitchEl;
-		}
-
-		/**
-		 * Val Check Length Element
-		 * @return {Object} Val Check Length Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckLengthEl() {
-
-			return _valCheckLengthEl;
-		}
-
-		/**
-		 * Val Check Special Element
-		 * @return {Object} Val Check Special Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckSpecialEl() {
-
-			return _valCheckSpecialEl;
-		}
-
-		/**
-		 * Val Check Upper Element
-		 * @return {Object} Val Check Upper Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckUpperEl() {
-
-			return _valCheckUpperEl;
-		}
-
-		/**
-		 * Val Check Lower Element
-		 * @return {Object} Val Check Lower Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckLowerEl() {
-
-			return _valCheckLowerEl;
-		}
-
-		/**
-		 * Val Check Match Element
-		 * @return {Object} Val Check Match Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckMatchEl() {
-
-			return _valCheckMatchEl;
-		}
-
-		/**
-		 * Val Check Number Element
-		 * @return {Object} Val Check Number Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckNumberEl() {
-
-			return _valCheckNumberEl;
-		}
-
-		/**
-		 * Val Check Email Element
-		 * @return {Object} Val Check Email Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckEmailEl() {
-
-			return _valCheckEmailEl;
-		}
-
-		/**
-		 * Val Check Required Element
-		 * @return {Object} Val Check Required Element
-		 * @memberof SignUp
-		 * @type {Object}
-		 * 
-		 */
-		static get valCheckRequiredEl() {
-
-			return _valCheckRequiredEl;
-
 		}
 
 		/**
@@ -421,7 +273,7 @@ var SignUp = (function() {
 		signUp() {
 
 			_signUpSpinner.hidden = false;
-			Displayer.SignupContainer.hidden = true;
+			Displayer.signUpContainerEl.hidden = true;
 
 			this.fbRef.createUser({
 			  email    : _signupEmailEl.value,
@@ -433,7 +285,7 @@ var SignUp = (function() {
 					Displayer.showSnackbar('Sorry!  There was an error signing you up.  :-(');
 
 					_signUpSpinner.hidden = true;
-					Displayer.SignupContainer.hidden = false;
+					Displayer.signUpContainerEl.hidden = false;
 
 				} else {
 
@@ -510,6 +362,7 @@ var SignUp = (function() {
 			//These will only display one at a time
 			if (!skipCustomValidation) {
 
+				_signupEmailEl.setCustomValidity(emailErrors);
 				_signupPasswordEl.setCustomValidity(passwordErrors);
 				_signupPassword2El.setCustomValidity(password2Errors);
 

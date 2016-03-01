@@ -11,15 +11,27 @@ var inject = require('gulp-inject');
 var shell = require('gulp-shell');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
+var rimraf = require('gulp-rimraf');
  
+/**************
+  Lint
+***************/   
 gulp.task('lint', function() {
   return gulp.src('./public/**/*.js')
-    .pipe(jshint())
+    .pipe(jshint().on('error', function(err) {
+      console.log('Lint: ', err);
+    }))
     .pipe(jshint.reporter(stylish));
 });
 
+/***************
+  Docs
+****************/
 gulp.task('js-doc', shell.task(['./node_modules/jsdoc/jsdoc.js -r ./public/js -d ./docs']));
 
+/****************
+  Serve
+ ****************/ 
 gulp.task('serve-docs', function() {
   connect.server({
     root: ['docs'],
@@ -32,6 +44,36 @@ gulp.task('serve', function() {
   	root: ['dev'],
     livereload: true
   });
+});
+
+gulp.task('serve-dist', function() {
+  connect.server({
+    root: ['dist'],
+    livereload: 8880
+  });
+});
+
+/******************
+  Clean
+*******************/
+gulp.task('dev-clean', function() {
+
+  return gulp.src('./dev/*', { read: false }).pipe(rimraf().on('error', function(err) {
+
+    console.log('Rimraf: ', err)
+
+  }));
+
+});
+
+gulp.task('dist-clean', function() {
+
+  return gulp.src('./dist/*', { read: false }).pipe(rimraf().on('error', function(err) {
+
+    console.log('Rimraf: ', err)
+
+  }));
+
 });
 
 /******************
@@ -87,14 +129,12 @@ gulp.task('dev-js', function() {
 gulp.task('dist-js', function() {
 
     gulp.src('./public/js/**/*.js')
-    .pipe(sourcemaps.init())
     .pipe(babel().on('error', function(e){
             console.log('Bablify Error: ', e);
          }))
     .pipe(uglify().on('error', function(e){
             console.log('Uglify Error: ', e);
          }))
-    .pipe(sourcemaps.write('../maps'))
     .pipe(gulp.dest('./dist/js'));
 
 });
@@ -136,8 +176,8 @@ gulp.task('dist-concat-minify', function() {
 *******************/
 gulp.task('dev', ['dev-copy', 'dev-styles', 'lint', 'dev-js', 'dev-concat-minify', 'js-doc', 'watch']);
 gulp.task('dist', ['dist-copy', 'dist-styles', 'lint', 'dist-js', 'dist-concat-minify']);
-gulp.task('default', ['dev']);
-gulp.task('watch', function() {
+gulp.task('default', ['dev', 'serve', 'serve-docs']);
+gulp.task('watch', ['dev-copy', 'dev-styles', 'lint', 'dev-js', 'dev-concat-minify', 'js-doc'], function() {
 
 	gulp.watch(['./public/**/*'], ['dev']);
 

@@ -62,7 +62,8 @@ body {
 		
 		margin-left: auto;
 		margin-right: auto;
-		margin-top: 7%;
+		margin-top: 3%;
+		margin-bottom: 3%;
 		width: 60%;
 
 	}
@@ -91,11 +92,29 @@ body {
 
 		}
 
+		.small-text {
+
+			font-size: 0.7em;
+
+		}
+
 		.val-check-good {
 
 			color: $good-text-color;
 
 		}
+
+	}
+
+	.guest-button {
+
+		margin-bottom: 1em;
+
+	}
+
+	.location-button {
+
+		margin-bottom: 4.1em;
 
 	}
 
@@ -157,17 +176,31 @@ body {
 
 	.mdl-card__supporting-text p.event-content {
 
-		font-size: 1.7em;
+		font-size: 1.6em;
 
 	}
 
-	@media screen and (max-width: 1000px) {
+	.address-container {
+		
+		text-align: left;
+		margin-left: 15%;
+
+	}
+
+	@media screen and (min-width: 767px) and (max-width: 1000px) {
 
 		.center-container {
 
 			margin-left: auto;
 			margin-right: auto;
 			width: 95%;
+
+		}
+
+		.left-container {
+
+			text-align: left;
+			padding-left: 0.5em;
 
 		}
 
@@ -187,12 +220,82 @@ body {
 		
 			margin-left: auto;
 			margin-right: auto;
-			margin-top: 7%;
+			margin-top: 4%;
+			margin-bottom: 4%;
 			width: 95%;
 
 		}
 
 		.mdl-card__supporting-text p.event-content {}
+
+		.address-container {
+		
+			text-align: left;
+			margin-left: 20%;
+
+		}
+
+		.location-button {
+
+			margin-bottom: 4.1em;
+
+		}
+
+	}	
+
+	@media screen and (max-width: 767px) {
+
+		.center-container {
+
+			margin-left: auto;
+			margin-right: auto;
+			width: 95%;
+
+		}
+
+		.left-container {
+
+			text-align: left;
+			padding-left: 0.5em;
+
+		}
+
+		.link {
+			
+			line-height: 2.25em;
+
+		}
+
+		.mdl-layout__content {
+
+			padding-bottom: 5em;
+
+		}
+
+		.vert-cent {
+		
+			margin-left: auto;
+			margin-right: auto;
+			margin-top: 4%;
+			margin-bottom: 4%;
+			width: 95%;
+
+		}
+
+		.mdl-card__supporting-text p.event-content {}
+
+		.address-container {
+		
+			text-align: left;
+			margin-left: 5%;
+
+		}
+
+		.location-button {
+
+			margin-bottom: 1em;
+
+		}
 
 	}
 

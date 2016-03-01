@@ -1,4 +1,4 @@
-<section class="mdl-layout__tab-panel is-active" id="user-info-tab">
+<section class="mdl-layout__tab-panel" id="user-info-tab">
 	
 	<div class="page-content">
 
@@ -9,83 +9,217 @@
 
 		</div>
 
-		<!-- User info form -->
-		<div id="user-info-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
+		<div id="user-info-container" hidden="true">
 
-			<div class="mdl-card__title">
+			<!-- User info form -->
+			<div class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
 
-				<h2 class="mdl-card__title-text">User Info</h2>
+				<div class="mdl-card__title">
+
+					<h2 class="mdl-card__title-text">User Info</h2>
+
+				</div>
+				
+				<!-- Card Content -->
+				<div class="mdl-card__supporting-text">
+
+					<form action="javascript:app.userInfo.saveInfo()" class="authForm" autocomplete="on">
+
+						<p>
+
+							<div id="user-name-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-name" title="Name">
+
+									What's your name?
+									
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" oninput="UserInfo.checkFields()" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div id="user-organization-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-employer" title="Employer">
+
+									Where do you work?
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-employer" type="text" title="Employer" name="organization">
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div id="user-job-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-title" title="Title">
+
+									What's your job title?
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-title" type="text" title="Title" name="organization-title">
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div id="user-bday-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-birthday" title="Birthday">
+
+									When's your birthday?
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')">
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-user-info-button" type="submit" value="Update Info" title="Update Info">
+
+						</p>
+
+					</form>
+
+				</div>
 
 			</div>
-			
-			<!-- Card Content -->
-			<div class="mdl-card__supporting-text">
 
-				<form action="javascript:app.userInfo.saveInfo()" class="authForm" autocomplete="on">
+			<!-- Change Password form -->
+			<div class="card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown">
+
+				<div class="mdl-card__title">
+
+					<h2 class="mdl-card__title-text">Change Password</h2>
+
+				</div>
+				
+				<!-- Card Content -->
+				<div class="mdl-card__supporting-text">
+
+					<form action="javascript:app.userInfo.changePassword()" class="authForm" autocomplete="on">
+
+						<p>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-old-password" title="Old Password">
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-old-password" type="password" name="old-password" title="Old Password" placeholder="Old Password" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-new-password" title="New Password">
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-new-password" type="password" name="new-password" title="New Password" oninput="UserInfo.checkPasswords()" placeholder="New Password" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+								<label class="mdl-textfield__label" for="user-info-new-password-repeated" title="New Password Repeated">
+
+								</label>
+
+								<input class="mdl-textfield__input" id="user-info-new-password-repeated" type="password" name="new-password-repeated" title="New Password Repeated" oninput="UserInfo.checkPasswords()" placeholder="New Password Repeated" required>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="change-password-button" type="submit" value="Change Password" title="Change Password">
+
+						</p>
+
+					</form>
 
 					<p>
 
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<div class="center-container">
 
-							<label class="mdl-textfield__label" for="user-info-name" title="Name">
+							<div class="left-container">
 
-							</label>
+								<p>
 
-							<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" oninput="UserInfo.checkFields()" placeholder="Whooo are you?  Who who" required>
+									<span class="val-check-bad" id="user-val-check-required"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-email"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-length"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-upper"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-lower"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-number"></span>
+
+								</p>
+
+								<p>
+
+									<span class="val-check-bad" id="user-val-check-match"></span>
+
+								</p>
+
+							</div>
 
 						</div>
 
 					</p>
 
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="user-info-employer" title="Employer">
-
-							</label>
-
-							<input class="mdl-textfield__input" id="user-info-employer" type="text" title="Employer" name="organization" placeholder="Where do you work?">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="user-info-title" title="Title">
-
-							</label>
-
-							<input class="mdl-textfield__input" id="user-info-title" type="text" title="Title" name="organization-title" placeholder="What's your job title?">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="user-info-birthday" title="Birthday">
-
-							</label>
-
-							<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="When's your birthday?">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-user-info-button" type="submit" value="Update Info" title="Update Info">
-
-					</p>
-
-				</form>
+				</div>
 
 			</div>
 

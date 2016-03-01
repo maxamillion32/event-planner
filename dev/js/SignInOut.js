@@ -75,6 +75,13 @@ var SignInOut = function (document) {
           * @type {Object}
           */
 			this.extraRef = undefined;
+
+			/**
+          * Users email
+          * @member SignInOut#email
+          * @type {string}
+          */
+			this.email = undefined;
 		}
 
 		/**
@@ -100,7 +107,6 @@ var SignInOut = function (document) {
 			value: function authHandler(error, authData) {
 
 				_signInSpinner.hidden = true;
-				SignUp.signUpSpinner.hidden = true;
 
 				if (error) {
 
@@ -114,6 +120,8 @@ var SignInOut = function (document) {
 
 					Displayer.signInContainerEl.hidden = false;
 				} else {
+
+					this.email = authData.password.email;
 
 					/**
             * Firebase user route reference
@@ -157,7 +165,17 @@ var SignInOut = function (document) {
 					// Dispatch/Trigger/Fire the event
 					document.dispatchEvent(new CustomEvent("signed-in"));
 
-					Displayer.showEventPlanner();
+					//Show the correct view
+					if (Displayer.addEventsTabEl.className.indexOf('is-active') > -1) {
+
+						Displayer.showEventPlanner();
+					} else if (Displayer.showEventsTabEl.className.indexOf('is-active') > -1) {
+
+						Displayer.showEventContainer();
+					} else {
+
+						Displayer.showUserInfo();
+					}
 
 					Displayer.showSnackbar('You are one AWESOME Signer Inner!... Go You! :-D');
 				}
@@ -180,6 +198,7 @@ var SignInOut = function (document) {
 				var password = passwordIn || _signInPasswordEl.value;
 
 				Displayer.signInContainerEl.hidden = true;
+				SignUp.signUpSpinner.hidden = true;
 				_signInSpinner.hidden = false;
 
 				// Sign in with an email/password combination
@@ -227,6 +246,7 @@ var SignInOut = function (document) {
 				this.userRef = undefined;
 				this.eventRef = undefined;
 				this.extraRef = undefined;
+				this.email = undefined;
 
 				_signOutLinkEl.hidden = true;
 				_signInLinkEl.hidden = false;
@@ -257,66 +277,6 @@ var SignInOut = function (document) {
 			}
 
 			/**
-    * SgnIn Password Element
-    * @return {Object} SignIn Password Element
-    * @memberof SignInOut
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'signInPasswordEl',
-			get: function get() {
-
-				return _signInPasswordEl;
-			}
-
-			/**
-    * SignOut Link Element
-    * @return {Object} SignOut Link Element
-    * @memberof SignInOut
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'signOutLinkEl',
-			get: function get() {
-
-				return _signOutLinkEl;
-			}
-
-			/**
-    * SignIn Link Element
-    * @return {Object} SignIn Link Element
-    * @memberof SignInOut
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'signInLinkEl',
-			get: function get() {
-
-				return _signInLinkEl;
-			}
-
-			/**
-    * SignIn Button Element
-    * @return {Object} SignIn Button Element
-    * @memberof SignInOut
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'signInButton',
-			get: function get() {
-
-				return _signInButton;
-			}
-
-			/**
     * Indicates if we will be storing additional user info when signing in (after a signup)
     * @return {boolean} Indicates if we will be storing additional user info when signing in (after a signup)
     * @memberof SignInOut
@@ -342,19 +302,6 @@ var SignInOut = function (document) {
 			set: function set(pred) {
 
 				_storeExtra = pred;
-			}
-
-			/**
-    * Spinner that displays when signing in
-    * @memberOf  SignInOut
-    * @type {object}
-    */
-
-		}, {
-			key: 'signInSpinner',
-			get: function get() {
-
-				return _signInSpinner;
 			}
 		}]);
 

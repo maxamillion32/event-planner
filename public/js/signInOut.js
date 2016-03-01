@@ -69,6 +69,13 @@ var SignInOut = (function(document) {
 	         */
 			this.extraRef = undefined;
 
+			/**
+	         * Users email
+	         * @member SignInOut#email
+	         * @type {string}
+	         */
+			this.email = undefined;
+
 		}
 
 		/**
@@ -81,55 +88,6 @@ var SignInOut = (function(document) {
 		static get signInEmailEl() {
 
 			return _signInEmailEl;
-		}
-
-		/**
-		 * SgnIn Password Element
-		 * @return {Object} SignIn Password Element
-		 * @memberof SignInOut
-		 * @type {Object}
-		 * 
-		 */
-		static get signInPasswordEl() {
-
-			return _signInPasswordEl;
-		}
-
-		/**
-		 * SignOut Link Element
-		 * @return {Object} SignOut Link Element
-		 * @memberof SignInOut
-		 * @type {Object}
-		 * 
-		 */
-		static get signOutLinkEl() {
-
-			return _signOutLinkEl;
-		}
-
-		/**
-		 * SignIn Link Element
-		 * @return {Object} SignIn Link Element
-		 * @memberof SignInOut
-		 * @type {Object}
-		 * 
-		 */
-		static get signInLinkEl() {
-
-			return _signInLinkEl;
-		}
-
-		/**
-		 * SignIn Button Element
-		 * @return {Object} SignIn Button Element
-		 * @memberof SignInOut
-		 * @type {Object}
-		 * 
-		 */
-		static get signInButton() {
-
-			return _signInButton;
-
 		}
 
 		/**
@@ -156,17 +114,6 @@ var SignInOut = (function(document) {
 			_storeExtra = pred;
 		}
 
-		/**
-		 * Spinner that displays when signing in
-		 * @memberOf  SignInOut
-		 * @type {object}
-		 */
-		static get signInSpinner() {
-
-			return _signInSpinner;
-
-		}
-
 		/** 
 		*   @function validateSignIn
 		*   @memberof SignInOut
@@ -188,7 +135,6 @@ var SignInOut = (function(document) {
 		authHandler(error, authData) {
 
 			_signInSpinner.hidden = true;
-			SignUp.signUpSpinner.hidden = true;
 
 			if(error) {
 
@@ -204,6 +150,8 @@ var SignInOut = (function(document) {
 				Displayer.signInContainerEl.hidden = false;
 
 			} else {
+
+				this.email = authData.password.email;
 
 				/**
 		         * Firebase user route reference
@@ -248,7 +196,20 @@ var SignInOut = (function(document) {
 				// Dispatch/Trigger/Fire the event
 				document.dispatchEvent(new CustomEvent("signed-in"));
 
-				Displayer.showEventPlanner();
+				//Show the correct view
+				if(Displayer.addEventsTabEl.className.indexOf('is-active') > -1) {
+
+					Displayer.showEventPlanner();
+
+				} else if(Displayer.showEventsTabEl.className.indexOf('is-active') > -1) {
+
+					Displayer.showEventContainer();
+
+				} else {
+
+					Displayer.showUserInfo();
+
+				}	
 
 				Displayer.showSnackbar('You are one AWESOME Signer Inner!... Go You! :-D');
 
@@ -271,6 +232,7 @@ var SignInOut = (function(document) {
 			let password = 	passwordIn || _signInPasswordEl.value;
 
 			Displayer.signInContainerEl.hidden = true;
+			SignUp.signUpSpinner.hidden = true;
 			_signInSpinner.hidden = false;
 
 			// Sign in with an email/password combination
@@ -314,6 +276,7 @@ var SignInOut = (function(document) {
 			this.userRef = 					undefined;
 			this.eventRef = 				undefined;
 			this.extraRef = 				undefined;
+			this.email = 					undefined;
 
 			_signOutLinkEl.hidden = 		true;
 			_signInLinkEl.hidden = 			false;

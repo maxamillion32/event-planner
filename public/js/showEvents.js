@@ -3,6 +3,8 @@
 var ShowEvents = (function(document) {
 	'use strict';
 
+	let _noEventsContainerEl = document.getElementById('no-events-container');
+
 	/**
 	* Clear all child elements
 	*
@@ -25,78 +27,88 @@ var ShowEvents = (function(document) {
 
 		_clearEl(Displayer.eventContainerEl);
 
-		events.forEach(event => {
+		if(events === null || events.length === 0) {
 
-			//Create the card
-			let cardDiv = document.createElement('div');
-			cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown";
+			_noEventsContainerEl.hidden = false;
 
-			//Card Title
-			let cardTitleDiv = document.createElement('div');
-			cardTitleDiv.className = "mdl-card__title";
-			let headerDiv = document.createElement('h2');
-			headerDiv.className = "mdl-card__title-text";
-			headerDiv.appendChild(document.createTextNode(event.title));
+		} else {
 
-			let del = document.createElement('a');
-			del.setAttribute('href', "#");
-			del.setAttribute('title', "Delete");
-			del.className = "card-trash";
-			del.setAttribute('onclick', 'APP.removeEvent("' + event.id + '")');
-			del.innerHTML = '<i class="fa fa-trash-o"></i>';
+			_noEventsContainerEl.hidden = true;
 
-			headerDiv.appendChild(del);
-			cardTitleDiv.appendChild(headerDiv);
-			cardDiv.appendChild(cardTitleDiv);
+			events.forEach(event => {
 
-			//Card Body
-			let cardContentDiv = document.createElement('div');
-			cardContentDiv.className = "mdl-card__supporting-text";
-			let p = document.createElement('p');
-			p.className = 'event-content';
-			p.innerHTML = "<b>" + event.host + '</b> is hosting a ' + '<b>' + 
-			event.type + '</b> at ';
-			cardContentDiv.appendChild(p);
+				//Create the card
+				let cardDiv = document.createElement('div');
+				cardDiv.className = "card-width mdl-card mdl-shadow--2dp vert-cent animated slideInDown";
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			p.innerHTML = event.address + '<br />' + event.city + ', ' + 
-			event.state + ' ' + event.zip + '<br />' + event.country;
-			cardContentDiv.appendChild(p);
+				//Card Title
+				let cardTitleDiv = document.createElement('div');
+				cardTitleDiv.className = "mdl-card__title";
+				let headerDiv = document.createElement('h2');
+				headerDiv.className = "mdl-card__title-text";
+				headerDiv.appendChild(document.createTextNode(event.title));
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			p.appendChild(document.createTextNode("on"));
-			cardContentDiv.appendChild(p);
+				let del = document.createElement('a');
+				del.setAttribute('href', "#");
+				del.setAttribute('title', "Delete");
+				del.className = "card-trash";
+				del.setAttribute('onclick', 'app.showEvents.removeEvent("' + event.id + '")');
+				del.innerHTML = '<i class="fa fa-trash-o"></i>';
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			let begin = new Date(event.begin);
-			let end = new Date(event.end);
-			p.innerHTML = '<b>' + begin.toLocaleString() + '</b>' + ' to ' + 
-			'<b>' + end.toLocaleString() + '</b>';
-			cardContentDiv.appendChild(p);
+				headerDiv.appendChild(del);
+				cardTitleDiv.appendChild(headerDiv);
+				cardDiv.appendChild(cardTitleDiv);
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			let guestlist = 'Everybody who\'s anybody is going including ';
-			event.guests.forEach(guest => {
+				//Card Body
+				let cardContentDiv = document.createElement('div');
+				cardContentDiv.className = "mdl-card__supporting-text";
+				let p = document.createElement('p');
+				p.className = 'event-content';
+				p.innerHTML = "<b>" + event.host + '</b> is hosting a ' + '<b>' + 
+				event.type + '</b> at ';
+				cardContentDiv.appendChild(p);
 
-				guestlist += '<b>' + guest.value + '</b> ';
+				p = document.createElement('p');
+				p.className = 'event-content';
+				p.innerHTML = event.address + '<br />' + event.city + ', ' + 
+				event.state + ' ' + event.zip + '<br />' + event.country;
+				cardContentDiv.appendChild(p);
+
+				p = document.createElement('p');
+				p.className = 'event-content';
+				p.appendChild(document.createTextNode("on"));
+				cardContentDiv.appendChild(p);
+
+				p = document.createElement('p');
+				p.className = 'event-content';
+				let begin = new Date(event.begin);
+				let end = new Date(event.end);
+				p.innerHTML = '<b>' + begin.toLocaleString() + '</b>' + ' to ' + 
+				'<b>' + end.toLocaleString() + '</b>';
+				cardContentDiv.appendChild(p);
+
+				p = document.createElement('p');
+				p.className = 'event-content';
+				let guestlist = 'Everybody who\'s anybody is going including ';
+				event.guests.forEach(guest => {
+
+					guestlist += '<b>' + guest.value + '</b> ';
+
+				});
+				p.innerHTML = guestlist;
+				cardContentDiv.appendChild(p);
+
+				p = document.createElement('p');
+				p.className = 'event-content';
+				p.innerHTML = 'and <b>' + event.host + '</b> wishes to let you know that<br/>' + event.message;
+				cardContentDiv.appendChild(p);
+
+				cardDiv.appendChild(cardContentDiv);
+				Displayer.eventContainerEl.appendChild(cardDiv);
 
 			});
-			p.innerHTML = guestlist;
-			cardContentDiv.appendChild(p);
 
-			p = document.createElement('p');
-			p.className = 'event-content';
-			p.innerHTML = 'and <b>' + event.host + '</b> wishes to let you know that<br/>' + event.message;
-			cardContentDiv.appendChild(p);
-
-			cardDiv.appendChild(cardContentDiv);
-			Displayer.eventContainerEl.appendChild(cardDiv);
-
-		});
+		}
 
 	}
 	
@@ -107,7 +119,7 @@ var ShowEvents = (function(document) {
 	 */
 	function _handleError(err) {
 
-		console.log('Error: ', err);
+		Displayer.showSnackbar('We totally failed to retrieve the event data. :-(');
 
 	}
 
@@ -184,6 +196,40 @@ var ShowEvents = (function(document) {
 			} catch(e) {
 
 				//Sometimes we end up here signing out
+
+			}
+
+		}
+
+		/**
+		 * Remove an event from events
+		 * @function removeEvent
+		 * @memberof ShowEvents
+		 * @param  {string} id Dom id of event to remove
+		 * @instance
+		 * 
+		 */
+		removeEvent(id) {
+
+			let index = -1;
+
+			for(let i = 0; i < this.events.length; ++i) {
+
+				if(id === this.events[i].id) {
+
+					index = i;
+					break;
+
+				}
+
+			}
+
+			if(index !== -1) {
+
+				let l = this.events.length > 1 ? 1 : undefined;
+
+				this.events = this.events.splice(index, l);
+				this.eventRef.set(this.events);
 
 			}
 

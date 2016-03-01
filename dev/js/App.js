@@ -86,7 +86,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			// Fired after the user signs up
 			document.addEventListener("signed-up", function () {
 
-				this.signInOut.signIn(this.signUp.signupEmailEl.value, this.signUp.signupPasswordEl.value);
+				this.signInOut.signIn(SignUp.signupEmailEl.value, SignUp.signupPasswordEl.value);
 			}.bind(this));
 
 			// Fired after user signs in
@@ -95,6 +95,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 				this.eventPlanner.eventRef = this.signInOut.eventRef;
 				this.showEvents.eventRef = this.signInOut.eventRef;
 				this.userInfo.extraRef = this.signInOut.extraRef;
+				this.userInfo.ref = fbRef;
+				this.userInfo.email = this.signInOut.email;
 
 				this.showEvents.listenForEvents();
 				this.userInfo.listenForData();

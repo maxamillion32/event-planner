@@ -121,21 +121,6 @@ var ResetPassword = function (document) {
 
 				return _resetPasswordEmailEl;
 			}
-
-			/**
-    * Reset Password Spinner Element
-    * @return {Object} Reset Password Spinner Element
-    * @memberof ResetPassword
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'resetPasswordSpinnerEl',
-			get: function get() {
-
-				return _resetPasswordSpinnerEl;
-			}
 		}]);
 
 		return ResetPassword;

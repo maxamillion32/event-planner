@@ -31,7 +31,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -47,7 +47,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-email" type="email" name="email" title="Email" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -63,7 +63,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -79,7 +79,7 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp(true)" required>
+					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp()" required>
 
 				</div>
 
@@ -187,12 +187,6 @@
 					<p>
 
 						<span class="val-check-bad" id="val-check-length"></span>
-
-					</p>
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-special"></span>
 
 					</p>
 

@@ -20,6 +20,8 @@ var Displayer = function (document) {
 	var _snackbarMessageEl = document.getElementById('snackbar-message');
 	var _contentEl = document.getElementById('content');
 	var _loadingEl = document.getElementById('loading');
+	var _addEventsTabEl = document.getElementById('add-events-tab');
+	var _showEventsTabEl = document.getElementById('show-events-tab');
 
 	/**
   * Shows and hides blocks, like a super simple router
@@ -57,7 +59,7 @@ var Displayer = function (document) {
     */
 			value: function showSnackbar(message) {
 
-				Displayer.snackbarMessageEl.MaterialSnackbar.showSnackbar({
+				_snackbarMessageEl.MaterialSnackbar.showSnackbar({
 
 					message: message,
 					timeout: 4000
@@ -77,12 +79,18 @@ var Displayer = function (document) {
 
 				_signInContainerEl.hidden = true;
 				_eventPlannerContainerEl.hidden = true;
-				_signUpContainerEl.hidden = false;
 				_resetPasswordContainerEl.hidden = true;
 				_showEventContainerEl.hidden = true;
 				_userInfoContainerEl.hidden = true;
+				_signUpContainerEl.hidden = false;
 
 				SignUp.validateSignUp(true); //<-Validate the sign up
+
+				setTimeout(function () {
+
+					SignUp.signupNameEl.focus();
+					SignUp.signupNameEl.scrollIntoView();
+				});
 			}
 
 			/**
@@ -95,12 +103,18 @@ var Displayer = function (document) {
 			key: 'showSignIn',
 			value: function showSignIn() {
 
-				_signInContainerEl.hidden = false;
 				_eventPlannerContainerEl.hidden = true;
 				_signUpContainerEl.hidden = true;
 				_resetPasswordContainerEl.hidden = true;
 				_showEventContainerEl.hidden = true;
 				_userInfoContainerEl.hidden = true;
+				_signInContainerEl.hidden = false;
+
+				setTimeout(function () {
+
+					SignInOut.signInEmailEl.focus();
+					SignInOut.signInEmailEl.scrollIntoView();
+				});
 			}
 
 			/**
@@ -114,13 +128,19 @@ var Displayer = function (document) {
 			value: function showEventPlanner() {
 
 				_signInContainerEl.hidden = true;
-				_eventPlannerContainerEl.hidden = false;
 				_signUpContainerEl.hidden = true;
 				_resetPasswordContainerEl.hidden = true;
 				_showEventContainerEl.hidden = true;
 				_userInfoContainerEl.hidden = true;
+				_eventPlannerContainerEl.hidden = false;
 
 				EventPlanner.checkEventFields(); //<-Check event fields
+
+				setTimeout(function () {
+
+					EventPlanner.eventNameEl.focus();
+					EventPlanner.eventNameEl.scrollIntoView();
+				});
 			}
 
 			/**
@@ -136,9 +156,15 @@ var Displayer = function (document) {
 				_signInContainerEl.hidden = true;
 				_eventPlannerContainerEl.hidden = true;
 				_signUpContainerEl.hidden = true;
-				_resetPasswordContainerEl.hidden = false;
 				_showEventContainerEl.hidden = true;
 				_userInfoContainerEl.hidden = true;
+				_resetPasswordContainerEl.hidden = false;
+
+				setTimeout(function () {
+
+					ResetPassword.resetPasswordEmailEl.focus();
+					ResetPassword.resetPasswordEmailEl.scrollIntoView();
+				});
 			}
 
 			/**
@@ -155,8 +181,8 @@ var Displayer = function (document) {
 				_eventPlannerContainerEl.hidden = true;
 				_signUpContainerEl.hidden = true;
 				_resetPasswordContainerEl.hidden = true;
-				_showEventContainerEl.hidden = false;
 				_userInfoContainerEl.hidden = true;
+				_showEventContainerEl.hidden = false;
 			}
 
 			/**
@@ -175,6 +201,13 @@ var Displayer = function (document) {
 				_resetPasswordContainerEl.hidden = true;
 				_showEventContainerEl.hidden = true;
 				_userInfoContainerEl.hidden = false;
+
+				setTimeout(function () {
+
+					UserInfo.userInfoNameEl.focus();
+					UserInfo.userInfoNameEl.scrollIntoView();
+					UserInfo.checkPasswords();
+				});
 			}
 		}, {
 			key: 'signInContainerEl',
@@ -244,21 +277,6 @@ var Displayer = function (document) {
 			}
 
 			/**
-    * Show Event Container Element
-    * @return {Object} Show Event Container Element
-    * @memberof Displayer
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'showEventContainerEl',
-			get: function get() {
-
-				return _showEventContainerEl;
-			}
-
-			/**
     * User Info Container Element
     * @return {Object} User Info Container Element
     * @memberof Displayer
@@ -271,21 +289,6 @@ var Displayer = function (document) {
 			get: function get() {
 
 				return _userInfoContainerEl;
-			}
-
-			/**
-    * Snackbar Element
-    * @return {Object} Snackbar Element
-    * @memberof Displayer
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'snackbarMessageEl',
-			get: function get() {
-
-				return _snackbarMessageEl;
 			}
 
 			/**
@@ -316,6 +319,36 @@ var Displayer = function (document) {
 			get: function get() {
 
 				return _loadingEl;
+			}
+
+			/**
+    * Add Events Tab Element
+    * @return {Object} Add Events Tab Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'addEventsTabEl',
+			get: function get() {
+
+				return _addEventsTabEl;
+			}
+
+			/**
+    * Show Events Tab Element
+    * @return {Object} Show Events Tab Element
+    * @memberof Displayer
+    * @type {Object}
+    * 
+    */
+
+		}, {
+			key: 'showEventsTabEl',
+			get: function get() {
+
+				return _showEventsTabEl;
 			}
 		}]);
 

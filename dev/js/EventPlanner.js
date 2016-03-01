@@ -36,6 +36,16 @@ var EventPlanner = function (document) {
 	var _submitEventButton = document.getElementById('submit-event-button');
 	var _addButton = document.getElementById('add-button');
 	var _eventPlannerSpinnerEl = document.getElementById('event-planner-spinner');
+	var _addressContainerEl = document.getElementById('address-container');
+	var _eventHostDiv = document.getElementById('event-host-div');
+	var _locationInputDiv = document.getElementById('location-input-div');
+	var _addressReminderEl = document.getElementById('address-reminder');
+	var _addressDivEl = document.getElementById('address-div');
+	var _cityDivEl = document.getElementById('city-div');
+	var _stateDivEl = document.getElementById('state-div');
+	var _zipDivEl = document.getElementById('zip-div');
+	var _countryDivEl = document.getElementById('country-div');
+	var _locationButtonEl = document.getElementById('location-button');
 	var _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	var _autocomplete = undefined;
 
@@ -123,26 +133,31 @@ var EventPlanner = function (document) {
 					//Address2
 					case 'route':
 						_streetNumberEl.value += ' ' + component.short_name;
+						_addressDivEl.className += ' is-dirty';
 						break;
 
 					//City
 					case 'locality':
 						_cityEl.value = component.short_name;
+						_cityDivEl.className += ' is-dirty';
 						break;
 
 					//State
 					case 'administrative_area_level_1':
 						_stateEl.value = component.short_name;
+						_stateDivEl.className += ' is-dirty';
 						break;
 
 					//Zip
 					case 'postal_code':
 						_postalCodeEl.value = component.short_name;
+						_zipDivEl.className += ' is-dirty';
 						break;
 
 					//Country
 					case 'country':
 						_countryEl.value = component.short_name;
+						_countryDivEl.className += ' is-dirty';
 						break;
 
 				}
@@ -161,6 +176,12 @@ var EventPlanner = function (document) {
 				}
 			}
 		}
+
+		_addressReminderEl.innerHTML = '';
+
+		_locationButtonEl.className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect guest-button';
+
+		_addressContainerEl.hidden = false;
 
 		EventPlanner.checkEventFields();
 	}
@@ -206,36 +227,8 @@ var EventPlanner = function (document) {
 
 
 		_createClass(EventPlanner, [{
-			key: 'removeEvent',
+			key: 'geolocate',
 
-
-			/**
-    * Remove an event from events
-    * @function removeEvent
-    * @memberof EventPlanner
-    * @param  {string} id Dom id of event to remove
-    * @instance
-    * 
-    */
-			value: function removeEvent(id) {
-
-				var index = -1;
-
-				for (var i = 0; i < this.events.length; ++i) {
-
-					if (id === this.events[i].id) {
-
-						index = i;
-						break;
-					}
-				}
-
-				if (index !== -1) {
-
-					this.events = this.events.splice(index, 1);
-					this.eventRef.set(this.events);
-				}
-			}
 
 			/**
     *  Get the location
@@ -244,9 +237,6 @@ var EventPlanner = function (document) {
     *  @instance
     * 
     */
-
-		}, {
-			key: 'geolocate',
 			value: function geolocate() {
 
 				if (navigator.geolocation) {
@@ -357,8 +347,47 @@ var EventPlanner = function (document) {
 				this.eventRef = undefined;
 			}
 		}], [{
-			key: 'checkEventFields',
+			key: 'setCurrentAddress',
 
+
+			/**
+    * Set the location input as the current Address
+    * @function setCurrentAddress
+    * @memberof EventPlanner
+    * 
+    */
+			value: function setCurrentAddress() {
+
+				if (navigator.geolocation) {
+
+					navigator.geolocation.getCurrentPosition(function (position) {
+
+						var geocoder = new google.maps.Geocoder();
+						var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+						geocoder.geocode({
+
+							'location': latlng
+						}, function (results, status) {
+
+							if (status == google.maps.GeocoderStatus.OK) {
+
+								_locationInputEl.value = results[0].formatted_address;
+								_locationInputDiv.className += ' is-dirty';
+								_locationInputEl.focus();
+
+								Displayer.showSnackbar('Address set! :-)');
+							} else {
+
+								Displayer.showSnackbar('Sorry, we could\'t get your location. :-(');
+							}
+						});
+					});
+				} else {
+
+					Displayer.showSnackbar('Location unavailable :-(');
+				}
+			}
 
 			/**
     *  Checks if fields are completed
@@ -366,6 +395,9 @@ var EventPlanner = function (document) {
     * 	@memberof EventPlanner
     * 
     */
+
+		}, {
+			key: 'checkEventFields',
 			value: function checkEventFields() {
 
 				var completed = 0;
@@ -473,21 +505,6 @@ var EventPlanner = function (document) {
 			}
 
 			/**
-    * Event Type Element
-    * @return {Object} Event Type Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'eventTypeEl',
-			get: function get() {
-
-				return _eventTypeEl;
-			}
-
-			/**
     * Event Host Element
     * @return {Object} Event Host Element
     * @memberof EventPlanner
@@ -503,243 +520,18 @@ var EventPlanner = function (document) {
 			}
 
 			/**
-    * Start Date Element
-    * @return {Object} Start Date Element
+    * Event Host Div Element
+    * @return {Object} Event Host Div Element
     * @memberof EventPlanner
     * @type {Object}
     * 
     */
 
 		}, {
-			key: 'startDateEl',
+			key: 'eventHostDiv',
 			get: function get() {
 
-				return _startDateEl;
-			}
-
-			/**
-    * End Date Element
-    * @return {Object} End Date Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'endDateEl',
-			get: function get() {
-
-				return _endDateEl;
-			}
-
-			/**
-    * Content Element
-    * @return {Object} Content Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'contentEl',
-			get: function get() {
-
-				return _contentEl;
-			}
-
-			/**
-    * Input Element
-    * @return {Object} Input Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'inputEl',
-			get: function get() {
-
-				return _inputEl;
-			}
-
-			/**
-    * Location Element
-    * @return {Object} Location Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'locationInputEl',
-			get: function get() {
-
-				return _locationInputEl;
-			}
-
-			/**
-    * Street Number Element
-    * @return {Object} Street Number Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'streetNumberEl',
-			get: function get() {
-
-				return _streetNumberEl;
-			}
-
-			/**
-    * City Element
-    * @return {Object} City Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'cityEl',
-			get: function get() {
-
-				return _cityEl;
-			}
-
-			/**
-    * State Element
-    * @return {Object} State Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'stateEl',
-			get: function get() {
-
-				return _stateEl;
-			}
-
-			/**
-    * Postal Code Element
-    * @return {Object} Postal Code Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'postalCodeEl',
-			get: function get() {
-
-				return _postalCodeEl;
-			}
-
-			/**
-    * Country Element
-    * @return {Object} Country Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'countryEl',
-			get: function get() {
-
-				return _countryEl;
-			}
-
-			/**
-    * Message Element
-    * @return {Object} Message Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'messageEl',
-			get: function get() {
-
-				return _messageEl;
-			}
-
-			/**
-    * Progress Bar Element
-    * @return {Object} Progress Bar Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'progressBarEl',
-			get: function get() {
-
-				return _progressBarEl;
-			}
-
-			/**
-    * Progress Bar Label Element
-    * @return {Object} Progress Bar Label Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'progressBarLabelEl',
-			get: function get() {
-
-				return _progressBarLabelEl;
-			}
-
-			/**
-    * Submit Event Button Element
-    * @return {Object} Submit Event Button Element
-    * @memberof EventPlanner
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'submitEventButton',
-			get: function get() {
-
-				return _submitEventButton;
-			}
-
-			/**
-    * Add a guest
-    * @return { object } Add a guest
-    * @memberof EventPlanner
-    * @type { object }
-    * 
-    */
-
-		}, {
-			key: 'addButton',
-			get: function get() {
-
-				return _addButton;
-			}
-
-			/**
-    * Event Planner Spinner Element
-    * @return { object } Event Planner Spinner Element
-    * @memberof EventPlanner
-    * @type { object }
-    * 
-    */
-
-		}, {
-			key: 'eventPlannerSpinnerEl',
-			get: function get() {
-
-				return _eventPlannerSpinnerEl;
+				return _eventHostDiv;
 			}
 		}]);
 

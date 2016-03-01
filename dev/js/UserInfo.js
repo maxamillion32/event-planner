@@ -15,8 +15,100 @@ var UserInfo = function () {
 	var _userInfoBirthdayEl = document.getElementById('user-info-birthday');
 	var _submitUserInfoButtonEl = document.getElementById('submit-user-info-button');
 	var _userInfoSpinnerEl = document.getElementById('user-info-spinner');
+	var _userInfoOldPassword = document.getElementById('user-info-old-password');
+	var _userInfoNewPassword = document.getElementById('user-info-new-password');
+	var _userInfoNewPasswordRepeated = document.getElementById('user-info-new-password-repeated');
+	var _changePasswordButtonEl = document.getElementById('change-password-button');
+	var _userValCheckRequiredEl = document.getElementById('user-val-check-required');
+	var _userValCheckLengthEl = document.getElementById('user-val-check-length');
+	var _userValCheckUpperEl = document.getElementById('user-val-check-upper');
+	var _userValCheckLowerEl = document.getElementById('user-val-check-lower');
+	var _userValCheckNumberEl = document.getElementById('user-val-check-number');
+	var _userValCheckMatchEl = document.getElementById('user-val-check-match');
+	var _userNameDivEl = document.getElementById('user-name-div');
+	var _userOrganizationDivEl = document.getElementById('user-organization-div');
+	var _userJobDivEl = document.getElementById('user-job-div');
+	var _userBdayDivEl = document.getElementById('user-bday-div');
+
+	var _validator = new FV.Validator();
+	var _passwordField = new FV.Field("Password1", _userInfoNewPassword);
+	var _password2Field = new FV.Field("Password2", _userInfoNewPasswordRepeated, _userInfoNewPassword);
+
+	_passwordField.constraints = [new FV.Constraint(FV.Validator.MINLENGTH, "* Password must be at least 8 characters long.\n", 8), new FV.Constraint(FV.Validator.CONTAINSUPPER, "* Password must contain at least one upper case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSLOWER, "* Password must contain at least one lower case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSNUMBER, "* Password must contain at least one number.\n")];
+
+	_password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD, "* Must match your password.\n")];
+
+	_validator.fields = [_passwordField, _password2Field];
 
 	_submitUserInfoButtonEl.disabled = true;
+
+	/**
+  * Private function for showing good/bad auth messages
+  * @param  {array} errorTypes Holds the errors present
+  * 
+  */
+	function _checkValFields(errorTypes) {
+
+		if (errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
+
+			_userValCheckLengthEl.className = 'val-check-good';
+			_userValCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
+		} else {
+
+			_userValCheckLengthEl.className = 'val-check-bad';
+			_userValCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
+
+			_userValCheckUpperEl.className = 'val-check-good';
+			_userValCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
+		} else {
+
+			_userValCheckUpperEl.className = 'val-check-bad';
+			_userValCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
+
+			_userValCheckLowerEl.className = 'val-check-good';
+			_userValCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
+		} else {
+
+			_userValCheckLowerEl.className = 'val-check-bad';
+			_userValCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 && _userInfoNewPassword.value !== '' && _userInfoNewPasswordRepeated.value !== '') {
+
+			_userValCheckMatchEl.className = 'val-check-good';
+			_userValCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Passwords must match';
+		} else {
+
+			_userValCheckMatchEl.className = 'val-check-bad';
+			_userValCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Passwords must match';
+		}
+
+		if (errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
+
+			_userValCheckNumberEl.className = 'val-check-good';
+			_userValCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one number';
+		} else {
+
+			_userValCheckNumberEl.className = 'val-check-bad';
+			_userValCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one number';
+		}
+
+		if (_userInfoOldPassword === '' || _userInfoNewPassword.value === '' || _userInfoNewPasswordRepeated.value === '') {
+
+			_userValCheckRequiredEl.className = 'val-check-bad';
+			_userValCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;All required fields must be filled out';
+		} else {
+
+			_userValCheckRequiredEl.className = 'val-check-good';
+			_userValCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;All required fields must be filled out';
+		}
+	}
 
 	/**
   * Add info to the page
@@ -27,9 +119,40 @@ var UserInfo = function () {
 		var info = snapshot.val();
 
 		_userInfoNameEl.value = info.name;
+
+		if (_userInfoNameEl.value) {
+
+			_userNameDivEl.className += ' is-dirty';
+		}
+
 		_userInfoEmployerEl.value = info.employer;
+
+		if (_userInfoEmployerEl.value) {
+
+			_userOrganizationDivEl.className += ' is-dirty';
+		}
+
 		_userInfoTitleEl.value = info.title;
+
+		if (_userInfoTitleEl.value) {
+
+			_userJobDivEl.className += ' is-dirty';
+		}
+
 		_userInfoBirthdayEl.value = info.birthday;
+
+		if (_userInfoBirthdayEl.value) {
+
+			_userBdayDivEl.className += ' is-dirty';
+		}
+
+		//Set the form to our name
+		EventPlanner.eventHostEl.value = info.name;
+
+		if (EventPlanner.eventHostEl.value) {
+
+			EventPlanner.eventHostDiv.className += ' is-dirty';
+		}
 
 		UserInfo.checkFields();
 	}
@@ -41,7 +164,7 @@ var UserInfo = function () {
   */
 	function _handleError(err) {
 
-		console.log('Error: ', err);
+		Displayer.showSnackbar('Sorry!  There was an error.  :-(');
 	}
 
 	/**
@@ -56,15 +179,29 @@ var UserInfo = function () {
       * @constructs UserInfo
       */
 
-		function UserInfo(extraRef) {
+		function UserInfo(extraRef, ref) {
 			_classCallCheck(this, UserInfo);
 
 			/**
           * The events
           * @member UserInfo#extraRef
-          * @type {array}
+          * @type {object}
           */
 			this.extraRef = extraRef;
+
+			/**
+          * Firebase ref
+          * @member UserInfo#ref
+          * @type {object}
+          */
+			this.ref = ref;
+
+			/**
+          * Users email
+          * @member UserInfo#email
+          * @type {string}
+          */
+			this.email = undefined;
 		}
 
 		/**
@@ -77,8 +214,63 @@ var UserInfo = function () {
 
 
 		_createClass(UserInfo, [{
-			key: 'saveInfo',
+			key: 'changePassword',
 
+
+			/**
+    * Changes the users password
+    * @function changePassword
+    * @memberof UserInfo
+    * @instance
+    * 
+    */
+			value: function changePassword() {
+
+				_userInfoSpinnerEl.hidden = false;
+				Displayer.userInfoContainerEl.hidden = true;
+
+				this.ref.changePassword({
+
+					email: this.email,
+					oldPassword: _userInfoOldPassword.value,
+					newPassword: _userInfoNewPassword.value
+
+				}, function (error) {
+
+					_userInfoSpinnerEl.hidden = true;
+					Displayer.userInfoContainerEl.hidden = false;
+
+					if (error) {
+
+						switch (error.code) {
+
+							case "INVALID_PASSWORD":
+
+								Displayer.showSnackbar('Sorry!  The password is incorrect.  :-(');
+								break;
+
+							case "INVALID_USER":
+
+								Displayer.showSnackbar('Sorry!  The user account doesn\'t exist.  :-(');
+								break;
+
+							default:
+
+								Displayer.showSnackbar('Sorry!  There was an error changing your password.  :-(');
+
+						}
+					} else {
+
+						Displayer.showSnackbar('Nice!  You just got yourself a brand new password.  :-)');
+					}
+
+					//Reset Vals
+					_userInfoOldPassword.value = '';
+					_userInfoNewPassword.value = '';
+					_userInfoNewPasswordRepeated.value = '';
+					UserInfo.checkPasswords();
+				});
+			}
 
 			/**
     * Updates the user info
@@ -87,6 +279,9 @@ var UserInfo = function () {
     * @instance
     * 
     */
+
+		}, {
+			key: 'saveInfo',
 			value: function saveInfo() {
 
 				_userInfoSpinnerEl.hidden = false;
@@ -152,11 +347,16 @@ var UserInfo = function () {
 				this.extraRef.off("value", _addInfo, _handleError);
 
 				this.extraRef = undefined;
+				this.ref = undefined;
+				this.email = undefined;
 
 				_userInfoNameEl.value = '';
 				_userInfoEmployerEl.value = '';
 				_userInfoTitleEl.value = '';
 				_userInfoBirthdayEl.value = '';
+				_userInfoOldPassword = '';
+				_userInfoNewPassword = '';
+				_userInfoNewPasswordRepeated = '';
 			}
 		}], [{
 			key: 'checkFields',
@@ -171,86 +371,63 @@ var UserInfo = function () {
 
 				_submitUserInfoButtonEl.disabled = _userInfoNameEl.value === '';
 			}
+
+			/**
+    * Check Password Validation
+    * @function checkPasswords
+    * @memberof UserInfo
+    * 
+    */
+
+		}, {
+			key: 'checkPasswords',
+			value: function checkPasswords() {
+
+				var errors = _validator.checkForErrors();
+				var errorTypes = [];
+				var passwordErrors = "";
+				var password2Errors = "";
+
+				errors.forEach(function (error) {
+
+					switch (error.name) {
+
+						case "Password1":
+
+							passwordErrors += error.error;
+							errorTypes.push(error.type);
+							break;
+
+						case "Password2":
+
+							password2Errors += error.error;
+							errorTypes.push(error.type);
+							break;
+
+					}
+				});
+
+				if (passwordErrors !== '') {
+
+					passwordErrors = "Please correct the following errors:\n" + passwordErrors;
+				}
+
+				if (password2Errors !== '') {
+
+					password2Errors = "Please correct the following errors:\n" + password2Errors;
+				}
+
+				_userInfoNewPassword.setCustomValidity(passwordErrors);
+				_userInfoNewPasswordRepeated.setCustomValidity(password2Errors);
+
+				_changePasswordButtonEl.disabled = errorTypes.length > 0;
+				_checkValFields(errorTypes);
+			}
 		}, {
 			key: 'userInfoNameEl',
 			get: function get() {
 
 				return _userInfoNameEl;
-			}
-
-			/**
-    * Employer Element
-    * @return {Object} Employer Element
-    * @memberof UserInfo
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'userInfoEmployerEl',
-			get: function get() {
-
-				return _userInfoEmployerEl;
-			}
-
-			/**
-    * Title Element
-    * @return {Object} Title Element
-    * @memberof UserInfo
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'userInfoTitleEl',
-			get: function get() {
-
-				return _userInfoTitleEl;
-			}
-
-			/**
-    * Birthday Element
-    * @return {Object} Birthday Element
-    * @memberof UserInfo
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'userInfoBirthdayEl',
-			get: function get() {
-
-				return _userInfoBirthdayEl;
-			}
-
-			/**
-    * User Info Button Element
-    * @return {Object} User Info Button Element
-    * @memberof UserInfo
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'submitUserInfoButtonEl',
-			get: function get() {
-
-				return _submitUserInfoButtonEl;
-			}
-
-			/**
-    * User Info Spinner Element
-    * @return {Object} User Info Spinner Element
-    * @memberof UserInfo
-    * @type {Object}
-    * 
-    */
-
-		}, {
-			key: 'userInfoSpinnerEl',
-			get: function get() {
-
-				return _userInfoSpinnerEl;
 			}
 		}]);
 
