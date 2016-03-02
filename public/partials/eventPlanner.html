@@ -12,7 +12,7 @@
 		</div>
 
 		<!-- Event Planner Form -->
-		<div id="event-planner-container" hidden="true">
+		<div class="event-planner-container" id="event-planner-container" hidden="true">
 
 			<div class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown">
 				
@@ -67,6 +67,7 @@
 									</label>
 
 									<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" oninput="EventPlanner.checkEventFields()" required>
+
 									<datalist id="guest-list">
 									  <option value="Birthday">
 									  <option value="Conference">
@@ -145,19 +146,17 @@
 
 									</label>
 
-									<input id="location-input" class="mdl-textfield__input" onFocus="app.eventPlanner.geolocate()"></input>
-
-									<span id="address-reminder" class="val-check-bad small-text">Be sure to select an address from the dropdown!</span>
+									<input id="location-input" class="mdl-textfield__input" onFocus="app.eventPlanner.geolocate()" title="Loaction Autofill"></input>
 
 								</div>
 
-								<button id="location-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect location-button" id="add-button" type='button' onclick="EventPlanner.setCurrentAddress()" title="Set current location as address"><i class="material-icons">location_on</i></button>
-
 							</p>
+
+							<button id="location-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' onclick="EventPlanner.setCurrentAddress()" title="Set current location as address"><i class="material-icons">location_on</i></button>
 
 						</div>
 
-						<div id="address-container" class="address-container" hidden="true">
+						<div class="address-container">
 
 							<p>
 
@@ -170,7 +169,7 @@
 										
 									</label>
 
-									<input type="text" id="street-number" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required></input>
+									<input type="text" id="street-number" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required></input>
 
 								</div>
 
@@ -186,7 +185,7 @@
 
 									</label>
 
-									<input type="text" id="city" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required></input>
+									<input type="text" id="city" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required></input>
 
 								</div>	
 
@@ -198,7 +197,7 @@
 
 									</label>
 
-									<input type="text" id="state" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required>
+									<input type="text" id="state" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required>
 
 								</div>
 								
@@ -210,7 +209,7 @@
 
 									</label>
 
-									<input type="text" id="postal-code" class="mdl-textfield__input" disabled="true" onchange="EventPlanner.checkEventFields()" required>
+									<input type="text" id="postal-code" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required>
 
 								</div>
 
@@ -226,7 +225,7 @@
 
 									</label>
 
-									<input type="text" id="country" class="mdl-textfield__input" disabled="true" placeholder="Country" onchange="EventPlanner.checkEventFields()" required>
+									<input type="text" id="country" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required>
 
 								</div>
 
@@ -251,9 +250,9 @@
 
 								</div>
 
-								<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect guest-button" id="add-button" type='button' disabled="true" onclick="app.eventPlanner.addTag()">Add Guest</button>
-
 							</p>
+
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type='button' disabled="true" onclick="app.eventPlanner.addTag()">Add Guest</button>
 
 						</div>
 
@@ -279,7 +278,7 @@
 
 									</label>
 
-									<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" oninput="EventPlanner.checkEventFields()" required></textarea>
+									<textarea id="message" class="mdl-textfield__input" name="textarea" rows="5" cols="85" oninput="EventPlanner.checkEventFields()"></textarea>
 
 								</div>
 

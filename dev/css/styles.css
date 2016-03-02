@@ -40,10 +40,6 @@ body {
     font-size: 0.7em; }
   body .card-width.mdl-card .val-check-good {
     color: #1B5E20; }
-  body .guest-button {
-    margin-bottom: 1em; }
-  body .location-button {
-    margin-bottom: 4.1em; }
   body .link {
     line-height: 1.5em; }
   body .card-width > .mdl-card__title {
@@ -92,8 +88,8 @@ body {
     body .address-container {
       text-align: left;
       margin-left: 20%; }
-    body .location-button {
-      margin-bottom: 4.1em; } }
+    body .event-planner-container {
+      padding-bottom: 5em; } }
   @media screen and (max-width: 767px) {
     body .center-container {
       margin-left: auto;
@@ -114,6 +110,4 @@ body {
       width: 95%; }
     body .address-container {
       text-align: left;
-      margin-left: 5%; }
-    body .location-button {
-      margin-bottom: 1em; } }
+      margin-left: 5%; } }

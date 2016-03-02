@@ -30,10 +30,8 @@ var EventPlanner = (function(document) {
 	let _submitEventButton = 		document.getElementById('submit-event-button');
 	let _addButton =				document.getElementById('add-button');
 	let _eventPlannerSpinnerEl =	document.getElementById('event-planner-spinner');
-	let _addressContainerEl =		document.getElementById('address-container');
 	let _eventHostDiv =				document.getElementById('event-host-div');
 	let _locationInputDiv =			document.getElementById('location-input-div');
-	let _addressReminderEl =		document.getElementById('address-reminder');
 	let _addressDivEl =				document.getElementById('address-div');
 	let _cityDivEl =				document.getElementById('city-div');
 	let _stateDivEl =				document.getElementById('state-div');
@@ -156,11 +154,7 @@ var EventPlanner = (function(document) {
 
 	  }
 
-	  _addressReminderEl.innerHTML = '';
-
 	  _locationButtonEl.className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect guest-button';
-
-	  _addressContainerEl.hidden = false;
 
 	  EventPlanner.checkEventFields();
 
@@ -442,11 +436,8 @@ var EventPlanner = (function(document) {
 			_eventPlannerSpinnerEl.hidden = false;
 			Displayer.eventPlannerContainerEl.hidden = true;
 
-			let d = new Date();
+			this.eventRef.push({
 
-			this.events.push({
-
-				'id': 		d.toISOString(),
 				'title': 	_eventNameEl.value,
 				'type': 	_eventTypeEl.value,
 				'host': 	_eventHostEl.value,
@@ -460,9 +451,7 @@ var EventPlanner = (function(document) {
 				'country': 	_countryEl.value,
 				'message': 	_messageEl.value
 
-			});
-
-			this.eventRef.set(this.events, function(err) {
+			}, function(err) {
 
 				_eventPlannerSpinnerEl.hidden = true;
 				Displayer.eventPlannerContainerEl.hidden = false;

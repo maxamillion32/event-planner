@@ -36,10 +36,8 @@ var EventPlanner = function (document) {
 	var _submitEventButton = document.getElementById('submit-event-button');
 	var _addButton = document.getElementById('add-button');
 	var _eventPlannerSpinnerEl = document.getElementById('event-planner-spinner');
-	var _addressContainerEl = document.getElementById('address-container');
 	var _eventHostDiv = document.getElementById('event-host-div');
 	var _locationInputDiv = document.getElementById('location-input-div');
-	var _addressReminderEl = document.getElementById('address-reminder');
 	var _addressDivEl = document.getElementById('address-div');
 	var _cityDivEl = document.getElementById('city-div');
 	var _stateDivEl = document.getElementById('state-div');
@@ -177,11 +175,7 @@ var EventPlanner = function (document) {
 			}
 		}
 
-		_addressReminderEl.innerHTML = '';
-
 		_locationButtonEl.className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect guest-button';
-
-		_addressContainerEl.hidden = false;
 
 		EventPlanner.checkEventFields();
 	}
@@ -277,11 +271,8 @@ var EventPlanner = function (document) {
 				_eventPlannerSpinnerEl.hidden = false;
 				Displayer.eventPlannerContainerEl.hidden = true;
 
-				var d = new Date();
+				this.eventRef.push({
 
-				this.events.push({
-
-					'id': d.toISOString(),
 					'title': _eventNameEl.value,
 					'type': _eventTypeEl.value,
 					'host': _eventHostEl.value,
@@ -295,9 +286,7 @@ var EventPlanner = function (document) {
 					'country': _countryEl.value,
 					'message': _messageEl.value
 
-				});
-
-				this.eventRef.set(this.events, function (err) {
+				}, function (err) {
 
 					_eventPlannerSpinnerEl.hidden = true;
 					Displayer.eventPlannerContainerEl.hidden = false;

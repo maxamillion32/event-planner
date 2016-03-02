@@ -55,7 +55,7 @@ var ShowEvents = (function(document) {
 
 		_clearEl(Displayer.eventContainerEl);
 
-		if(events === null || events.length === 0) {
+		if(Object.keys(events).length === 0) {
 
 			_noEventsContainerEl.hidden = false;
 
@@ -63,7 +63,7 @@ var ShowEvents = (function(document) {
 
 			_noEventsContainerEl.hidden = true;
 
-			events.forEach(event => {
+			Object.keys(events).forEach(prop => {
 
 				//Create the card
 				let cardDiv = document.createElement('div');
@@ -74,13 +74,13 @@ var ShowEvents = (function(document) {
 				cardTitleDiv.className = "mdl-card__title";
 				let headerDiv = document.createElement('h2');
 				headerDiv.className = "mdl-card__title-text";
-				headerDiv.appendChild(document.createTextNode(event.title));
+				headerDiv.appendChild(document.createTextNode(events[prop].title));
 
 				let del = document.createElement('a');
 				del.setAttribute('href', "#");
 				del.setAttribute('title', "Delete");
 				del.className = "card-trash";
-				del.setAttribute('onclick', 'app.showEvents.removeEvent("' + event.id + '")');
+				del.setAttribute('onclick', 'app.showEvents.removeEvent("' + prop + '")');
 				del.innerHTML = '&lt;i class="fa fa-trash-o">&lt;/i>';
 
 				headerDiv.appendChild(del);
@@ -92,14 +92,14 @@ var ShowEvents = (function(document) {
 				cardContentDiv.className = "mdl-card__supporting-text";
 				let p = document.createElement('p');
 				p.className = 'event-content';
-				p.innerHTML = "&lt;b>" + event.host + '&lt;/b> is hosting a ' + '&lt;b>' + 
-				event.type + '&lt;/b> at ';
+				p.innerHTML = "&lt;b>" + events[prop].host + '&lt;/b> is hosting a ' + '&lt;b>' + 
+				events[prop].type + '&lt;/b> at ';
 				cardContentDiv.appendChild(p);
 
 				p = document.createElement('p');
 				p.className = 'event-content';
-				p.innerHTML = event.address + '&lt;br />' + event.city + ', ' + 
-				event.state + ' ' + event.zip + '&lt;br />' + event.country;
+				p.innerHTML = events[prop].address + '&lt;br />' + events[prop].city + ', ' + 
+				events[prop].state + ' ' + events[prop].zip + '&lt;br />' + events[prop].country;
 				cardContentDiv.appendChild(p);
 
 				p = document.createElement('p');
@@ -109,8 +109,8 @@ var ShowEvents = (function(document) {
 
 				p = document.createElement('p');
 				p.className = 'event-content';
-				let begin = new Date(event.begin);
-				let end = new Date(event.end);
+				let begin = new Date(events[prop].begin);
+				let end = new Date(events[prop].end);
 				p.innerHTML = '&lt;b>' + begin.toLocaleString() + '&lt;/b>' + ' to ' + 
 				'&lt;b>' + end.toLocaleString() + '&lt;/b>';
 				cardContentDiv.appendChild(p);
@@ -118,7 +118,7 @@ var ShowEvents = (function(document) {
 				p = document.createElement('p');
 				p.className = 'event-content';
 				let guestlist = 'Everybody who\'s anybody is going including ';
-				event.guests.forEach(guest => {
+				events[prop].guests.forEach(guest => {
 
 					guestlist += '&lt;b>' + guest.value + '&lt;/b> ';
 
@@ -128,7 +128,7 @@ var ShowEvents = (function(document) {
 
 				p = document.createElement('p');
 				p.className = 'event-content';
-				p.innerHTML = 'and &lt;b>' + event.host + '&lt;/b> wishes to let you know that&lt;br/>' + event.message;
+				p.innerHTML = 'and &lt;b>' + events[prop].host + '&lt;/b> wishes to let you know that&lt;br/>' + events[prop].message;
 				cardContentDiv.appendChild(p);
 
 				cardDiv.appendChild(cardContentDiv);
@@ -169,9 +169,9 @@ var ShowEvents = (function(document) {
 			/**
 	         * The events
 	         * @member ShowEvents#events
-	         * @type {array}
+	         * @type {object}
 	         */
-			this.events = events || [];
+			this.events = events || {};
 
 			/**
 	         * Frebase events reference
@@ -198,7 +198,21 @@ var ShowEvents = (function(document) {
 		 */
 		_addEvents(snapshot) {
 
-			this.events = snapshot.val();
+			let data = snapshot.val();
+
+			if(data !== null) {
+
+				Object.keys(data).forEach(key =>{
+
+					if(data.hasOwnProperty(key)) {
+
+						this.events[key] = data[key];
+
+					}
+
+				});
+
+			}
 
 			_redrawEvents(this.events);
 
@@ -233,33 +247,31 @@ var ShowEvents = (function(document) {
 		 * Remove an event from events
 		 * @function removeEvent
 		 * @memberof ShowEvents
-		 * @param  {string} id Dom id of event to remove
+		 * @param  {string} id of event to remove
 		 * @instance
 		 * 
 		 */
 		removeEvent(id) {
 
-			let index = -1;
+			let eventsCopy = Object.assign({}, this.events);
 
-			for(let i = 0; i &lt; this.events.length; ++i) {
+			this.events = {};
 
-				if(id === this.events[i].id) {
+			var fbDel = this.eventRef.child(id);
 
-					index = i;
-					break;
+			fbDel.remove(function(err) {
+
+				if(err) {
+
+					Displayer.showSnackbar('Sorry, we had an error removing the event. :-(');
+
+					this.events = eventsCopy;
+
+					_redrawEvents(this.events);
 
 				}
 
-			}
-
-			if(index !== -1) {
-
-				let l = this.events.length > 1 ? 1 : undefined;
-
-				this.events = this.events.splice(index, l);
-				this.eventRef.set(this.events);
-
-			}
+			}.bind(this));
 
 		}
 
@@ -297,7 +309,7 @@ var ShowEvents = (function(document) {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Feb 29 2016 19:41:33 GMT-0500 (EST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Tue Mar 01 2016 19:44:36 GMT-0500 (EST)
 </footer>
 
 <script> prettyPrint(); </script>
