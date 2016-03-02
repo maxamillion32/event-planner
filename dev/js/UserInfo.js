@@ -146,25 +146,7 @@ var UserInfo = function () {
 			_userBdayDivEl.className += ' is-dirty';
 		}
 
-		//Set the form to our name
-		EventPlanner.eventHostEl.value = info.name;
-
-		if (EventPlanner.eventHostEl.value) {
-
-			EventPlanner.eventHostDiv.className += ' is-dirty';
-		}
-
 		UserInfo.checkFields();
-	}
-
-	/**
-  * Handle data error
-  * @param  {object} err fb error
-  * 
-  */
-	function _handleError(err) {
-
-		Displayer.showSnackbar('Sorry!  There was an error.  :-(');
 	}
 
 	/**
@@ -323,7 +305,7 @@ var UserInfo = function () {
 
 				try {
 
-					this.extraRef.on("value", _addInfo, _handleError);
+					this.extraRef.on("value", _addInfo);
 				} catch (e) {
 
 					//Sometimes we end up here signing out
@@ -344,7 +326,7 @@ var UserInfo = function () {
 			key: 'dispose',
 			value: function dispose() {
 
-				this.extraRef.off("value", _addInfo, _handleError);
+				this.extraRef.off("value", _addInfo);
 
 				this.extraRef = undefined;
 				this.ref = undefined;

@@ -27,7 +27,9 @@ var ShowEvents = (function(document) {
 
 		_clearEl(Displayer.eventContainerEl);
 
-		if(Object.keys(events).length === 0) {
+		let keys = Object.keys(events);
+
+		if(keys.length === 0) {
 
 			_noEventsContainerEl.hidden = false;
 
@@ -35,7 +37,7 @@ var ShowEvents = (function(document) {
 
 			_noEventsContainerEl.hidden = true;
 
-			Object.keys(events).forEach(prop => {
+			keys.forEach(prop => {
 
 				//Create the card
 				let cardDiv = document.createElement('div');
@@ -111,17 +113,6 @@ var ShowEvents = (function(document) {
 		}
 
 	}
-	
-	/**
-	 * Handle the fb error
-	 * @param  {object} err fb error
-	 * 
-	 */
-	function _handleError(err) {
-
-		Displayer.showSnackbar('We totally failed to retrieve the event data. :-(');
-
-	}
 
 	/**
 	 * Represents a ShowEvents Page
@@ -174,15 +165,7 @@ var ShowEvents = (function(document) {
 
 			if(data !== null) {
 
-				Object.keys(data).forEach(key =>{
-
-					if(data.hasOwnProperty(key)) {
-
-						this.events[key] = data[key];
-
-					}
-
-				});
+				this.events = Object.assign(this.events, data);
 
 			}
 
@@ -205,7 +188,7 @@ var ShowEvents = (function(document) {
 			 */
 			try {
 
-				this.eventRef.on("value", this._addEvents.bind(this), _handleError);
+				this.eventRef.on("value", this._addEvents.bind(this));
 
 			} catch(e) {
 
@@ -256,7 +239,7 @@ var ShowEvents = (function(document) {
 		 */
 		dispose() {
 
-			this.eventRef.off("value", this._addEvents.bind(this), _handleError);
+			this.eventRef.off("value", this._addEvents.bind(this));
 			this.events = [];
 			_redrawEvents(this.events);
 			this.eventRef = undefined;

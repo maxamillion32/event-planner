@@ -37,7 +37,8 @@ body {
   body .card-width.mdl-card .val-check-bad {
     color: #D50000; }
   body .card-width.mdl-card .small-text {
-    font-size: 0.7em; }
+    margin-top: -2%;
+    font-size: 0.75em; }
   body .card-width.mdl-card .val-check-good {
     color: #1B5E20; }
   body .link {

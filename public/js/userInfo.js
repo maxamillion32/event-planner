@@ -136,7 +136,7 @@ var UserInfo = (function() {
 
 		let info = snapshot.val();
 
-		_userInfoNameEl.value =				info.name;
+		_userInfoNameEl.value = info.name;
 
 		if(_userInfoNameEl.value) {
 
@@ -144,7 +144,7 @@ var UserInfo = (function() {
 
 		}
 
-		_userInfoEmployerEl.value =			info.employer;
+		_userInfoEmployerEl.value =	info.employer;
 
 		if(_userInfoEmployerEl.value) {
 
@@ -152,7 +152,7 @@ var UserInfo = (function() {
 
 		}
 
-		_userInfoTitleEl.value =			info.title;
+		_userInfoTitleEl.value = info.title;
 
 		if(_userInfoTitleEl.value) {
 
@@ -160,7 +160,7 @@ var UserInfo = (function() {
 
 		}
 
-		_userInfoBirthdayEl.value =			info.birthday;
+		_userInfoBirthdayEl.value =	info.birthday;
 
 		if(_userInfoBirthdayEl.value) {
 
@@ -168,29 +168,11 @@ var UserInfo = (function() {
 
 		}
 
-		//Set the form to our name
-		EventPlanner.eventHostEl.value = info.name;
-
-		if(EventPlanner.eventHostEl.value) {
-
-			EventPlanner.eventHostDiv.className += ' is-dirty';
-
-		}
-
 		UserInfo.checkFields();
 
-	}
+	}	
 
-	/**
-	 * Handle data error
-	 * @param  {object} err fb error
-	 * 
-	 */
-	function _handleError (err) {
-
-		Displayer.showSnackbar('Sorry!  There was an error.  :-(');
-
-	}
+	
 
 	/**
 	 * Represents an UserInfo Planner Page
@@ -412,7 +394,7 @@ var UserInfo = (function() {
 
 			try {
 
-				this.extraRef.on("value", _addInfo, _handleError);
+				this.extraRef.on("value", _addInfo);
 
 			} catch(e) {
 
@@ -432,7 +414,7 @@ var UserInfo = (function() {
 		 */
 		dispose() {
 
-			this.extraRef.off("value", _addInfo, _handleError);
+			this.extraRef.off("value", _addInfo);
 
 			this.extraRef =					undefined;
 			this.ref =						undefined;

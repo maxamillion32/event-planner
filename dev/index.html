@@ -137,7 +137,7 @@
 
 									</label>
 
-									<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" oninput="EventPlanner.checkEventFields()" required>
+									<input id="event-type" class="mdl-textfield__input" type="text" name="event-type" title="Event Type" list="guest-list" oninput="EventPlanner.checkEventFields()" autocomplete="off" required>
 
 									<datalist id="guest-list">
 									  <option value="Birthday">
@@ -221,9 +221,13 @@
 
 								</div>
 
-							</p>
+								<div class="val-check-bad small-text">
+									
+									Input the address and select the location from the dropdown
 
-							<button id="location-button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="add-button" type="button" onclick="EventPlanner.setCurrentAddress()" title="Set current location as address"><i class="material-icons">location_on</i></button>
+								</div>
+
+							</p>
 
 						</div>
 
@@ -925,7 +929,7 @@
 
 								</label>
 
-								<input class="mdl-textfield__input" id="user-info-old-password" type="password" name="old-password" placeholder="Old Password" required>
+								<input class="mdl-textfield__input" id="user-info-old-password" type="password" name="old-password" required>
 
 							</div>
 

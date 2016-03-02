@@ -70,12 +70,11 @@ var EventPlanner = function (document) {
   * Clear the address elements
   * 
   */
-	function _clearAddress(pred) {
+	function _clearAddress() {
 
 		_addressList.forEach(function (addressEl) {
 
 			addressEl.value = '';
-			addressEl.disabled = pred;
 		});
 	}
 
@@ -94,7 +93,7 @@ var EventPlanner = function (document) {
 		_messageEl.value = '';
 		_progressBarEl.value = 0;
 		_progressBarLabelEl.innerHTML = '0 of ' + _totalInputs.toString() + ' fields completed';
-		_clearAddress(true);
+		_clearAddress();
 		_clearGuests();
 	}
 
@@ -174,8 +173,6 @@ var EventPlanner = function (document) {
 				}
 			}
 		}
-
-		_locationButtonEl.className = 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect guest-button';
 
 		EventPlanner.checkEventFields();
 	}
@@ -336,47 +333,8 @@ var EventPlanner = function (document) {
 				this.eventRef = undefined;
 			}
 		}], [{
-			key: 'setCurrentAddress',
+			key: 'checkEventFields',
 
-
-			/**
-    * Set the location input as the current Address
-    * @function setCurrentAddress
-    * @memberof EventPlanner
-    * 
-    */
-			value: function setCurrentAddress() {
-
-				if (navigator.geolocation) {
-
-					navigator.geolocation.getCurrentPosition(function (position) {
-
-						var geocoder = new google.maps.Geocoder();
-						var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-						geocoder.geocode({
-
-							'location': latlng
-						}, function (results, status) {
-
-							if (status == google.maps.GeocoderStatus.OK) {
-
-								_locationInputEl.value = results[0].formatted_address;
-								_locationInputDiv.className += ' is-dirty';
-								_locationInputEl.focus();
-
-								Displayer.showSnackbar('Address set! :-)');
-							} else {
-
-								Displayer.showSnackbar('Sorry, we could\'t get your location. :-(');
-							}
-						});
-					});
-				} else {
-
-					Displayer.showSnackbar('Location unavailable :-(');
-				}
-			}
 
 			/**
     *  Checks if fields are completed
@@ -384,9 +342,6 @@ var EventPlanner = function (document) {
     * 	@memberof EventPlanner
     * 
     */
-
-		}, {
-			key: 'checkEventFields',
 			value: function checkEventFields() {
 
 				var completed = 0;
