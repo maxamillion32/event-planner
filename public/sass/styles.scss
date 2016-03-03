@@ -176,6 +176,22 @@ body {
 
 	}
 
+	.fake-label {
+
+		float: left;
+		color: #d50000;
+    	font-size: 12px;
+
+	}
+
+	.fake-label2 {
+
+		float: left;
+		color: #e91e63;
+    	font-size: 12px;
+
+	}
+
 	@media screen and (min-width: 767px) and (max-width: 1000px) {
 
 		.center-container {

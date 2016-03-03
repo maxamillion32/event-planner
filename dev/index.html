@@ -176,12 +176,12 @@
 								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 									<label class="mdl-textfield__label" for="start-date" title="Start Date">
-										
-										<span>When will it begin?</span>
 
 									</label>
 
-									<input id="start-date" class="mdl-textfield__input" type="test" name="start-date" title="Start Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" oninput="EventPlanner.checkEventFields()" required>
+									<span class="fake-label">When will it begin?</span>
+
+									<input id="start-date" class="mdl-textfield__input" type="datetime-local" name="start-date" title="Start Date" oninput="EventPlanner.checkEventFields()" required>
 
 								</div>
 
@@ -199,12 +199,12 @@
 								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 									<label class="mdl-textfield__label" for="end-date" title="End Date">
-										
-										<span>When will it end?</span>
 
 									</label>
 
-									<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" oninput="EventPlanner.checkEventFields()" required>
+									<span class="fake-label">When will it end?</span>
+
+									<input id="end-date" class="mdl-textfield__input" type="datetime-local" name="end-date" title="End Date" oninput="EventPlanner.checkEventFields()" required>
 
 								</div>
 
@@ -718,12 +718,12 @@
 						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 							<label class="mdl-textfield__label" for="signup-birthday" title="Birthday">
-								
-								<span>When's your birthday?</span>
 
 							</label>
 
-							<input class="mdl-textfield__input" id="signup-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='month')" onblur="(this.type='text')">
+							<span class="fake-label2">When's your birthday?</span>
+
+							<input class="mdl-textfield__input" id="signup-birthday" type="month" title="Birthday" name="bday">
 
 						</div>
 
@@ -895,11 +895,11 @@
 
 								<label class="mdl-textfield__label" for="user-info-birthday" title="Birthday">
 
-									When's your birthday?
-
 								</label>
 
-								<input class="mdl-textfield__input" id="user-info-birthday" type="text" title="Birthday" name="bday" onfocus="(this.type='month')" onblur="(this.type='text')">
+								<span class="fake-label2">When's your birthday?</span>
+
+								<input class="mdl-textfield__input" id="user-info-birthday" type="month" title="Birthday" name="bday">
 
 							</div>
 
