@@ -44,6 +44,8 @@ var EventPlanner = function (document) {
 	var _zipDivEl = document.getElementById('zip-div');
 	var _countryDivEl = document.getElementById('country-div');
 	var _locationButtonEl = document.getElementById('location-button');
+	var _startDateErrorEl = document.getElementById('start-date-error');
+	var _endDateErrorEl = document.getElementById('end-date-error');
 	var _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	var _autocomplete = undefined;
 
@@ -363,12 +365,48 @@ var EventPlanner = function (document) {
 
 				if (_startDateEl.value !== '') {
 
-					completed += 1;
+					if (_endDateEl.value !== '') {
+
+						var start = new Date(_startDateEl.value);
+						var end = new Date(_endDateEl.value);
+						var diff = Math.floor((end - start) / 1000 / 60);
+
+						if (diff < 0) {
+
+							_startDateErrorEl.hidden = false;
+						} else {
+
+							completed += 1;
+							_startDateErrorEl.hidden = true;
+						}
+					} else {
+
+						completed += 1;
+						_startDateErrorEl.hidden = true;
+					}
 				}
 
 				if (_endDateEl.value !== '') {
 
-					completed += 1;
+					if (_startDateEl.value !== '') {
+
+						var start = new Date(_startDateEl.value);
+						var end = new Date(_endDateEl.value);
+						var diff = Math.floor((end - start) / 1000 / 60);
+
+						if (diff < 0) {
+
+							_endDateErrorEl.hidden = false;
+						} else {
+
+							completed += 1;
+							_endDateErrorEl.hidden = true;
+						}
+					} else {
+
+						completed += 1;
+						_endDateErrorEl.hidden = true;
+					}
 				}
 
 				if (VTILAPP.vtil.tags.length > 0) {

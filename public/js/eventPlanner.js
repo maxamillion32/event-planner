@@ -38,6 +38,8 @@ var EventPlanner = (function(document) {
 	let _zipDivEl = 				document.getElementById('zip-div');
 	let _countryDivEl =				document.getElementById('country-div');
 	let _locationButtonEl =			document.getElementById('location-button');
+	let _startDateErrorEl =			document.getElementById('start-date-error');
+	let _endDateErrorEl =			document.getElementById('end-date-error');
 	let _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	let _autocomplete;
 
@@ -256,13 +258,57 @@ var EventPlanner = (function(document) {
 
 			if(_startDateEl.value !== '') {
 
-				completed += 1;
+				if(_endDateEl.value !== '') {
+
+					let start = new Date(_startDateEl.value);
+					let end = new Date(_endDateEl.value);
+					let diff = Math.floor(((end - start) / 1000) / 60);
+
+					if(diff < 0) {
+
+						_startDateErrorEl.hidden = false;
+
+					} else {
+
+						completed += 1;
+						_startDateErrorEl.hidden = true;
+
+					}
+
+				} else {
+
+					completed += 1;
+					_startDateErrorEl.hidden = true;
+
+				}
 
 			}
 
 			if(_endDateEl.value !== '') {
 
-				completed += 1;
+				if(_startDateEl.value !== '') {
+
+					let start = new Date(_startDateEl.value);
+					let end = new Date(_endDateEl.value);
+					let diff = Math.floor(((end - start) / 1000) / 60);
+
+					if(diff < 0) {
+
+						_endDateErrorEl.hidden = false;
+
+					} else {
+
+						completed += 1;
+						_endDateErrorEl.hidden = true;
+
+					}
+
+				} else {
+
+					completed += 1;
+					_endDateErrorEl.hidden = true;
+
+				}
 
 			}
 

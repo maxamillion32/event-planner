@@ -424,9 +424,9 @@ var UserInfo = (function() {
 			_userInfoEmployerEl.value = 	'';
 			_userInfoTitleEl.value = 		'';
 			_userInfoBirthdayEl.value = 	'';
-			_userInfoOldPassword = 			'';
-			_userInfoNewPassword = 			'';
-			_userInfoNewPasswordRepeated = 	'';
+			_userInfoOldPassword.value = 			'';
+			_userInfoNewPassword.value = 			'';
+			_userInfoNewPasswordRepeated.value = 	'';
 
 		}
 

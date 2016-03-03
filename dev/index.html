@@ -185,6 +185,12 @@
 
 								</div>
 
+								<div id="start-date-error" class="val-check-bad small-text" hidden="true">
+									
+									Whoa... this starts before it ends!?
+
+								</div>
+
 							</p>
 
 							<p>
@@ -199,6 +205,12 @@
 									</label>
 
 									<input id="end-date" class="mdl-textfield__input" type="text" name="end-date" title="End Date" onfocus="(this.type='datetime-local')" onblur="(this.type='text')" oninput="EventPlanner.checkEventFields()" required>
+
+								</div>
+
+								<div id="end-date-error" class="val-check-bad small-text" hidden="true">
+									
+									Whoa... this ends before it starts!?
 
 								</div>
 
