@@ -1,0 +1,22 @@
+{
+  "name": "form-validator",
+  "authors": [
+    "Dustin Gulley <dlgulley411@gmail.com>"
+  ],
+  "description": "Helps validate complex form fields",
+  "main": "dist/app.js",
+  "moduleType": [],
+  "keywords": [
+    "validation",
+    "validator"
+  ],
+  "license": "BSD",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

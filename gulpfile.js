@@ -49,7 +49,7 @@ gulp.task('serve', function() {
 gulp.task('serve-dist', function() {
   connect.server({
     root: ['dist'],
-    livereload: 8880
+    port: 8880
   });
 });
 
