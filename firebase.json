@@ -1,0 +1,9 @@
+{
+  "firebase": "swanky-event-planner",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
