@@ -8,10 +8,14 @@ body {
     /* This background is dark, so we set text to white. Use 87% black instead if
 	     your background is light. */
     color: white; }
+  body .top-pad-xx-sm {
+    padding-top: 1em; }
   body .top-pad-x-sm {
     padding-top: 2em; }
   body .top-pad-sm {
     padding-top: 3em; }
+  body .top-pad-m {
+    padding-top: 4em; }
   body .long-input {
     min-width: 43em; }
   body .center {
@@ -37,10 +41,10 @@ body {
     margin-right: 1em;
     width: 13em; }
   body .card-width.mdl-card .val-check-bad {
-    color: #D50000; }
+    color: #d50000; }
   body .card-width.mdl-card .small-text {
     margin-top: -2%;
-    font-size: 0.75em; }
+    font-size: 0.90em; }
   body .card-width.mdl-card .val-check-good {
     color: #1B5E20; }
   body .link {

@@ -179,7 +179,7 @@
 							<p>
 
 								<!-- Begin Date -->
-								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<div id="begin-date-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 									<label class="mdl-textfield__label" for="start-date" title="Start Date">
 
@@ -189,13 +189,7 @@
 
 									<input id="start-date" class="mdl-textfield__input" type="datetime-local" name="start-date" title="Start Date" oninput="EventPlanner.checkEventFields()" required>
 
-									<span class="mdl-textfield__error">Required</span>
-
-								</div>
-
-								<div id="start-date-error" class="val-check-bad small-text" hidden="true">
-									
-									Whoa... this starts after it ends!?
+									<span id="start-date-error" class="mdl-textfield__error"></span>
 
 								</div>
 
@@ -204,7 +198,7 @@
 							<p>
 
 								<!-- End Date -->
-								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<div id="end-date-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 									<label class="mdl-textfield__label" for="end-date" title="End Date">
 
@@ -214,13 +208,7 @@
 
 									<input id="end-date" class="mdl-textfield__input" type="datetime-local" name="end-date" title="End Date" oninput="EventPlanner.checkEventFields()" required>
 
-									<span class="mdl-textfield__error">Required</span>
-
-								</div>
-
-								<div id="end-date-error" class="val-check-bad small-text" hidden="true">
-									
-									Whoa... this ends before it starts!?
+									<span id="end-date-error" class="mdl-textfield__error"></span>
 
 								</div>
 
@@ -364,6 +352,8 @@
 						</div>
 
 						<p class="tag-wrapper">
+
+							<div id="guest-error" class="val-check-bad center small-text">You must add a guest</div>
 
 							<div id="vtil-content" class="vtil-tag-content-wrapper tag-style">
 
@@ -887,6 +877,8 @@
 
 								<input class="mdl-textfield__input" id="user-info-name" type="text" name="name" title="Name" oninput="UserInfo.checkFields()" required>
 
+								<span class="mdl-textfield__error">Required</span>
+
 							</div>
 
 						</p>
@@ -967,7 +959,7 @@
 
 						<p>
 
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<div id="userinfo-old-password-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 								<label class="mdl-textfield__label" for="user-info-old-password" title="Old Password">
 
@@ -975,7 +967,9 @@
 
 								</label>
 
-								<input class="mdl-textfield__input" id="user-info-old-password" type="password" name="old-password" required>
+								<input class="mdl-textfield__input" id="user-info-old-password" type="password" name="old-password" oninput="UserInfo.checkPasswords()" required>
+
+								<span class="mdl-textfield__error">Required</span>
 
 							</div>
 
@@ -983,7 +977,7 @@
 
 						<p>
 
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<div id="userinfo-new-password" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 								<label class="mdl-textfield__label" for="user-info-new-password" title="New Password">
 
@@ -993,13 +987,15 @@
 
 								<input class="mdl-textfield__input" id="user-info-new-password" type="password" name="new-password" title="New Password" oninput="UserInfo.checkPasswords()" required>
 
+								<span id="userinfo-password-error" class="mdl-textfield__error left"></span>
+
 							</div>
 
 						</p>
 
-						<p>
+						<p class="top-pad-m">
 
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+							<div id="userinfo-new-password-repeat" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 								<label class="mdl-textfield__label" for="user-info-new-password-repeated" title="New Password Repeated">
 
@@ -1009,71 +1005,19 @@
 
 								<input class="mdl-textfield__input" id="user-info-new-password-repeated" type="password" name="new-password-repeated" title="New Password Repeated" oninput="UserInfo.checkPasswords()" required>
 
+								<span id="userinfo-password-repeat-error" class="mdl-textfield__error left"></span>
+
 							</div>
 
 						</p>
 
-						<p>
+						<p class="top-pad-xx-sm">
 
 							<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="change-password-button" type="submit" value="Change Password" title="Change Password">
 
 						</p>
 
 					</form>
-
-					<p>
-
-						<div class="center-container">
-
-							<div class="left-container">
-
-								<p>
-
-									<span class="val-check-bad" id="user-val-check-required"></span>
-
-								</p>
-
-								<p>
-
-									<span class="val-check-bad" id="user-val-check-email"></span>
-
-								</p>
-
-								<p>
-
-									<span class="val-check-bad" id="user-val-check-length"></span>
-
-								</p>
-
-								<p>
-
-									<span class="val-check-bad" id="user-val-check-upper"></span>
-
-								</p>
-
-								<p>
-
-									<span class="val-check-bad" id="user-val-check-lower"></span>
-
-								</p>
-
-								<p>
-
-									<span class="val-check-bad" id="user-val-check-number"></span>
-
-								</p>
-
-								<p>
-
-									<span class="val-check-bad" id="user-val-check-match"></span>
-
-								</p>
-
-							</div>
-
-						</div>
-
-					</p>
 
 				</div>
 

@@ -41,6 +41,9 @@ var EventPlanner = (function(document) {
 	let _startDateErrorEl =			document.getElementById('start-date-error');
 	let _endDateErrorEl =			document.getElementById('end-date-error');
 	let _locationValidationEl =		document.getElementById('location-validation');
+	let _beginDateDivEl =			document.getElementById('begin-date-div');
+	let _endDateDivEl =				document.getElementById('end-date-div');
+	let _guestErrorEl = 			document.getElementById('guest-error');
 	let _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	let _autocomplete;
 
@@ -194,7 +197,18 @@ var EventPlanner = (function(document) {
 			* 	@member EventPlanner#eventRef
 			* 	@type {Object}
 			*/
-			this.eventRef = eventRef;	
+			this.eventRef = eventRef;
+
+			//Listen for tags being removed
+			document.addEventListener("tag-removed", function() {
+
+				if(VTILAPP.vtil.tags.length === 0) {
+
+					_guestErrorEl.hidden = false;
+
+				}
+
+			});	
 
 		}
 
@@ -265,7 +279,7 @@ var EventPlanner = (function(document) {
 
 			}
 
-			if(_startDateEl.value !== '') {
+			if(_startDateEl.value) {
 
 				if(_endDateEl.value !== '') {
 
@@ -275,25 +289,47 @@ var EventPlanner = (function(document) {
 
 					if(diff < 0) {
 
-						_startDateErrorEl.hidden = false;
+						setTimeout(function() {
+
+							if(_beginDateDivEl.className.indexOf('is-invalid') === -1) {
+
+								_beginDateDivEl.className += ' is-invalid';
+
+							}
+
+							_startDateErrorEl.innerHTML = 'Whoa... this starts after it ends!?';
+
+						});
 
 					} else {
 
 						completed += 1;
-						_startDateErrorEl.hidden = true;
+
+						_beginDateDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty';
 
 					}
 
 				} else {
 
 					completed += 1;
-					_startDateErrorEl.hidden = true;
+
+					_beginDateDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty';
 
 				}
 
+			} else {
+
+				if(_beginDateDivEl.className.indexOf('is-invalid') === -1) {
+
+					_beginDateDivEl.className += ' is-invalid';
+
+				}
+
+				_startDateErrorEl.innerHTML = 'Required';
+
 			}
 
-			if(_endDateEl.value !== '') {
+			if(_endDateEl.value) {
 
 				if(_startDateEl.value !== '') {
 
@@ -303,21 +339,43 @@ var EventPlanner = (function(document) {
 
 					if(diff < 0) {
 
-						_endDateErrorEl.hidden = false;
+						setTimeout(function() {
+
+							if(_endDateDivEl.className.indexOf('is-invalid') === -1) {
+
+								_endDateDivEl.className += ' is-invalid';
+
+							}
+
+							_endDateErrorEl.innerHTML =  'Whoa... this ends before it starts!?';
+
+						});
 
 					} else {
 
 						completed += 1;
-						_endDateErrorEl.hidden = true;
+
+						_endDateDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty';
 
 					}
 
 				} else {
 
 					completed += 1;
-					_endDateErrorEl.hidden = true;
+
+					_endDateDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded is-dirty';
 
 				}
+
+			} else {
+
+				if(_endDateDivEl.className.indexOf('is-invalid') === -1) {
+
+					_endDateDivEl.className += ' is-invalid';
+
+				}
+
+				_endDateErrorEl.innerHTML =  'Required';
 
 			}
 
@@ -505,6 +563,13 @@ var EventPlanner = (function(document) {
 
 			VTILAPP.vtil.addTag();
 			EventPlanner.checkEventFields();
+
+			if(VTILAPP.vtil.tags.length > 0) {
+
+				_guestErrorEl.hidden = true;
+
+			}
+
 			_addButton.disabled = true;
 
 		}
@@ -519,6 +584,7 @@ var EventPlanner = (function(document) {
 		dispose() {
 
 			_clearElements();
+			document.removeEventListener('tag-removed');
 			this.eventRef = undefined;
 
 		}

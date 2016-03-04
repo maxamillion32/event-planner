@@ -19,96 +19,17 @@ var UserInfo = function () {
 	var _userInfoNewPassword = document.getElementById('user-info-new-password');
 	var _userInfoNewPasswordRepeated = document.getElementById('user-info-new-password-repeated');
 	var _changePasswordButtonEl = document.getElementById('change-password-button');
-	var _userValCheckRequiredEl = document.getElementById('user-val-check-required');
-	var _userValCheckLengthEl = document.getElementById('user-val-check-length');
-	var _userValCheckUpperEl = document.getElementById('user-val-check-upper');
-	var _userValCheckLowerEl = document.getElementById('user-val-check-lower');
-	var _userValCheckNumberEl = document.getElementById('user-val-check-number');
-	var _userValCheckMatchEl = document.getElementById('user-val-check-match');
 	var _userNameDivEl = document.getElementById('user-name-div');
 	var _userOrganizationDivEl = document.getElementById('user-organization-div');
 	var _userJobDivEl = document.getElementById('user-job-div');
 	var _userBdayDivEl = document.getElementById('user-bday-div');
-
-	var _validator = new FV.Validator();
-	var _passwordField = new FV.Field("Password1", _userInfoNewPassword);
-	var _password2Field = new FV.Field("Password2", _userInfoNewPasswordRepeated, _userInfoNewPassword);
-
-	_passwordField.constraints = [new FV.Constraint(FV.Validator.MINLENGTH, "* Password must be at least 8 characters long.\n", 8), new FV.Constraint(FV.Validator.CONTAINSUPPER, "* Password must contain at least one upper case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSLOWER, "* Password must contain at least one lower case letter.\n"), new FV.Constraint(FV.Validator.CONTAINSNUMBER, "* Password must contain at least one number.\n")];
-
-	_password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD, "* Must match your password.\n")];
-
-	_validator.fields = [_passwordField, _password2Field];
+	var _userinfoNewPasswordDivEl = document.getElementById('userinfo-new-password');
+	var _userinfoPasswordErrorEl = document.getElementById('userinfo-password-error');
+	var _userinfoNewPasswordRepeatDivEl = document.getElementById('userinfo-new-password-repeat');
+	var _userinfoPasswordRepeatErrorEl = document.getElementById('userinfo-password-repeat-error');
+	var _userinfoOldPasswordDivEl = document.getElementById('userinfo-old-password-div');
 
 	_submitUserInfoButtonEl.disabled = true;
-
-	/**
-  * Private function for showing good/bad auth messages
-  * @param  {array} errorTypes Holds the errors present
-  * 
-  */
-	function _checkValFields(errorTypes) {
-
-		if (errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
-
-			_userValCheckLengthEl.className = 'val-check-good';
-			_userValCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
-		} else {
-
-			_userValCheckLengthEl.className = 'val-check-bad';
-			_userValCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
-		}
-
-		if (errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
-
-			_userValCheckUpperEl.className = 'val-check-good';
-			_userValCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
-		} else {
-
-			_userValCheckUpperEl.className = 'val-check-bad';
-			_userValCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
-		}
-
-		if (errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
-
-			_userValCheckLowerEl.className = 'val-check-good';
-			_userValCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
-		} else {
-
-			_userValCheckLowerEl.className = 'val-check-bad';
-			_userValCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
-		}
-
-		if (errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 && _userInfoNewPassword.value !== '' && _userInfoNewPasswordRepeated.value !== '') {
-
-			_userValCheckMatchEl.className = 'val-check-good';
-			_userValCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Passwords must match';
-		} else {
-
-			_userValCheckMatchEl.className = 'val-check-bad';
-			_userValCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Passwords must match';
-		}
-
-		if (errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
-
-			_userValCheckNumberEl.className = 'val-check-good';
-			_userValCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one number';
-		} else {
-
-			_userValCheckNumberEl.className = 'val-check-bad';
-			_userValCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one number';
-		}
-
-		if (_userInfoOldPassword === '' || _userInfoNewPassword.value === '' || _userInfoNewPasswordRepeated.value === '') {
-
-			_userValCheckRequiredEl.className = 'val-check-bad';
-			_userValCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;All required fields must be filled out';
-		} else {
-
-			_userValCheckRequiredEl.className = 'val-check-good';
-			_userValCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;All required fields must be filled out';
-		}
-	}
 
 	/**
   * Add info to the page
@@ -365,45 +286,106 @@ var UserInfo = function () {
 			key: 'checkPasswords',
 			value: function checkPasswords() {
 
-				var errors = _validator.checkForErrors();
-				var errorTypes = [];
-				var passwordErrors = "";
-				var password2Errors = "";
+				setTimeout(function () {
 
-				errors.forEach(function (error) {
+					var valid = true;
+					var passwordMessage = '';
+					var password2Message = '';
 
-					switch (error.name) {
+					if (_userinfoOldPasswordDivEl.className.indexOf('is-invalid') > -1) {
 
-						case "Password1":
-
-							passwordErrors += error.error;
-							errorTypes.push(error.type);
-							break;
-
-						case "Password2":
-
-							password2Errors += error.error;
-							errorTypes.push(error.type);
-							break;
-
+						valid = false;
 					}
+
+					if (!_userInfoNewPassword.value) {
+
+						passwordMessage += '<div>Required</div>';
+						valid = false;
+					}
+
+					if (_userInfoNewPassword.value === _userInfoOldPassword.value) {
+
+						passwordMessage += '<div>New password cannot match the old password</div>';
+						valid = false;
+
+						if (_userinfoNewPasswordDivEl.className.indexOf('is-invalid') === -1) {
+
+							_userinfoNewPasswordDivEl.className += ' is-invalid';
+						}
+					}
+
+					if (_userInfoNewPassword.value.length < 8) {
+
+						passwordMessage += '<div>Password must be at least 8 characters long</div>';
+						valid = false;
+
+						if (_userinfoNewPasswordDivEl.className.indexOf('is-invalid') === -1) {
+
+							_userinfoNewPasswordDivEl.className += ' is-invalid';
+						}
+					}
+
+					if (!_userInfoNewPassword.value.match(/[A-Z]/g)) {
+
+						passwordMessage += '<div>Must contain at least one upper case character</div>';
+						valid = false;
+
+						if (_userinfoNewPasswordDivEl.className.indexOf('is-invalid') === -1) {
+
+							_userinfoNewPasswordDivEl.className += ' is-invalid';
+						}
+					}
+
+					if (!_userInfoNewPassword.value.match(/[a-z]/g)) {
+
+						passwordMessage += '<div>Must contain at least one lower case character</div>';
+						valid = false;
+
+						if (_userinfoNewPasswordDivEl.className.indexOf('is-invalid') === -1) {
+
+							_userinfoNewPasswordDivEl.className += ' is-invalid';
+						}
+					}
+
+					if (!_userInfoNewPassword.value.match(/\d+/g)) {
+
+						passwordMessage += '<div>Must contain at least one number</div>';
+						valid = false;
+
+						if (_userinfoNewPasswordDivEl.className.indexOf('is-invalid') === -1) {
+
+							_userinfoNewPasswordDivEl.className += ' is-invalid';
+						}
+					}
+
+					if (!_userInfoNewPasswordRepeated.value) {
+
+						valid = false;
+						password2Message += '<div>Required</div>';
+					}
+
+					if (_userInfoNewPasswordRepeated.value !== _userInfoNewPassword.value) {
+
+						passwordMessage += '<div>Passwords must match</div>';
+						password2Message += '<div>Passwords must match</div>';
+						valid = false;
+
+						if (_userinfoNewPasswordDivEl.className.indexOf('is-invalid') === -1) {
+
+							_userinfoNewPasswordDivEl.className += ' is-invalid';
+						}
+
+						if (_userinfoNewPasswordRepeatDivEl.className.indexOf('is-invalid') === -1) {
+
+							_userinfoNewPasswordRepeatDivEl.className += ' is-invalid';
+						}
+					}
+
+					_userinfoPasswordErrorEl.innerHTML = passwordMessage;
+					_userinfoPasswordRepeatErrorEl.innerHTML = password2Message;
+
+					_changePasswordButtonEl.disabled = !valid;
 				});
-
-				if (passwordErrors !== '') {
-
-					passwordErrors = "Please correct the following errors:\n" + passwordErrors;
-				}
-
-				if (password2Errors !== '') {
-
-					password2Errors = "Please correct the following errors:\n" + password2Errors;
-				}
-
-				_userInfoNewPassword.setCustomValidity(passwordErrors);
-				_userInfoNewPasswordRepeated.setCustomValidity(password2Errors);
-
-				_changePasswordButtonEl.disabled = errorTypes.length > 0;
-				_checkValFields(errorTypes);
 			}
 		}, {
 			key: 'userInfoNameEl',

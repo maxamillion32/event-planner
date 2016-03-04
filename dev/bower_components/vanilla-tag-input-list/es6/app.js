@@ -108,6 +108,7 @@ var VTIL = (function() {
 
 				this.tags.splice(index, 1);
 				_redrawTags(this.contentElement, this.tags, this.objectPath);
+				document.dispatchEvent(new CustomEvent("tag-removed"));
 
 			}
 

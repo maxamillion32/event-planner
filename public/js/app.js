@@ -11,19 +11,19 @@
 	class App {
 
 		/**
-	     * App constructor.
-	     * @constructs App
-	     */
+		 * App constructor.
+		 * @constructs App
+		 */
 		constructor() {
 
 			// Register the callback to be fired every time auth state changes
 			let fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
 
 			/**
-	         * SignInOut Object
-	         * @member App#signInOut
-	         * @type {object}
-	         */
+			 * SignInOut Object
+			 * @member App#signInOut
+			 * @type {object}
+			 */
 			this.signInOut = 	 new SignInOut(fbRef);
 
 			/**

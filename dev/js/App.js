@@ -18,9 +18,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 	var App = function () {
 
 		/**
-      * App constructor.
-      * @constructs App
-      */
+   * App constructor.
+   * @constructs App
+   */
 
 		function App() {
 			_classCallCheck(this, App);
@@ -29,10 +29,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
 
 			/**
-          * SignInOut Object
-          * @member App#signInOut
-          * @type {object}
-          */
+    * SignInOut Object
+    * @member App#signInOut
+    * @type {object}
+    */
 			this.signInOut = new SignInOut(fbRef);
 
 			/**
