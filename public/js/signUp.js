@@ -4,141 +4,23 @@ var SignUp = (function() {
 	'use strict';
 
 	//signing up
-	let _signupNameEl = 			document.getElementById('signup-name');
-	let _signupEmailEl = 			document.getElementById('signup-email');
-	let _signupPasswordEl = 		document.getElementById('signup-password');
-	let _signupPassword2El = 		document.getElementById('signup-password2');
-	let _signupEmployerEl =			document.getElementById('signup-employer');
-	let _signupTitleEl =			document.getElementById('signup-title');
-	let _signupBirthdayEl =			document.getElementById('signup-birthday');
-	let _submitPasswordButton =		document.getElementById('submit-password-button');
-	let _signupAdditionalInfoEl =	document.getElementById('signup-additional-info');
-	let _signupSwitchEl =			document.getElementById('switch-1');
-	let _valCheckLengthEl =			document.getElementById('val-check-length');
-	let _valCheckUpperEl =			document.getElementById('val-check-upper');
-	let _valCheckLowerEl =			document.getElementById('val-check-lower');
-	let _valCheckMatchEl =			document.getElementById('val-check-match');
-	let _valCheckNumberEl =			document.getElementById('val-check-number');
-	let _valCheckEmailEl =			document.getElementById('val-check-email');
-	let _valCheckRequiredEl =		document.getElementById('val-check-required');
-	let _signUpSpinner = 			document.getElementById('sign-up-spinner');
-
-	let _validator = 				new FV.Validator();
-	let _passwordField = 			new FV.Field("Password1", _signupPasswordEl);
-	let _password2Field = 			new FV.Field("Password2", _signupPassword2El, _signupPasswordEl);
-	let _emailField =				new FV.Field('EmailError', _signupEmailEl);
-
-	_passwordField.constraints = [
-		new FV.Constraint(FV.Validator.MINLENGTH, 
-			"* Password must be at least 8 characters long.\n",
-			8),
-		new FV.Constraint(FV.Validator.CONTAINSUPPER,
-			"* Password must contain at least one upper case letter.\n"),
-		new FV.Constraint(FV.Validator.CONTAINSLOWER,
-			"* Password must contain at least one lower case letter.\n"),
-		new FV.Constraint(FV.Validator.CONTAINSNUMBER,
-			"* Password must contain at least one number.\n")
-	];
-
-	_password2Field.constraints = [new FV.Constraint(FV.Validator.EQUALSFIELD,
-			"* Must match your password.\n")];
-
-	_emailField.constraints = [new FV.Constraint(FV.Validator.EMAIL, "* Must be a valid email address.\n")];
-
-	_validator.fields = [_passwordField, _password2Field, _emailField];
-
-	/**
-	 * Private function for showing good/bad auth messages
-	 * @param  {array} errorTypes Holds the errors present
-	 * 
-	 */
-	function _checkValFields(errorTypes) {
-
-		if(errorTypes.indexOf(FV.Validator.EMAIL) === -1) {
-
-			_valCheckEmailEl.className = 'val-check-good';
-			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Must use a valid email address';
-
-		} else {
-
-			_valCheckEmailEl.className = 'val-check-bad';
-			_valCheckEmailEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Must use a valid email address';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.MINLENGTH) === -1) {
-
-			_valCheckLengthEl.className = 'val-check-good';
-			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
-
-		} else {
-
-			_valCheckLengthEl.className = 'val-check-bad';
-			_valCheckLengthEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must be at least 8 characters long';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSUPPER) === -1) {
-
-			_valCheckUpperEl.className = 'val-check-good';
-			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
-
-		} else {
-
-			_valCheckUpperEl.className = 'val-check-bad';
-			_valCheckUpperEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one upper case character';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSLOWER) === -1) {
-
-			_valCheckLowerEl.className = 'val-check-good';
-			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
-
-		} else {
-
-			_valCheckLowerEl.className = 'val-check-bad';
-			_valCheckLowerEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one lower case character';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.EQUALSFIELD) === -1 && _signupPasswordEl.value !== '' && _signupPassword2El.value !== '') {
-
-			_valCheckMatchEl.className = 'val-check-good';
-			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Passwords must match';
-
-		} else {
-
-			_valCheckMatchEl.className = 'val-check-bad';
-			_valCheckMatchEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Passwords must match';
-
-		}
-
-		if(errorTypes.indexOf(FV.Validator.CONTAINSNUMBER) === -1) {
-
-			_valCheckNumberEl.className = 'val-check-good';
-			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;Password must contain at least one number';
-
-		} else {
-
-			_valCheckNumberEl.className = 'val-check-bad';
-			_valCheckNumberEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;Password must contain at least one number';
-
-		}
-
-		if( _signupNameEl.value === '' || _signupEmailEl.value === '' || _signupPasswordEl.value === '' || _signupPassword2El.value === '') {
-
-			_valCheckRequiredEl.className = 'val-check-bad';
-			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-down"></i>&nbsp;&nbsp;All required fields must be filled out';
-
-		} else {
-
-			_valCheckRequiredEl.className = 'val-check-good';
-			_valCheckRequiredEl.innerHTML = '<i class="fa fa-thumbs-o-up"></i>&nbsp;&nbsp;All required fields must be filled out';
-
-		}
-
-	}
+	let _signupNameEl = 				document.getElementById('signup-name');
+	let _signupEmailEl = 				document.getElementById('signup-email');
+	let _signupPasswordEl = 			document.getElementById('signup-password');
+	let _signupPassword2El = 			document.getElementById('signup-password2');
+	let _signupEmployerEl =				document.getElementById('signup-employer');
+	let _signupTitleEl =				document.getElementById('signup-title');
+	let _signupBirthdayEl =				document.getElementById('signup-birthday');
+	let _submitPasswordButton =			document.getElementById('submit-password-button');
+	let _signupAdditionalInfoEl =		document.getElementById('signup-additional-info');
+	let _signupSwitchEl =				document.getElementById('switch-1');
+	let _signUpSpinner = 				document.getElementById('sign-up-spinner');
+	let _signupNameDivEl =				document.getElementById('signup-name-div');
+	let _signupEmailDivEl = 			document.getElementById('signup-email-div');
+	let _signupPasswordDivEl =			document.getElementById('signup-password-div');
+	let _signupPasswordRepeatDivEl =	document.getElementById('signup-password-repeat-div');
+	let _passwordErrorEl =				document.getElementById('password-error');
+	let _passwordRepeatErrorEl =		document.getElementById('password-repeat-error');
 
 	/**
 	 * Represents a SignUp Page
@@ -304,72 +186,117 @@ var SignUp = (function() {
 		/**
 		 * Validate sign up page
 		 * @memberof SignUp
-		 * @param  {Boolean} skipCustomValidation checks if we will show custom validation
 		 * 
 		 */
-		static validateSignUp(skipCustomValidation) {
+		static validateSignUp() {
 
-			let errors = 			_validator.checkForErrors();
-			let errorTypes = 		[];
-			let passwordErrors = 	"";
-			let password2Errors = 	"";
-			let emailErrors =		"";
+			let valid = true;
+			let passwordMessage = '';
+			let password2Message = '';
 
-			errors.forEach(error => {
+			if(_signupNameDivEl.className.indexOf('is-invalid') > -1) {
 
-				switch(error.name) {
+				valid = false;
 
-					case "Password1":
+			}
 
-						passwordErrors += error.error;
-						errorTypes.push(error.type);
-						break;
+			if(_signupEmailDivEl.className.indexOf('is-invalid') > -1) {
 
-					case "Password2":
+				valid = false;
 
-						password2Errors += error.error;
-						errorTypes.push(error.type);
-						break;
+			}
 
-					case "EmailError":
-					
-						emailErrors += error.error;
-						errorTypes.push(error.type);
-						break;	
+			if(!_signupPasswordEl.value) {
+
+				passwordMessage += '<div>Required</div>';
+				valid = false;
+
+			}
+
+			if(_signupPasswordEl.value.length < 8) {
+
+				passwordMessage += '<div>Password must be at least 8 characters long</div>';
+				valid = false;
+
+				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+					_signupPasswordDivEl.className += ' is-invalid';
 
 				}
 
-			});
+			}
 
-			if(passwordErrors !== '') {
+			if(!_signupPasswordEl.value.match(/[A-Z]/g)) {
 
-				passwordErrors = "Please correct the following errors:\n" + passwordErrors;
+				passwordMessage += '<div>Must contain at least one upper case character</div>';
+				valid = false;
+
+				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+					_signupPasswordDivEl.className += ' is-invalid';
+
+				}
 
 			}
 
-			if(password2Errors !== '') {
+			if(!_signupPasswordEl.value.match(/[a-z]/g)) {
 
-				password2Errors = "Please correct the following errors:\n" + password2Errors;
+				passwordMessage += '<div>Must contain at least one lower case character</div>';
+				valid = false;
 
-			}
+				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
 
-			if(emailErrors !== '') {
+					_signupPasswordDivEl.className += ' is-invalid';
 
-				emailErrors = "Please correct the following errors:\n" + emailErrors;
-
-			}
-
-			//These will only display one at a time
-			if (!skipCustomValidation) {
-
-				_signupEmailEl.setCustomValidity(emailErrors);
-				_signupPasswordEl.setCustomValidity(passwordErrors);
-				_signupPassword2El.setCustomValidity(password2Errors);
+				}
 
 			}
 
-			_submitPasswordButton.disabled = errorTypes.length > 0;
-			_checkValFields(errorTypes);
+			if(!_signupPasswordEl.value.match(/\d+/g)) {
+
+				passwordMessage += '<div>Must contain at least one number</div>';
+				valid = false;
+
+				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+					_signupPasswordDivEl.className += ' is-invalid';
+
+				}
+
+			}
+
+			if(!_signupPassword2El.value) {
+
+				valid = false;
+				password2Message += '<div>Required</div>';
+
+			}
+
+			if(_signupPasswordEl.value !== _signupPassword2El.value) {
+
+				passwordMessage += '<div>Passwords must match</div>';
+				password2Message += '<div>Passwords must match</div>';
+				valid = false;
+
+				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+					_signupPasswordDivEl.className += ' is-invalid';
+
+				}
+
+				if(_signupPasswordRepeatDivEl.className.indexOf('is-invalid') === -1) {
+
+					_signupPasswordRepeatDivEl.className += ' is-invalid';
+
+				}
+
+			}
+
+			_submitPasswordButton.disabled = !valid;
+
+			_signupPasswordEl.setCustomValidity(passwordMessage);
+			_passwordErrorEl.innerHTML = passwordMessage;
+			_passwordRepeatErrorEl.innerHTML = password2Message;
 
 		}
 

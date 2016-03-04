@@ -23,7 +23,7 @@
 
 			<p>
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-name-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-name" title="Name">
 						
@@ -31,7 +31,9 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="SignUp.validateSignUp()" required>
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
+
+					<span class="mdl-textfield__error">Required</span>
 
 				</div>
 
@@ -39,7 +41,7 @@
 
 			<p>
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-email-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-email" title="Email">
 						
@@ -47,7 +49,9 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" required>
+					<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" type="email" required>
+
+					<span class="mdl-textfield__error">* Valid email address required</span>
 
 				</div>
 
@@ -55,7 +59,7 @@
 
 			<p>
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-password-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-password" title="Password">
 						
@@ -65,13 +69,15 @@
 
 					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp()" required>
 
+					<span id="password-error" class="mdl-textfield__error left"></span>
+
 				</div>
 
 			</p>
 
-			<p>
+			<p class="top-pad-x-sm">
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-password-repeat-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
 						
@@ -80,6 +86,8 @@
 					</label>
 
 					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp()" required>
+
+					<span id="password-repeat-error" class="mdl-textfield__error left"></span>
 
 				</div>
 

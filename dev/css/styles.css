@@ -8,6 +8,8 @@ body {
     /* This background is dark, so we set text to white. Use 87% black instead if
 	     your background is light. */
     color: white; }
+  body .top-pad-x-sm {
+    padding-top: 2em; }
   body .top-pad-sm {
     padding-top: 3em; }
   body .long-input {
@@ -76,6 +78,8 @@ body {
     float: left;
     color: #e91e63;
     font-size: 12px; }
+  body .left {
+    text-align: left; }
   @media screen and (min-width: 767px) and (max-width: 1000px) {
     body .center-container {
       margin-left: auto;

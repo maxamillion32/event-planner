@@ -122,6 +122,8 @@
 
 									<input id="event-name" class="mdl-textfield__input" type="text" name="event-name" title="Event Name" oninput="EventPlanner.checkEventFields()" required>
 
+									<span class="mdl-textfield__error">Required</span>
+
 								</div>
 
 							</p>
@@ -149,6 +151,8 @@
 									  <option value="Funeral">
 									</option></option></option></option></option></option></option></datalist>
 
+									<span class="mdl-textfield__error">Required</span>
+
 								</div>
 
 							</p>
@@ -166,6 +170,8 @@
 
 									<input id="event-host" class="mdl-textfield__input" type="text" name="name" title="Event Host" oninput="EventPlanner.checkEventFields()" required>
 
+									<span class="mdl-textfield__error">Required</span>
+
 								</div>
 
 							</p>
@@ -182,6 +188,8 @@
 									<span class="fake-label">When will it begin?</span>
 
 									<input id="start-date" class="mdl-textfield__input" type="datetime-local" name="start-date" title="Start Date" oninput="EventPlanner.checkEventFields()" required>
+
+									<span class="mdl-textfield__error">Required</span>
 
 								</div>
 
@@ -205,6 +213,8 @@
 									<span class="fake-label">When will it end?</span>
 
 									<input id="end-date" class="mdl-textfield__input" type="datetime-local" name="end-date" title="End Date" oninput="EventPlanner.checkEventFields()" required>
+
+									<span class="mdl-textfield__error">Required</span>
 
 								</div>
 
@@ -258,7 +268,7 @@
 
 									<input type="text" id="street-number" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
 
-									<span class="mdl-textfield__error">Don't forget the street address!</span>
+									<span class="mdl-textfield__error">Required</span>
 
 								</div>
 
@@ -276,7 +286,7 @@
 
 									<input type="text" id="city" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
 
-									<span class="mdl-textfield__error">Your city should be here!</span>
+									<span class="mdl-textfield__error">Required</span>
 
 								</div>	
 
@@ -290,7 +300,7 @@
 
 									<input type="text" id="state" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
 
-									<span class="mdl-textfield__error">Let's have the state here!</span>
+									<span class="mdl-textfield__error">Required</span>
 
 								</div>
 								
@@ -304,7 +314,7 @@
 
 									<input type="text" id="postal-code" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
 
-									<span class="mdl-textfield__error">Oh zip code, how could we forget ye?</span>
+									<span class="mdl-textfield__error">Required</span>
 
 								</div>
 
@@ -322,7 +332,7 @@
 
 									<input type="text" id="country" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
 
-									<span class="mdl-textfield__error">I'd hate it if your guests showed up to the wrong country</span>
+									<span class="mdl-textfield__error">Required</span>
 
 								</div>
 
@@ -437,6 +447,8 @@
 
 				<input class="mdl-textfield__input" id="reset-password-email" type="email" name="email" title="Email" oninput="ResetPassword.validateResetPassword()" required>
 
+				<span class="mdl-textfield__error">Required</span>
+
 			</div>
 
 			<p>
@@ -537,6 +549,8 @@
 
 					<input class="mdl-textfield__input input-width" id="signin-email" type="email" name="email" title="Email" oninput="SignInOut.validateSignIn()" autofocus="true" required>
 
+					<span class="mdl-textfield__error">Required</span>
+
 				</div>
 
 			</p>
@@ -552,6 +566,8 @@
 					</label>
 
 					<input class="mdl-textfield__input" id="signin-password" type="password" name="current-password" title="Password" oninput="SignInOut.validateSignIn()" required>
+
+					<span class="mdl-textfield__error">Required</span>
 
 				</div>
 
@@ -609,7 +625,7 @@
 
 			<p>
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-name-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-name" title="Name">
 						
@@ -617,7 +633,9 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" oninput="SignUp.validateSignUp()" required>
+					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
+
+					<span class="mdl-textfield__error">Required</span>
 
 				</div>
 
@@ -625,7 +643,7 @@
 
 			<p>
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-email-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-email" title="Email">
 						
@@ -633,7 +651,9 @@
 
 					</label>
 
-					<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" required>
+					<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" type="email" required>
+
+					<span class="mdl-textfield__error">* Valid email address required</span>
 
 				</div>
 
@@ -641,7 +661,7 @@
 
 			<p>
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-password-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-password" title="Password">
 						
@@ -651,13 +671,15 @@
 
 					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp()" required>
 
+					<span id="password-error" class="mdl-textfield__error left"></span>
+
 				</div>
 
 			</p>
 
-			<p>
+			<p class="top-pad-x-sm">
 
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+				<div id="signup-password-repeat-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
 
 					<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
 						
@@ -666,6 +688,8 @@
 					</label>
 
 					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp()" required>
+
+					<span id="password-repeat-error" class="mdl-textfield__error left"></span>
 
 				</div>
 
