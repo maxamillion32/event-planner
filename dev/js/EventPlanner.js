@@ -46,6 +46,7 @@ var EventPlanner = function (document) {
 	var _locationButtonEl = document.getElementById('location-button');
 	var _startDateErrorEl = document.getElementById('start-date-error');
 	var _endDateErrorEl = document.getElementById('end-date-error');
+	var _locationValidationEl = document.getElementById('location-validation');
 	var _addressList = [_streetNumberEl, _cityEl, _stateEl, _postalCodeEl, _countryEl];
 	var _autocomplete = undefined;
 
@@ -109,6 +110,12 @@ var EventPlanner = function (document) {
 
 		_clearAddress(false);
 
+		_addressDivEl.className += ' is-invalid';
+		_cityDivEl.className += ' is-invalid';
+		_stateDivEl.className += ' is-invalid';
+		_zipDivEl.className += ' is-invalid';
+		_countryDivEl.className += ' is-invalid';
+
 		// Get each component of the address from the place details
 		// and fill the corresponding field on the form.
 		var _iteratorNormalCompletion = true;
@@ -132,31 +139,31 @@ var EventPlanner = function (document) {
 					//Address2
 					case 'route':
 						_streetNumberEl.value += ' ' + component.short_name;
-						_addressDivEl.className += ' is-dirty';
+						_addressDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field is-upgraded is-dirty';
 						break;
 
 					//City
 					case 'locality':
 						_cityEl.value = component.short_name;
-						_cityDivEl.className += ' is-dirty';
+						_cityDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field is-upgraded is-dirty';
 						break;
 
 					//State
 					case 'administrative_area_level_1':
 						_stateEl.value = component.short_name;
-						_stateDivEl.className += ' is-dirty';
+						_stateDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field is-upgraded is-dirty';
 						break;
 
 					//Zip
 					case 'postal_code':
 						_postalCodeEl.value = component.short_name;
-						_zipDivEl.className += ' is-dirty';
+						_zipDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field is-upgraded is-dirty';
 						break;
 
 					//Country
 					case 'country':
 						_countryEl.value = component.short_name;
-						_countryDivEl.className += ' is-dirty';
+						_countryDivEl.className = 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label address-field is-upgraded is-dirty';
 						break;
 
 				}
@@ -175,6 +182,8 @@ var EventPlanner = function (document) {
 				}
 			}
 		}
+
+		_locationValidationEl.hidden = true;
 
 		EventPlanner.checkEventFields();
 	}
@@ -444,6 +453,23 @@ var EventPlanner = function (document) {
 
 				//Disable the submit button until all the fields are filled out
 				_submitEventButton.disabled = completed !== _totalInputs;
+			}
+
+			/**
+    *  Checks if we should redisplay the message on location input
+    *  @function checkLocationInput
+    * 	@memberof EventPlanner
+    * 
+    */
+
+		}, {
+			key: 'checkLocationInput',
+			value: function checkLocationInput() {
+
+				if (_locationInputEl.value === '') {
+
+					_locationValidationEl.hidden = false;
+				}
 			}
 
 			/**

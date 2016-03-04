@@ -116,7 +116,7 @@
 
 								<div id="start-date-error" class="val-check-bad small-text" hidden="true">
 									
-									Whoa... this starts before it ends!?
+									Whoa... this starts after it ends!?
 
 								</div>
 
@@ -158,11 +158,11 @@
 
 									</label>
 
-									<input id="location-input" class="mdl-textfield__input" onFocus="app.eventPlanner.geolocate()" title="Loaction Autofill"></input>
+									<input id="location-input" class="mdl-textfield__input" onFocus="app.eventPlanner.geolocate()" title="Loaction Autofill" oninput="EventPlanner.checkLocationInput()"></input>
 
 								</div>
 
-								<div class="val-check-bad small-text">
+								<div id="location-validation" class="val-check-bad small-text" hidden="false">
 									
 									Input the address and select the location from the dropdown
 
@@ -185,7 +185,9 @@
 										
 									</label>
 
-									<input type="text" id="street-number" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required></input>
+									<input type="text" id="street-number" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required></input>
+
+									<span class="mdl-textfield__error">Don't forget the street address!</span>
 
 								</div>
 
@@ -201,7 +203,9 @@
 
 									</label>
 
-									<input type="text" id="city" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required></input>
+									<input type="text" id="city" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required></input>
+
+									<span class="mdl-textfield__error">Your city should be here!</span>
 
 								</div>	
 
@@ -213,7 +217,9 @@
 
 									</label>
 
-									<input type="text" id="state" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required>
+									<input type="text" id="state" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
+
+									<span class="mdl-textfield__error">Let's have the state here!</span>
 
 								</div>
 								
@@ -225,7 +231,9 @@
 
 									</label>
 
-									<input type="text" id="postal-code" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required>
+									<input type="text" id="postal-code" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
+
+									<span class="mdl-textfield__error">Oh zip code, how could we forget ye?</span>
 
 								</div>
 
@@ -241,7 +249,9 @@
 
 									</label>
 
-									<input type="text" id="country" class="mdl-textfield__input" onchange="EventPlanner.checkEventFields()" required>
+									<input type="text" id="country" class="mdl-textfield__input" oninput="EventPlanner.checkEventFields()" required>
+
+									<span class="mdl-textfield__error">I'd hate it if your guests showed up to the wrong country</span>
 
 								</div>
 
