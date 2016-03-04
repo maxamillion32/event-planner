@@ -78,32 +78,32 @@ var UserInfo = function () {
 	return function () {
 
 		/**
-      * UserInfo constructor.
-      * @constructs UserInfo
-      */
+   * UserInfo constructor.
+   * @constructs UserInfo
+   */
 
 		function UserInfo(extraRef, ref) {
 			_classCallCheck(this, UserInfo);
 
 			/**
-          * The events
-          * @member UserInfo#extraRef
-          * @type {object}
-          */
+    * The events
+    * @member UserInfo#extraRef
+    * @type {object}
+    */
 			this.extraRef = extraRef;
 
 			/**
-          * Firebase ref
-          * @member UserInfo#ref
-          * @type {object}
-          */
+    * Firebase ref
+    * @member UserInfo#ref
+    * @type {object}
+    */
 			this.ref = ref;
 
 			/**
-          * Users email
-          * @member UserInfo#email
-          * @type {string}
-          */
+    * Users email
+    * @member UserInfo#email
+    * @type {string}
+    */
 			this.email = undefined;
 		}
 
@@ -266,8 +266,8 @@ var UserInfo = function () {
 
 
 			/** 
-   *   @function checkFields
-   *   @memberof UserInfo
+   * @function checkFields
+   * @memberof UserInfo
    *   
    */
 			value: function checkFields() {

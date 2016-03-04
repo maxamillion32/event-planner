@@ -35,45 +35,45 @@ var SignInOut = (function(document) {
 	return class SignInOut {
 
 		/**
-	     * SignInOut constructor.
-	     * @constructs SignInOut
-	     * @param {object} fbRef Firebase Reference
-	     */
+		 * SignInOut constructor.
+		 * @constructs SignInOut
+		 * @param {object} fbRef Firebase Reference
+		 */
 		constructor(fbRef) {
 
 			/**
-	         * Firebase Reference
-	         * @member SignInOut#fbRef
-	         * @type {Object}
-	         */
+			 * Firebase Reference
+			 * @member SignInOut#fbRef
+			 * @type {Object}
+			 */
 			this.fbRef = fbRef;
 
 			/**
-	         * Firebase User Route Reference
-	         * @member SignInOut#userRef
-	         * @type {Object}
-	         */
+			 * Firebase User Route Reference
+			 * @member SignInOut#userRef
+			 * @type {Object}
+			 */
 			this.userRef = undefined;
 
 			/**
-	         * Firebase Event Route Reference
-	         * @member SignInOut#eventRef
-	         * @type {Object}
-	         */
+			 * Firebase Event Route Reference
+			 * @member SignInOut#eventRef
+			 * @type {Object}
+			 */
 			this.eventRef = undefined;
 
 			/**
-	         * Firebase Extra Info Route Reference
-	         * @member SignInOut#extraRef
-	         * @type {Object}
-	         */
+			 * Firebase Extra Info Route Reference
+			 * @member SignInOut#extraRef
+			 * @type {Object}
+			 */
 			this.extraRef = undefined;
 
 			/**
-	         * Users email
-	         * @member SignInOut#email
-	         * @type {string}
-	         */
+			 * Users email
+			 * @member SignInOut#email
+			 * @type {string}
+			 */
 			this.email = undefined;
 
 		}
@@ -154,24 +154,24 @@ var SignInOut = (function(document) {
 				this.email = authData.password.email;
 
 				/**
-		         * Firebase user route reference
-		         * @member SignInOut#userRef
-		         * @type {object}
-		         */
+				 * Firebase user route reference
+				 * @member SignInOut#userRef
+				 * @type {object}
+				 */
 				this.userRef = 	this.fbRef.child('users/' + authData.uid);
 
 				/**
-		         * Firebase events route reference
-		         * @member SignInOut#eventRef
-		         * @type {object}
-		         */
+				 * Firebase events route reference
+				 * @member SignInOut#eventRef
+				 * @type {object}
+				 */
 				this.eventRef = this.userRef.child('/events');
 
 				/**
-		         * Firebase extras route reference
-		         * @member SignInOut#extraRef
-		         * @type {object}
-		         */
+				 * Firebase extras route reference
+				 * @member SignInOut#extraRef
+				 * @type {object}
+				 */
 				this.extraRef = this.userRef.child('/extra');
 
 				//If just signing up store the extra user data
@@ -220,10 +220,10 @@ var SignInOut = (function(document) {
 
 		/**
 		 * @function signIn
-		 *   @memberof SignInOut
-		 *   @param {string} emailIn Holds the users email
-		 *   @param {string} passwordIn Holds the users password
-		 *   @instance
+		 * @memberof SignInOut
+		 * @param {string} emailIn Holds the users email
+		 * @param {string} passwordIn Holds the users password
+		 * @instance
 		 * 
 		 */
 		signIn(emailIn, passwordIn) {

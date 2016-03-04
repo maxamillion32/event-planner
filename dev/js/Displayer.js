@@ -31,9 +31,9 @@ var Displayer = function (document) {
 	return function () {
 
 		/**
-      * Displayer constructor.
-      * @constructs Displayer
-      */
+   * Displayer constructor.
+   * @constructs Displayer
+   */
 
 		function Displayer() {
 			_classCallCheck(this, Displayer);

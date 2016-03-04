@@ -1,249 +1,249 @@
-<!-- Sign up -->
+				<!-- Sign up -->
 
-<!-- MDL Spinner Component -->
-<div id="sign-up-spinner" class="spinner" hidden="true">
+				<!-- MDL Spinner Component -->
+				<div id="sign-up-spinner" class="spinner" hidden="true">
 
-	<div class="mdl-spinner mdl-js-spinner is-active"></div>
-
-</div>
-
-<!-- Sign up form -->
-<div id="sign-up-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
-
-	<div class="mdl-card__title">
-
-		<h2 class="mdl-card__title-text">Sign Up</h2>
-
-	</div>
-	
-	<!-- Card Content -->
-	<div class="mdl-card__supporting-text">
-
-		<form action="javascript:app.signUp.signUp()" class="authForm" autocomplete="on">
-
-			<p>
-
-				<div id="signup-name-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-					<label class="mdl-textfield__label" for="signup-name" title="Name">
-						
-						<span>Name</span>
-
-					</label>
-
-					<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
-
-					<span class="mdl-textfield__error">Required</span>
+					<div class="mdl-spinner mdl-js-spinner is-active"></div>
 
 				</div>
 
-			</p>
+				<!-- Sign up form -->
+				<div id="sign-up-container" class="card-width mdl-card mdl-shadow--2dp center-container animated slideInDown" hidden="true">
 
-			<p>
+					<div class="mdl-card__title">
 
-				<div id="signup-email-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<h2 class="mdl-card__title-text">Sign Up</h2>
 
-					<label class="mdl-textfield__label" for="signup-email" title="Email">
-						
-						<span>Email</span>
+					</div>
+					
+					<!-- Card Content -->
+					<div class="mdl-card__supporting-text">
 
-					</label>
+						<form action="javascript:app.signUp.signUp()" class="authForm" autocomplete="on">
 
-					<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" type="email" required>
+							<p>
 
-					<span class="mdl-textfield__error">* Valid email address required</span>
+								<div id="signup-name-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="signup-name" title="Name">
+										
+										<span>Name</span>
+
+									</label>
+
+									<input class="mdl-textfield__input" id="signup-name" type="text" name="name" title="Name" required>
+
+									<span class="mdl-textfield__error">Required</span>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<div id="signup-email-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="signup-email" title="Email">
+										
+										<span>Email</span>
+
+									</label>
+
+									<input class="mdl-textfield__input" id="signup-email" name="email" title="Email" oninput="SignUp.validateSignUp()" type="email" required>
+
+									<span class="mdl-textfield__error">* Valid email address required</span>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<div id="signup-password-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="signup-password" title="Password">
+										
+										<span>Password</span>
+
+									</label>
+
+									<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp()" required>
+
+									<span id="password-error" class="mdl-textfield__error left"></span>
+
+								</div>
+
+							</p>
+
+							<p class="top-pad-x-sm">
+
+								<div id="signup-password-repeat-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
+										
+										<span>Retype Password</span>
+
+									</label>
+
+									<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp()" required>
+
+									<span id="password-repeat-error" class="mdl-textfield__error left"></span>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+									<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+
+										<input type="checkbox" id="switch-1" class="mdl-switch__input"
+										onclick="app.signUp.showAdditionalInfo()">
+										<span class="mdl-switch__label">Care to tell us more about yourself?</span>
+
+									</label>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<!-- Additional signup info -->
+								<div id="signup-additional-info" hidden="true">
+
+									<p>
+
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+											<label class="mdl-textfield__label" for="signup-employer" title="Employer">
+												
+												<span>Employer</span>
+
+											</label>
+
+											<input class="mdl-textfield__input" id="signup-employer" type="text" title="Employer" name="organization">
+
+										</div>
+
+									</p>
+
+									<p>
+
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+											<label class="mdl-textfield__label" for="signup-title" title="Title">
+												
+												<span>Job Title</span>
+
+											</label>
+
+											<input class="mdl-textfield__input" id="signup-title" type="text" title="Title" name="organization-title">
+
+										</div>
+
+									</p>
+
+									<p>
+
+										<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+
+											<label class="mdl-textfield__label" for="signup-birthday" title="Birthday">
+
+											</label>
+
+											<span class="fake-label2">When's your birthday?</span>
+
+											<input class="mdl-textfield__input" id="signup-birthday" type="month" title="Birthday" name="bday">
+
+										</div>
+
+									</p>
+
+								</div>
+
+							</p>
+
+							<p>
+
+								<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
+
+							</p>
+
+						</form>
+
+						<p>
+
+							<div class="center-container">
+
+								<div class="left-container">
+
+									<p>
+
+										<span class="val-check-bad" id="val-check-required"></span>
+
+									</p>
+
+									<p>
+
+										<span class="val-check-bad" id="val-check-email"></span>
+
+									</p>
+
+									<p>
+
+										<span class="val-check-bad" id="val-check-length"></span>
+
+									</p>
+
+									<p>
+
+										<span class="val-check-bad" id="val-check-upper"></span>
+
+									</p>
+
+									<p>
+
+										<span class="val-check-bad" id="val-check-lower"></span>
+
+									</p>
+
+									<p>
+
+										<span class="val-check-bad" id="val-check-number"></span>
+
+									</p>
+
+									<p>
+
+										<span class="val-check-bad" id="val-check-match"></span>
+
+									</p>
+
+								</div>
+
+							</div>
+
+						</p>
+
+						<p>
+
+							<div class="link">
+
+								Already have an account?  <a onclick="Displayer.showSignIn()" href="#" title="Sign In">Sign In</a>
+
+							</div>
+
+							<div class="link">
+
+								Forgot your password?  <a onclick="Displayer.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
+
+							</div>
+
+						</p>
+
+					</div>
 
 				</div>
-
-			</p>
-
-			<p>
-
-				<div id="signup-password-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-					<label class="mdl-textfield__label" for="signup-password" title="Password">
-						
-						<span>Password</span>
-
-					</label>
-
-					<input class="mdl-textfield__input" id="signup-password" type="password" name="new-password" title="Password" oninput="SignUp.validateSignUp()" required>
-
-					<span id="password-error" class="mdl-textfield__error left"></span>
-
-				</div>
-
-			</p>
-
-			<p class="top-pad-x-sm">
-
-				<div id="signup-password-repeat-div" class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-					<label class="mdl-textfield__label" for="signup-password2" title="Password Repeat">
-						
-						<span>Retype Password</span>
-
-					</label>
-
-					<input class="mdl-textfield__input" id="signup-password2" type="password" name="new-password" title="Password Repeat" oninput="SignUp.validateSignUp()" required>
-
-					<span id="password-repeat-error" class="mdl-textfield__error left"></span>
-
-				</div>
-
-			</p>
-
-			<p>
-
-				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-					<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
-
-						<input type="checkbox" id="switch-1" class="mdl-switch__input"
-						onclick="app.signUp.showAdditionalInfo()">
-						<span class="mdl-switch__label">Care to tell us more about yourself?</span>
-
-					</label>
-
-				</div>
-
-			</p>
-
-			<p>
-
-				<!-- Additional signup info -->
-				<div id="signup-additional-info" hidden="true">
-
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="signup-employer" title="Employer">
-								
-								<span>Employer</span>
-
-							</label>
-
-							<input class="mdl-textfield__input" id="signup-employer" type="text" title="Employer" name="organization">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="signup-title" title="Title">
-								
-								<span>Job Title</span>
-
-							</label>
-
-							<input class="mdl-textfield__input" id="signup-title" type="text" title="Title" name="organization-title">
-
-						</div>
-
-					</p>
-
-					<p>
-
-						<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-
-							<label class="mdl-textfield__label" for="signup-birthday" title="Birthday">
-
-							</label>
-
-							<span class="fake-label2">When's your birthday?</span>
-
-							<input class="mdl-textfield__input" id="signup-birthday" type="month" title="Birthday" name="bday">
-
-						</div>
-
-					</p>
-
-				</div>
-
-			</p>
-
-			<p>
-
-				<input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="submit-password-button" type="submit" value="Sign Up" title="Sign Up">
-
-			</p>
-
-		</form>
-
-		<p>
-
-			<div class="center-container">
-
-				<div class="left-container">
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-required"></span>
-
-					</p>
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-email"></span>
-
-					</p>
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-length"></span>
-
-					</p>
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-upper"></span>
-
-					</p>
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-lower"></span>
-
-					</p>
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-number"></span>
-
-					</p>
-
-					<p>
-
-						<span class="val-check-bad" id="val-check-match"></span>
-
-					</p>
-
-				</div>
-
-			</div>
-
-		</p>
-
-		<p>
-
-			<div class="link">
-
-				Already have an account?  <a onclick="Displayer.showSignIn()" href="#" title="Sign In">Sign In</a>
-
-			</div>
-
-			<div class="link">
-
-				Forgot your password?  <a onclick="Displayer.showResetPassword()" href="#" title="Reset Password">Reset Password</a>
-
-			</div>
-
-		</p>
-
-	</div>
-
-</div>

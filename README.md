@@ -17,3 +17,13 @@ You can run 'gulp dist' to build the distro, and gulp 'serve-dist' to serve te d
 # To Clean
 
 Run 'gulp dev-clean' to remove all files from the dev directory and 'gulp dist-clean' to remove all files from the dist directory.
+
+# Structure
+
+Files for app are in the /public directory.
+These files in /public are built/transpiled and put into the /dev directory to serve during development.
+These files in /public are built/transpiled/minified and put into the /dist directory to create a releasable distro.
+
+# License
+
+New BSD

@@ -32,10 +32,10 @@ var SignUp = (function() {
 		constructor(fbRef) {
 
 			/**
-	         * Firebase Reference
-	         * @member SignUp#fbRef
-	         * @type {Object}
-	         */
+			 * Firebase Reference
+			 * @member SignUp#fbRef
+			 * @type {Object}
+			 */
 			this.fbRef = fbRef;
 
 			/**

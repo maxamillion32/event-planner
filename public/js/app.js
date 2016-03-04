@@ -27,45 +27,45 @@
 			this.signInOut = 	 new SignInOut(fbRef);
 
 			/**
-	         * EventPlanner Object
-	         * @member App#eventPlanner
-	         * @type {object}
-	         */
+			 * EventPlanner Object
+			 * @member App#eventPlanner
+			 * @type {object}
+			 */
 			this.eventPlanner =  new EventPlanner();
 
 			/**
-	         * ResetPassword Object
-	         * @member App#resetPassword
-	         * @type {object}
-	         */
+			 * ResetPassword Object
+			 * @member App#resetPassword
+			 * @type {object}
+			 */
 			this.resetPassword = new ResetPassword(fbRef);
 
 			/**
-	         * ShowEvents Object
-	         * @member App#showEvents
-	         * @type {object}
-	         */
+			 * ShowEvents Object
+			 * @member App#showEvents
+			 * @type {object}
+			 */
 			this.showEvents =	 new ShowEvents();
 
 			/**
-	         * SignUp Object
-	         * @member App#signUp 
-	         * @type {object}
-	         */
+			 * SignUp Object
+			 * @member App#signUp 
+			 * @type {object}
+			 */
 			this.signUp =		 new SignUp(fbRef);
 
 			/**
-	         * UserInfo Object
-	         * @member App#signUp 
-	         * @type {object}
-	         */
+			 * UserInfo Object
+			 * @member App#signUp 
+			 * @type {object}
+			 */
 			this.userInfo =		new UserInfo();
 
 			/**
-	         * ResetPassword Object
-	         * @member App#resetPassword
-	         * @type {object}
-	         */
+			 * ResetPassword Object
+			 * @member App#resetPassword
+			 * @type {object}
+			 */
 			this.resetPassword = new ResetPassword(fbRef);
 
 			// Check the sign in button

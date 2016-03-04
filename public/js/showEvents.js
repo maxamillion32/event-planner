@@ -122,25 +122,25 @@ var ShowEvents = (function(document) {
 	return class ShowEvents {
 
 		/**
-	     * ShowEvents constructor.
-	     * @constructs ShowEvents
-	     * @param {array} events events to display
-	     * @param {object} eventRef Firebase reference to the events route
-	     */
+		 * ShowEvents constructor.
+		 * @constructs ShowEvents
+		 * @param {array} events events to display
+		 * @param {object} eventRef Firebase reference to the events route
+		 */
 		constructor(events, eventRef) {
 
 			/**
-	         * The events
-	         * @member ShowEvents#events
-	         * @type {object}
-	         */
+			 * The events
+			 * @member ShowEvents#events
+			 * @type {object}
+			 */
 			this.events = events || {};
 
 			/**
-	         * Frebase events reference
-	         * @member ShowEvents#eventRef
-	         * @type {object}
-	         */
+			 * Frebase events reference
+			 * @member ShowEvents#eventRef
+			 * @type {object}
+			 */
 			this.eventRef = eventRef;
 
 			if(this.eventRef) {

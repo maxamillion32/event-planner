@@ -118,7 +118,7 @@ gulp.task('dev-js', function() {
 
     gulp.src('./public/js/**/*.js')
     //.pipe(sourcemaps.init())
-    .pipe(babel().on('error', function(e){
+    .pipe(babel({comments: false}).on('error', function(e){
             console.log('Bablify Error: ', e);
          }))
     //.pipe(sourcemaps.write('../maps'))

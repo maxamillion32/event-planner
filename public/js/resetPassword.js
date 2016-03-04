@@ -15,17 +15,17 @@ var ResetPassword = (function(document) {
 	return class ResetPassword {
 
 		/**
-	     * ResetPassword constructor.
-	     * @constructs ResetPassword
-	     * @param {object} fbRef Reference to firebase
-	     */
+		 * ResetPassword constructor.
+		 * @constructs ResetPassword
+		 * @param {object} fbRef Reference to firebase
+		 */
 		constructor(fbRef) {
 
 			/**
-	         * Firebase reference
-	         * @member ResetPassword#fbRef
-	         * @type {object}
-	         */
+			 * Firebase reference
+			 * @member ResetPassword#fbRef
+			 * @type {object}
+			 */
 			this.fbRef = fbRef;
 
 		}

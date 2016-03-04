@@ -39,10 +39,10 @@ var SignUp = function () {
 			_classCallCheck(this, SignUp);
 
 			/**
-          * Firebase Reference
-          * @member SignUp#fbRef
-          * @type {Object}
-          */
+    * Firebase Reference
+    * @member SignUp#fbRef
+    * @type {Object}
+    */
 			this.fbRef = fbRef;
 
 			/**

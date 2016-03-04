@@ -25,9 +25,9 @@ var Displayer = (function(document) {
 	return class Displayer {
 
 		/**
-	     * Displayer constructor.
-	     * @constructs Displayer
-	     */
+		 * Displayer constructor.
+		 * @constructs Displayer
+		 */
 		constructor() {
 
 		}
