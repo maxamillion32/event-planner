@@ -12,6 +12,7 @@ var shell = require('gulp-shell');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var rimraf = require('gulp-rimraf');
+var browserSync = require('browser-sync').create();
  
 /**************
   Lint
@@ -40,10 +41,11 @@ gulp.task('serve-docs', function() {
 });
  
 gulp.task('serve', function() {
-  connect.server({
-  	root: ['dev'],
-    livereload: true
-  });
+  browserSync.init({
+        server: {
+            baseDir: "./dev",
+        }
+    });
 });
 
 gulp.task('serve-dist', function() {
@@ -83,6 +85,7 @@ gulp.task('dev-copy', function () {
   return mergeStream(
     gulp.src('./public/assets/**/*').pipe(gulp.dest('./dev/assets')),
     gulp.src('./bower_components/**/*').pipe(gulp.dest('./dev/bower_components'))
+    .pipe(browserSync.stream())
   );
 });
 
@@ -102,6 +105,7 @@ gulp.task('dev-styles', function() {
 	.pipe(sass().on('error', sass.logError))
 	.pipe(concat('styles.css'))
 	.pipe(gulp.dest('./dev/css'))
+  .pipe(browserSync.stream())
 });
 
 gulp.task('dist-styles', function() {
@@ -122,7 +126,8 @@ gulp.task('dev-js', function() {
             console.log('Bablify Error: ', e);
          }))
     //.pipe(sourcemaps.write('../maps'))
-    .pipe(gulp.dest('./dev/js'));
+    .pipe(gulp.dest('./dev/js'))
+    .pipe(browserSync.stream())
 
 });
 
@@ -155,6 +160,7 @@ gulp.task('dev-concat-minify', function() {
     }))
     .pipe(htmlmin())
     .pipe(gulp.dest('./dev'))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('dist-concat-minify', function() {
