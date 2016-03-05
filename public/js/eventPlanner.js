@@ -172,6 +172,20 @@ var EventPlanner = (function(document) {
 	}
 
 	/**
+	 * Tag removed listener
+	 * 
+	 */
+	function _tagRemovedListener() {
+
+		if(VTILAPP.vtil.tags.length === 0) {
+
+			_guestErrorEl.hidden = false;
+
+		}
+
+	}
+
+	/**
 	 * Represents an Event Planner Page
 	 * @class EventPlanner
 	 * 
@@ -200,15 +214,7 @@ var EventPlanner = (function(document) {
 			this.eventRef = eventRef;
 
 			//Listen for tags being removed
-			document.addEventListener("tag-removed", function() {
-
-				if(VTILAPP.vtil.tags.length === 0) {
-
-					_guestErrorEl.hidden = false;
-
-				}
-
-			});	
+			document.addEventListener("tag-removed", _tagRemovedListener);	
 
 		}
 
@@ -584,7 +590,7 @@ var EventPlanner = (function(document) {
 		dispose() {
 
 			_clearElements();
-			document.removeEventListener('tag-removed');
+			document.removeEventListener('tag-removed', _tagRemovedListener);
 			this.eventRef = undefined;
 
 		}

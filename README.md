@@ -20,7 +20,7 @@ Run 'gulp dev-clean' to remove all files from the dev directory and 'gulp dist-c
 
 # Structure
 
-Files for app are in the /public directory.
+Files for active development are in the /public directory.
 These files in /public are built/transpiled and put into the /dev directory to serve during development.
 These files in /public are built/transpiled/minified and put into the /dist directory to create a releasable distro.
 

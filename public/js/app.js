@@ -3,6 +3,26 @@
 	'use strict';
 
 	/**
+	 * Sign Out Listener
+	 *
+	 */
+	function _signOutListener() {
+
+		app.removeEvents();
+		app.showEvents.dispose();
+		app.userInfo.dispose();
+		app.eventPlanner.dispose();
+		app.resetPassword.dispose();
+		app.signUp.dispose();
+
+		window.app = new App();
+
+	}
+
+	// Firebase reference
+	let fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
+
+	/**
 	 * App
 	 * @class App
 	 * @description Starting point for the event planner application
@@ -16,22 +36,19 @@
 		 */
 		constructor() {
 
-			// Register the callback to be fired every time auth state changes
-			let fbRef = new Firebase("https://swanky-event-planner.firebaseIO.com");
-
 			/**
 			 * SignInOut Object
 			 * @member App#signInOut
 			 * @type {object}
 			 */
-			this.signInOut = 	 new SignInOut(fbRef);
+			this.signInOut = new SignInOut(fbRef);
 
 			/**
 			 * EventPlanner Object
 			 * @member App#eventPlanner
 			 * @type {object}
 			 */
-			this.eventPlanner =  new EventPlanner();
+			this.eventPlanner = new EventPlanner();
 
 			/**
 			 * ResetPassword Object
@@ -45,21 +62,21 @@
 			 * @member App#showEvents
 			 * @type {object}
 			 */
-			this.showEvents =	 new ShowEvents();
+			this.showEvents = new ShowEvents();
 
 			/**
 			 * SignUp Object
 			 * @member App#signUp 
 			 * @type {object}
 			 */
-			this.signUp =		 new SignUp(fbRef);
+			this.signUp = new SignUp(fbRef);
 
 			/**
 			 * UserInfo Object
 			 * @member App#signUp 
 			 * @type {object}
 			 */
-			this.userInfo =		new UserInfo();
+			this.userInfo =	new UserInfo();
 
 			/**
 			 * ResetPassword Object
@@ -75,25 +92,10 @@
 			ResetPassword.validateResetPassword();
 
 			// Fired after the user signs up
-			document.addEventListener("signed-up", function() {
-
-				this.signInOut.signIn(SignUp.signupEmailEl.value, SignUp.signupPasswordEl.value);
-
-			}.bind(this));
+			document.addEventListener("signed-up", this._signedUpListener.bind(this));
 
 			// Fired after user signs in
-			document.addEventListener("signed-in", function() {
-
-			  this.eventPlanner.eventRef = 	this.signInOut.eventRef;
-			  this.showEvents.eventRef = 	this.signInOut.eventRef;
-			  this.userInfo.extraRef = 		this.signInOut.extraRef;
-			  this.userInfo.ref = 			fbRef;
-			  this.userInfo.email =			this.signInOut.email;
-
-			  this.showEvents.listenForEvents();
-			  this.userInfo.listenForData();
-
-			}.bind(this));
+			document.addEventListener("signed-in", this._signedInListener.bind(this));
 
 			/**
 			 * Sign out on exit
@@ -102,9 +104,44 @@
 			window.onbeforeunload = function() {
 
 				this.signInOut.signOut();
-				document.removeEventListener('signed-out');
+				document.removeEventListener('signed-out', _signOutListener);
 
 			};
+
+		}
+
+		/**
+		 * Sign Up Listener
+		 * @function _signedUpListener
+		 * @memberof App
+		 * @instance
+		 * @private
+		 *
+		 */
+		_signedUpListener() {
+
+			this.signInOut.signIn(SignUp.signupEmailEl.value, SignUp.signupPasswordEl.value);
+
+		}
+
+		/**
+		 * Sign In Listener
+		 * @function _signedInListener
+		 * @memberof App
+		 * @instance
+		 * @private
+		 *
+		 */
+		_signedInListener() {
+
+			this.eventPlanner.eventRef = 	this.signInOut.eventRef;
+			this.showEvents.eventRef = 		this.signInOut.eventRef;
+			this.userInfo.extraRef = 		this.signInOut.extraRef;
+			this.userInfo.ref = 			fbRef;
+			this.userInfo.email =			this.signInOut.email;
+
+			this.showEvents.listenForEvents();
+			this.userInfo.listenForData();
 
 		}
 
@@ -117,8 +154,8 @@
 		 */
 		removeEvents() {
 
-			document.removeEventListener('signed-up');
-			document.removeEventListener('signed-in');
+			document.removeEventListener('signed-up', this._signedUpListener.bind(this));
+			document.removeEventListener('signed-in', this._signedInListener.bind(this));
 			window.onbeforeunload = undefined;
 
 		}
@@ -188,19 +225,10 @@
 
 	}
 
+	window.app = new App();
+
 	// Fired after user signs out
-	document.addEventListener("signed-out", function() {
-
-		app.removeEvents();
-		app.showEvents.dispose();
-		app.userInfo.dispose();
-		app.eventPlanner.dispose();
-		app.resetPassword.dispose();
-		app.signUp.dispose();
-
-		window.app = new App();
-
-	}.bind(this));
+	document.addEventListener("signed-out", _signOutListener);
 
 	//After the Dom is loaded show the sign in container
 	//I'm using this because I'm getting a double load, seems to have
@@ -211,7 +239,5 @@
 	    Displayer.contentEl.hidden = false;
 	
 	});
-
-	window.app = new App();
 
 })(document);

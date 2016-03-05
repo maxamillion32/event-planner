@@ -190,113 +190,117 @@ var SignUp = (function() {
 		 */
 		static validateSignUp() {
 
-			let valid = true;
-			let passwordMessage = '';
-			let password2Message = '';
+			setTimeout(function() {
 
-			if(_signupNameDivEl.className.indexOf('is-invalid') > -1) {
+				let valid = true;
+				let passwordMessage = '';
+				let password2Message = '';
 
-				valid = false;
+				if(_signupNameDivEl.className.indexOf('is-invalid') > -1) {
 
-			}
-
-			if(_signupEmailDivEl.className.indexOf('is-invalid') > -1) {
-
-				valid = false;
-
-			}
-
-			if(!_signupPasswordEl.value) {
-
-				passwordMessage += '<div>Required</div>';
-				valid = false;
-
-			}
-
-			if(_signupPasswordEl.value.length < 8) {
-
-				passwordMessage += '<div>Password must be at least 8 characters long</div>';
-				valid = false;
-
-				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
-
-					_signupPasswordDivEl.className += ' is-invalid';
+					valid = false;
 
 				}
 
-			}
+				if(_signupEmailDivEl.className.indexOf('is-invalid') > -1) {
 
-			if(!_signupPasswordEl.value.match(/[A-Z]/g)) {
-
-				passwordMessage += '<div>Must contain at least one upper case character</div>';
-				valid = false;
-
-				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
-
-					_signupPasswordDivEl.className += ' is-invalid';
+					valid = false;
 
 				}
 
-			}
+				if(!_signupPasswordEl.value) {
 
-			if(!_signupPasswordEl.value.match(/[a-z]/g)) {
-
-				passwordMessage += '<div>Must contain at least one lower case character</div>';
-				valid = false;
-
-				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
-
-					_signupPasswordDivEl.className += ' is-invalid';
+					passwordMessage += '<div>Required</div>';
+					valid = false;
 
 				}
 
-			}
+				if(_signupPasswordEl.value.length < 8) {
 
-			if(!_signupPasswordEl.value.match(/\d+/g)) {
+					passwordMessage += '<div>Password must be at least 8 characters long</div>';
+					valid = false;
 
-				passwordMessage += '<div>Must contain at least one number</div>';
-				valid = false;
+					if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
 
-				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+						_signupPasswordDivEl.className += ' is-invalid';
 
-					_signupPasswordDivEl.className += ' is-invalid';
-
-				}
-
-			}
-
-			if(!_signupPassword2El.value) {
-
-				valid = false;
-				password2Message += '<div>Required</div>';
-
-			}
-
-			if(_signupPasswordEl.value !== _signupPassword2El.value) {
-
-				passwordMessage += '<div>Passwords must match</div>';
-				password2Message += '<div>Passwords must match</div>';
-				valid = false;
-
-				if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
-
-					_signupPasswordDivEl.className += ' is-invalid';
+					}
 
 				}
 
-				if(_signupPasswordRepeatDivEl.className.indexOf('is-invalid') === -1) {
+				if(!_signupPasswordEl.value.match(/[A-Z]/g)) {
 
-					_signupPasswordRepeatDivEl.className += ' is-invalid';
+					passwordMessage += '<div>Must contain at least one upper case character</div>';
+					valid = false;
+
+					if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+						_signupPasswordDivEl.className += ' is-invalid';
+
+					}
 
 				}
 
-			}
+				if(!_signupPasswordEl.value.match(/[a-z]/g)) {
 
-			_submitPasswordButton.disabled = !valid;
+					passwordMessage += '<div>Must contain at least one lower case character</div>';
+					valid = false;
 
-			_signupPasswordEl.setCustomValidity(passwordMessage);
-			_passwordErrorEl.innerHTML = passwordMessage;
-			_passwordRepeatErrorEl.innerHTML = password2Message;
+					if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+						_signupPasswordDivEl.className += ' is-invalid';
+
+					}
+
+				}
+
+				if(!_signupPasswordEl.value.match(/\d+/g)) {
+
+					passwordMessage += '<div>Must contain at least one number</div>';
+					valid = false;
+
+					if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+						_signupPasswordDivEl.className += ' is-invalid';
+
+					}
+
+				}
+
+				if(!_signupPassword2El.value) {
+
+					valid = false;
+					password2Message += '<div>Required</div>';
+
+				}
+
+				if(_signupPasswordEl.value !== _signupPassword2El.value) {
+
+					passwordMessage += '<div>Passwords must match</div>';
+					password2Message += '<div>Passwords must match</div>';
+					valid = false;
+
+					if(_signupPasswordDivEl.className.indexOf('is-invalid') === -1 ) {
+
+						_signupPasswordDivEl.className += ' is-invalid';
+
+					}
+
+					if(_signupPasswordRepeatDivEl.className.indexOf('is-invalid') === -1) {
+
+						_signupPasswordRepeatDivEl.className += ' is-invalid';
+
+					}
+
+				}
+
+				_submitPasswordButton.disabled = !valid;
+
+				_signupPasswordEl.setCustomValidity(passwordMessage);
+				_passwordErrorEl.innerHTML = passwordMessage;
+				_passwordRepeatErrorEl.innerHTML = password2Message;
+
+			});
 
 		}
 
